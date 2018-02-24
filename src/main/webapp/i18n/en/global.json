@@ -7,6 +7,16 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entities",
+                "passeport": "Passeport",
+                "donneesActe": "Donnees Acte",
+                "livre": "Livre",
+                "categorie": "Categorie",
+                "rapatriement": "Rapatriement",
+                "caisse": "Caisse",
+                "monnaie": "Monnaie",
+                "montant": "Montant",
+                "produit": "Produit",
+                "visa": "Visa",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity DonneesActe.
+    -->
+    <changeSet id="20180222221147-1" author="jhipster">
+        <createTable tableName="donnees_acte">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="reference" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="date_du_jour_chiffre" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="registre_special_rd" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="nom_enfant" type="varchar(40)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="registre" type="varchar(10)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="annee" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="numero" type="varchar(15)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="date_naissance_chiffre" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="nom_pere" type="varchar(20)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="prenom_pere" type="varchar(40)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="nom_mere" type="varchar(20)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="prenom_mere" type="varchar(40)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sexe" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="statut" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="ville_naissance" type="varchar(35)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="adresse_pere" type="varchar(150)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="adresse_mere" type="varchar(150)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="temoins_1" type="varchar(35)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="temoins_2" type="varchar(35)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="id_pere" type="varchar(35)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="id_mere" type="varchar(35)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="photo" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="photo_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="juridiction" type="varchar(40)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="livre" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="notes" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="feuille" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="acte" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="donnees_acte" columnName="date_du_jour_chiffre" columnDataType="datetime"/>
+        <dropDefaultValue tableName="donnees_acte" columnName="date_naissance_chiffre" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

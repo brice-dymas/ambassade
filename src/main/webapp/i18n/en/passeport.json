@@ -1,0 +1,42 @@
+
+{
+    "ambassadeApp": {
+        "passeport" : {
+            "home": {
+                "title": "Passeports",
+                "createLabel": "Create a new Passeport",
+                "createOrEditLabel": "Create or edit a Passeport"
+            },
+            "created": "A new Passeport is created with identifier {{ param }}",
+            "updated": "A Passeport is updated with identifier {{ param }}",
+            "deleted": "A Passeport is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Passeport {{ id }}?"
+            },
+            "detail": {
+                "title": "Passeport"
+            },
+            "numeroFormulaire": "Numero Formulaire",
+            "nom": "Nom",
+            "prenom": "Prenom",
+            "numeroPasseport": "Numero Passeport",
+            "neLe": "Ne Le",
+            "lieuNaissance": "Lieu Naissance",
+            "etatCivil": "Etat Civil",
+            "adresse": "Adresse",
+            "telephone": "Telephone",
+            "nif": "Nif",
+            "paysEmetteur": "Pays Emetteur",
+            "soumisLe": "Soumis Le",
+            "delivreLe": "Delivre Le",
+            "montant": "Montant",
+            "remarques": "Remarques",
+            "dateEmission": "Date Emission",
+            "dateExpiration": "Date Expiration",
+            "remarquesR": "Remarques R",
+            "sms": "Sms",
+            "sms2": "Sms 2",
+            "documents": "Documents"
+        }
+    }
+}

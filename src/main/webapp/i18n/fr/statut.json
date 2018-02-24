@@ -1,0 +1,10 @@
+{
+    "ambassadeApp": {
+        "Statut" : {
+            "null": "",
+            "LEGITIME": "LEGITIME",
+            "NATUREL": "NATUREL",
+            "NATURELLE": "NATURELLE"
+        }
+    }
+}

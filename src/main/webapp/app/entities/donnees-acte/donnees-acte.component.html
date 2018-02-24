@@ -1,0 +1,121 @@
+<div>
+    <h2>
+        <span jhiTranslate="ambassadeApp.donneesActe.home.title">Donnees Actes</span>
+        <button class="btn btn-primary float-right jh-create-entity create-donnees-acte" [routerLink]="['/', { outlets: { popup: ['donnees-acte-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="ambassadeApp.donneesActe.home.createLabel">
+            Create new Donnees Acte
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="donneesActes">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="reference"><span jhiTranslate="ambassadeApp.donneesActe.reference">Reference</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dateDuJourChiffre"><span jhiTranslate="ambassadeApp.donneesActe.dateDuJourChiffre">Date Du Jour Chiffre</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="registreSpecialRD"><span jhiTranslate="ambassadeApp.donneesActe.registreSpecialRD">Registre Special RD</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nomEnfant"><span jhiTranslate="ambassadeApp.donneesActe.nomEnfant">Nom Enfant</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="registre"><span jhiTranslate="ambassadeApp.donneesActe.registre">Registre</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="annee"><span jhiTranslate="ambassadeApp.donneesActe.annee">Annee</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="numero"><span jhiTranslate="ambassadeApp.donneesActe.numero">Numero</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dateNaissanceChiffre"><span jhiTranslate="ambassadeApp.donneesActe.dateNaissanceChiffre">Date Naissance Chiffre</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nomPere"><span jhiTranslate="ambassadeApp.donneesActe.nomPere">Nom Pere</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="prenomPere"><span jhiTranslate="ambassadeApp.donneesActe.prenomPere">Prenom Pere</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nomMere"><span jhiTranslate="ambassadeApp.donneesActe.nomMere">Nom Mere</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="prenomMere"><span jhiTranslate="ambassadeApp.donneesActe.prenomMere">Prenom Mere</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="sexe"><span jhiTranslate="ambassadeApp.donneesActe.sexe">Sexe</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="statut"><span jhiTranslate="ambassadeApp.donneesActe.statut">Statut</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="villeNaissance"><span jhiTranslate="ambassadeApp.donneesActe.villeNaissance">Ville Naissance</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="adressePere"><span jhiTranslate="ambassadeApp.donneesActe.adressePere">Adresse Pere</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="adresseMere"><span jhiTranslate="ambassadeApp.donneesActe.adresseMere">Adresse Mere</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="temoins1"><span jhiTranslate="ambassadeApp.donneesActe.temoins1">Temoins 1</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="temoins2"><span jhiTranslate="ambassadeApp.donneesActe.temoins2">Temoins 2</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="idPere"><span jhiTranslate="ambassadeApp.donneesActe.idPere">Id Pere</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="idMere"><span jhiTranslate="ambassadeApp.donneesActe.idMere">Id Mere</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="photo"><span jhiTranslate="ambassadeApp.donneesActe.photo">Photo</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="juridiction"><span jhiTranslate="ambassadeApp.donneesActe.juridiction">Juridiction</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="livre"><span jhiTranslate="ambassadeApp.donneesActe.livre">Livre</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="notes"><span jhiTranslate="ambassadeApp.donneesActe.notes">Notes</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="feuille"><span jhiTranslate="ambassadeApp.donneesActe.feuille">Feuille</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="acte"><span jhiTranslate="ambassadeApp.donneesActe.acte">Acte</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let donneesActe of donneesActes ;trackBy: trackId">
+                <td><a [routerLink]="['../donnees-acte', donneesActe.id ]">{{donneesActe.id}}</a></td>
+                <td>{{donneesActe.reference}}</td>
+                <td>{{donneesActe.dateDuJourChiffre | date:'medium'}}</td>
+                <td>{{donneesActe.registreSpecialRD}}</td>
+                <td>{{donneesActe.nomEnfant}}</td>
+                <td>{{donneesActe.registre}}</td>
+                <td>{{donneesActe.annee}}</td>
+                <td>{{donneesActe.numero}}</td>
+                <td>{{donneesActe.dateNaissanceChiffre | date:'medium'}}</td>
+                <td>{{donneesActe.nomPere}}</td>
+                <td>{{donneesActe.prenomPere}}</td>
+                <td>{{donneesActe.nomMere}}</td>
+                <td>{{donneesActe.prenomMere}}</td>
+                <td jhiTranslate="{{'ambassadeApp.Sexe.' + donneesActe.sexe}}">{{donneesActe.sexe}}</td>
+                <td jhiTranslate="{{'ambassadeApp.Statut.' + donneesActe.statut}}">{{donneesActe.statut}}</td>
+                <td>{{donneesActe.villeNaissance}}</td>
+                <td>{{donneesActe.adressePere}}</td>
+                <td>{{donneesActe.adresseMere}}</td>
+                <td>{{donneesActe.temoins1}}</td>
+                <td>{{donneesActe.temoins2}}</td>
+                <td>{{donneesActe.idPere}}</td>
+                <td>{{donneesActe.idMere}}</td>
+                <td>
+                    <a *ngIf="donneesActe.photo" (click)="openFile(donneesActe.photoContentType, donneesActe.photo)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="donneesActe.photo">{{donneesActe.photoContentType}}, {{byteSize(donneesActe.photo)}}</span>
+                </td>
+                <td>{{donneesActe.juridiction}}</td>
+                <td>{{donneesActe.livre}}</td>
+                <td>{{donneesActe.notes}}</td>
+                <td>{{donneesActe.feuille}}</td>
+                <td>{{donneesActe.acte}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../donnees-acte', donneesActe.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'donnees-acte/'+ donneesActe.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'donnees-acte/'+ donneesActe.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="donneesActes && donneesActes.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

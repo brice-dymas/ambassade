@@ -1,0 +1,152 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCaisseLabel" jhiTranslate="ambassadeApp.caisse.home.createOrEditLabel">Create or edit a Caisse</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!caisse.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="caisse.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.reference" for="field_reference">Reference</label>
+            <input type="number" class="form-control" name="reference" id="field_reference"
+                [(ngModel)]="caisse.reference" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.dateDuJour" for="field_dateDuJour">Date Du Jour</label>
+            <div class="d-flex">
+                <input id="field_dateDuJour" type="datetime-local" class="form-control" name="dateDuJour" [(ngModel)]="caisse.dateDuJour"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.nom" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="caisse.nom" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.prenom" for="field_prenom">Prenom</label>
+            <input type="text" class="form-control" name="prenom" id="field_prenom"
+                [(ngModel)]="caisse.prenom" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.prenom?.dirty && editForm.controls.prenom?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.prenom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.typeID" for="field_typeID">Type ID</label>
+            <input type="text" class="form-control" name="typeID" id="field_typeID"
+                [(ngModel)]="caisse.typeID" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.typeID?.dirty && editForm.controls.typeID?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.typeID?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.numeroID" for="field_numeroID">Numero ID</label>
+            <input type="text" class="form-control" name="numeroID" id="field_numeroID"
+                [(ngModel)]="caisse.numeroID" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.numeroID?.dirty && editForm.controls.numeroID?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.numeroID?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.serviceConcerne" for="field_serviceConcerne">Service Concerne</label>
+            <input type="text" class="form-control" name="serviceConcerne" id="field_serviceConcerne"
+                [(ngModel)]="caisse.serviceConcerne" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.serviceConcerne?.dirty && editForm.controls.serviceConcerne?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.serviceConcerne?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.monnaie" for="field_monnaie">Monnaie</label>
+            <input type="text" class="form-control" name="monnaie" id="field_monnaie"
+                [(ngModel)]="caisse.monnaie" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.monnaie?.dirty && editForm.controls.monnaie?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.monnaie?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.montant" for="field_montant">Montant</label>
+            <input type="number" class="form-control" name="montant" id="field_montant"
+                [(ngModel)]="caisse.montant" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.dateRetour" for="field_dateRetour">Date Retour</label>
+            <div class="d-flex">
+                <input id="field_dateRetour" type="datetime-local" class="form-control" name="dateRetour" [(ngModel)]="caisse.dateRetour"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.telephone" for="field_telephone">Telephone</label>
+            <input type="text" class="form-control" name="telephone" id="field_telephone"
+                [(ngModel)]="caisse.telephone" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.telephone?.dirty && editForm.controls.telephone?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.telephone?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.num" for="field_num">Num</label>
+            <input type="number" class="form-control" name="num" id="field_num"
+                [(ngModel)]="caisse.num" required/>
+            <div [hidden]="!(editForm.controls.num?.dirty && editForm.controls.num?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.num?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.num?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.paiement" for="field_paiement">Paiement</label>
+            <input type="text" class="form-control" name="paiement" id="field_paiement"
+                [(ngModel)]="caisse.paiement" maxlength="50"/>
+            <div [hidden]="!(editForm.controls.paiement?.dirty && editForm.controls.paiement?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.paiement?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

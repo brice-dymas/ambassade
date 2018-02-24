@@ -1,0 +1,166 @@
+entity Passeport {
+	numeroFormulaire Long required min(0)
+    nom String maxlength(30)
+    prenom String maxlength(40)
+    numeroPasseport String maxlength(15)
+    neLe String maxlength(20)
+    lieuNaissance String maxlength(30)
+    etatCivil String maxlength(20)
+    adresse String
+    telephone String maxlength(15)
+    nif String maxlength(20)
+    paysEmetteur String maxlength(25)
+    soumisLe ZonedDateTime
+    delivreLe ZonedDateTime
+    montant BigDecimal min(0)
+    remarques String
+    dateEmission ZonedDateTime
+    dateExpiration ZonedDateTime
+    remarquesR String
+    sms String maxlength(15)
+    sms2 String maxlength(60)
+    documents String maxlength(50)    
+}
+
+entity DonneesActe {
+	reference String required minlength(1) minlength(10)
+    dateDuJourChiffre ZonedDateTime
+    registreSpecialRD String maxlength(50)
+    nomEnfant String maxlength(40)
+    registre String maxlength(10)
+    annee Integer min(1900)
+    numero String maxlength(15)
+    dateNaissanceChiffre ZonedDateTime
+    nomPere String maxlength(20)
+    prenomPere String maxlength(40)
+    nomMere String maxlength(20)
+    prenomMere String maxlength(40)
+    sexe Sexe required
+    statut Statut required
+    villeNaissance String maxlength(35)
+    adressePere String maxlength(150)
+    adresseMere String maxlength(150)
+    temoins1 String maxlength(35)
+    temoins2 String maxlength(35)
+    idPere String maxlength(35)
+    idMere String maxlength(35)
+    photo Blob
+    juridiction String maxlength(40)
+    livre String maxlength(50)
+    notes String maxlength(50)
+    feuille String maxlength(50)
+    acte String maxlength(50)
+}
+
+entity Livre {
+	codeISBN String maxlength(50) required
+	auteur String maxlength(50)
+	titre String maxlength(100)
+	edition String maxlength(50)
+    etagere String maxlength(50)
+    annee String maxlength(4)
+    categorie String maxlength(50)
+    resume String
+    quantite String maxlength(2)
+    disponible String maxlength(50)
+    createdByPHPRunner Integer
+    page String maxlength(4)
+    consultation String
+    origine String maxlength(50)
+    sousTitre String maxlength(100)
+    collection String maxlength(50)
+    impression String maxlength(50)
+    format String maxlength(50)
+    index String maxlength(50)
+    bibliographie String maxlength(50)
+    lieuEdition String maxlength(50)
+    lieuImpression String maxlength(50)
+    illustration String maxlength(50)
+    observation String maxlength(50)
+    prenom String maxlength(50)
+    statistique String maxlength(50)
+    glossaire String maxlength(50)   
+}
+
+entity Categorie {
+	nomCategorie String maxlength(50)
+}
+
+entity Rapatriement {
+	reference Integer required
+    numeroDossier String maxlength(50)
+    nom String maxlength(50)
+    prenom String maxlength(50)
+    dateNaissance ZonedDateTime
+    documentID String maxlength(50)
+    sexe Sexe
+    motif String maxlength(50)
+    dateRapatriement ZonedDateTime
+    frontiere String maxlength(50)
+    documentScanne Blob
+    createdByPHPRunner Integer
+}
+
+entity Caisse {
+	reference Long
+    dateDuJour ZonedDateTime
+    nom String maxlength(50)
+    prenom String maxlength(50)
+    typeID String maxlength(50)
+    numeroID String maxlength(50)
+    serviceConcerne String maxlength(50)
+    monnaie String maxlength(50)
+    montant BigDecimal
+    dateRetour ZonedDateTime
+    telephone String maxlength(50)
+    num Integer required
+    paiement String maxlength(50)
+}
+
+entity Monnaie {
+	type String maxlength(40)
+	montant Long
+	produit String maxlength(40)
+}
+
+entity Montant {
+	monnaie String maxlength(50)
+	montant Long min(0)
+	produit String maxlength(40)
+}
+
+entity Produit {
+	nomProduit String maxlength(50)
+	monnaie String maxlength(50)
+	montant Long min(0)
+}
+
+entity Visa {
+	nom String maxlength(60)
+	prenom String maxlength(50)
+    nationalite String maxlength(50)
+    numeroPasseport String maxlength(30)
+    cedula String maxlength(30)
+    numeroVisa Long required
+    dateEmission ZonedDateTime
+	dateExpiration ZonedDateTime
+    validePour Integer
+    nombreEntree String maxlength(20)
+    type String maxlength(20)
+    categorie String maxlength(25)
+    taxes Integer
+    adresse String maxlength(30)
+    remarques String
+}
+enum Sexe {
+    MASCULIN, FEMININ
+}
+enum Statut {
+    LEGITIME, NATUREL, NATURELLE
+}
+
+// Set pagination options
+paginate all with pagination
+
+// Set service options to all 
+service all with serviceImpl 
