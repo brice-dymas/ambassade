@@ -1,0 +1,48 @@
+
+{
+    "ambassadeApp": {
+        "donneesActe" : {
+            "home": {
+                "title": "DonneesActes",
+                "createLabel": "Créer un nouveau Donnees Acte",
+                "createOrEditLabel": "Créer ou éditer un Donnees Acte"
+            },
+            "created": "Un nouveau Donnees Acte a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Donnees Acte avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Donnees Acte avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Donnees Acte {{ id }} ?"
+            },
+            "detail": {
+                "title": "Donnees Acte"
+            },
+            "reference": "Reference",
+            "dateDuJourChiffre": "Date Du Jour Chiffre",
+            "registreSpecialRD": "Registre Special RD",
+            "nomEnfant": "Nom Enfant",
+            "registre": "Registre",
+            "annee": "Annee",
+            "numero": "Numero",
+            "dateNaissanceChiffre": "Date Naissance Chiffre",
+            "nomPere": "Nom Pere",
+            "prenomPere": "Prenom Pere",
+            "nomMere": "Nom Mere",
+            "prenomMere": "Prenom Mere",
+            "sexe": "Sexe",
+            "statut": "Statut",
+            "villeNaissance": "Ville Naissance",
+            "adressePere": "Adresse Pere",
+            "adresseMere": "Adresse Mere",
+            "temoins1": "Temoins 1",
+            "temoins2": "Temoins 2",
+            "idPere": "Id Pere",
+            "idMere": "Id Mere",
+            "photo": "Photo",
+            "juridiction": "Juridiction",
+            "livre": "Livre",
+            "notes": "Notes",
+            "feuille": "Feuille",
+            "acte": "Acte"
+        }
+    }
+}

@@ -5,6 +5,16 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180222221146_added_entity_Passeport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180222221147_added_entity_DonneesActe.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180222221148_added_entity_Livre.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180222221149_added_entity_Categorie.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180222221150_added_entity_Rapatriement.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180222221151_added_entity_Caisse.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180222221152_added_entity_Monnaie.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180222221153_added_entity_Montant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180222221154_added_entity_Produit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180222221155_added_entity_Visa.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
