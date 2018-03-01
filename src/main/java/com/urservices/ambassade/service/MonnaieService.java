@@ -1,6 +1,7 @@
 package com.urservices.ambassade.service;
 
 import com.urservices.ambassade.domain.Monnaie;
+import com.urservices.ambassade.domain.Montant;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -24,6 +25,10 @@ public interface MonnaieService {
      * @return the list of entities
      */
     Page<Monnaie> findAll(Pageable pageable);
+
+
+
+
 
     /**
      * Get the "id" monnaie.

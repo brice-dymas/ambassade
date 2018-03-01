@@ -15,6 +15,8 @@ import { ITEMS_PER_PAGE, Principal } from '../../shared';
 export class MontantComponent implements OnInit, OnDestroy {
 
 currentAccount: any;
+    montant: 'Euro';
+    produit: ' ';
     montants: Montant[];
     error: any;
     success: any;
@@ -47,11 +49,18 @@ currentAccount: any;
         });
     }
 
-    loadAll() {
-        this.montantService.query({
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
+
+    // loadAll() {
+    //     this.montantService.query({
+    //         page: this.page - 1,
+    //         size: this.itemsPerPage,
+    //         sort: this.sort()}).subscribe(
+    //         (res: HttpResponse<Montant[]>) => this.onSuccess(res.body, res.headers),
+    //         (res: HttpErrorResponse) => this.onError(res.message)
+    //     );
+    // }
+    loadAll(montant, produit) {
+        this.montantService.search(montant, produit).subscribe(
                 (res: HttpResponse<Montant[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -70,7 +79,7 @@ currentAccount: any;
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });
-        this.loadAll();
+        this.loadAll(this.montant, this.produit);
     }
 
     clear() {
@@ -79,10 +88,11 @@ currentAccount: any;
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
-        this.loadAll();
+        this.loadAll(this.montant, this.produit);
     }
     ngOnInit() {
-        this.loadAll();
+        // this.loadAll();
+        this.loadAll(this.montant, this.produit);
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
@@ -97,7 +107,9 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInMontants() {
-        this.eventSubscriber = this.eventManager.subscribe('montantListModification', (response) => this.loadAll());
+
+        this.eventSubscriber = this.eventManager.subscribe('montantListModification', (response) => this.loadAll(this.montant, this.produit));
+        // this.eventSubscriber = this.eventManager.subscribe('montantListModification', (response) => this.loadAll());
     }
 
     sort() {

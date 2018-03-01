@@ -6,9 +6,13 @@ import com.urservices.ambassade.repository.CaisseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 
 
 /**
@@ -73,5 +77,34 @@ public class CaisseServiceImpl implements CaisseService {
     public void delete(Long id) {
         log.debug("Request to delete Caisse : {}", id);
         caisseRepository.delete(id);
+    }
+
+    /**
+     * Search Caisse using parameters
+     *
+     * @param dateDuJour
+     * @param reference
+     * @param montant
+     * @param num
+     * @param dateRetour
+     * @param monnaie
+     * @param nom
+     * @param prenom
+     * @param typeID
+     * @param serviceConcerne
+     * @param telephone
+     * @param paiement
+     * @param numero
+     * @param page
+     * @param size
+     */
+    @Override
+    public Page<Caisse> searchAll(ZonedDateTime dateDuJour, Long reference, BigDecimal montant, Integer num,
+                                  ZonedDateTime dateRetour, String monnaie, String nom, String prenom, String typeID,
+                                  String serviceConcerne, String telephone, String paiement, String numero,
+                                  int page, Integer size) {
+        return caisseRepository.searchAll(dateDuJour,reference,montant,num,dateRetour,"%"+monnaie+"%","%"+nom+"%",
+            "%"+prenom+"%","%"+typeID+"%","%"+serviceConcerne+"%","%"+telephone+"%",
+            "%"+paiement+"%","%"+numero+"%",new PageRequest(page,size));
     }
 }

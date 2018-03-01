@@ -22,6 +22,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static com.urservices.ambassade.web.rest.TestUtil.createFormattingConversionService;
@@ -147,6 +149,22 @@ public class MontantResourceIntTest {
 
         // Get all the montantList
         restMontantMockMvc.perform(get("/api/montants?sort=id,desc"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(montant.getId().intValue())))
+            .andExpect(jsonPath("$.[*].monnaie").value(hasItem(DEFAULT_MONNAIE.toString())))
+            .andExpect(jsonPath("$.[*].montant").value(hasItem(DEFAULT_MONTANT.intValue())))
+            .andExpect(jsonPath("$.[*].produit").value(hasItem(DEFAULT_PRODUIT.toString())));
+    }
+
+    @Test
+    @Transactional
+    public void searchSomeMontants() throws Exception {
+        // Initialize the database
+        montantRepository.saveAndFlush(montant);
+
+        // Get all the montantList
+        restMontantMockMvc.perform(get("/api/montants?monnaie=AAAAAAAAAA&produit=AAAAAAAAAA&montant=11"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(montant.getId().intValue())))

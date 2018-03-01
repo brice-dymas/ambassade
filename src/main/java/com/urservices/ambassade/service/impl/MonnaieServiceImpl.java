@@ -1,5 +1,6 @@
 package com.urservices.ambassade.service.impl;
 
+import com.urservices.ambassade.domain.Montant;
 import com.urservices.ambassade.service.MonnaieService;
 import com.urservices.ambassade.domain.Monnaie;
 import com.urservices.ambassade.repository.MonnaieRepository;

@@ -44,6 +44,14 @@ export const montantRoute: Routes = [
             pageTitle: 'ambassadeApp.montant.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'montant/search',
+        component: MontantComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.montant.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
