@@ -1,0 +1,106 @@
+
+<div *ngIf="passeport">
+    <h2><span jhiTranslate="ambassadeApp.passeport.detail.title">Passeport</span> {{passeport.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="ambassadeApp.passeport.numeroFormulaire">Numero Formulaire</span></dt>
+        <dd>
+            <span>{{passeport.numeroFormulaire}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.nom">Nom</span></dt>
+        <dd>
+            <span>{{passeport.nom}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.prenom">Prenom</span></dt>
+        <dd>
+            <span>{{passeport.prenom}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.numeroPasseport">Numero Passeport</span></dt>
+        <dd>
+            <span>{{passeport.numeroPasseport}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.neLe">Ne Le</span></dt>
+        <dd>
+            <span>{{passeport.neLe}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.lieuNaissance">Lieu Naissance</span></dt>
+        <dd>
+            <span>{{passeport.lieuNaissance}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.etatCivil">Etat Civil</span></dt>
+        <dd>
+            <span>{{passeport.etatCivil}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.adresse">Adresse</span></dt>
+        <dd>
+            <span>{{passeport.adresse}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.telephone">Telephone</span></dt>
+        <dd>
+            <span>{{passeport.telephone}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.nif">Nif</span></dt>
+        <dd>
+            <span>{{passeport.nif}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.paysEmetteur">Pays Emetteur</span></dt>
+        <dd>
+            <span>{{passeport.paysEmetteur}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.soumisLe">Soumis Le</span></dt>
+        <dd>
+            <span>{{passeport.soumisLe | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.delivreLe">Delivre Le</span></dt>
+        <dd>
+            <span>{{passeport.delivreLe | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.montant">Montant</span></dt>
+        <dd>
+            <span>{{passeport.montant}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.remarques">Remarques</span></dt>
+        <dd>
+            <span>{{passeport.remarques}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.dateEmission">Date Emission</span></dt>
+        <dd>
+            <span>{{passeport.dateEmission | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.dateExpiration">Date Expiration</span></dt>
+        <dd>
+            <span>{{passeport.dateExpiration | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.remarquesR">Remarques R</span></dt>
+        <dd>
+            <span>{{passeport.remarquesR}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.sms">Sms</span></dt>
+        <dd>
+            <span>{{passeport.sms}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.sms2">Sms 2</span></dt>
+        <dd>
+            <span>{{passeport.sms2}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.passeport.documents">Documents</span></dt>
+        <dd>
+            <span>{{passeport.documents}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

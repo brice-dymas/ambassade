@@ -1,0 +1,133 @@
+
+<div *ngIf="donneesActe">
+    <h2><span jhiTranslate="ambassadeApp.donneesActe.detail.title">Donnees Acte</span> {{donneesActe.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.reference">Reference</span></dt>
+        <dd>
+            <span>{{donneesActe.reference}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.dateDuJourChiffre">Date Du Jour Chiffre</span></dt>
+        <dd>
+            <span>{{donneesActe.dateDuJourChiffre | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.registreSpecialRD">Registre Special RD</span></dt>
+        <dd>
+            <span>{{donneesActe.registreSpecialRD}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.nomEnfant">Nom Enfant</span></dt>
+        <dd>
+            <span>{{donneesActe.nomEnfant}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.registre">Registre</span></dt>
+        <dd>
+            <span>{{donneesActe.registre}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.annee">Annee</span></dt>
+        <dd>
+            <span>{{donneesActe.annee}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.numero">Numero</span></dt>
+        <dd>
+            <span>{{donneesActe.numero}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.dateNaissanceChiffre">Date Naissance Chiffre</span></dt>
+        <dd>
+            <span>{{donneesActe.dateNaissanceChiffre | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.nomPere">Nom Pere</span></dt>
+        <dd>
+            <span>{{donneesActe.nomPere}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.prenomPere">Prenom Pere</span></dt>
+        <dd>
+            <span>{{donneesActe.prenomPere}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.nomMere">Nom Mere</span></dt>
+        <dd>
+            <span>{{donneesActe.nomMere}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.prenomMere">Prenom Mere</span></dt>
+        <dd>
+            <span>{{donneesActe.prenomMere}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.sexe">Sexe</span></dt>
+        <dd>
+            <span jhiTranslate="{{'ambassadeApp.Sexe.' + donneesActe.sexe}}">{{donneesActe.sexe}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.statut">Statut</span></dt>
+        <dd>
+            <span jhiTranslate="{{'ambassadeApp.Statut.' + donneesActe.statut}}">{{donneesActe.statut}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.villeNaissance">Ville Naissance</span></dt>
+        <dd>
+            <span>{{donneesActe.villeNaissance}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.adressePere">Adresse Pere</span></dt>
+        <dd>
+            <span>{{donneesActe.adressePere}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.adresseMere">Adresse Mere</span></dt>
+        <dd>
+            <span>{{donneesActe.adresseMere}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.temoins1">Temoins 1</span></dt>
+        <dd>
+            <span>{{donneesActe.temoins1}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.temoins2">Temoins 2</span></dt>
+        <dd>
+            <span>{{donneesActe.temoins2}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.idPere">Id Pere</span></dt>
+        <dd>
+            <span>{{donneesActe.idPere}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.idMere">Id Mere</span></dt>
+        <dd>
+            <span>{{donneesActe.idMere}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.photo">Photo</span></dt>
+        <dd>
+            <div *ngIf="donneesActe.photo">
+                <a (click)="openFile(donneesActe.photoContentType, donneesActe.photo)" jhiTranslate="entity.action.open">open</a>
+                {{donneesActe.photoContentType}}, {{byteSize(donneesActe.photo)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.juridiction">Juridiction</span></dt>
+        <dd>
+            <span>{{donneesActe.juridiction}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.livre">Livre</span></dt>
+        <dd>
+            <span>{{donneesActe.livre}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.notes">Notes</span></dt>
+        <dd>
+            <span>{{donneesActe.notes}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.feuille">Feuille</span></dt>
+        <dd>
+            <span>{{donneesActe.feuille}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.donneesActe.acte">Acte</span></dt>
+        <dd>
+            <span>{{donneesActe.acte}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'donnees-acte/'+ donneesActe.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

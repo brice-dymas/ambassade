@@ -1,0 +1,48 @@
+
+{
+    "ambassadeApp": {
+        "livre" : {
+            "home": {
+                "title": "Livres",
+                "createLabel": "Créer un nouveau Livre",
+                "createOrEditLabel": "Créer ou éditer un Livre"
+            },
+            "created": "Un nouveau Livre a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Livre avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Livre avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Livre {{ id }} ?"
+            },
+            "detail": {
+                "title": "Livre"
+            },
+            "codeISBN": "Code ISBN",
+            "auteur": "Auteur",
+            "titre": "Titre",
+            "edition": "Edition",
+            "etagere": "Etagere",
+            "annee": "Annee",
+            "categorie": "Categorie",
+            "resume": "Resume",
+            "quantite": "Quantite",
+            "disponible": "Disponible",
+            "createdByPHPRunner": "Created By PHP Runner",
+            "page": "Page",
+            "consultation": "Consultation",
+            "origine": "Origine",
+            "sousTitre": "Sous Titre",
+            "collection": "Collection",
+            "impression": "Impression",
+            "format": "Format",
+            "index": "Index",
+            "bibliographie": "Bibliographie",
+            "lieuEdition": "Lieu Edition",
+            "lieuImpression": "Lieu Impression",
+            "illustration": "Illustration",
+            "observation": "Observation",
+            "prenom": "Prenom",
+            "statistique": "Statistique",
+            "glossaire": "Glossaire"
+        }
+    }
+}

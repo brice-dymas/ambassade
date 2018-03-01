@@ -1,0 +1,36 @@
+
+{
+    "ambassadeApp": {
+        "visa" : {
+            "home": {
+                "title": "Visas",
+                "createLabel": "Create a new Visa",
+                "createOrEditLabel": "Create or edit a Visa"
+            },
+            "created": "A new Visa is created with identifier {{ param }}",
+            "updated": "A Visa is updated with identifier {{ param }}",
+            "deleted": "A Visa is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Visa {{ id }}?"
+            },
+            "detail": {
+                "title": "Visa"
+            },
+            "nom": "Nom",
+            "prenom": "Prenom",
+            "nationalite": "Nationalite",
+            "numeroPasseport": "Numero Passeport",
+            "cedula": "Cedula",
+            "numeroVisa": "Numero Visa",
+            "dateEmission": "Date Emission",
+            "dateExpiration": "Date Expiration",
+            "validePour": "Valide Pour",
+            "nombreEntree": "Nombre Entree",
+            "type": "Type",
+            "categorie": "Categorie",
+            "taxes": "Taxes",
+            "adresse": "Adresse",
+            "remarques": "Remarques"
+        }
+    }
+}

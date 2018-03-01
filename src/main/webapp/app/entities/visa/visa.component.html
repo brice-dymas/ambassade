@@ -1,0 +1,94 @@
+<div>
+    <h2>
+        <span jhiTranslate="ambassadeApp.visa.home.title">Visas</span>
+        <button class="btn btn-primary float-right jh-create-entity create-visa" [routerLink]="['/', { outlets: { popup: ['visa-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="ambassadeApp.visa.home.createLabel">
+            Create new Visa
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="visas">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.visa.nom">Nom</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="prenom"><span jhiTranslate="ambassadeApp.visa.prenom">Prenom</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nationalite"><span jhiTranslate="ambassadeApp.visa.nationalite">Nationalite</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="numeroPasseport"><span jhiTranslate="ambassadeApp.visa.numeroPasseport">Numero Passeport</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="cedula"><span jhiTranslate="ambassadeApp.visa.cedula">Cedula</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="numeroVisa"><span jhiTranslate="ambassadeApp.visa.numeroVisa">Numero Visa</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dateEmission"><span jhiTranslate="ambassadeApp.visa.dateEmission">Date Emission</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dateExpiration"><span jhiTranslate="ambassadeApp.visa.dateExpiration">Date Expiration</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="validePour"><span jhiTranslate="ambassadeApp.visa.validePour">Valide Pour</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nombreEntree"><span jhiTranslate="ambassadeApp.visa.nombreEntree">Nombre Entree</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="type"><span jhiTranslate="ambassadeApp.visa.type">Type</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="categorie"><span jhiTranslate="ambassadeApp.visa.categorie">Categorie</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="taxes"><span jhiTranslate="ambassadeApp.visa.taxes">Taxes</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="adresse"><span jhiTranslate="ambassadeApp.visa.adresse">Adresse</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="remarques"><span jhiTranslate="ambassadeApp.visa.remarques">Remarques</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let visa of visas ;trackBy: trackId">
+                <td><a [routerLink]="['../visa', visa.id ]">{{visa.id}}</a></td>
+                <td>{{visa.nom}}</td>
+                <td>{{visa.prenom}}</td>
+                <td>{{visa.nationalite}}</td>
+                <td>{{visa.numeroPasseport}}</td>
+                <td>{{visa.cedula}}</td>
+                <td>{{visa.numeroVisa}}</td>
+                <td>{{visa.dateEmission | date:'medium'}}</td>
+                <td>{{visa.dateExpiration | date:'medium'}}</td>
+                <td>{{visa.validePour}}</td>
+                <td>{{visa.nombreEntree}}</td>
+                <td>{{visa.type}}</td>
+                <td>{{visa.categorie}}</td>
+                <td>{{visa.taxes}}</td>
+                <td>{{visa.adresse}}</td>
+                <td>{{visa.remarques}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../visa', visa.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'visa/'+ visa.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'visa/'+ visa.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="visas && visas.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

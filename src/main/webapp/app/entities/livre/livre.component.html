@@ -1,0 +1,118 @@
+<div>
+    <h2>
+        <span jhiTranslate="ambassadeApp.livre.home.title">Livres</span>
+        <button class="btn btn-primary float-right jh-create-entity create-livre" [routerLink]="['/', { outlets: { popup: ['livre-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="ambassadeApp.livre.home.createLabel">
+            Create new Livre
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="livres">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="codeISBN"><span jhiTranslate="ambassadeApp.livre.codeISBN">Code ISBN</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="auteur"><span jhiTranslate="ambassadeApp.livre.auteur">Auteur</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="titre"><span jhiTranslate="ambassadeApp.livre.titre">Titre</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="edition"><span jhiTranslate="ambassadeApp.livre.edition">Edition</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="etagere"><span jhiTranslate="ambassadeApp.livre.etagere">Etagere</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="annee"><span jhiTranslate="ambassadeApp.livre.annee">Annee</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="categorie"><span jhiTranslate="ambassadeApp.livre.categorie">Categorie</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="resume"><span jhiTranslate="ambassadeApp.livre.resume">Resume</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="quantite"><span jhiTranslate="ambassadeApp.livre.quantite">Quantite</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="disponible"><span jhiTranslate="ambassadeApp.livre.disponible">Disponible</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdByPHPRunner"><span jhiTranslate="ambassadeApp.livre.createdByPHPRunner">Created By PHP Runner</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="page"><span jhiTranslate="ambassadeApp.livre.page">Page</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="consultation"><span jhiTranslate="ambassadeApp.livre.consultation">Consultation</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="origine"><span jhiTranslate="ambassadeApp.livre.origine">Origine</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="sousTitre"><span jhiTranslate="ambassadeApp.livre.sousTitre">Sous Titre</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="collection"><span jhiTranslate="ambassadeApp.livre.collection">Collection</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="impression"><span jhiTranslate="ambassadeApp.livre.impression">Impression</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="format"><span jhiTranslate="ambassadeApp.livre.format">Format</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="index"><span jhiTranslate="ambassadeApp.livre.index">Index</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="bibliographie"><span jhiTranslate="ambassadeApp.livre.bibliographie">Bibliographie</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lieuEdition"><span jhiTranslate="ambassadeApp.livre.lieuEdition">Lieu Edition</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lieuImpression"><span jhiTranslate="ambassadeApp.livre.lieuImpression">Lieu Impression</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="illustration"><span jhiTranslate="ambassadeApp.livre.illustration">Illustration</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="observation"><span jhiTranslate="ambassadeApp.livre.observation">Observation</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="prenom"><span jhiTranslate="ambassadeApp.livre.prenom">Prenom</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="statistique"><span jhiTranslate="ambassadeApp.livre.statistique">Statistique</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="glossaire"><span jhiTranslate="ambassadeApp.livre.glossaire">Glossaire</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let livre of livres ;trackBy: trackId">
+                <td><a [routerLink]="['../livre', livre.id ]">{{livre.id}}</a></td>
+                <td>{{livre.codeISBN}}</td>
+                <td>{{livre.auteur}}</td>
+                <td>{{livre.titre}}</td>
+                <td>{{livre.edition}}</td>
+                <td>{{livre.etagere}}</td>
+                <td>{{livre.annee}}</td>
+                <td>{{livre.categorie}}</td>
+                <td>{{livre.resume}}</td>
+                <td>{{livre.quantite}}</td>
+                <td>{{livre.disponible}}</td>
+                <td>{{livre.createdByPHPRunner}}</td>
+                <td>{{livre.page}}</td>
+                <td>{{livre.consultation}}</td>
+                <td>{{livre.origine}}</td>
+                <td>{{livre.sousTitre}}</td>
+                <td>{{livre.collection}}</td>
+                <td>{{livre.impression}}</td>
+                <td>{{livre.format}}</td>
+                <td>{{livre.index}}</td>
+                <td>{{livre.bibliographie}}</td>
+                <td>{{livre.lieuEdition}}</td>
+                <td>{{livre.lieuImpression}}</td>
+                <td>{{livre.illustration}}</td>
+                <td>{{livre.observation}}</td>
+                <td>{{livre.prenom}}</td>
+                <td>{{livre.statistique}}</td>
+                <td>{{livre.glossaire}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../livre', livre.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'livre/'+ livre.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'livre/'+ livre.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="livres && livres.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

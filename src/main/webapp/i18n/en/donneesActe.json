@@ -1,0 +1,48 @@
+
+{
+    "ambassadeApp": {
+        "donneesActe" : {
+            "home": {
+                "title": "Donnees Actes",
+                "createLabel": "Create a new Donnees Acte",
+                "createOrEditLabel": "Create or edit a Donnees Acte"
+            },
+            "created": "A new Donnees Acte is created with identifier {{ param }}",
+            "updated": "A Donnees Acte is updated with identifier {{ param }}",
+            "deleted": "A Donnees Acte is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Donnees Acte {{ id }}?"
+            },
+            "detail": {
+                "title": "Donnees Acte"
+            },
+            "reference": "Reference",
+            "dateDuJourChiffre": "Date Du Jour Chiffre",
+            "registreSpecialRD": "Registre Special RD",
+            "nomEnfant": "Nom Enfant",
+            "registre": "Registre",
+            "annee": "Annee",
+            "numero": "Numero",
+            "dateNaissanceChiffre": "Date Naissance Chiffre",
+            "nomPere": "Nom Pere",
+            "prenomPere": "Prenom Pere",
+            "nomMere": "Nom Mere",
+            "prenomMere": "Prenom Mere",
+            "sexe": "Sexe",
+            "statut": "Statut",
+            "villeNaissance": "Ville Naissance",
+            "adressePere": "Adresse Pere",
+            "adresseMere": "Adresse Mere",
+            "temoins1": "Temoins 1",
+            "temoins2": "Temoins 2",
+            "idPere": "Id Pere",
+            "idMere": "Id Mere",
+            "photo": "Photo",
+            "juridiction": "Juridiction",
+            "livre": "Livre",
+            "notes": "Notes",
+            "feuille": "Feuille",
+            "acte": "Acte"
+        }
+    }
+}

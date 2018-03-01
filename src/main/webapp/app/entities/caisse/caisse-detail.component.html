@@ -1,0 +1,74 @@
+
+<div *ngIf="caisse">
+    <h2><span jhiTranslate="ambassadeApp.caisse.detail.title">Caisse</span> {{caisse.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="ambassadeApp.caisse.reference">Reference</span></dt>
+        <dd>
+            <span>{{caisse.reference}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.caisse.dateDuJour">Date Du Jour</span></dt>
+        <dd>
+            <span>{{caisse.dateDuJour | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.caisse.nom">Nom</span></dt>
+        <dd>
+            <span>{{caisse.nom}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.caisse.prenom">Prenom</span></dt>
+        <dd>
+            <span>{{caisse.prenom}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.caisse.typeID">Type ID</span></dt>
+        <dd>
+            <span>{{caisse.typeID}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.caisse.numeroID">Numero ID</span></dt>
+        <dd>
+            <span>{{caisse.numeroID}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.caisse.serviceConcerne">Service Concerne</span></dt>
+        <dd>
+            <span>{{caisse.serviceConcerne}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</span></dt>
+        <dd>
+            <span>{{caisse.monnaie}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.caisse.montant">Montant</span></dt>
+        <dd>
+            <span>{{caisse.montant}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.caisse.dateRetour">Date Retour</span></dt>
+        <dd>
+            <span>{{caisse.dateRetour | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.caisse.telephone">Telephone</span></dt>
+        <dd>
+            <span>{{caisse.telephone}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.caisse.num">Num</span></dt>
+        <dd>
+            <span>{{caisse.num}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.caisse.paiement">Paiement</span></dt>
+        <dd>
+            <span>{{caisse.paiement}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'caisse/'+ caisse.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

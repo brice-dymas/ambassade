@@ -1,0 +1,34 @@
+
+<div *ngIf="montant">
+    <h2><span jhiTranslate="ambassadeApp.montant.detail.title">Montant</span> {{montant.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="ambassadeApp.montant.monnaie">Monnaie</span></dt>
+        <dd>
+            <span>{{montant.monnaie}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.montant.montant">Montant</span></dt>
+        <dd>
+            <span>{{montant.montant}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.montant.produit">Produit</span></dt>
+        <dd>
+            <span>{{montant.produit}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'montant/'+ montant.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

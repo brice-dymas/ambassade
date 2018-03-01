@@ -1,0 +1,33 @@
+
+{
+    "ambassadeApp": {
+        "rapatriement" : {
+            "home": {
+                "title": "Rapatriements",
+                "createLabel": "Create a new Rapatriement",
+                "createOrEditLabel": "Create or edit a Rapatriement"
+            },
+            "created": "A new Rapatriement is created with identifier {{ param }}",
+            "updated": "A Rapatriement is updated with identifier {{ param }}",
+            "deleted": "A Rapatriement is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Rapatriement {{ id }}?"
+            },
+            "detail": {
+                "title": "Rapatriement"
+            },
+            "reference": "Reference",
+            "numeroDossier": "Numero Dossier",
+            "nom": "Nom",
+            "prenom": "Prenom",
+            "dateNaissance": "Date Naissance",
+            "documentID": "Document ID",
+            "sexe": "Sexe",
+            "motif": "Motif",
+            "dateRapatriement": "Date Rapatriement",
+            "frontiere": "Frontiere",
+            "documentScanne": "Document Scanne",
+            "createdByPHPRunner": "Created By PHP Runner"
+        }
+    }
+}

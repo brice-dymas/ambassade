@@ -1,0 +1,73 @@
+
+<div *ngIf="rapatriement">
+    <h2><span jhiTranslate="ambassadeApp.rapatriement.detail.title">Rapatriement</span> {{rapatriement.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="ambassadeApp.rapatriement.reference">Reference</span></dt>
+        <dd>
+            <span>{{rapatriement.reference}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.rapatriement.numeroDossier">Numero Dossier</span></dt>
+        <dd>
+            <span>{{rapatriement.numeroDossier}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.rapatriement.nom">Nom</span></dt>
+        <dd>
+            <span>{{rapatriement.nom}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.rapatriement.prenom">Prenom</span></dt>
+        <dd>
+            <span>{{rapatriement.prenom}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.rapatriement.dateNaissance">Date Naissance</span></dt>
+        <dd>
+            <span>{{rapatriement.dateNaissance | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.rapatriement.documentID">Document ID</span></dt>
+        <dd>
+            <span>{{rapatriement.documentID}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.rapatriement.sexe">Sexe</span></dt>
+        <dd>
+            <span jhiTranslate="{{'ambassadeApp.Sexe.' + rapatriement.sexe}}">{{rapatriement.sexe}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.rapatriement.motif">Motif</span></dt>
+        <dd>
+            <span>{{rapatriement.motif}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.rapatriement.dateRapatriement">Date Rapatriement</span></dt>
+        <dd>
+            <span>{{rapatriement.dateRapatriement | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.rapatriement.frontiere">Frontiere</span></dt>
+        <dd>
+            <span>{{rapatriement.frontiere}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.rapatriement.documentScanne">Document Scanne</span></dt>
+        <dd>
+            <div *ngIf="rapatriement.documentScanne">
+                <a (click)="openFile(rapatriement.documentScanneContentType, rapatriement.documentScanne)" jhiTranslate="entity.action.open">open</a>
+                {{rapatriement.documentScanneContentType}}, {{byteSize(rapatriement.documentScanne)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.rapatriement.createdByPHPRunner">Created By PHP Runner</span></dt>
+        <dd>
+            <span>{{rapatriement.createdByPHPRunner}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'rapatriement/'+ rapatriement.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,24 @@
+
+{
+    "ambassadeApp": {
+        "montant" : {
+            "home": {
+                "title": "Montants",
+                "createLabel": "Créer un nouveau Montant",
+                "createOrEditLabel": "Créer ou éditer un Montant"
+            },
+            "created": "Un nouveau Montant a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Montant avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Montant avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Montant {{ id }} ?"
+            },
+            "detail": {
+                "title": "Montant"
+            },
+            "monnaie": "Monnaie",
+            "montant": "Montant",
+            "produit": "Produit"
+        }
+    }
+}
