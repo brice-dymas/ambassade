@@ -40,5 +40,9 @@ public interface CategorieService {
      */
     void delete(Long id);
 
+<<<<<<< HEAD
     Page<Categorie> search(String nomCategorie, Pageable pageable);
+=======
+    public Page<Categorie> findAll(String parameter, Pageable pageable);
+>>>>>>> b65b4be... ajout de querydsl
 }

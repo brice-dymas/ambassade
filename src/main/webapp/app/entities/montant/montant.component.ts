@@ -107,12 +107,9 @@ currentAccount: any;
     registerChangeInMontants() {
         // this.eventSubscriber = this.eventManager.subscribe('montantListModification', (response) => this.loadAll(this.montant, this.produit));
         this.eventSubscriber = this.eventManager.subscribe('montantListModification', (response) => {
-            console.log(response);
             if (typeof response.content === 'string') {
-                console.log('query');
                 return this.loadAll();
             }else {
-                console.log('search');
                 return this.searchMontant(response.content);
             }
         });

@@ -15,6 +15,7 @@ import {
     donneesActePopupRoute,
     DonneesActeResolvePagingParams,
 } from './';
+import { DonneesActeSearchComponent } from './donnees-acte-search.component';
 
 import {DonneesActeSearchComponent} from './donnees-acte-search.component';
 

@@ -104,14 +104,10 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInPasseports() {
-        // this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => this.loadAll());
         this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => {
-            console.log(response);
             if (typeof response.content === 'string') {
-                console.log('query');
                 return this.loadAll();
             }else {
-                console.log('search');
                 return this.searchPasseport(response.content);
             }
         });

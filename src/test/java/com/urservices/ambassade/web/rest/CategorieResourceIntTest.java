@@ -142,6 +142,20 @@ public class CategorieResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(categorie.getId().intValue())))
             .andExpect(jsonPath("$.[*].nomCategorie").value(hasItem(DEFAULT_NOM_CATEGORIE.toString())));
     }
+    
+    @Test
+    @Transactional
+    public void getAllCategoriesWithQueryDsl() throws Exception {
+        // Initialize the database
+        categorieRepository.saveAndFlush(categorie);
+
+        // Get all the categorieList
+        restCategorieMockMvc.perform(get("/api/categories/search?sort=id,desc"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(categorie.getId().intValue())))
+            .andExpect(jsonPath("$.[*].nomCategorie").value(hasItem(DEFAULT_NOM_CATEGORIE.toString())));
+    }
 
     @Test
     @Transactional
