@@ -32,6 +32,12 @@ export class MontantService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
+    search(montant: Montant): Observable<HttpResponse<Montant[]>> {
+        const options = createRequestOption(montant);
+        return this.http.get<Montant[]>(this.resourceUrl, { params: options,  observe: 'response'})
+            .map((res: HttpResponse<Montant[]>) => this.convertArrayResponse(res));
+    }
+
     query(req?: any): Observable<HttpResponse<Montant[]>> {
         const options = createRequestOption(req);
         return this.http.get<Montant[]>(this.resourceUrl, { params: options, observe: 'response' })

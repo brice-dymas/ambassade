@@ -74,4 +74,22 @@ public class MontantServiceImpl implements MontantService {
         log.debug("Request to delete Montant : {}", id);
         montantRepository.delete(id);
     }
+
+    @Override
+    public Page<Montant> findByMonnaieAndProduitAndMontant(String monnaie, String produit, Long montant, Pageable pageable) {
+        log.debug("Request to get Monnaie with monnaie: {}, produit: {}, and montant: {}", monnaie, produit, montant);
+        if(monnaie.isEmpty() && produit.isEmpty() && montant==null) {
+        	return this.findAll(pageable);
+        }else {
+	        if (montant == null){
+	            return montantRepository.findByMonnaieAndProduit("%"+monnaie+"%", "%"+produit+"%",
+	                pageable);
+	        }else {
+	            Page<Montant> page = montantRepository.findByMonnaieAndProduitAndMontant("%"+monnaie+"%", "%"+produit+"%", montant,
+	                pageable);
+	            System.out.println(page.getContent());
+	            return page;
+	        }
+        }
+    }
 }

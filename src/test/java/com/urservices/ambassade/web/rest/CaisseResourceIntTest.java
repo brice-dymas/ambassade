@@ -238,6 +238,33 @@ public class CaisseResourceIntTest {
             .andExpect(jsonPath("$.[*].num").value(hasItem(DEFAULT_NUM)))
             .andExpect(jsonPath("$.[*].paiement").value(hasItem(DEFAULT_PAIEMENT.toString())));
     }
+    
+    @Test
+    @Transactional
+    public void getAllCaissesByDateDuJour() throws Exception {
+        // Initialize the database
+        caisseRepository.saveAndFlush(caisse);
+
+        // Get all the caisseList
+        restCaisseMockMvc.perform(get("/api/caisses?sort=id,desc&dateDuJour="+DEFAULT_DATE_DU_JOUR))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(caisse.getId().intValue())))
+            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.intValue())))
+            .andExpect(jsonPath("$.[*].dateDuJour").value(hasItem(sameInstant(DEFAULT_DATE_DU_JOUR))))
+            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
+            .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM.toString())))
+            .andExpect(jsonPath("$.[*].typeID").value(hasItem(DEFAULT_TYPE_ID.toString())))
+            .andExpect(jsonPath("$.[*].numeroID").value(hasItem(DEFAULT_NUMERO_ID.toString())))
+            .andExpect(jsonPath("$.[*].serviceConcerne").value(hasItem(DEFAULT_SERVICE_CONCERNE.toString())))
+            .andExpect(jsonPath("$.[*].monnaie").value(hasItem(DEFAULT_MONNAIE.toString())))
+            .andExpect(jsonPath("$.[*].montant").value(hasItem(DEFAULT_MONTANT.intValue())))
+            .andExpect(jsonPath("$.[*].dateRetour").value(hasItem(sameInstant(DEFAULT_DATE_RETOUR))))
+            .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
+            .andExpect(jsonPath("$.[*].num").value(hasItem(DEFAULT_NUM)))
+            .andExpect(jsonPath("$.[*].paiement").value(hasItem(DEFAULT_PAIEMENT.toString())));
+    }
+
 
     @Test
     @Transactional

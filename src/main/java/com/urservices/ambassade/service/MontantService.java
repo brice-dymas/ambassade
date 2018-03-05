@@ -39,4 +39,13 @@ public interface MontantService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    /**
+     * Get monnaies using some parameters.
+     *
+     * @param monnaie the monnaie
+     * @param produit
+     * @return the list of entities
+     */
+    Page<Montant> findByMonnaieAndProduitAndMontant(String monnaie, String produit, Long montant, Pageable pageable);
 }

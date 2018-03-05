@@ -11,15 +11,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,11 +100,43 @@ public class CaisseResource {
      */
     @GetMapping("/caisses")
     @Timed
-    public ResponseEntity<List<Caisse>> getAllCaisses(Pageable pageable) {
+    public ResponseEntity<List<Caisse>> getAllCaisses(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Caisses");
-        Page<Caisse> page = caisseService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/caisses");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+
+        
+        //String pattern = "dd-MM-yyyy";
+        String pattern = "yyyy-MM-dd";
+        Page<Caisse> pageCaisse;
+        DateTimeFormatter Parser = DateTimeFormatter.ofPattern(pattern);
+        final String dateRetourString = webRequest.getParameter("dateRetour") != null
+            ? webRequest.getParameter("dateRetour") : "01/01/1960";
+        String dateDuJourString  = webRequest.getParameter("dateDuJour") != null
+            ? webRequest.getParameter("dateDuJour") : "01/01/1960";
+            
+        LocalDate localDate = LocalDate.parse(dateDuJourString);
+
+        ZonedDateTime dateDuJour = ZonedDateTime.parse(dateDuJourString);
+        ZonedDateTime dateRetour = ZonedDateTime.parse(dateRetourString, Parser);
+        //ZonedDateTime dateDuJour = localDate.atStartOfDay(ZoneId.systemDefault());
+
+        Long reference = webRequest.getParameter("reference") != null ? Long.valueOf(webRequest.getParameter("reference")) : 0L;
+        BigDecimal montant = webRequest.getParameter("montant") != null ?
+            BigDecimal.valueOf(Long.valueOf(webRequest.getParameter("montant"))) : new BigDecimal(0);
+        Integer num = webRequest.getParameter("num") != null ? Integer.valueOf(webRequest.getParameter("num")) : 0;
+        String monnaie = webRequest.getParameter("monnaie") != null ? webRequest.getParameter("monnaie") : "";
+        String nom = webRequest.getParameter("nom") != null ? webRequest.getParameter("nom") : "";
+        String prenom = webRequest.getParameter("prenom") != null ? webRequest.getParameter("prenom") : "";
+        String typeID = webRequest.getParameter("typeID") != null ? webRequest.getParameter("typeID") : "";
+        String serviceConcerne = webRequest.getParameter("serviceConcerne") != null ? webRequest.getParameter("serviceConcerne") : "";
+        String telephone = webRequest.getParameter("telephone") != null ? webRequest.getParameter("telephone") : "";
+        String paiement = webRequest.getParameter("paiement") != null ? webRequest.getParameter("paiement") : "";
+        String numero = webRequest.getParameter("numero") != null ? webRequest.getParameter("numero") : "";
+
+        pageCaisse = caisseService.searchAll(dateDuJour,reference,montant,num,dateRetour,monnaie,nom,prenom,
+            typeID,serviceConcerne,telephone,paiement,numero,pageable);
+//        Page<Caisse> pageCaisse = caisseService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(pageCaisse, "/api/caisses");
+        return new ResponseEntity<>(pageCaisse.getContent(), headers, HttpStatus.OK);
     }
 
     /**

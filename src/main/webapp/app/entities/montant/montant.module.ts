@@ -15,6 +15,7 @@ import {
     montantPopupRoute,
     MontantResolvePagingParams,
 } from './';
+import { MontantSearchComponent } from './montant-search.component';
 
 const ENTITY_STATES = [
     ...montantRoute,
@@ -33,6 +34,7 @@ const ENTITY_STATES = [
         MontantDeleteDialogComponent,
         MontantPopupComponent,
         MontantDeletePopupComponent,
+        MontantSearchComponent,
     ],
     entryComponents: [
         MontantComponent,

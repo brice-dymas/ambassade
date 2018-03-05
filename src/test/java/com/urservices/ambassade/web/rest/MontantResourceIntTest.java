@@ -157,6 +157,38 @@ public class MontantResourceIntTest {
 
     @Test
     @Transactional
+    public void searchWithMontants() throws Exception {
+        // Initialize the database
+        montantRepository.saveAndFlush(montant);
+
+        // Get all the montantList
+        restMontantMockMvc.perform(get("/api/montants?monnaie=AAAAAAAAAA&produit=AAAAAAAAAA&montant=0&sort=id,desc"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(montant.getId().intValue())))
+            .andExpect(jsonPath("$.[*].monnaie").value(hasItem(DEFAULT_MONNAIE.toString())))
+            .andExpect(jsonPath("$.[*].montant").value(hasItem(DEFAULT_MONTANT.intValue())))
+            .andExpect(jsonPath("$.[*].produit").value(hasItem(DEFAULT_PRODUIT.toString())));
+    }
+    
+    @Test
+    @Transactional
+    public void searchWithoutMontants() throws Exception {
+        // Initialize the database
+        montantRepository.saveAndFlush(montant);
+
+        // Get all the montantList
+        restMontantMockMvc.perform(get("/api/montants?monnaie=AAAAAAAAAA&produit=AAAAAAAAAA&sort=id,desc"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(montant.getId().intValue())))
+            .andExpect(jsonPath("$.[*].monnaie").value(hasItem(DEFAULT_MONNAIE.toString())))
+            .andExpect(jsonPath("$.[*].montant").value(hasItem(DEFAULT_MONTANT.intValue())))
+            .andExpect(jsonPath("$.[*].produit").value(hasItem(DEFAULT_PRODUIT.toString())));
+    }
+
+    @Test
+    @Transactional
     public void getMontant() throws Exception {
         // Initialize the database
         montantRepository.saveAndFlush(montant);

@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -90,12 +91,24 @@ public class MontantResource {
      */
     @GetMapping("/montants")
     @Timed
-    public ResponseEntity<List<Montant>> getAllMontants(Pageable pageable) {
+    public ResponseEntity<List<Montant>> getAllMontants(WebRequest webRequest, Pageable pageable) {
+
         log.debug("REST request to get a page of Montants");
-        Page<Montant> page = montantService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/montants");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+
+        String monnaie = webRequest.getParameter("monnaie") != null ? webRequest.getParameter("monnaie") : "";
+        String produit = webRequest.getParameter("produit") != null ? webRequest.getParameter("produit") : "";
+        Long montant = (webRequest.getParameter("montant") != null && !webRequest.getParameter("montant").equals(""))
+            ? Long.valueOf(webRequest.getParameter("montant")) : null;
+
+        Page<Montant> pageMontant;
+
+        //pageMontant = montantService.findAll(pageable);
+        pageMontant = montantService.findByMonnaieAndProduitAndMontant(monnaie,produit,montant,pageable);
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(pageMontant, "/api/montants");
+        return new ResponseEntity<>(pageMontant.getContent(), headers, HttpStatus.OK);
     }
+
 
     /**
      * GET  /montants/:id : get the "id" montant.

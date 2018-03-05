@@ -15,6 +15,8 @@ import { ITEMS_PER_PAGE, Principal } from '../../shared';
 export class MontantComponent implements OnInit, OnDestroy {
 
 currentAccount: any;
+    montant: 'Euro';
+    produit: ' ';
     montants: Montant[];
     error: any;
     success: any;
@@ -28,6 +30,7 @@ currentAccount: any;
     predicate: any;
     previousPage: any;
     reverse: any;
+    settings: any;
 
     constructor(
         private montantService: MontantService,
@@ -46,12 +49,17 @@ currentAccount: any;
             this.predicate = data.pagingParams.predicate;
         });
     }
-
     loadAll() {
-        this.montantService.query({
-            page: this.page - 1,
-            size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
+         this.montantService.query({
+             page: this.page - 1,
+             size: this.itemsPerPage,
+             sort: this.sort()}).subscribe(
+             (res: HttpResponse<Montant[]>) => this.onSuccess(res.body, res.headers),
+             (res: HttpErrorResponse) => this.onError(res.message)
+         );
+    }
+    searchMontant(montant: Montant) {
+        this.montantService.search(montant).subscribe(
                 (res: HttpResponse<Montant[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -97,7 +105,17 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInMontants() {
-        this.eventSubscriber = this.eventManager.subscribe('montantListModification', (response) => this.loadAll());
+        // this.eventSubscriber = this.eventManager.subscribe('montantListModification', (response) => this.loadAll(this.montant, this.produit));
+        this.eventSubscriber = this.eventManager.subscribe('montantListModification', (response) => {
+            console.log(response);
+            if (typeof response.content === 'string') {
+                console.log('query');
+                return this.loadAll();
+            }else {
+                console.log('search');
+                return this.searchMontant(response.content);
+            }
+        });
     }
 
     sort() {
