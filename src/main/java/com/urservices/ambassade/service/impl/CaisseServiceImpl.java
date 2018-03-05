@@ -102,9 +102,15 @@ public class CaisseServiceImpl implements CaisseService {
     public Page<Caisse> searchAll(ZonedDateTime dateDuJour, Long reference, BigDecimal montant, Integer num,
                                   ZonedDateTime dateRetour, String monnaie, String nom, String prenom, String typeID,
                                   String serviceConcerne, String telephone, String paiement, String numero,
-                                  int page, Integer size) {
-        return caisseRepository.searchAll(dateDuJour,reference,montant,num,dateRetour,"%"+monnaie+"%","%"+nom+"%",
+                                  Pageable pageable) {
+    	
+    	System.out.println("Date du jour "+dateDuJour.toString());
+    	
+    	Page<Caisse> pageCaisse = caisseRepository.searchByDateDuJour(dateDuJour, pageable);
+    	
+    	return pageCaisse;
+        /*return caisseRepository.searchAll(dateDuJour,reference,montant,num,dateRetour,"%"+monnaie+"%","%"+nom+"%",
             "%"+prenom+"%","%"+typeID+"%","%"+serviceConcerne+"%","%"+telephone+"%",
-            "%"+paiement+"%","%"+numero+"%",new PageRequest(page,size));
+            "%"+paiement+"%","%"+numero+"%",pageable);*/
     }
 }

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -96,27 +95,15 @@ public class MontantResource {
 
         log.debug("REST request to get a page of Montants");
 
-        String monnaie = webRequest.getParameter("monnaie");
-        String produit = webRequest.getParameter("produit");
-        final Long montant = (webRequest.getParameter("montant") != null && !webRequest.getParameter("montant").equals(""))
-            ? Long.valueOf(webRequest.getParameter("montant")) : -1;
+        String monnaie = webRequest.getParameter("monnaie") != null ? webRequest.getParameter("monnaie") : "";
+        String produit = webRequest.getParameter("produit") != null ? webRequest.getParameter("produit") : "";
+        Long montant = (webRequest.getParameter("montant") != null && !webRequest.getParameter("montant").equals(""))
+            ? Long.valueOf(webRequest.getParameter("montant")) : null;
 
-        final Integer page = webRequest.getParameter("page") != null
-            ? Integer.valueOf(webRequest.getParameter("page")) : 0;
-        final Integer size = webRequest.getParameter("size") != null
-            ? Integer.valueOf(webRequest.getParameter("size")) : 5;
         Page<Montant> pageMontant;
 
-        pageMontant = montantService.findByMonnaieAndProduitAndMontant(monnaie,produit,montant,page,size);
-//        System.out.println("Getting a page of Montants with monnaie= "+monnaie+ "and produit= "+ produit+ "and MONTANT= "+ montant);
-//        if (montant != null) {
-////            page = montantService.findAll(pageable);
-//            System.out.println("Getting a page of Montants with monnaie= "+monnaie+ "and produit= "+ produit+ "and montant= "+ montant);
-//            pageMontant = montantService.findByMonnaieAndProduitAndMontant(monnaie,produit,montant,pageable);
-//        }else {
-//            System.out.println("Getting a page of Montants with monnaie= "+monnaie+ "and produit= "+ produit+ "and montant= "+ montant);
-//            pageMontant = montantService.findByMonnaieAndProduit(monnaie,produit,pageable);
-//        }
+        //pageMontant = montantService.findAll(pageable);
+        pageMontant = montantService.findByMonnaieAndProduitAndMontant(monnaie,produit,montant,pageable);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(pageMontant, "/api/montants");
         return new ResponseEntity<>(pageMontant.getContent(), headers, HttpStatus.OK);

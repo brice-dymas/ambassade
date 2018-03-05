@@ -50,5 +50,5 @@ public interface CaisseService {
     Page<Caisse> searchAll(ZonedDateTime dateDuJour, Long reference, BigDecimal montant, Integer num,
                            ZonedDateTime dateRetour, String monnaie, String nom, String prenom, String typeID,
                            String serviceConcerne, String telephone, String paiement, String numero,
-                           final int page, final Integer size);
+                           Pageable pageable);
 }

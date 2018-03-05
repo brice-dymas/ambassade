@@ -47,7 +47,5 @@ public interface MontantService {
      * @param produit
      * @return the list of entities
      */
-    Page<Montant> findByMonnaieAndProduit(String monnaie, String produit, final int page, final Integer size);
-
-    Page<Montant> findByMonnaieAndProduitAndMontant(String monnaie, String produit, Long montant, final int page, final Integer size);
+    Page<Montant> findByMonnaieAndProduitAndMontant(String monnaie, String produit, Long montant, Pageable pageable);
 }

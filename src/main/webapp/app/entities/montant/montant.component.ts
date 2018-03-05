@@ -30,6 +30,7 @@ currentAccount: any;
     predicate: any;
     previousPage: any;
     reverse: any;
+    settings: any;
 
     constructor(
         private montantService: MontantService,
@@ -48,19 +49,17 @@ currentAccount: any;
             this.predicate = data.pagingParams.predicate;
         });
     }
-
-
-    // loadAll() {
-    //     this.montantService.query({
-    //         page: this.page - 1,
-    //         size: this.itemsPerPage,
-    //         sort: this.sort()}).subscribe(
-    //         (res: HttpResponse<Montant[]>) => this.onSuccess(res.body, res.headers),
-    //         (res: HttpErrorResponse) => this.onError(res.message)
-    //     );
-    // }
-    loadAll(montant, produit) {
-        this.montantService.search(montant, produit).subscribe(
+    loadAll() {
+         this.montantService.query({
+             page: this.page - 1,
+             size: this.itemsPerPage,
+             sort: this.sort()}).subscribe(
+             (res: HttpResponse<Montant[]>) => this.onSuccess(res.body, res.headers),
+             (res: HttpErrorResponse) => this.onError(res.message)
+         );
+    }
+    searchMontant(montant: Montant) {
+        this.montantService.search(montant).subscribe(
                 (res: HttpResponse<Montant[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -79,7 +78,7 @@ currentAccount: any;
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });
-        this.loadAll(this.montant, this.produit);
+        this.loadAll();
     }
 
     clear() {
@@ -88,11 +87,10 @@ currentAccount: any;
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
-        this.loadAll(this.montant, this.produit);
+        this.loadAll();
     }
     ngOnInit() {
-        // this.loadAll();
-        this.loadAll(this.montant, this.produit);
+        this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
@@ -107,9 +105,17 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInMontants() {
-
-        this.eventSubscriber = this.eventManager.subscribe('montantListModification', (response) => this.loadAll(this.montant, this.produit));
-        // this.eventSubscriber = this.eventManager.subscribe('montantListModification', (response) => this.loadAll());
+        // this.eventSubscriber = this.eventManager.subscribe('montantListModification', (response) => this.loadAll(this.montant, this.produit));
+        this.eventSubscriber = this.eventManager.subscribe('montantListModification', (response) => {
+            console.log(response);
+            if (typeof response.content === 'string') {
+                console.log('query');
+                return this.loadAll();
+            }else {
+                console.log('search');
+                return this.searchMontant(response.content);
+            }
+        });
     }
 
     sort() {

@@ -75,6 +75,10 @@ public interface CaisseRepository extends JpaRepository<Caisse, Long> {
                            @Param("telephone") String telephone,
                            @Param("paiement") String paiement,
                            @Param("numero") String numero, Pageable pageable);
+    
+    
+    @Query("SELECT C FROM Caisse C WHERE C.dateDuJour > :dateJour")
+        Page<Caisse> searchByDateDuJour(@Param("dateJour") ZonedDateTime dateDuJour,Pageable pageable);
 
 
 

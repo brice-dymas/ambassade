@@ -12,7 +12,6 @@ export type EntityResponseType = HttpResponse<Montant>;
 export class MontantService {
 
     private resourceUrl =  SERVER_API_URL + 'api/montants';
-    private searchUrl =  SERVER_API_URL + 'api/montants/search';
 
     constructor(private http: HttpClient) { }
 
@@ -33,8 +32,9 @@ export class MontantService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
-    search(monnaie: String, produit: String): Observable<HttpResponse<Montant[]>> {
-        return this.http.get<Montant[]>(this.searchUrl, {  observe: 'response'})
+    search(montant: Montant): Observable<HttpResponse<Montant[]>> {
+        const options = createRequestOption(montant);
+        return this.http.get<Montant[]>(this.resourceUrl, { params: options,  observe: 'response'})
             .map((res: HttpResponse<Montant[]>) => this.convertArrayResponse(res));
     }
 

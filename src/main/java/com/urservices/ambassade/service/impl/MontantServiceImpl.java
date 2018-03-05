@@ -6,7 +6,6 @@ import com.urservices.ambassade.repository.MontantRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,23 +76,20 @@ public class MontantServiceImpl implements MontantService {
     }
 
     @Override
-    public Page<Montant> findByMonnaieAndProduit(String monnaie, String produit, int page, Integer size) {
-        log.debug("Request to get Monnaie with monnaie: {}, produit: {}", monnaie, produit);
-        return montantRepository.findByMonnaieAndProduit("%"+monnaie+"%", "%"+produit+"%",
-            new PageRequest(page,size));
-    }
-
-    @Override
-    public Page<Montant> findByMonnaieAndProduitAndMontant(String monnaie, String produit, Long montant, int page, Integer size) {
+    public Page<Montant> findByMonnaieAndProduitAndMontant(String monnaie, String produit, Long montant, Pageable pageable) {
         log.debug("Request to get Monnaie with monnaie: {}, produit: {}, and montant: {}", monnaie, produit, montant);
-        if (montant == -1){
-            System.out.println("MontantServiceImpl Recherche montant sans montant");
-            return montantRepository.findByMonnaieAndProduit("%"+monnaie+"%", "%"+produit+"%",
-                new PageRequest(page,size));
+        if(monnaie.isEmpty() && produit.isEmpty() && montant==null) {
+        	return this.findAll(pageable);
         }else {
-            System.out.println("MontantServiceImpl Recherche montant avec montant");
-            return montantRepository.findByMonnaieAndProduitAndMontant("%"+monnaie+"%", "%"+produit+"%", montant,
-                new PageRequest(page, size));
+	        if (montant == null){
+	            return montantRepository.findByMonnaieAndProduit("%"+monnaie+"%", "%"+produit+"%",
+	                pageable);
+	        }else {
+	            Page<Montant> page = montantRepository.findByMonnaieAndProduitAndMontant("%"+monnaie+"%", "%"+produit+"%", montant,
+	                pageable);
+	            System.out.println(page.getContent());
+	            return page;
+	        }
         }
     }
 }
