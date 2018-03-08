@@ -81,16 +81,17 @@ public class PasseportServiceImpl implements PasseportService {
     }
 
     @Override
-    public Page<Passeport> searchAll(String nom, String prenom, String numeroPasseport, String neLe,
-                                     String lieuNaissance, List<Statut> etatCivils, String adresse, String telephone,
-                                     String nif, String paysEmetteur, LocalDate soumisLe, LocalDate delivreLe,
-                                     BigDecimal montant, String remarques, LocalDate dateEmission,
-                                     LocalDate dateExpiration, String remarquesR, String sms, String sms2,
-                                     String documents, Pageable pageable) {
-        return passeportRepository.searchAll("%" + nom + "%", "%" + prenom + "%", "%" + numeroPasseport + "%",
-            "%" + neLe + "%", "%" + lieuNaissance + "%",  etatCivils, "%" + adresse + "%",
-            "%" + telephone + "%", "%" + nif + "%", "%" + paysEmetteur + "%", soumisLe, delivreLe, montant,
-            "%" + remarques + "%", dateEmission, dateExpiration, "%" + remarquesR + "%", "%" + sms + "%",
-            "%" + sms2 + "%", "%" + documents + "%", pageable);
+    public Page<Passeport> searchAll(String nom, String prenom, String numeroPasseport, String neLe, String lieuNaissance,
+                                     List<Statut> etatCivils, String adresse, String telephone, String nif, String paysEmetteur,
+                                     LocalDate soumisLeDeb, LocalDate soumisLeFin, LocalDate delivreLeDeb, LocalDate delivreLeFin,
+                                     BigDecimal montant, String remarques, LocalDate dateEmissionDeb, LocalDate dateEmissionFin,
+                                     LocalDate dateExpirationDeb, LocalDate dateExpirationFin, String remarquesR, String sms,
+                                     String sms2, String documents, Pageable pageable) {
+        return passeportRepository.searchAll("%" + nom + "%", "%" + prenom + "%", "%" +
+                numeroPasseport + "%", "%" + neLe + "%", "%" + lieuNaissance + "%",  etatCivils,
+            "%" + adresse + "%","%" + telephone + "%", "%" + nif + "%", "%" +
+                paysEmetteur + "%", soumisLeDeb, soumisLeFin, delivreLeDeb, delivreLeFin,  montant, "%" +
+                remarques + "%", dateEmissionDeb, dateEmissionFin, dateExpirationDeb, dateEmissionFin, "%" +
+                remarquesR + "%", "%" + sms + "%","%" + sms2 + "%", "%" + documents + "%", pageable);
     }
 }

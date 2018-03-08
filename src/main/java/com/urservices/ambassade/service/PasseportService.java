@@ -50,9 +50,11 @@ public interface PasseportService {
                               String lieuNaissance, List<Statut> etatCivils,
                               String adresse, String telephone,
                               String nif, String paysEmetteur,
-                              LocalDate soumisLe, LocalDate delivreLe,
+                              LocalDate soumisLeDeb, LocalDate soumisLeFin,
+                              LocalDate delivreLeDeb, LocalDate delivreLeFin,
                               BigDecimal montant, String remarques,
-                              LocalDate dateEmission, LocalDate dateExpiration,
+                              LocalDate dateEmissionDeb, LocalDate dateEmissionFin,
+                              LocalDate dateExpirationDeb, LocalDate dateExpirationFin,
                               String remarquesR, String sms,
                               String sms2, String documents, Pageable pageable);
 }
