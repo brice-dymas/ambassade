@@ -23,13 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-import static com.urservices.ambassade.web.rest.TestUtil.sameInstant;
 import static com.urservices.ambassade.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -58,8 +55,8 @@ public class RapatriementResourceIntTest {
     private static final String DEFAULT_PRENOM = "AAAAAAAAAA";
     private static final String UPDATED_PRENOM = "BBBBBBBBBB";
 
-    private static final ZonedDateTime DEFAULT_DATE_NAISSANCE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE_NAISSANCE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_DATE_NAISSANCE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_NAISSANCE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_DOCUMENT_ID = "AAAAAAAAAA";
     private static final String UPDATED_DOCUMENT_ID = "BBBBBBBBBB";
@@ -70,8 +67,8 @@ public class RapatriementResourceIntTest {
     private static final String DEFAULT_MOTIF = "AAAAAAAAAA";
     private static final String UPDATED_MOTIF = "BBBBBBBBBB";
 
-    private static final ZonedDateTime DEFAULT_DATE_RAPATRIEMENT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE_RAPATRIEMENT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_DATE_RAPATRIEMENT = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_RAPATRIEMENT = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_FRONTIERE = "AAAAAAAAAA";
     private static final String UPDATED_FRONTIERE = "BBBBBBBBBB";
@@ -228,11 +225,11 @@ public class RapatriementResourceIntTest {
             .andExpect(jsonPath("$.[*].numeroDossier").value(hasItem(DEFAULT_NUMERO_DOSSIER.toString())))
             .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
             .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM.toString())))
-            .andExpect(jsonPath("$.[*].dateNaissance").value(hasItem(sameInstant(DEFAULT_DATE_NAISSANCE))))
+            .andExpect(jsonPath("$.[*].dateNaissance").value(hasItem(DEFAULT_DATE_NAISSANCE.toString())))
             .andExpect(jsonPath("$.[*].documentID").value(hasItem(DEFAULT_DOCUMENT_ID.toString())))
             .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE.toString())))
             .andExpect(jsonPath("$.[*].motif").value(hasItem(DEFAULT_MOTIF.toString())))
-            .andExpect(jsonPath("$.[*].dateRapatriement").value(hasItem(sameInstant(DEFAULT_DATE_RAPATRIEMENT))))
+            .andExpect(jsonPath("$.[*].dateRapatriement").value(hasItem(DEFAULT_DATE_RAPATRIEMENT.toString())))
             .andExpect(jsonPath("$.[*].frontiere").value(hasItem(DEFAULT_FRONTIERE.toString())))
             .andExpect(jsonPath("$.[*].documentScanneContentType").value(hasItem(DEFAULT_DOCUMENT_SCANNE_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].documentScanne").value(hasItem(Base64Utils.encodeToString(DEFAULT_DOCUMENT_SCANNE))))
@@ -254,11 +251,11 @@ public class RapatriementResourceIntTest {
             .andExpect(jsonPath("$.numeroDossier").value(DEFAULT_NUMERO_DOSSIER.toString()))
             .andExpect(jsonPath("$.nom").value(DEFAULT_NOM.toString()))
             .andExpect(jsonPath("$.prenom").value(DEFAULT_PRENOM.toString()))
-            .andExpect(jsonPath("$.dateNaissance").value(sameInstant(DEFAULT_DATE_NAISSANCE)))
+            .andExpect(jsonPath("$.dateNaissance").value(DEFAULT_DATE_NAISSANCE.toString()))
             .andExpect(jsonPath("$.documentID").value(DEFAULT_DOCUMENT_ID.toString()))
             .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE.toString()))
             .andExpect(jsonPath("$.motif").value(DEFAULT_MOTIF.toString()))
-            .andExpect(jsonPath("$.dateRapatriement").value(sameInstant(DEFAULT_DATE_RAPATRIEMENT)))
+            .andExpect(jsonPath("$.dateRapatriement").value(DEFAULT_DATE_RAPATRIEMENT.toString()))
             .andExpect(jsonPath("$.frontiere").value(DEFAULT_FRONTIERE.toString()))
             .andExpect(jsonPath("$.documentScanneContentType").value(DEFAULT_DOCUMENT_SCANNE_CONTENT_TYPE))
             .andExpect(jsonPath("$.documentScanne").value(Base64Utils.encodeToString(DEFAULT_DOCUMENT_SCANNE)))

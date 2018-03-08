@@ -37,7 +37,7 @@
             <tr *ngFor="let caisse of caisses ;trackBy: trackId">
                 <td><a [routerLink]="['../caisse', caisse.id ]">{{caisse.id}}</a></td>
                 <td>{{caisse.reference}}</td>
-                <td>{{caisse.dateDuJour | date:'medium'}}</td>
+                <td>{{caisse.dateDuJour | date:'mediumDate'}}</td>
                 <td>{{caisse.nom}}</td>
                 <td>{{caisse.prenom}}</td>
                 <td>{{caisse.typeID}}</td>
@@ -45,7 +45,7 @@
                 <td>{{caisse.serviceConcerne}}</td>
                 <td>{{caisse.monnaie}}</td>
                 <td>{{caisse.montant}}</td>
-                <td>{{caisse.dateRetour | date:'medium'}}</td>
+                <td>{{caisse.dateRetour | date:'mediumDate'}}</td>
                 <td>{{caisse.telephone}}</td>
                 <td>{{caisse.num}}</td>
                 <td>{{caisse.paiement}}</td>

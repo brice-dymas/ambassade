@@ -64,9 +64,9 @@ export class DonneesActeService {
     private convertItemFromServer(donneesActe: DonneesActe): DonneesActe {
         const copy: DonneesActe = Object.assign({}, donneesActe);
         copy.dateDuJourChiffre = this.dateUtils
-            .convertDateTimeFromServer(donneesActe.dateDuJourChiffre);
+            .convertLocalDateFromServer(donneesActe.dateDuJourChiffre);
         copy.dateNaissanceChiffre = this.dateUtils
-            .convertDateTimeFromServer(donneesActe.dateNaissanceChiffre);
+            .convertLocalDateFromServer(donneesActe.dateNaissanceChiffre);
         return copy;
     }
 
@@ -75,10 +75,10 @@ export class DonneesActeService {
      */
     private convert(donneesActe: DonneesActe): DonneesActe {
         const copy: DonneesActe = Object.assign({}, donneesActe);
-
-        copy.dateDuJourChiffre = this.dateUtils.toDate(donneesActe.dateDuJourChiffre);
-
-        copy.dateNaissanceChiffre = this.dateUtils.toDate(donneesActe.dateNaissanceChiffre);
+        copy.dateDuJourChiffre = this.dateUtils
+            .convertLocalDateToServer(donneesActe.dateDuJourChiffre);
+        copy.dateNaissanceChiffre = this.dateUtils
+            .convertLocalDateToServer(donneesActe.dateNaissanceChiffre);
         return copy;
     }
 }

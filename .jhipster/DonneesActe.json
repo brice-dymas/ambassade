@@ -13,7 +13,7 @@
         },
         {
             "fieldName": "dateDuJourChiffre",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "registreSpecialRD",
@@ -57,7 +57,7 @@
         },
         {
             "fieldName": "dateNaissanceChiffre",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "nomPere",

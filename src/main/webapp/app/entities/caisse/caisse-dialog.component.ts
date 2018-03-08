@@ -18,6 +18,8 @@ export class CaisseDialogComponent implements OnInit {
 
     caisse: Caisse;
     isSaving: boolean;
+    dateDuJourDp: any;
+    dateRetourDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

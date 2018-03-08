@@ -39,11 +39,11 @@
                 <td>{{rapatriement.numeroDossier}}</td>
                 <td>{{rapatriement.nom}}</td>
                 <td>{{rapatriement.prenom}}</td>
-                <td>{{rapatriement.dateNaissance | date:'medium'}}</td>
+                <td>{{rapatriement.dateNaissance | date:'mediumDate'}}</td>
                 <td>{{rapatriement.documentID}}</td>
                 <td jhiTranslate="{{'ambassadeApp.Sexe.' + rapatriement.sexe}}">{{rapatriement.sexe}}</td>
                 <td>{{rapatriement.motif}}</td>
-                <td>{{rapatriement.dateRapatriement | date:'medium'}}</td>
+                <td>{{rapatriement.dateRapatriement | date:'mediumDate'}}</td>
                 <td>{{rapatriement.frontiere}}</td>
                 <td>
                     <a *ngIf="rapatriement.documentScanne" (click)="openFile(rapatriement.documentScanneContentType, rapatriement.documentScanne)" jhiTranslate="entity.action.open">open</a>

@@ -29,9 +29,12 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.dateDuJourChiffre" for="field_dateDuJourChiffre">Date Du Jour Chiffre</label>
-            <div class="d-flex">
-                <input id="field_dateDuJourChiffre" type="datetime-local" class="form-control" name="dateDuJourChiffre" [(ngModel)]="donneesActe.dateDuJourChiffre"
+            <div class="input-group">
+                <input id="field_dateDuJourChiffre" type="text" class="form-control" name="dateDuJourChiffre" ngbDatepicker  #dateDuJourChiffreDp="ngbDatepicker" [(ngModel)]="donneesActe.dateDuJourChiffre"
                 />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateDuJourChiffreDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
         </div>
         <div class="form-group">
@@ -95,9 +98,12 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.dateNaissanceChiffre" for="field_dateNaissanceChiffre">Date Naissance Chiffre</label>
-            <div class="d-flex">
-                <input id="field_dateNaissanceChiffre" type="datetime-local" class="form-control" name="dateNaissanceChiffre" [(ngModel)]="donneesActe.dateNaissanceChiffre"
+            <div class="input-group">
+                <input id="field_dateNaissanceChiffre" type="text" class="form-control" name="dateNaissanceChiffre" ngbDatepicker  #dateNaissanceChiffreDp="ngbDatepicker" [(ngModel)]="donneesActe.dateNaissanceChiffre"
                 />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateNaissanceChiffreDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
         </div>
         <div class="form-group">

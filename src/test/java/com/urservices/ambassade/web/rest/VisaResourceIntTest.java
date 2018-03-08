@@ -22,13 +22,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-import static com.urservices.ambassade.web.rest.TestUtil.sameInstant;
 import static com.urservices.ambassade.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -62,11 +59,11 @@ public class VisaResourceIntTest {
     private static final Long DEFAULT_NUMERO_VISA = 1L;
     private static final Long UPDATED_NUMERO_VISA = 2L;
 
-    private static final ZonedDateTime DEFAULT_DATE_EMISSION = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE_EMISSION = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_DATE_EMISSION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_EMISSION = LocalDate.now(ZoneId.systemDefault());
 
-    private static final ZonedDateTime DEFAULT_DATE_EXPIRATION = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE_EXPIRATION = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_DATE_EXPIRATION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_EXPIRATION = LocalDate.now(ZoneId.systemDefault());
 
     private static final Integer DEFAULT_VALIDE_POUR = 1;
     private static final Integer UPDATED_VALIDE_POUR = 2;
@@ -239,8 +236,8 @@ public class VisaResourceIntTest {
             .andExpect(jsonPath("$.[*].numeroPasseport").value(hasItem(DEFAULT_NUMERO_PASSEPORT.toString())))
             .andExpect(jsonPath("$.[*].cedula").value(hasItem(DEFAULT_CEDULA.toString())))
             .andExpect(jsonPath("$.[*].numeroVisa").value(hasItem(DEFAULT_NUMERO_VISA.intValue())))
-            .andExpect(jsonPath("$.[*].dateEmission").value(hasItem(sameInstant(DEFAULT_DATE_EMISSION))))
-            .andExpect(jsonPath("$.[*].dateExpiration").value(hasItem(sameInstant(DEFAULT_DATE_EXPIRATION))))
+            .andExpect(jsonPath("$.[*].dateEmission").value(hasItem(DEFAULT_DATE_EMISSION.toString())))
+            .andExpect(jsonPath("$.[*].dateExpiration").value(hasItem(DEFAULT_DATE_EXPIRATION.toString())))
             .andExpect(jsonPath("$.[*].validePour").value(hasItem(DEFAULT_VALIDE_POUR)))
             .andExpect(jsonPath("$.[*].nombreEntree").value(hasItem(DEFAULT_NOMBRE_ENTREE.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
@@ -267,8 +264,8 @@ public class VisaResourceIntTest {
             .andExpect(jsonPath("$.numeroPasseport").value(DEFAULT_NUMERO_PASSEPORT.toString()))
             .andExpect(jsonPath("$.cedula").value(DEFAULT_CEDULA.toString()))
             .andExpect(jsonPath("$.numeroVisa").value(DEFAULT_NUMERO_VISA.intValue()))
-            .andExpect(jsonPath("$.dateEmission").value(sameInstant(DEFAULT_DATE_EMISSION)))
-            .andExpect(jsonPath("$.dateExpiration").value(sameInstant(DEFAULT_DATE_EXPIRATION)))
+            .andExpect(jsonPath("$.dateEmission").value(DEFAULT_DATE_EMISSION.toString()))
+            .andExpect(jsonPath("$.dateExpiration").value(DEFAULT_DATE_EXPIRATION.toString()))
             .andExpect(jsonPath("$.validePour").value(DEFAULT_VALIDE_POUR))
             .andExpect(jsonPath("$.nombreEntree").value(DEFAULT_NOMBRE_ENTREE.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))

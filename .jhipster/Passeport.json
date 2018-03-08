@@ -15,7 +15,8 @@
             "fieldName": "nom",
             "fieldType": "String",
             "fieldValidateRules": [
-                "maxlength"
+                "maxlength",
+                "required"
             ],
             "fieldValidateRulesMaxlength": 30
         },
@@ -23,7 +24,8 @@
             "fieldName": "prenom",
             "fieldType": "String",
             "fieldValidateRules": [
-                "maxlength"
+                "maxlength",
+                "required"
             ],
             "fieldValidateRulesMaxlength": 40
         },
@@ -39,7 +41,8 @@
             "fieldName": "neLe",
             "fieldType": "String",
             "fieldValidateRules": [
-                "maxlength"
+                "maxlength",
+                "required"
             ],
             "fieldValidateRulesMaxlength": 20
         },
@@ -47,7 +50,8 @@
             "fieldName": "lieuNaissance",
             "fieldType": "String",
             "fieldValidateRules": [
-                "maxlength"
+                "maxlength",
+                "required"
             ],
             "fieldValidateRulesMaxlength": 30
         },
@@ -86,7 +90,10 @@
         },
         {
             "fieldName": "soumisLe",
-            "fieldType": "LocalDate"
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "delivreLe",
@@ -96,7 +103,8 @@
             "fieldName": "montant",
             "fieldType": "BigDecimal",
             "fieldValidateRules": [
-                "min"
+                "min",
+                "required"
             ],
             "fieldValidateRulesMin": 0
         },

@@ -27,11 +27,11 @@
             </column>
 
             <column name="nom" type="varchar(30)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="prenom" type="varchar(40)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="numero_passeport" type="varchar(15)">
@@ -39,11 +39,11 @@
             </column>
 
             <column name="ne_le" type="varchar(20)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="lieu_naissance" type="varchar(30)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="etat_civil" type="varchar(255)">
@@ -67,7 +67,7 @@
             </column>
 
             <column name="soumis_le" type="date">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="delivre_le" type="date">
@@ -75,7 +75,7 @@
             </column>
 
             <column name="montant" type="decimal(10,2)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="remarques" type="varchar(255)">

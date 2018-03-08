@@ -18,6 +18,8 @@ export class VisaDialogComponent implements OnInit {
 
     visa: Visa;
     isSaving: boolean;
+    dateEmissionDp: any;
+    dateExpirationDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

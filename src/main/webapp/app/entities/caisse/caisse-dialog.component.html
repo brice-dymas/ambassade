@@ -19,9 +19,12 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.dateDuJour" for="field_dateDuJour">Date Du Jour</label>
-            <div class="d-flex">
-                <input id="field_dateDuJour" type="datetime-local" class="form-control" name="dateDuJour" [(ngModel)]="caisse.dateDuJour"
+            <div class="input-group">
+                <input id="field_dateDuJour" type="text" class="form-control" name="dateDuJour" ngbDatepicker  #dateDuJourDp="ngbDatepicker" [(ngModel)]="caisse.dateDuJour"
                 />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateDuJourDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
         </div>
         <div class="form-group">
@@ -97,9 +100,12 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.dateRetour" for="field_dateRetour">Date Retour</label>
-            <div class="d-flex">
-                <input id="field_dateRetour" type="datetime-local" class="form-control" name="dateRetour" [(ngModel)]="caisse.dateRetour"
+            <div class="input-group">
+                <input id="field_dateRetour" type="text" class="form-control" name="dateRetour" ngbDatepicker  #dateRetourDp="ngbDatepicker" [(ngModel)]="caisse.dateRetour"
                 />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateRetourDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
         </div>
         <div class="form-group">

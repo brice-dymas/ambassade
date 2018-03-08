@@ -32,24 +32,28 @@ public class Passeport implements Serializable {
     @Column(name = "numero_formulaire", nullable = false)
     private Long numeroFormulaire;
 
+    @NotNull
     @Size(max = 30)
-    @Column(name = "nom", length = 30)
+    @Column(name = "nom", length = 30, nullable = false)
     private String nom;
 
+    @NotNull
     @Size(max = 40)
-    @Column(name = "prenom", length = 40)
+    @Column(name = "prenom", length = 40, nullable = false)
     private String prenom;
 
     @Size(max = 15)
     @Column(name = "numero_passeport", length = 15)
     private String numeroPasseport;
 
+    @NotNull
     @Size(max = 20)
-    @Column(name = "ne_le", length = 20)
+    @Column(name = "ne_le", length = 20, nullable = false)
     private String neLe;
 
+    @NotNull
     @Size(max = 30)
-    @Column(name = "lieu_naissance", length = 30)
+    @Column(name = "lieu_naissance", length = 30, nullable = false)
     private String lieuNaissance;
 
     @Enumerated(EnumType.STRING)
@@ -71,14 +75,16 @@ public class Passeport implements Serializable {
     @Column(name = "pays_emetteur", length = 25)
     private String paysEmetteur;
 
-    @Column(name = "soumis_le")
+    @NotNull
+    @Column(name = "soumis_le", nullable = false)
     private LocalDate soumisLe;
 
     @Column(name = "delivre_le")
     private LocalDate delivreLe;
 
+    @NotNull
     @DecimalMin(value = "0")
-    @Column(name = "montant", precision=10, scale=2)
+    @Column(name = "montant", precision=10, scale=2, nullable = false)
     private BigDecimal montant;
 
     @Column(name = "remarques")

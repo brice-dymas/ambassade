@@ -2,7 +2,6 @@ import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HttpResponse } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { Caisse } from './caisse.model';
 import { CaisseService } from './caisse.service';
 
@@ -11,7 +10,6 @@ export class CaissePopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
-        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private caisseService: CaisseService
@@ -31,10 +29,20 @@ export class CaissePopupService {
                 this.caisseService.find(id)
                     .subscribe((caisseResponse: HttpResponse<Caisse>) => {
                         const caisse: Caisse = caisseResponse.body;
-                        caisse.dateDuJour = this.datePipe
-                            .transform(caisse.dateDuJour, 'yyyy-MM-ddTHH:mm:ss');
-                        caisse.dateRetour = this.datePipe
-                            .transform(caisse.dateRetour, 'yyyy-MM-ddTHH:mm:ss');
+                        if (caisse.dateDuJour) {
+                            caisse.dateDuJour = {
+                                year: caisse.dateDuJour.getFullYear(),
+                                month: caisse.dateDuJour.getMonth() + 1,
+                                day: caisse.dateDuJour.getDate()
+                            };
+                        }
+                        if (caisse.dateRetour) {
+                            caisse.dateRetour = {
+                                year: caisse.dateRetour.getFullYear(),
+                                month: caisse.dateRetour.getMonth() + 1,
+                                day: caisse.dateRetour.getDate()
+                            };
+                        }
                         this.ngbModalRef = this.caisseModalRef(component, caisse);
                         resolve(this.ngbModalRef);
                     });

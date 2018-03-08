@@ -2,7 +2,6 @@ import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HttpResponse } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { DonneesActe } from './donnees-acte.model';
 import { DonneesActeService } from './donnees-acte.service';
 
@@ -11,7 +10,6 @@ export class DonneesActePopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
-        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private donneesActeService: DonneesActeService
@@ -31,10 +29,20 @@ export class DonneesActePopupService {
                 this.donneesActeService.find(id)
                     .subscribe((donneesActeResponse: HttpResponse<DonneesActe>) => {
                         const donneesActe: DonneesActe = donneesActeResponse.body;
-                        donneesActe.dateDuJourChiffre = this.datePipe
-                            .transform(donneesActe.dateDuJourChiffre, 'yyyy-MM-ddTHH:mm:ss');
-                        donneesActe.dateNaissanceChiffre = this.datePipe
-                            .transform(donneesActe.dateNaissanceChiffre, 'yyyy-MM-ddTHH:mm:ss');
+                        if (donneesActe.dateDuJourChiffre) {
+                            donneesActe.dateDuJourChiffre = {
+                                year: donneesActe.dateDuJourChiffre.getFullYear(),
+                                month: donneesActe.dateDuJourChiffre.getMonth() + 1,
+                                day: donneesActe.dateDuJourChiffre.getDate()
+                            };
+                        }
+                        if (donneesActe.dateNaissanceChiffre) {
+                            donneesActe.dateNaissanceChiffre = {
+                                year: donneesActe.dateNaissanceChiffre.getFullYear(),
+                                month: donneesActe.dateNaissanceChiffre.getMonth() + 1,
+                                day: donneesActe.dateNaissanceChiffre.getDate()
+                            };
+                        }
                         this.ngbModalRef = this.donneesActeModalRef(component, donneesActe);
                         resolve(this.ngbModalRef);
                     });

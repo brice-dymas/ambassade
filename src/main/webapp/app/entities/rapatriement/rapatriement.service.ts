@@ -64,9 +64,9 @@ export class RapatriementService {
     private convertItemFromServer(rapatriement: Rapatriement): Rapatriement {
         const copy: Rapatriement = Object.assign({}, rapatriement);
         copy.dateNaissance = this.dateUtils
-            .convertDateTimeFromServer(rapatriement.dateNaissance);
+            .convertLocalDateFromServer(rapatriement.dateNaissance);
         copy.dateRapatriement = this.dateUtils
-            .convertDateTimeFromServer(rapatriement.dateRapatriement);
+            .convertLocalDateFromServer(rapatriement.dateRapatriement);
         return copy;
     }
 
@@ -75,10 +75,10 @@ export class RapatriementService {
      */
     private convert(rapatriement: Rapatriement): Rapatriement {
         const copy: Rapatriement = Object.assign({}, rapatriement);
-
-        copy.dateNaissance = this.dateUtils.toDate(rapatriement.dateNaissance);
-
-        copy.dateRapatriement = this.dateUtils.toDate(rapatriement.dateRapatriement);
+        copy.dateNaissance = this.dateUtils
+            .convertLocalDateToServer(rapatriement.dateNaissance);
+        copy.dateRapatriement = this.dateUtils
+            .convertLocalDateToServer(rapatriement.dateRapatriement);
         return copy;
     }
 }

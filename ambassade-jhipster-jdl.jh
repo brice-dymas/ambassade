@@ -1,18 +1,18 @@
 entity Passeport {
 	numeroFormulaire Long required min(0)
-    nom String maxlength(30)
-    prenom String maxlength(40)
+    nom String maxlength(30) required
+    prenom String maxlength(40) required
     numeroPasseport String maxlength(15)
-    neLe String maxlength(20)
-    lieuNaissance String maxlength(30)
+    neLe String maxlength(20) required
+    lieuNaissance String maxlength(30) required
     etatCivil Statut
     adresse String
     telephone String maxlength(15)
     nif String maxlength(20)
     paysEmetteur String maxlength(25)
-    soumisLe LocalDate
+    soumisLe LocalDate required
     delivreLe LocalDate
-    montant BigDecimal min(0)
+    montant BigDecimal min(0) required
     remarques String
     dateEmission LocalDate
     dateExpiration LocalDate
@@ -24,13 +24,13 @@ entity Passeport {
 
 entity DonneesActe {
 	reference String required minlength(1) minlength(10)
-    dateDuJourChiffre ZonedDateTime
+    dateDuJourChiffre LocalDate
     registreSpecialRD String maxlength(50)
     nomEnfant String maxlength(40)
     registre String maxlength(10)
     annee Integer min(1900)
     numero String maxlength(15)
-    dateNaissanceChiffre ZonedDateTime
+    dateNaissanceChiffre LocalDate
     nomPere String maxlength(20)
     prenomPere String maxlength(40)
     nomMere String maxlength(20)
@@ -91,11 +91,11 @@ entity Rapatriement {
     numeroDossier String maxlength(50)
     nom String maxlength(50)
     prenom String maxlength(50)
-    dateNaissance ZonedDateTime
+    dateNaissance LocalDate
     documentID String maxlength(50)
     sexe Sexe
     motif String maxlength(50)
-    dateRapatriement ZonedDateTime
+    dateRapatriement LocalDate
     frontiere String maxlength(50)
     documentScanne Blob
     createdByPHPRunner Integer
@@ -103,7 +103,7 @@ entity Rapatriement {
 
 entity Caisse {
 	reference Long
-    dateDuJour ZonedDateTime
+    dateDuJour LocalDate
     nom String maxlength(50)
     prenom String maxlength(50)
     typeID String maxlength(50)
@@ -111,7 +111,7 @@ entity Caisse {
     serviceConcerne String maxlength(50)
     monnaie String maxlength(50)
     montant BigDecimal
-    dateRetour ZonedDateTime
+    dateRetour LocalDate
     telephone String maxlength(50)
     num Integer required
     paiement String maxlength(50)
@@ -142,8 +142,8 @@ entity Visa {
     numeroPasseport String maxlength(30)
     cedula String maxlength(30)
     numeroVisa Long required
-    dateEmission ZonedDateTime
-	dateExpiration ZonedDateTime
+    dateEmission LocalDate
+	dateExpiration LocalDate
     validePour Integer
     nombreEntree String maxlength(20)
     type String maxlength(20)

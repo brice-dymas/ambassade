@@ -2,7 +2,6 @@ import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HttpResponse } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { Rapatriement } from './rapatriement.model';
 import { RapatriementService } from './rapatriement.service';
 
@@ -11,7 +10,6 @@ export class RapatriementPopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
-        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private rapatriementService: RapatriementService
@@ -31,10 +29,20 @@ export class RapatriementPopupService {
                 this.rapatriementService.find(id)
                     .subscribe((rapatriementResponse: HttpResponse<Rapatriement>) => {
                         const rapatriement: Rapatriement = rapatriementResponse.body;
-                        rapatriement.dateNaissance = this.datePipe
-                            .transform(rapatriement.dateNaissance, 'yyyy-MM-ddTHH:mm:ss');
-                        rapatriement.dateRapatriement = this.datePipe
-                            .transform(rapatriement.dateRapatriement, 'yyyy-MM-ddTHH:mm:ss');
+                        if (rapatriement.dateNaissance) {
+                            rapatriement.dateNaissance = {
+                                year: rapatriement.dateNaissance.getFullYear(),
+                                month: rapatriement.dateNaissance.getMonth() + 1,
+                                day: rapatriement.dateNaissance.getDate()
+                            };
+                        }
+                        if (rapatriement.dateRapatriement) {
+                            rapatriement.dateRapatriement = {
+                                year: rapatriement.dateRapatriement.getFullYear(),
+                                month: rapatriement.dateRapatriement.getMonth() + 1,
+                                day: rapatriement.dateRapatriement.getDate()
+                            };
+                        }
                         this.ngbModalRef = this.rapatriementModalRef(component, rapatriement);
                         resolve(this.ngbModalRef);
                     });

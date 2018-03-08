@@ -2,7 +2,6 @@ import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HttpResponse } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { Visa } from './visa.model';
 import { VisaService } from './visa.service';
 
@@ -11,7 +10,6 @@ export class VisaPopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
-        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private visaService: VisaService
@@ -31,10 +29,20 @@ export class VisaPopupService {
                 this.visaService.find(id)
                     .subscribe((visaResponse: HttpResponse<Visa>) => {
                         const visa: Visa = visaResponse.body;
-                        visa.dateEmission = this.datePipe
-                            .transform(visa.dateEmission, 'yyyy-MM-ddTHH:mm:ss');
-                        visa.dateExpiration = this.datePipe
-                            .transform(visa.dateExpiration, 'yyyy-MM-ddTHH:mm:ss');
+                        if (visa.dateEmission) {
+                            visa.dateEmission = {
+                                year: visa.dateEmission.getFullYear(),
+                                month: visa.dateEmission.getMonth() + 1,
+                                day: visa.dateEmission.getDate()
+                            };
+                        }
+                        if (visa.dateExpiration) {
+                            visa.dateExpiration = {
+                                year: visa.dateExpiration.getFullYear(),
+                                month: visa.dateExpiration.getMonth() + 1,
+                                day: visa.dateExpiration.getDate()
+                            };
+                        }
                         this.ngbModalRef = this.visaModalRef(component, visa);
                         resolve(this.ngbModalRef);
                     });

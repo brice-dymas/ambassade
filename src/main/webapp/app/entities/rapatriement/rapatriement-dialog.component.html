@@ -62,9 +62,12 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.dateNaissance" for="field_dateNaissance">Date Naissance</label>
-            <div class="d-flex">
-                <input id="field_dateNaissance" type="datetime-local" class="form-control" name="dateNaissance" [(ngModel)]="rapatriement.dateNaissance"
+            <div class="input-group">
+                <input id="field_dateNaissance" type="text" class="form-control" name="dateNaissance" ngbDatepicker  #dateNaissanceDp="ngbDatepicker" [(ngModel)]="rapatriement.dateNaissance"
                 />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateNaissanceDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
         </div>
         <div class="form-group">
@@ -98,9 +101,12 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.dateRapatriement" for="field_dateRapatriement">Date Rapatriement</label>
-            <div class="d-flex">
-                <input id="field_dateRapatriement" type="datetime-local" class="form-control" name="dateRapatriement" [(ngModel)]="rapatriement.dateRapatriement"
+            <div class="input-group">
+                <input id="field_dateRapatriement" type="text" class="form-control" name="dateRapatriement" ngbDatepicker  #dateRapatriementDp="ngbDatepicker" [(ngModel)]="rapatriement.dateRapatriement"
                 />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateRapatriementDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
         </div>
         <div class="form-group">

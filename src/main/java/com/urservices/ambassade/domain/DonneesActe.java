@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import com.urservices.ambassade.domain.enumeration.Sexe;
@@ -34,7 +34,7 @@ public class DonneesActe implements Serializable {
     private String reference;
 
     @Column(name = "date_du_jour_chiffre")
-    private ZonedDateTime dateDuJourChiffre;
+    private LocalDate dateDuJourChiffre;
 
     @Size(max = 50)
     @Column(name = "registre_special_rd", length = 50)
@@ -57,7 +57,7 @@ public class DonneesActe implements Serializable {
     private String numero;
 
     @Column(name = "date_naissance_chiffre")
-    private ZonedDateTime dateNaissanceChiffre;
+    private LocalDate dateNaissanceChiffre;
 
     @Size(max = 20)
     @Column(name = "nom_pere", length = 20)
@@ -162,16 +162,16 @@ public class DonneesActe implements Serializable {
         this.reference = reference;
     }
 
-    public ZonedDateTime getDateDuJourChiffre() {
+    public LocalDate getDateDuJourChiffre() {
         return dateDuJourChiffre;
     }
 
-    public DonneesActe dateDuJourChiffre(ZonedDateTime dateDuJourChiffre) {
+    public DonneesActe dateDuJourChiffre(LocalDate dateDuJourChiffre) {
         this.dateDuJourChiffre = dateDuJourChiffre;
         return this;
     }
 
-    public void setDateDuJourChiffre(ZonedDateTime dateDuJourChiffre) {
+    public void setDateDuJourChiffre(LocalDate dateDuJourChiffre) {
         this.dateDuJourChiffre = dateDuJourChiffre;
     }
 
@@ -240,16 +240,16 @@ public class DonneesActe implements Serializable {
         this.numero = numero;
     }
 
-    public ZonedDateTime getDateNaissanceChiffre() {
+    public LocalDate getDateNaissanceChiffre() {
         return dateNaissanceChiffre;
     }
 
-    public DonneesActe dateNaissanceChiffre(ZonedDateTime dateNaissanceChiffre) {
+    public DonneesActe dateNaissanceChiffre(LocalDate dateNaissanceChiffre) {
         this.dateNaissanceChiffre = dateNaissanceChiffre;
         return this;
     }
 
-    public void setDateNaissanceChiffre(ZonedDateTime dateNaissanceChiffre) {
+    public void setDateNaissanceChiffre(LocalDate dateNaissanceChiffre) {
         this.dateNaissanceChiffre = dateNaissanceChiffre;
     }
 

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -49,10 +49,10 @@ public class Visa implements Serializable {
     private Long numeroVisa;
 
     @Column(name = "date_emission")
-    private ZonedDateTime dateEmission;
+    private LocalDate dateEmission;
 
     @Column(name = "date_expiration")
-    private ZonedDateTime dateExpiration;
+    private LocalDate dateExpiration;
 
     @Column(name = "valide_pour")
     private Integer validePour;
@@ -166,29 +166,29 @@ public class Visa implements Serializable {
         this.numeroVisa = numeroVisa;
     }
 
-    public ZonedDateTime getDateEmission() {
+    public LocalDate getDateEmission() {
         return dateEmission;
     }
 
-    public Visa dateEmission(ZonedDateTime dateEmission) {
+    public Visa dateEmission(LocalDate dateEmission) {
         this.dateEmission = dateEmission;
         return this;
     }
 
-    public void setDateEmission(ZonedDateTime dateEmission) {
+    public void setDateEmission(LocalDate dateEmission) {
         this.dateEmission = dateEmission;
     }
 
-    public ZonedDateTime getDateExpiration() {
+    public LocalDate getDateExpiration() {
         return dateExpiration;
     }
 
-    public Visa dateExpiration(ZonedDateTime dateExpiration) {
+    public Visa dateExpiration(LocalDate dateExpiration) {
         this.dateExpiration = dateExpiration;
         return this;
     }
 
-    public void setDateExpiration(ZonedDateTime dateExpiration) {
+    public void setDateExpiration(LocalDate dateExpiration) {
         this.dateExpiration = dateExpiration;
     }
 

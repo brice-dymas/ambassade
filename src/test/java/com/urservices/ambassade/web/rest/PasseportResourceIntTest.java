@@ -253,46 +253,120 @@ public class PasseportResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNomIsRequired() throws Exception {
+        int databaseSizeBeforeTest = passeportRepository.findAll().size();
+        // set the field null
+        passeport.setNom(null);
+
+        // Create the Passeport, which fails.
+
+        restPasseportMockMvc.perform(post("/api/passeports")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(passeport)))
+            .andExpect(status().isBadRequest());
+
+        List<Passeport> passeportList = passeportRepository.findAll();
+        assertThat(passeportList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkPrenomIsRequired() throws Exception {
+        int databaseSizeBeforeTest = passeportRepository.findAll().size();
+        // set the field null
+        passeport.setPrenom(null);
+
+        // Create the Passeport, which fails.
+
+        restPasseportMockMvc.perform(post("/api/passeports")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(passeport)))
+            .andExpect(status().isBadRequest());
+
+        List<Passeport> passeportList = passeportRepository.findAll();
+        assertThat(passeportList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkNeLeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = passeportRepository.findAll().size();
+        // set the field null
+        passeport.setNeLe(null);
+
+        // Create the Passeport, which fails.
+
+        restPasseportMockMvc.perform(post("/api/passeports")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(passeport)))
+            .andExpect(status().isBadRequest());
+
+        List<Passeport> passeportList = passeportRepository.findAll();
+        assertThat(passeportList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLieuNaissanceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = passeportRepository.findAll().size();
+        // set the field null
+        passeport.setLieuNaissance(null);
+
+        // Create the Passeport, which fails.
+
+        restPasseportMockMvc.perform(post("/api/passeports")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(passeport)))
+            .andExpect(status().isBadRequest());
+
+        List<Passeport> passeportList = passeportRepository.findAll();
+        assertThat(passeportList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkSoumisLeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = passeportRepository.findAll().size();
+        // set the field null
+        passeport.setSoumisLe(null);
+
+        // Create the Passeport, which fails.
+
+        restPasseportMockMvc.perform(post("/api/passeports")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(passeport)))
+            .andExpect(status().isBadRequest());
+
+        List<Passeport> passeportList = passeportRepository.findAll();
+        assertThat(passeportList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkMontantIsRequired() throws Exception {
+        int databaseSizeBeforeTest = passeportRepository.findAll().size();
+        // set the field null
+        passeport.setMontant(null);
+
+        // Create the Passeport, which fails.
+
+        restPasseportMockMvc.perform(post("/api/passeports")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(passeport)))
+            .andExpect(status().isBadRequest());
+
+        List<Passeport> passeportList = passeportRepository.findAll();
+        assertThat(passeportList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPasseports() throws Exception {
         // Initialize the database
         passeportRepository.saveAndFlush(passeport);
 
         // Get all the passeportList
         restPasseportMockMvc.perform(get("/api/passeports?sort=id,desc"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(passeport.getId().intValue())))
-            .andExpect(jsonPath("$.[*].numeroFormulaire").value(hasItem(DEFAULT_NUMERO_FORMULAIRE.intValue())))
-            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
-            .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM.toString())))
-            .andExpect(jsonPath("$.[*].numeroPasseport").value(hasItem(DEFAULT_NUMERO_PASSEPORT.toString())))
-            .andExpect(jsonPath("$.[*].neLe").value(hasItem(DEFAULT_NE_LE.toString())))
-            .andExpect(jsonPath("$.[*].lieuNaissance").value(hasItem(DEFAULT_LIEU_NAISSANCE.toString())))
-            .andExpect(jsonPath("$.[*].etatCivil").value(hasItem(DEFAULT_ETAT_CIVIL.toString())))
-            .andExpect(jsonPath("$.[*].adresse").value(hasItem(DEFAULT_ADRESSE.toString())))
-            .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
-            .andExpect(jsonPath("$.[*].nif").value(hasItem(DEFAULT_NIF.toString())))
-            .andExpect(jsonPath("$.[*].paysEmetteur").value(hasItem(DEFAULT_PAYS_EMETTEUR.toString())))
-            .andExpect(jsonPath("$.[*].soumisLe").value(hasItem(DEFAULT_SOUMIS_LE.toString())))
-            .andExpect(jsonPath("$.[*].delivreLe").value(hasItem(DEFAULT_DELIVRE_LE.toString())))
-            .andExpect(jsonPath("$.[*].montant").value(hasItem(DEFAULT_MONTANT.intValue())))
-            .andExpect(jsonPath("$.[*].remarques").value(hasItem(DEFAULT_REMARQUES.toString())))
-            .andExpect(jsonPath("$.[*].dateEmission").value(hasItem(DEFAULT_DATE_EMISSION.toString())))
-            .andExpect(jsonPath("$.[*].dateExpiration").value(hasItem(DEFAULT_DATE_EXPIRATION.toString())))
-            .andExpect(jsonPath("$.[*].remarquesR").value(hasItem(DEFAULT_REMARQUES_R.toString())))
-            .andExpect(jsonPath("$.[*].sms").value(hasItem(DEFAULT_SMS.toString())))
-            .andExpect(jsonPath("$.[*].sms2").value(hasItem(DEFAULT_SMS_2.toString())))
-            .andExpect(jsonPath("$.[*].documents").value(hasItem(DEFAULT_DOCUMENTS.toString())));
-    }
-
-    @Test
-    @Transactional
-    public void searchAllPasseports() throws Exception {
-        // Initialize the database
-        passeportRepository.saveAndFlush(passeport);
-
-        // Get all the passeportList
-        restPasseportMockMvc.perform(get("/api/passeports?nom=AAAAAAAAAA&prenom=AAAAAAAAAA&numeroPasseport=AAAAAAAAAA"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(passeport.getId().intValue())))

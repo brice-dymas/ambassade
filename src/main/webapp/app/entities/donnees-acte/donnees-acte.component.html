@@ -51,13 +51,13 @@
             <tr *ngFor="let donneesActe of donneesActes ;trackBy: trackId">
                 <td><a [routerLink]="['../donnees-acte', donneesActe.id ]">{{donneesActe.id}}</a></td>
                 <td>{{donneesActe.reference}}</td>
-                <td>{{donneesActe.dateDuJourChiffre | date:'medium'}}</td>
+                <td>{{donneesActe.dateDuJourChiffre | date:'mediumDate'}}</td>
                 <td>{{donneesActe.registreSpecialRD}}</td>
                 <td>{{donneesActe.nomEnfant}}</td>
                 <td>{{donneesActe.registre}}</td>
                 <td>{{donneesActe.annee}}</td>
                 <td>{{donneesActe.numero}}</td>
-                <td>{{donneesActe.dateNaissanceChiffre | date:'medium'}}</td>
+                <td>{{donneesActe.dateNaissanceChiffre | date:'mediumDate'}}</td>
                 <td>{{donneesActe.nomPere}}</td>
                 <td>{{donneesActe.prenomPere}}</td>
                 <td>{{donneesActe.nomMere}}</td>
