@@ -86,8 +86,8 @@ public class DonneesActeResourceIntTest {
     private static final Sexe DEFAULT_SEXE = Sexe.MASCULIN;
     private static final Sexe UPDATED_SEXE = Sexe.FEMININ;
 
-    private static final Statut DEFAULT_STATUT = Statut.LEGITIME;
-    private static final Statut UPDATED_STATUT = Statut.NATUREL;
+    private static final Statut DEFAULT_STATUT = Statut.CELIBATAIRE;
+    private static final Statut UPDATED_STATUT = Statut.DIVORCE;
 
     private static final String DEFAULT_VILLE_NAISSANCE = "AAAAAAAAAA";
     private static final String UPDATED_VILLE_NAISSANCE = "BBBBBBBBBB";

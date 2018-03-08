@@ -2,9 +2,11 @@
     "ambassadeApp": {
         "Statut" : {
             "null": "",
-            "LEGITIME": "LEGITIME",
-            "NATUREL": "NATUREL",
-            "NATURELLE": "NATURELLE"
+            "CELIBATAIRE": "CELIBATAIRE",
+            "MARIE": "MARIE",
+            "DIVORCE": "DIVORCE",
+            "SEPARE": "SEPARE",
+            "VEUF": "VEUF"
         }
     }
 }

@@ -8,8 +8,10 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
+
+import com.urservices.ambassade.domain.enumeration.Statut;
 
 /**
  * A Passeport.
@@ -50,9 +52,9 @@ public class Passeport implements Serializable {
     @Column(name = "lieu_naissance", length = 30)
     private String lieuNaissance;
 
-    @Size(max = 20)
-    @Column(name = "etat_civil", length = 20)
-    private String etatCivil;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "etat_civil")
+    private Statut etatCivil;
 
     @Column(name = "adresse")
     private String adresse;
@@ -70,10 +72,10 @@ public class Passeport implements Serializable {
     private String paysEmetteur;
 
     @Column(name = "soumis_le")
-    private ZonedDateTime soumisLe;
+    private LocalDate soumisLe;
 
     @Column(name = "delivre_le")
-    private ZonedDateTime delivreLe;
+    private LocalDate delivreLe;
 
     @DecimalMin(value = "0")
     @Column(name = "montant", precision=10, scale=2)
@@ -83,10 +85,10 @@ public class Passeport implements Serializable {
     private String remarques;
 
     @Column(name = "date_emission")
-    private ZonedDateTime dateEmission;
+    private LocalDate dateEmission;
 
     @Column(name = "date_expiration")
-    private ZonedDateTime dateExpiration;
+    private LocalDate dateExpiration;
 
     @Column(name = "remarques_r")
     private String remarquesR;
@@ -190,16 +192,16 @@ public class Passeport implements Serializable {
         this.lieuNaissance = lieuNaissance;
     }
 
-    public String getEtatCivil() {
+    public Statut getEtatCivil() {
         return etatCivil;
     }
 
-    public Passeport etatCivil(String etatCivil) {
+    public Passeport etatCivil(Statut etatCivil) {
         this.etatCivil = etatCivil;
         return this;
     }
 
-    public void setEtatCivil(String etatCivil) {
+    public void setEtatCivil(Statut etatCivil) {
         this.etatCivil = etatCivil;
     }
 
@@ -255,29 +257,29 @@ public class Passeport implements Serializable {
         this.paysEmetteur = paysEmetteur;
     }
 
-    public ZonedDateTime getSoumisLe() {
+    public LocalDate getSoumisLe() {
         return soumisLe;
     }
 
-    public Passeport soumisLe(ZonedDateTime soumisLe) {
+    public Passeport soumisLe(LocalDate soumisLe) {
         this.soumisLe = soumisLe;
         return this;
     }
 
-    public void setSoumisLe(ZonedDateTime soumisLe) {
+    public void setSoumisLe(LocalDate soumisLe) {
         this.soumisLe = soumisLe;
     }
 
-    public ZonedDateTime getDelivreLe() {
+    public LocalDate getDelivreLe() {
         return delivreLe;
     }
 
-    public Passeport delivreLe(ZonedDateTime delivreLe) {
+    public Passeport delivreLe(LocalDate delivreLe) {
         this.delivreLe = delivreLe;
         return this;
     }
 
-    public void setDelivreLe(ZonedDateTime delivreLe) {
+    public void setDelivreLe(LocalDate delivreLe) {
         this.delivreLe = delivreLe;
     }
 
@@ -307,29 +309,29 @@ public class Passeport implements Serializable {
         this.remarques = remarques;
     }
 
-    public ZonedDateTime getDateEmission() {
+    public LocalDate getDateEmission() {
         return dateEmission;
     }
 
-    public Passeport dateEmission(ZonedDateTime dateEmission) {
+    public Passeport dateEmission(LocalDate dateEmission) {
         this.dateEmission = dateEmission;
         return this;
     }
 
-    public void setDateEmission(ZonedDateTime dateEmission) {
+    public void setDateEmission(LocalDate dateEmission) {
         this.dateEmission = dateEmission;
     }
 
-    public ZonedDateTime getDateExpiration() {
+    public LocalDate getDateExpiration() {
         return dateExpiration;
     }
 
-    public Passeport dateExpiration(ZonedDateTime dateExpiration) {
+    public Passeport dateExpiration(LocalDate dateExpiration) {
         this.dateExpiration = dateExpiration;
         return this;
     }
 
-    public void setDateExpiration(ZonedDateTime dateExpiration) {
+    public void setDateExpiration(LocalDate dateExpiration) {
         this.dateExpiration = dateExpiration;
     }
 

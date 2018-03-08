@@ -44,6 +44,14 @@ export const passeportRoute: Routes = [
             pageTitle: 'ambassadeApp.passeport.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'passeport/search',
+        component: PasseportComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.passeport.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 

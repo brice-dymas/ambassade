@@ -23,19 +23,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-import static com.urservices.ambassade.web.rest.TestUtil.sameInstant;
 import static com.urservices.ambassade.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.urservices.ambassade.domain.enumeration.Statut;
 /**
  * Test class for the PasseportResource REST controller.
  *
@@ -63,8 +61,8 @@ public class PasseportResourceIntTest {
     private static final String DEFAULT_LIEU_NAISSANCE = "AAAAAAAAAA";
     private static final String UPDATED_LIEU_NAISSANCE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_ETAT_CIVIL = "AAAAAAAAAA";
-    private static final String UPDATED_ETAT_CIVIL = "BBBBBBBBBB";
+    private static final Statut DEFAULT_ETAT_CIVIL = Statut.CELIBATAIRE;
+    private static final Statut UPDATED_ETAT_CIVIL = Statut.MARIE;
 
     private static final String DEFAULT_ADRESSE = "AAAAAAAAAA";
     private static final String UPDATED_ADRESSE = "BBBBBBBBBB";
@@ -78,11 +76,11 @@ public class PasseportResourceIntTest {
     private static final String DEFAULT_PAYS_EMETTEUR = "AAAAAAAAAA";
     private static final String UPDATED_PAYS_EMETTEUR = "BBBBBBBBBB";
 
-    private static final ZonedDateTime DEFAULT_SOUMIS_LE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_SOUMIS_LE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_SOUMIS_LE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_SOUMIS_LE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final ZonedDateTime DEFAULT_DELIVRE_LE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DELIVRE_LE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_DELIVRE_LE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DELIVRE_LE = LocalDate.now(ZoneId.systemDefault());
 
     private static final BigDecimal DEFAULT_MONTANT = new BigDecimal(0);
     private static final BigDecimal UPDATED_MONTANT = new BigDecimal(1);
@@ -90,11 +88,11 @@ public class PasseportResourceIntTest {
     private static final String DEFAULT_REMARQUES = "AAAAAAAAAA";
     private static final String UPDATED_REMARQUES = "BBBBBBBBBB";
 
-    private static final ZonedDateTime DEFAULT_DATE_EMISSION = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE_EMISSION = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_DATE_EMISSION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_EMISSION = LocalDate.now(ZoneId.systemDefault());
 
-    private static final ZonedDateTime DEFAULT_DATE_EXPIRATION = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE_EXPIRATION = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_DATE_EXPIRATION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_EXPIRATION = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_REMARQUES_R = "AAAAAAAAAA";
     private static final String UPDATED_REMARQUES_R = "BBBBBBBBBB";
@@ -275,12 +273,46 @@ public class PasseportResourceIntTest {
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
             .andExpect(jsonPath("$.[*].nif").value(hasItem(DEFAULT_NIF.toString())))
             .andExpect(jsonPath("$.[*].paysEmetteur").value(hasItem(DEFAULT_PAYS_EMETTEUR.toString())))
-            .andExpect(jsonPath("$.[*].soumisLe").value(hasItem(sameInstant(DEFAULT_SOUMIS_LE))))
-            .andExpect(jsonPath("$.[*].delivreLe").value(hasItem(sameInstant(DEFAULT_DELIVRE_LE))))
+            .andExpect(jsonPath("$.[*].soumisLe").value(hasItem(DEFAULT_SOUMIS_LE.toString())))
+            .andExpect(jsonPath("$.[*].delivreLe").value(hasItem(DEFAULT_DELIVRE_LE.toString())))
             .andExpect(jsonPath("$.[*].montant").value(hasItem(DEFAULT_MONTANT.intValue())))
             .andExpect(jsonPath("$.[*].remarques").value(hasItem(DEFAULT_REMARQUES.toString())))
-            .andExpect(jsonPath("$.[*].dateEmission").value(hasItem(sameInstant(DEFAULT_DATE_EMISSION))))
-            .andExpect(jsonPath("$.[*].dateExpiration").value(hasItem(sameInstant(DEFAULT_DATE_EXPIRATION))))
+            .andExpect(jsonPath("$.[*].dateEmission").value(hasItem(DEFAULT_DATE_EMISSION.toString())))
+            .andExpect(jsonPath("$.[*].dateExpiration").value(hasItem(DEFAULT_DATE_EXPIRATION.toString())))
+            .andExpect(jsonPath("$.[*].remarquesR").value(hasItem(DEFAULT_REMARQUES_R.toString())))
+            .andExpect(jsonPath("$.[*].sms").value(hasItem(DEFAULT_SMS.toString())))
+            .andExpect(jsonPath("$.[*].sms2").value(hasItem(DEFAULT_SMS_2.toString())))
+            .andExpect(jsonPath("$.[*].documents").value(hasItem(DEFAULT_DOCUMENTS.toString())));
+    }
+
+    @Test
+    @Transactional
+    public void searchAllPasseports() throws Exception {
+        // Initialize the database
+        passeportRepository.saveAndFlush(passeport);
+
+        // Get all the passeportList
+        restPasseportMockMvc.perform(get("/api/passeports?nom=AAAAAAAAAA&prenom=AAAAAAAAAA&numeroPasseport=AAAAAAAAAA"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(passeport.getId().intValue())))
+            .andExpect(jsonPath("$.[*].numeroFormulaire").value(hasItem(DEFAULT_NUMERO_FORMULAIRE.intValue())))
+            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
+            .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM.toString())))
+            .andExpect(jsonPath("$.[*].numeroPasseport").value(hasItem(DEFAULT_NUMERO_PASSEPORT.toString())))
+            .andExpect(jsonPath("$.[*].neLe").value(hasItem(DEFAULT_NE_LE.toString())))
+            .andExpect(jsonPath("$.[*].lieuNaissance").value(hasItem(DEFAULT_LIEU_NAISSANCE.toString())))
+            .andExpect(jsonPath("$.[*].etatCivil").value(hasItem(DEFAULT_ETAT_CIVIL.toString())))
+            .andExpect(jsonPath("$.[*].adresse").value(hasItem(DEFAULT_ADRESSE.toString())))
+            .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
+            .andExpect(jsonPath("$.[*].nif").value(hasItem(DEFAULT_NIF.toString())))
+            .andExpect(jsonPath("$.[*].paysEmetteur").value(hasItem(DEFAULT_PAYS_EMETTEUR.toString())))
+            .andExpect(jsonPath("$.[*].soumisLe").value(hasItem(DEFAULT_SOUMIS_LE.toString())))
+            .andExpect(jsonPath("$.[*].delivreLe").value(hasItem(DEFAULT_DELIVRE_LE.toString())))
+            .andExpect(jsonPath("$.[*].montant").value(hasItem(DEFAULT_MONTANT.intValue())))
+            .andExpect(jsonPath("$.[*].remarques").value(hasItem(DEFAULT_REMARQUES.toString())))
+            .andExpect(jsonPath("$.[*].dateEmission").value(hasItem(DEFAULT_DATE_EMISSION.toString())))
+            .andExpect(jsonPath("$.[*].dateExpiration").value(hasItem(DEFAULT_DATE_EXPIRATION.toString())))
             .andExpect(jsonPath("$.[*].remarquesR").value(hasItem(DEFAULT_REMARQUES_R.toString())))
             .andExpect(jsonPath("$.[*].sms").value(hasItem(DEFAULT_SMS.toString())))
             .andExpect(jsonPath("$.[*].sms2").value(hasItem(DEFAULT_SMS_2.toString())))
@@ -309,12 +341,12 @@ public class PasseportResourceIntTest {
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE.toString()))
             .andExpect(jsonPath("$.nif").value(DEFAULT_NIF.toString()))
             .andExpect(jsonPath("$.paysEmetteur").value(DEFAULT_PAYS_EMETTEUR.toString()))
-            .andExpect(jsonPath("$.soumisLe").value(sameInstant(DEFAULT_SOUMIS_LE)))
-            .andExpect(jsonPath("$.delivreLe").value(sameInstant(DEFAULT_DELIVRE_LE)))
+            .andExpect(jsonPath("$.soumisLe").value(DEFAULT_SOUMIS_LE.toString()))
+            .andExpect(jsonPath("$.delivreLe").value(DEFAULT_DELIVRE_LE.toString()))
             .andExpect(jsonPath("$.montant").value(DEFAULT_MONTANT.intValue()))
             .andExpect(jsonPath("$.remarques").value(DEFAULT_REMARQUES.toString()))
-            .andExpect(jsonPath("$.dateEmission").value(sameInstant(DEFAULT_DATE_EMISSION)))
-            .andExpect(jsonPath("$.dateExpiration").value(sameInstant(DEFAULT_DATE_EXPIRATION)))
+            .andExpect(jsonPath("$.dateEmission").value(DEFAULT_DATE_EMISSION.toString()))
+            .andExpect(jsonPath("$.dateExpiration").value(DEFAULT_DATE_EXPIRATION.toString()))
             .andExpect(jsonPath("$.remarquesR").value(DEFAULT_REMARQUES_R.toString()))
             .andExpect(jsonPath("$.sms").value(DEFAULT_SMS.toString()))
             .andExpect(jsonPath("$.sms2").value(DEFAULT_SMS_2.toString()))

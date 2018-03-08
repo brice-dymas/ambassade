@@ -102,7 +102,7 @@
         {
             "fieldName": "statut",
             "fieldType": "Statut",
-            "fieldValues": "LEGITIME,NATUREL,NATURELLE",
+            "fieldValues": "CELIBATAIRE,MARIE,DIVORCE,SEPARE,VEUF",
             "fieldValidateRules": [
                 "required"
             ]

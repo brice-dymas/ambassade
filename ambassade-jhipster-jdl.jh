@@ -5,21 +5,21 @@ entity Passeport {
     numeroPasseport String maxlength(15)
     neLe String maxlength(20)
     lieuNaissance String maxlength(30)
-    etatCivil String maxlength(20)
+    etatCivil Statut
     adresse String
     telephone String maxlength(15)
     nif String maxlength(20)
     paysEmetteur String maxlength(25)
-    soumisLe ZonedDateTime
-    delivreLe ZonedDateTime
+    soumisLe LocalDate
+    delivreLe LocalDate
     montant BigDecimal min(0)
     remarques String
-    dateEmission ZonedDateTime
-    dateExpiration ZonedDateTime
+    dateEmission LocalDate
+    dateExpiration LocalDate
     remarquesR String
     sms String maxlength(15)
     sms2 String maxlength(60)
-    documents String maxlength(50)    
+    documents String maxlength(50)
 }
 
 entity DonneesActe {
@@ -79,7 +79,7 @@ entity Livre {
     observation String maxlength(50)
     prenom String maxlength(50)
     statistique String maxlength(50)
-    glossaire String maxlength(50)   
+    glossaire String maxlength(50)
 }
 
 entity Categorie {
@@ -156,11 +156,11 @@ enum Sexe {
     MASCULIN, FEMININ
 }
 enum Statut {
-    LEGITIME, NATUREL, NATURELLE
+    CELIBATAIRE, MARIE, DIVORCE, SEPARE, VEUF
 }
 
 // Set pagination options
 paginate all with pagination
 
-// Set service options to all 
-service all with serviceImpl 
+// Set service options to all
+service all with serviceImpl

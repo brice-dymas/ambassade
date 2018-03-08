@@ -1,5 +1,13 @@
 import { BaseEntity } from './../../shared';
 
+export const enum Statut {
+    'CELIBATAIRE',
+    'MARIE',
+    'DIVORCE',
+    'SEPARE',
+    'VEUF'
+}
+
 export class Passeport implements BaseEntity {
     constructor(
         public id?: number,
@@ -9,7 +17,7 @@ export class Passeport implements BaseEntity {
         public numeroPasseport?: string,
         public neLe?: string,
         public lieuNaissance?: string,
-        public etatCivil?: string,
+        public etatCivil?: Statut,
         public adresse?: string,
         public telephone?: string,
         public nif?: string,

@@ -2,6 +2,7 @@ package com.urservices.ambassade.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.urservices.ambassade.domain.Passeport;
+import com.urservices.ambassade.domain.enumeration.Statut;
 import com.urservices.ambassade.service.PasseportService;
 import com.urservices.ambassade.web.rest.errors.BadRequestAlertException;
 import com.urservices.ambassade.web.rest.util.HeaderUtil;
@@ -15,11 +16,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,9 +96,50 @@ public class PasseportResource {
      */
     @GetMapping("/passeports")
     @Timed
-    public ResponseEntity<List<Passeport>> getAllPasseports(Pageable pageable) {
+    public ResponseEntity<List<Passeport>> getAllPasseports(WebRequest webRequest,Pageable pageable) {
         log.debug("REST request to get a page of Passeports");
-        Page<Passeport> page = passeportService.findAll(pageable);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String nom = webRequest.getParameter("nom") !=null ? webRequest.getParameter("nom"):"";
+        String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
+        String numeroPasseport = webRequest.getParameter("numeroPasseport") !=null ? webRequest.getParameter("numeroPasseport"):"";
+        String neLe = webRequest.getParameter("neLe") !=null ? webRequest.getParameter("neLe"):"";
+        String lieuNaissance = webRequest.getParameter("lieuNaissance") !=null ? webRequest.getParameter("lieuNaissance"):"";
+        List<Statut> etatCivils  = webRequest.getParameter("etatCivil") !=null  && !webRequest.getParameter("etatCivil").isEmpty() ?
+            Arrays.asList(Statut.valueOf(webRequest.getParameter("etatCivil"))):Arrays.asList(Statut.values());
+        String adresse = webRequest.getParameter("adresse") !=null ? webRequest.getParameter("adresse"):"";
+        String telephone = webRequest.getParameter("telephone") !=null ? webRequest.getParameter("telephone"):"";
+        String nif = webRequest.getParameter("nif") !=null ? webRequest.getParameter("nif"):"";
+        String paysEmetteur = webRequest.getParameter("paysEmetteur") !=null ? webRequest.getParameter("paysEmetteur"):"";
+        BigDecimal montant =  webRequest.getParameter("montant") !=null && webRequest.getParameter("montant") !="" ?
+            new BigDecimal(webRequest.getParameter("montant")):new BigDecimal(0.0);
+        String remarques = webRequest.getParameter("remarques") !=null ? webRequest.getParameter("remarques"):"";
+
+        String soumisLeStr = webRequest.getParameter("soumisLe") !=null ? webRequest.getParameter("soumisLe"):"01-01-1970";
+        String delivreLeStr = webRequest.getParameter("delivreLe") !=null ? webRequest.getParameter("delivreLe"):"01-01-1970";
+        String dateEmissionStr = webRequest.getParameter("dateEmission") !=null ? webRequest.getParameter("dateEmission"):"01-01-1970";
+        String dateExpirationStr= webRequest.getParameter("dateExpiration") !=null ? webRequest.getParameter("dateExpiration"):"01-01-1970";
+
+
+        LocalDate soumisLe = LocalDate.parse(soumisLeStr,formatter);
+        LocalDate delivreLe = LocalDate.parse(delivreLeStr,formatter);
+        LocalDate dateEmission = LocalDate.parse(dateEmissionStr,formatter);
+        LocalDate dateExpiration = LocalDate.parse(dateExpirationStr,formatter);
+        System.out.println("soumisLe = "+soumisLe);
+        System.out.println("delivreLe = "+delivreLe);
+        System.out.println("dateEmission = "+dateEmission);
+        System.out.println("dateExpiration = "+dateExpiration);
+
+
+
+        String remarquesR = webRequest.getParameter("remarquesR") !=null ? webRequest.getParameter("remarquesR"):"";
+        String sms = webRequest.getParameter("sms") !=null ? webRequest.getParameter("sms"):"";
+        String sms2 = webRequest.getParameter("sms2") !=null ? webRequest.getParameter("sms2"):"";
+        String documents = webRequest.getParameter("documents") !=null ? webRequest.getParameter("documents"):"";
+
+//        Page<Passeport> page = passeportService.findAll(pageable);
+        Page<Passeport> page = passeportService.searchAll(nom,prenom,numeroPasseport,neLe,lieuNaissance,etatCivils,
+            adresse,telephone,nif,paysEmetteur,soumisLe,delivreLe,montant,remarques,dateEmission,dateExpiration,
+            remarquesR,sms,sms2,documents,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/passeports");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

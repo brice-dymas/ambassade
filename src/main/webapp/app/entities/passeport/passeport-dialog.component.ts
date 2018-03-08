@@ -18,6 +18,10 @@ export class PasseportDialogComponent implements OnInit {
 
     passeport: Passeport;
     isSaving: boolean;
+    soumisLeDp: any;
+    delivreLeDp: any;
+    dateEmissionDp: any;
+    dateExpirationDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

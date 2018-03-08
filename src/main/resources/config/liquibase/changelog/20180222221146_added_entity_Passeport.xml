@@ -46,7 +46,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="etat_civil" type="varchar(20)">
+            <column name="etat_civil" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -66,11 +66,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="soumis_le" type="timestamp">
+            <column name="soumis_le" type="date">
                 <constraints nullable="true" />
             </column>
 
-            <column name="delivre_le" type="timestamp">
+            <column name="delivre_le" type="date">
                 <constraints nullable="true" />
             </column>
 
@@ -82,11 +82,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="date_emission" type="timestamp">
+            <column name="date_emission" type="date">
                 <constraints nullable="true" />
             </column>
 
-            <column name="date_expiration" type="timestamp">
+            <column name="date_expiration" type="date">
                 <constraints nullable="true" />
             </column>
 
@@ -108,10 +108,6 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="passeport" columnName="soumis_le" columnDataType="datetime"/>
-        <dropDefaultValue tableName="passeport" columnName="delivre_le" columnDataType="datetime"/>
-        <dropDefaultValue tableName="passeport" columnName="date_emission" columnDataType="datetime"/>
-        <dropDefaultValue tableName="passeport" columnName="date_expiration" columnDataType="datetime"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

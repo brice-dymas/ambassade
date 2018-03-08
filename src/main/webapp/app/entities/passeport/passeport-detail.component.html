@@ -30,7 +30,7 @@
         </dd>
         <dt><span jhiTranslate="ambassadeApp.passeport.etatCivil">Etat Civil</span></dt>
         <dd>
-            <span>{{passeport.etatCivil}}</span>
+            <span jhiTranslate="{{'ambassadeApp.Statut.' + passeport.etatCivil}}">{{passeport.etatCivil}}</span>
         </dd>
         <dt><span jhiTranslate="ambassadeApp.passeport.adresse">Adresse</span></dt>
         <dd>
@@ -50,11 +50,11 @@
         </dd>
         <dt><span jhiTranslate="ambassadeApp.passeport.soumisLe">Soumis Le</span></dt>
         <dd>
-            <span>{{passeport.soumisLe | date:'medium'}}</span>
+            <span>{{passeport.soumisLe | date:'mediumDate'}}</span>
         </dd>
         <dt><span jhiTranslate="ambassadeApp.passeport.delivreLe">Delivre Le</span></dt>
         <dd>
-            <span>{{passeport.delivreLe | date:'medium'}}</span>
+            <span>{{passeport.delivreLe | date:'mediumDate'}}</span>
         </dd>
         <dt><span jhiTranslate="ambassadeApp.passeport.montant">Montant</span></dt>
         <dd>
@@ -66,11 +66,11 @@
         </dd>
         <dt><span jhiTranslate="ambassadeApp.passeport.dateEmission">Date Emission</span></dt>
         <dd>
-            <span>{{passeport.dateEmission | date:'medium'}}</span>
+            <span>{{passeport.dateEmission | date:'mediumDate'}}</span>
         </dd>
         <dt><span jhiTranslate="ambassadeApp.passeport.dateExpiration">Date Expiration</span></dt>
         <dd>
-            <span>{{passeport.dateExpiration | date:'medium'}}</span>
+            <span>{{passeport.dateExpiration | date:'mediumDate'}}</span>
         </dd>
         <dt><span jhiTranslate="ambassadeApp.passeport.remarquesR">Remarques R</span></dt>
         <dd>

@@ -160,9 +160,11 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.statut" for="field_statut">Statut</label>
             <select class="form-control" name="statut" [(ngModel)]="donneesActe.statut" id="field_statut"  required>
-                <option value="LEGITIME">{{'ambassadeApp.Statut.LEGITIME' | translate}}</option>
-                <option value="NATUREL">{{'ambassadeApp.Statut.NATUREL' | translate}}</option>
-                <option value="NATURELLE">{{'ambassadeApp.Statut.NATURELLE' | translate}}</option>
+                <option value="CELIBATAIRE">{{'ambassadeApp.Statut.CELIBATAIRE' | translate}}</option>
+                <option value="MARIE">{{'ambassadeApp.Statut.MARIE' | translate}}</option>
+                <option value="DIVORCE">{{'ambassadeApp.Statut.DIVORCE' | translate}}</option>
+                <option value="SEPARE">{{'ambassadeApp.Statut.SEPARE' | translate}}</option>
+                <option value="VEUF">{{'ambassadeApp.Statut.VEUF' | translate}}</option>
             </select>
             <div [hidden]="!(editForm.controls.statut?.dirty && editForm.controls.statut?.invalid)">
                 <small class="form-text text-danger"

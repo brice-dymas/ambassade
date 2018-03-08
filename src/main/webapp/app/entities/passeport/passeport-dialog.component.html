@@ -88,14 +88,13 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.etatCivil" for="field_etatCivil">Etat Civil</label>
-            <input type="text" class="form-control" name="etatCivil" id="field_etatCivil"
-                [(ngModel)]="passeport.etatCivil" maxlength="20"/>
-            <div [hidden]="!(editForm.controls.etatCivil?.dirty && editForm.controls.etatCivil?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.etatCivil?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
-                   This field cannot be longer than 20 characters.
-                </small>
-            </div>
+            <select class="form-control" name="etatCivil" [(ngModel)]="passeport.etatCivil" id="field_etatCivil" >
+                <option value="CELIBATAIRE">{{'ambassadeApp.Statut.CELIBATAIRE' | translate}}</option>
+                <option value="MARIE">{{'ambassadeApp.Statut.MARIE' | translate}}</option>
+                <option value="DIVORCE">{{'ambassadeApp.Statut.DIVORCE' | translate}}</option>
+                <option value="SEPARE">{{'ambassadeApp.Statut.SEPARE' | translate}}</option>
+                <option value="VEUF">{{'ambassadeApp.Statut.VEUF' | translate}}</option>
+            </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.adresse" for="field_adresse">Adresse</label>
@@ -137,16 +136,22 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.soumisLe" for="field_soumisLe">Soumis Le</label>
-            <div class="d-flex">
-                <input id="field_soumisLe" type="datetime-local" class="form-control" name="soumisLe" [(ngModel)]="passeport.soumisLe"
+            <div class="input-group">
+                <input id="field_soumisLe" type="text" class="form-control" name="soumisLe" ngbDatepicker  #soumisLeDp="ngbDatepicker" [(ngModel)]="passeport.soumisLe"
                 />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="soumisLeDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.delivreLe" for="field_delivreLe">Delivre Le</label>
-            <div class="d-flex">
-                <input id="field_delivreLe" type="datetime-local" class="form-control" name="delivreLe" [(ngModel)]="passeport.delivreLe"
+            <div class="input-group">
+                <input id="field_delivreLe" type="text" class="form-control" name="delivreLe" ngbDatepicker  #delivreLeDp="ngbDatepicker" [(ngModel)]="passeport.delivreLe"
                 />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="delivreLeDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
         </div>
         <div class="form-group">
@@ -171,16 +176,22 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateEmission" for="field_dateEmission">Date Emission</label>
-            <div class="d-flex">
-                <input id="field_dateEmission" type="datetime-local" class="form-control" name="dateEmission" [(ngModel)]="passeport.dateEmission"
+            <div class="input-group">
+                <input id="field_dateEmission" type="text" class="form-control" name="dateEmission" ngbDatepicker  #dateEmissionDp="ngbDatepicker" [(ngModel)]="passeport.dateEmission"
                 />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateEmissionDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateExpiration" for="field_dateExpiration">Date Expiration</label>
-            <div class="d-flex">
-                <input id="field_dateExpiration" type="datetime-local" class="form-control" name="dateExpiration" [(ngModel)]="passeport.dateExpiration"
+            <div class="input-group">
+                <input id="field_dateExpiration" type="text" class="form-control" name="dateExpiration" ngbDatepicker  #dateExpirationDp="ngbDatepicker" [(ngModel)]="passeport.dateExpiration"
                 />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateExpirationDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
         </div>
         <div class="form-group">
