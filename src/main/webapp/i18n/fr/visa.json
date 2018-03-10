@@ -30,7 +30,9 @@
             "categorie": "Categorie",
             "taxes": "Taxes",
             "adresse": "Adresse",
-            "remarques": "Remarques"
+            "remarques": "Remarques",
+            "dateEmissionSearch": "Date Emission comprise entre ",
+            "dateExpirationSearch": "Date Expiration comprise entre "
         }
     }
 }

@@ -99,6 +99,7 @@
     },
     "entity": {
         "action": {
+            "and": "Et le ",
             "addblob": "Ajouter blob",
             "addimage": "Ajouter image",
             "back": "Retour",

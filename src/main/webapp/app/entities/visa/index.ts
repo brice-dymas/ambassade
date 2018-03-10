@@ -6,3 +6,4 @@ export * from './visa-delete-dialog.component';
 export * from './visa-detail.component';
 export * from './visa.component';
 export * from './visa.route';
+export * from './visa-dto.model';

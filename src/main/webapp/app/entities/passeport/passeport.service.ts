@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Passeport } from './passeport.model';
 import { createRequestOption } from '../../shared';
+import {PasseportModelDTO} from './passeport-dto.model';
 
 export type EntityResponseType = HttpResponse<Passeport>;
 
@@ -34,7 +35,7 @@ export class PasseportService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
-    search(passeport: Passeport): Observable<HttpResponse<Passeport[]>> {
+    search(passeport: PasseportModelDTO): Observable<HttpResponse<Passeport[]>> {
         const options = createRequestOption(passeport);
         return this.http.get<Passeport[]>(this.resourceUrl, { params: options,  observe: 'response'})
             .map((res: HttpResponse<Passeport[]>) => this.convertArrayResponse(res));

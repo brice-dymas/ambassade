@@ -238,6 +238,32 @@ public class RapatriementResourceIntTest {
 
     @Test
     @Transactional
+    public void searchAllRapatriements() throws Exception {
+        // Initialize the database
+        rapatriementRepository.saveAndFlush(rapatriement);
+
+        // Get all the rapatriementList
+        restRapatriementMockMvc.perform(get("/api/rapatriements?reference=111&numeroDossier=AAAAAAAAAA"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(rapatriement.getId().intValue())))
+            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE)))
+            .andExpect(jsonPath("$.[*].numeroDossier").value(hasItem(DEFAULT_NUMERO_DOSSIER.toString())))
+            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
+            .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM.toString())))
+            .andExpect(jsonPath("$.[*].dateNaissance").value(hasItem(DEFAULT_DATE_NAISSANCE.toString())))
+            .andExpect(jsonPath("$.[*].documentID").value(hasItem(DEFAULT_DOCUMENT_ID.toString())))
+            .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE.toString())))
+            .andExpect(jsonPath("$.[*].motif").value(hasItem(DEFAULT_MOTIF.toString())))
+            .andExpect(jsonPath("$.[*].dateRapatriement").value(hasItem(DEFAULT_DATE_RAPATRIEMENT.toString())))
+            .andExpect(jsonPath("$.[*].frontiere").value(hasItem(DEFAULT_FRONTIERE.toString())))
+            .andExpect(jsonPath("$.[*].documentScanneContentType").value(hasItem(DEFAULT_DOCUMENT_SCANNE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].documentScanne").value(hasItem(Base64Utils.encodeToString(DEFAULT_DOCUMENT_SCANNE))))
+            .andExpect(jsonPath("$.[*].createdByPHPRunner").value(hasItem(DEFAULT_CREATED_BY_PHP_RUNNER)));
+    }
+
+    @Test
+    @Transactional
     public void getRapatriement() throws Exception {
         // Initialize the database
         rapatriementRepository.saveAndFlush(rapatriement);

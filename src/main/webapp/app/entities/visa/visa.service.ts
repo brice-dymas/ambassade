@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Visa } from './visa.model';
 import { createRequestOption } from '../../shared';
+import {VisaDtoModel} from './visa-dto.model';
 
 export type EntityResponseType = HttpResponse<Visa>;
 
@@ -32,6 +33,12 @@ export class VisaService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<Visa>(`${this.resourceUrl}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    search(visa: VisaDtoModel): Observable<HttpResponse<Visa[]>> {
+        const options = createRequestOption(visa);
+        return this.http.get<Visa[]>(this.resourceUrl, { params: options,  observe: 'response'})
+            .map((res: HttpResponse<Visa[]>) => this.convertArrayResponse(res));
     }
 
     query(req?: any): Observable<HttpResponse<Visa[]>> {

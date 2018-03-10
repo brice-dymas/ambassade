@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Rapatriement } from './rapatriement.model';
 import { createRequestOption } from '../../shared';
+import {RapatriementDtoModel} from './rapatriement-dto.model';
 
 export type EntityResponseType = HttpResponse<Rapatriement>;
 
@@ -32,6 +33,12 @@ export class RapatriementService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<Rapatriement>(`${this.resourceUrl}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    search(rapatriement: RapatriementDtoModel): Observable<HttpResponse<Rapatriement[]>> {
+        const options = createRequestOption(rapatriement);
+        return this.http.get<Rapatriement[]>(this.resourceUrl, { params: options,  observe: 'response'})
+            .map((res: HttpResponse<Rapatriement[]>) => this.convertArrayResponse(res));
     }
 
     query(req?: any): Observable<HttpResponse<Rapatriement[]>> {

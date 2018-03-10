@@ -44,6 +44,14 @@ export const visaRoute: Routes = [
             pageTitle: 'ambassadeApp.visa.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'visa/search',
+        component: VisaComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.visa.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
