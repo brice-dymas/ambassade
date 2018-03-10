@@ -111,7 +111,7 @@ currentAccount: any;
                 console.log('query');
                 return this.loadAll();
             }else {
-                console.log('search for visas');
+                console.log('search for visas with ', response.content);
                 return this.searchVisa(response.content);
             }
         });
