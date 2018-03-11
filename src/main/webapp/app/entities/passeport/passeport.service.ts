@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Passeport } from './passeport.model';
 import { createRequestOption } from '../../shared';
+import {PasseportModelDTO} from './passeport-dto.model';
 
 export type EntityResponseType = HttpResponse<Passeport>;
 
@@ -32,6 +33,12 @@ export class PasseportService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<Passeport>(`${this.resourceUrl}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    search(passeport: PasseportModelDTO): Observable<HttpResponse<Passeport[]>> {
+        const options = createRequestOption(passeport);
+        return this.http.get<Passeport[]>(this.resourceUrl, { params: options,  observe: 'response'})
+            .map((res: HttpResponse<Passeport[]>) => this.convertArrayResponse(res));
     }
 
     query(req?: any): Observable<HttpResponse<Passeport[]>> {
@@ -64,13 +71,13 @@ export class PasseportService {
     private convertItemFromServer(passeport: Passeport): Passeport {
         const copy: Passeport = Object.assign({}, passeport);
         copy.soumisLe = this.dateUtils
-            .convertDateTimeFromServer(passeport.soumisLe);
+            .convertLocalDateFromServer(passeport.soumisLe);
         copy.delivreLe = this.dateUtils
-            .convertDateTimeFromServer(passeport.delivreLe);
+            .convertLocalDateFromServer(passeport.delivreLe);
         copy.dateEmission = this.dateUtils
-            .convertDateTimeFromServer(passeport.dateEmission);
+            .convertLocalDateFromServer(passeport.dateEmission);
         copy.dateExpiration = this.dateUtils
-            .convertDateTimeFromServer(passeport.dateExpiration);
+            .convertLocalDateFromServer(passeport.dateExpiration);
         return copy;
     }
 
@@ -79,14 +86,14 @@ export class PasseportService {
      */
     private convert(passeport: Passeport): Passeport {
         const copy: Passeport = Object.assign({}, passeport);
-
-        copy.soumisLe = this.dateUtils.toDate(passeport.soumisLe);
-
-        copy.delivreLe = this.dateUtils.toDate(passeport.delivreLe);
-
-        copy.dateEmission = this.dateUtils.toDate(passeport.dateEmission);
-
-        copy.dateExpiration = this.dateUtils.toDate(passeport.dateExpiration);
+        copy.soumisLe = this.dateUtils
+            .convertLocalDateToServer(passeport.soumisLe);
+        copy.delivreLe = this.dateUtils
+            .convertLocalDateToServer(passeport.delivreLe);
+        copy.dateEmission = this.dateUtils
+            .convertLocalDateToServer(passeport.dateEmission);
+        copy.dateExpiration = this.dateUtils
+            .convertLocalDateToServer(passeport.dateExpiration);
         return copy;
     }
 }

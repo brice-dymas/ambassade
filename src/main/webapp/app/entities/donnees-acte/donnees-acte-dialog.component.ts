@@ -18,6 +18,8 @@ export class DonneesActeDialogComponent implements OnInit {
 
     donneesActe: DonneesActe;
     isSaving: boolean;
+    dateDuJourChiffreDp: any;
+    dateNaissanceChiffreDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

@@ -2,6 +2,7 @@ package com.urservices.ambassade.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.urservices.ambassade.domain.Rapatriement;
+import com.urservices.ambassade.domain.enumeration.Sexe;
 import com.urservices.ambassade.service.RapatriementService;
 import com.urservices.ambassade.web.rest.errors.BadRequestAlertException;
 import com.urservices.ambassade.web.rest.util.HeaderUtil;
@@ -15,11 +16,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,9 +94,43 @@ public class RapatriementResource {
      */
     @GetMapping("/rapatriements")
     @Timed
-    public ResponseEntity<List<Rapatriement>> getAllRapatriements(Pageable pageable) {
+    public ResponseEntity<List<Rapatriement>> getAllRapatriements(WebRequest webRequest, Pageable pageable) {
+
         log.debug("REST request to get a page of Rapatriements");
-        Page<Rapatriement> page = rapatriementService.findAll(pageable);
+
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        Integer reference = webRequest.getParameter("reference") !=null ? Integer.valueOf(webRequest.getParameter("reference")):-1;
+        String numeroDossier = webRequest.getParameter("numeroDossier") !=null ? webRequest.getParameter("numeroDossier"):"";
+        String nom = webRequest.getParameter("nom") !=null ? webRequest.getParameter("nom"):"";
+        String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
+        String documentID = webRequest.getParameter("documentID") !=null ? webRequest.getParameter("documentID"):"";
+        Sexe sexe= webRequest.getParameter("sexe") !=null ? Sexe.valueOf(webRequest.getParameter("sexe")): Sexe.MASCULIN;
+        String motif = webRequest.getParameter("motif") !=null ? webRequest.getParameter("motif"):"";
+        String frontiere = webRequest.getParameter("frontiere") !=null ? webRequest.getParameter("frontiere"):"";
+
+        String dateNaissanceDebStr = webRequest.getParameter("dateNaissanceDeb") !=null &&
+            !webRequest.getParameter("dateNaissanceDeb").isEmpty()? webRequest.getParameter("dateNaissanceDeb"): "1970-01-01";
+        String dateNaissanceFinStr = webRequest.getParameter("dateNaissanceFin") !=null &&
+            !webRequest.getParameter("dateNaissanceFin").isEmpty() ?
+            webRequest.getParameter("dateNaissanceFin"): LocalDate.now().toString();
+        String dateRapatriementDebStr = webRequest.getParameter("dateRapatriementDeb") !=null &&
+            !webRequest.getParameter("dateRapatriementDeb").isEmpty() ? webRequest.getParameter("dateRapatriementDeb"): "1970-01-01";
+        String dateRapatriementFinStr= webRequest.getParameter("dateRapatriementFin") !=null &&
+            !webRequest.getParameter("dateRapatriementFin").isEmpty() ?
+            webRequest.getParameter("dateRapatriementFin") : LocalDate.now().toString();
+
+//        LocalDate dateNaissanceDeb = LocalDate.parse(dateNaissanceDebStr, formatter);
+//        LocalDate dateNaissanceFin = LocalDate.parse(dateNaissanceFinStr, formatter);
+//        LocalDate dateRapatriementDeb = LocalDate.parse(dateRapatriementDebStr, formatter);
+//        LocalDate dateRapatriementFin = LocalDate.parse(dateRapatriementFinStr, formatter);
+        LocalDate dateNaissanceDeb = LocalDate.parse(dateNaissanceDebStr);
+        LocalDate dateNaissanceFin = LocalDate.parse(dateNaissanceFinStr);
+        LocalDate dateRapatriementDeb = LocalDate.parse(dateRapatriementDebStr);
+        LocalDate dateRapatriementFin = LocalDate.parse(dateRapatriementFinStr);
+//        Page<Rapatriement> page = rapatriementService.findAll(pageable);
+        Page<Rapatriement> page = rapatriementService.searchAll(reference,numeroDossier,nom,prenom,dateNaissanceDeb,
+            dateNaissanceFin, documentID,sexe,motif,dateRapatriementDeb, dateRapatriementFin, frontiere,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/rapatriements");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

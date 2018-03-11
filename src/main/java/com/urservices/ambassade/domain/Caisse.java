@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -29,7 +29,7 @@ public class Caisse implements Serializable {
     private Long reference;
 
     @Column(name = "date_du_jour")
-    private ZonedDateTime dateDuJour;
+    private LocalDate dateDuJour;
 
     @Size(max = 50)
     @Column(name = "nom", length = 50)
@@ -59,7 +59,7 @@ public class Caisse implements Serializable {
     private BigDecimal montant;
 
     @Column(name = "date_retour")
-    private ZonedDateTime dateRetour;
+    private LocalDate dateRetour;
 
     @Size(max = 50)
     @Column(name = "telephone", length = 50)
@@ -95,16 +95,16 @@ public class Caisse implements Serializable {
         this.reference = reference;
     }
 
-    public ZonedDateTime getDateDuJour() {
+    public LocalDate getDateDuJour() {
         return dateDuJour;
     }
 
-    public Caisse dateDuJour(ZonedDateTime dateDuJour) {
+    public Caisse dateDuJour(LocalDate dateDuJour) {
         this.dateDuJour = dateDuJour;
         return this;
     }
 
-    public void setDateDuJour(ZonedDateTime dateDuJour) {
+    public void setDateDuJour(LocalDate dateDuJour) {
         this.dateDuJour = dateDuJour;
     }
 
@@ -199,16 +199,16 @@ public class Caisse implements Serializable {
         this.montant = montant;
     }
 
-    public ZonedDateTime getDateRetour() {
+    public LocalDate getDateRetour() {
         return dateRetour;
     }
 
-    public Caisse dateRetour(ZonedDateTime dateRetour) {
+    public Caisse dateRetour(LocalDate dateRetour) {
         this.dateRetour = dateRetour;
         return this;
     }
 
-    public void setDateRetour(ZonedDateTime dateRetour) {
+    public void setDateRetour(LocalDate dateRetour) {
         this.dateRetour = dateRetour;
     }
 

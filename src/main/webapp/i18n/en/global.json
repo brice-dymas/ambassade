@@ -54,6 +54,7 @@
             "email.placeholder": "Your email"
         },
         "messages": {
+            "and": "And ",
             "info": {
                 "authenticated": {
                     "prefix": "If you want to ",
@@ -98,6 +99,7 @@
     },
     "entity": {
         "action": {
+            "and": "And ",
             "addblob": "Add blob",
             "addimage": "Add image",
             "back": "Back",
@@ -106,7 +108,8 @@
             "edit": "Edit",
             "open": "Open",
             "save": "Save",
-            "view": "View"
+            "view": "View",
+            "search": "Search"
         },
         "detail": {
             "field": "Field",

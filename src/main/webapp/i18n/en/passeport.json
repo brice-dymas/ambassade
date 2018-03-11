@@ -36,7 +36,11 @@
             "remarquesR": "Remarques R",
             "sms": "Sms",
             "sms2": "Sms 2",
-            "documents": "Documents"
+            "documents": "Documents",
+            "soumisLeSearch": "Submission date between",
+            "delivreLeSearch": "Delivery date between",
+            "dateEmissionSearch": "Release date between",
+            "dateExpirationSearch": "DeadLine date between"
         }
     }
 }

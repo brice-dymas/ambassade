@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import com.urservices.ambassade.domain.enumeration.Sexe;
@@ -43,7 +43,7 @@ public class Rapatriement implements Serializable {
     private String prenom;
 
     @Column(name = "date_naissance")
-    private ZonedDateTime dateNaissance;
+    private LocalDate dateNaissance;
 
     @Size(max = 50)
     @Column(name = "document_id", length = 50)
@@ -58,7 +58,7 @@ public class Rapatriement implements Serializable {
     private String motif;
 
     @Column(name = "date_rapatriement")
-    private ZonedDateTime dateRapatriement;
+    private LocalDate dateRapatriement;
 
     @Size(max = 50)
     @Column(name = "frontiere", length = 50)
@@ -135,16 +135,16 @@ public class Rapatriement implements Serializable {
         this.prenom = prenom;
     }
 
-    public ZonedDateTime getDateNaissance() {
+    public LocalDate getDateNaissance() {
         return dateNaissance;
     }
 
-    public Rapatriement dateNaissance(ZonedDateTime dateNaissance) {
+    public Rapatriement dateNaissance(LocalDate dateNaissance) {
         this.dateNaissance = dateNaissance;
         return this;
     }
 
-    public void setDateNaissance(ZonedDateTime dateNaissance) {
+    public void setDateNaissance(LocalDate dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 
@@ -187,16 +187,16 @@ public class Rapatriement implements Serializable {
         this.motif = motif;
     }
 
-    public ZonedDateTime getDateRapatriement() {
+    public LocalDate getDateRapatriement() {
         return dateRapatriement;
     }
 
-    public Rapatriement dateRapatriement(ZonedDateTime dateRapatriement) {
+    public Rapatriement dateRapatriement(LocalDate dateRapatriement) {
         this.dateRapatriement = dateRapatriement;
         return this;
     }
 
-    public void setDateRapatriement(ZonedDateTime dateRapatriement) {
+    public void setDateRapatriement(LocalDate dateRapatriement) {
         this.dateRapatriement = dateRapatriement;
     }
 

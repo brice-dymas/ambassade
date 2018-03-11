@@ -27,7 +27,9 @@
             "dateRapatriement": "Date Rapatriement",
             "frontiere": "Frontiere",
             "documentScanne": "Document Scanne",
-            "createdByPHPRunner": "Created By PHP Runner"
+            "createdByPHPRunner": "Created By PHP Runner",
+            "dateNaissanceSearch": "Birth date between ",
+            "dateRapatriementSearch": "Repatriation Date between "
         }
     }
 }

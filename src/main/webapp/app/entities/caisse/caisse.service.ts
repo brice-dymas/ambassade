@@ -64,9 +64,9 @@ export class CaisseService {
     private convertItemFromServer(caisse: Caisse): Caisse {
         const copy: Caisse = Object.assign({}, caisse);
         copy.dateDuJour = this.dateUtils
-            .convertDateTimeFromServer(caisse.dateDuJour);
+            .convertLocalDateFromServer(caisse.dateDuJour);
         copy.dateRetour = this.dateUtils
-            .convertDateTimeFromServer(caisse.dateRetour);
+            .convertLocalDateFromServer(caisse.dateRetour);
         return copy;
     }
 
@@ -75,10 +75,10 @@ export class CaisseService {
      */
     private convert(caisse: Caisse): Caisse {
         const copy: Caisse = Object.assign({}, caisse);
-
-        copy.dateDuJour = this.dateUtils.toDate(caisse.dateDuJour);
-
-        copy.dateRetour = this.dateUtils.toDate(caisse.dateRetour);
+        copy.dateDuJour = this.dateUtils
+            .convertLocalDateToServer(caisse.dateDuJour);
+        copy.dateRetour = this.dateUtils
+            .convertLocalDateToServer(caisse.dateRetour);
         return copy;
     }
 }

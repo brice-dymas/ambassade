@@ -18,6 +18,8 @@ export class RapatriementDialogComponent implements OnInit {
 
     rapatriement: Rapatriement;
     isSaving: boolean;
+    dateNaissanceDp: any;
+    dateRapatriementDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

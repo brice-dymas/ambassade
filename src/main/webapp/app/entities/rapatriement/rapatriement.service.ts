@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Rapatriement } from './rapatriement.model';
 import { createRequestOption } from '../../shared';
+import {RapatriementDtoModel} from './rapatriement-dto.model';
 
 export type EntityResponseType = HttpResponse<Rapatriement>;
 
@@ -32,6 +33,12 @@ export class RapatriementService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<Rapatriement>(`${this.resourceUrl}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    search(rapatriement: RapatriementDtoModel): Observable<HttpResponse<Rapatriement[]>> {
+        const options = createRequestOption(rapatriement);
+        return this.http.get<Rapatriement[]>(this.resourceUrl, { params: options,  observe: 'response'})
+            .map((res: HttpResponse<Rapatriement[]>) => this.convertArrayResponse(res));
     }
 
     query(req?: any): Observable<HttpResponse<Rapatriement[]>> {
@@ -64,9 +71,9 @@ export class RapatriementService {
     private convertItemFromServer(rapatriement: Rapatriement): Rapatriement {
         const copy: Rapatriement = Object.assign({}, rapatriement);
         copy.dateNaissance = this.dateUtils
-            .convertDateTimeFromServer(rapatriement.dateNaissance);
+            .convertLocalDateFromServer(rapatriement.dateNaissance);
         copy.dateRapatriement = this.dateUtils
-            .convertDateTimeFromServer(rapatriement.dateRapatriement);
+            .convertLocalDateFromServer(rapatriement.dateRapatriement);
         return copy;
     }
 
@@ -75,10 +82,10 @@ export class RapatriementService {
      */
     private convert(rapatriement: Rapatriement): Rapatriement {
         const copy: Rapatriement = Object.assign({}, rapatriement);
-
-        copy.dateNaissance = this.dateUtils.toDate(rapatriement.dateNaissance);
-
-        copy.dateRapatriement = this.dateUtils.toDate(rapatriement.dateRapatriement);
+        copy.dateNaissance = this.dateUtils
+            .convertLocalDateToServer(rapatriement.dateNaissance);
+        copy.dateRapatriement = this.dateUtils
+            .convertLocalDateToServer(rapatriement.dateRapatriement);
         return copy;
     }
 }

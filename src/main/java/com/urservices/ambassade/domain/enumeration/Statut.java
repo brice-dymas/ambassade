@@ -4,5 +4,5 @@ package com.urservices.ambassade.domain.enumeration;
  * The Statut enumeration.
  */
 public enum Statut {
-    LEGITIME, NATUREL, NATURELLE
+    CELIBATAIRE, MARIE, DIVORCE, SEPARE, VEUF
 }

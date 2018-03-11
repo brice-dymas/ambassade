@@ -44,6 +44,14 @@ export const rapatriementRoute: Routes = [
             pageTitle: 'ambassadeApp.rapatriement.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'rapatriement/search',
+        component: RapatriementComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.rapatriement.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 

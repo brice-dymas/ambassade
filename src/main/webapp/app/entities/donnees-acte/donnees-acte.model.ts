@@ -6,9 +6,11 @@ export const enum Sexe {
 }
 
 export const enum Statut {
-    'LEGITIME',
-    'NATUREL',
-    'NATURELLE'
+    'CELIBATAIRE',
+    'MARIE',
+    'DIVORCE',
+    'SEPARE',
+    'VEUF'
 }
 
 export class DonneesActe implements BaseEntity {

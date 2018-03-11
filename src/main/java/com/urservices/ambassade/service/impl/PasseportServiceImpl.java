@@ -1,5 +1,6 @@
 package com.urservices.ambassade.service.impl;
 
+import com.urservices.ambassade.domain.enumeration.Statut;
 import com.urservices.ambassade.service.PasseportService;
 import com.urservices.ambassade.domain.Passeport;
 import com.urservices.ambassade.repository.PasseportRepository;
@@ -9,6 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
 
 
 /**
@@ -73,5 +78,20 @@ public class PasseportServiceImpl implements PasseportService {
     public void delete(Long id) {
         log.debug("Request to delete Passeport : {}", id);
         passeportRepository.delete(id);
+    }
+
+    @Override
+    public Page<Passeport> searchAll(String nom, String prenom, String numeroPasseport, String neLe, String lieuNaissance,
+                                     List<Statut> etatCivils, String adresse, String telephone, String nif, String paysEmetteur,
+                                     LocalDate soumisLeDeb, LocalDate soumisLeFin, LocalDate delivreLeDeb, LocalDate delivreLeFin,
+                                     BigDecimal montant, String remarques, LocalDate dateEmissionDeb, LocalDate dateEmissionFin,
+                                     LocalDate dateExpirationDeb, LocalDate dateExpirationFin, String remarquesR, String sms,
+                                     String sms2, String documents, Pageable pageable) {
+        return passeportRepository.searchAll("%" + nom + "%", "%" + prenom + "%", "%" +
+                numeroPasseport + "%", "%" + neLe + "%", "%" + lieuNaissance + "%",  etatCivils,
+            "%" + adresse + "%","%" + telephone + "%", "%" + nif + "%", "%" +
+                paysEmetteur + "%", soumisLeDeb, soumisLeFin, delivreLeDeb, delivreLeFin,  montant, "%" +
+                remarques + "%", dateEmissionDeb, dateEmissionFin, dateExpirationDeb, dateEmissionFin, "%" +
+                remarquesR + "%", "%" + sms + "%","%" + sms2 + "%", "%" + documents + "%", pageable);
     }
 }

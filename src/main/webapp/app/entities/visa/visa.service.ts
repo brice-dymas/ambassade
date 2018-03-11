@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Visa } from './visa.model';
 import { createRequestOption } from '../../shared';
+import {VisaDtoModel} from './visa-dto.model';
 
 export type EntityResponseType = HttpResponse<Visa>;
 
@@ -32,6 +33,12 @@ export class VisaService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<Visa>(`${this.resourceUrl}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    search(visa: VisaDtoModel): Observable<HttpResponse<Visa[]>> {
+        const options = createRequestOption(visa);
+        return this.http.get<Visa[]>(this.resourceUrl, { params: options,  observe: 'response'})
+            .map((res: HttpResponse<Visa[]>) => this.convertArrayResponse(res));
     }
 
     query(req?: any): Observable<HttpResponse<Visa[]>> {
@@ -64,9 +71,9 @@ export class VisaService {
     private convertItemFromServer(visa: Visa): Visa {
         const copy: Visa = Object.assign({}, visa);
         copy.dateEmission = this.dateUtils
-            .convertDateTimeFromServer(visa.dateEmission);
+            .convertLocalDateFromServer(visa.dateEmission);
         copy.dateExpiration = this.dateUtils
-            .convertDateTimeFromServer(visa.dateExpiration);
+            .convertLocalDateFromServer(visa.dateExpiration);
         return copy;
     }
 
@@ -75,10 +82,10 @@ export class VisaService {
      */
     private convert(visa: Visa): Visa {
         const copy: Visa = Object.assign({}, visa);
-
-        copy.dateEmission = this.dateUtils.toDate(visa.dateEmission);
-
-        copy.dateExpiration = this.dateUtils.toDate(visa.dateExpiration);
+        copy.dateEmission = this.dateUtils
+            .convertLocalDateToServer(visa.dateEmission);
+        copy.dateExpiration = this.dateUtils
+            .convertLocalDateToServer(visa.dateExpiration);
         return copy;
     }
 }

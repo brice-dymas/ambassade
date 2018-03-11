@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 
 /**
  * Service Implementation for managing Visa.
@@ -73,5 +75,33 @@ public class VisaServiceImpl implements VisaService {
     public void delete(Long id) {
         log.debug("Request to delete Visa : {}", id);
         visaRepository.delete(id);
+    }
+
+    /**
+     * Get all the visas using params.
+     *
+     * @param nom
+     * @param prenom
+     * @param nationalite
+     * @param numeroPasseport
+     * @param cedula
+     * @param numeroVisa
+     * @param nombreEntree
+     * @param type
+     * @param categorie
+     * @param taxes
+     * @param adresse
+     * @param remarques
+     * @param pageable  the pagination information  @return the list of entities
+     */
+    @Override
+    public Page<Visa> searchAll(String nom, String prenom, String nationalite, String numeroPasseport, String cedula,
+                                Long numeroVisa, LocalDate dateEmissionDeb, LocalDate dateEmissionFin, LocalDate dateExpirationDeb,
+                                LocalDate dateExpirationFin,  Integer validePour, String nombreEntree, String type, String categorie,
+                                Integer taxes, String adresse, String remarques, Pageable pageable) {
+        return visaRepository.searchAll("%"+nom+"%","%"+prenom+"%","%"+nationalite+"%",
+            "%"+numeroPasseport+"%","%"+cedula+"%",numeroVisa,dateEmissionDeb,dateEmissionFin,
+            dateExpirationDeb, dateExpirationFin, validePour,"%"+nombreEntree+"%","%"+type+"%","%"+categorie+"%",taxes,
+            "%"+adresse+"%","%"+remarques+"%",pageable);
     }
 }

@@ -15,11 +15,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,9 +93,51 @@ public class VisaResource {
      */
     @GetMapping("/visas")
     @Timed
-    public ResponseEntity<List<Visa>> getAllVisas(Pageable pageable) {
+    public ResponseEntity<List<Visa>> getAllVisas(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Visas");
-        Page<Visa> page = visaService.findAll(pageable);
+
+        System.out.println("WebRequest = "+webRequest.getParameterMap());
+
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        String nom = webRequest.getParameter("nom") !=null ? webRequest.getParameter("nom"):"";
+        String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
+        String nationalite = webRequest.getParameter("nationalite") !=null ? webRequest.getParameter("nationalite"):"";
+        String numeroPasseport = webRequest.getParameter("numeroPasseport") !=null ? webRequest.getParameter("numeroPasseport"):"";
+        String cedula = webRequest.getParameter("cedula") !=null ? webRequest.getParameter("cedula"):"";
+        Long numeroVisa =  (webRequest.getParameter("numeroVisa") != null && !webRequest.getParameter("numeroVisa").equals(""))
+            ? Long.valueOf(webRequest.getParameter("numeroVisa")) : -1;
+        Integer validePour =  (webRequest.getParameter("validePour") != null && !webRequest.getParameter("validePour").equals(""))
+            ? Integer.valueOf(webRequest.getParameter("validePour")) : -1;
+        String nombreEntree = webRequest.getParameter("nombreEntree") !=null ? webRequest.getParameter("nombreEntree"):"";
+        String type = webRequest.getParameter("type") !=null ? webRequest.getParameter("type"):"";
+        String categorie = webRequest.getParameter("categorie") !=null ? webRequest.getParameter("categorie"):"";
+        Integer taxes =  (webRequest.getParameter("taxes") != null && !webRequest.getParameter("taxes").equals(""))
+            ? Integer.valueOf(webRequest.getParameter("taxes")) : -1;
+        String adresse = webRequest.getParameter("adresse") !=null ? webRequest.getParameter("adresse"):"";
+        String remarques = webRequest.getParameter("remarques") !=null ? webRequest.getParameter("remarques"):"";
+
+        String dateEmissionDebStr = webRequest.getParameter("dateEmissionDeb") !=null &&
+            !webRequest.getParameter("dateEmissionDeb").isEmpty() ? webRequest.getParameter("dateEmissionDeb"): "1970-01-01";
+        String dateEmissionFinStr = webRequest.getParameter("dateEmissionFin") !=null &&
+            !webRequest.getParameter("dateEmissionFin").isEmpty() ? webRequest.getParameter("dateEmissionFin"):LocalDate.now().toString();
+        String dateExpirationDebStr = webRequest.getParameter("dateExpirationDeb") !=null &&
+            !webRequest.getParameter("dateExpirationDeb").isEmpty() ? webRequest.getParameter("dateExpirationDeb"): "1970-01-01";
+        String dateExpirationFinStr = webRequest.getParameter("dateExpirationFin") !=null &&
+            !webRequest.getParameter("dateExpirationFin").isEmpty() ? webRequest.getParameter("dateExpirationFin"):LocalDate.now().toString();
+
+//        LocalDate dateEmissionDeb= LocalDate.parse(dateEmissionDebStr, formatter);
+//        LocalDate dateEmissionFin= LocalDate.parse(dateEmissionFinStr, formatter);
+//        LocalDate dateExpirationDeb= LocalDate.parse(dateExpirationDebStr, formatter);
+//        LocalDate dateExpirationFin= LocalDate.parse(dateExpirationFinStr, formatter);
+        LocalDate dateEmissionDeb= LocalDate.parse(dateEmissionDebStr);
+        LocalDate dateEmissionFin= LocalDate.parse(dateEmissionFinStr);
+        LocalDate dateExpirationDeb= LocalDate.parse(dateExpirationDebStr);
+        LocalDate dateExpirationFin= LocalDate.parse(dateExpirationFinStr);
+
+        System.out.println("WebRequest = "+webRequest);
+        Page<Visa> page = visaService.searchAll(nom,prenom,nationalite,numeroPasseport,cedula,numeroVisa,dateEmissionDeb, dateEmissionFin,
+            dateExpirationDeb, dateExpirationFin, validePour,nombreEntree,type,categorie,taxes,adresse,remarques,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/visas");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -2,7 +2,6 @@ import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HttpResponse } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { Passeport } from './passeport.model';
 import { PasseportService } from './passeport.service';
 
@@ -11,7 +10,6 @@ export class PasseportPopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
-        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private passeportService: PasseportService
@@ -31,14 +29,34 @@ export class PasseportPopupService {
                 this.passeportService.find(id)
                     .subscribe((passeportResponse: HttpResponse<Passeport>) => {
                         const passeport: Passeport = passeportResponse.body;
-                        passeport.soumisLe = this.datePipe
-                            .transform(passeport.soumisLe, 'yyyy-MM-ddTHH:mm:ss');
-                        passeport.delivreLe = this.datePipe
-                            .transform(passeport.delivreLe, 'yyyy-MM-ddTHH:mm:ss');
-                        passeport.dateEmission = this.datePipe
-                            .transform(passeport.dateEmission, 'yyyy-MM-ddTHH:mm:ss');
-                        passeport.dateExpiration = this.datePipe
-                            .transform(passeport.dateExpiration, 'yyyy-MM-ddTHH:mm:ss');
+                        if (passeport.soumisLe) {
+                            passeport.soumisLe = {
+                                year: passeport.soumisLe.getFullYear(),
+                                month: passeport.soumisLe.getMonth() + 1,
+                                day: passeport.soumisLe.getDate()
+                            };
+                        }
+                        if (passeport.delivreLe) {
+                            passeport.delivreLe = {
+                                year: passeport.delivreLe.getFullYear(),
+                                month: passeport.delivreLe.getMonth() + 1,
+                                day: passeport.delivreLe.getDate()
+                            };
+                        }
+                        if (passeport.dateEmission) {
+                            passeport.dateEmission = {
+                                year: passeport.dateEmission.getFullYear(),
+                                month: passeport.dateEmission.getMonth() + 1,
+                                day: passeport.dateEmission.getDate()
+                            };
+                        }
+                        if (passeport.dateExpiration) {
+                            passeport.dateExpiration = {
+                                year: passeport.dateExpiration.getFullYear(),
+                                month: passeport.dateExpiration.getMonth() + 1,
+                                day: passeport.dateExpiration.getDate()
+                            };
+                        }
                         this.ngbModalRef = this.passeportModalRef(component, passeport);
                         resolve(this.ngbModalRef);
                     });

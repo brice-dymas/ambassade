@@ -7,6 +7,7 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Visa } from './visa.model';
 import { VisaService } from './visa.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
+import {VisaDtoModel} from './visa-dto.model';
 
 @Component({
     selector: 'jhi-visa',
@@ -56,6 +57,12 @@ currentAccount: any;
                 (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+    searchVisa(visa: VisaDtoModel) {
+        this.visaService.search(visa).subscribe(
+            (res: HttpResponse<Visa[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -97,7 +104,17 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInVisas() {
-        this.eventSubscriber = this.eventManager.subscribe('visaListModification', (response) => this.loadAll());
+        // this.eventSubscriber = this.eventManager.subscribe('visaListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('visaListModification', (response) => {
+            console.log(response);
+            if (typeof response.content === 'string') {
+                console.log('query');
+                return this.loadAll();
+            }else {
+                console.log('search for visas with ', response.content);
+                return this.searchVisa(response.content);
+            }
+        });
     }
 
     sort() {

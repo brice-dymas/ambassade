@@ -23,13 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-import static com.urservices.ambassade.web.rest.TestUtil.sameInstant;
 import static com.urservices.ambassade.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -48,8 +45,8 @@ public class CaisseResourceIntTest {
     private static final Long DEFAULT_REFERENCE = 1L;
     private static final Long UPDATED_REFERENCE = 2L;
 
-    private static final ZonedDateTime DEFAULT_DATE_DU_JOUR = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE_DU_JOUR = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_DATE_DU_JOUR = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_DU_JOUR = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_NOM = "AAAAAAAAAA";
     private static final String UPDATED_NOM = "BBBBBBBBBB";
@@ -72,8 +69,8 @@ public class CaisseResourceIntTest {
     private static final BigDecimal DEFAULT_MONTANT = new BigDecimal(1);
     private static final BigDecimal UPDATED_MONTANT = new BigDecimal(2);
 
-    private static final ZonedDateTime DEFAULT_DATE_RETOUR = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE_RETOUR = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_DATE_RETOUR = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_RETOUR = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_TELEPHONE = "AAAAAAAAAA";
     private static final String UPDATED_TELEPHONE = "BBBBBBBBBB";
@@ -225,7 +222,7 @@ public class CaisseResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(caisse.getId().intValue())))
             .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.intValue())))
-            .andExpect(jsonPath("$.[*].dateDuJour").value(hasItem(sameInstant(DEFAULT_DATE_DU_JOUR))))
+            .andExpect(jsonPath("$.[*].dateDuJour").value(hasItem(DEFAULT_DATE_DU_JOUR.toString())))
             .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
             .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM.toString())))
             .andExpect(jsonPath("$.[*].typeID").value(hasItem(DEFAULT_TYPE_ID.toString())))
@@ -233,38 +230,11 @@ public class CaisseResourceIntTest {
             .andExpect(jsonPath("$.[*].serviceConcerne").value(hasItem(DEFAULT_SERVICE_CONCERNE.toString())))
             .andExpect(jsonPath("$.[*].monnaie").value(hasItem(DEFAULT_MONNAIE.toString())))
             .andExpect(jsonPath("$.[*].montant").value(hasItem(DEFAULT_MONTANT.intValue())))
-            .andExpect(jsonPath("$.[*].dateRetour").value(hasItem(sameInstant(DEFAULT_DATE_RETOUR))))
+            .andExpect(jsonPath("$.[*].dateRetour").value(hasItem(DEFAULT_DATE_RETOUR.toString())))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
             .andExpect(jsonPath("$.[*].num").value(hasItem(DEFAULT_NUM)))
             .andExpect(jsonPath("$.[*].paiement").value(hasItem(DEFAULT_PAIEMENT.toString())));
     }
-    
-    @Test
-    @Transactional
-    public void getAllCaissesByDateDuJour() throws Exception {
-        // Initialize the database
-        caisseRepository.saveAndFlush(caisse);
-
-        // Get all the caisseList
-        restCaisseMockMvc.perform(get("/api/caisses?sort=id,desc&dateDuJour="+DEFAULT_DATE_DU_JOUR))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(caisse.getId().intValue())))
-            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.intValue())))
-            .andExpect(jsonPath("$.[*].dateDuJour").value(hasItem(sameInstant(DEFAULT_DATE_DU_JOUR))))
-            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
-            .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM.toString())))
-            .andExpect(jsonPath("$.[*].typeID").value(hasItem(DEFAULT_TYPE_ID.toString())))
-            .andExpect(jsonPath("$.[*].numeroID").value(hasItem(DEFAULT_NUMERO_ID.toString())))
-            .andExpect(jsonPath("$.[*].serviceConcerne").value(hasItem(DEFAULT_SERVICE_CONCERNE.toString())))
-            .andExpect(jsonPath("$.[*].monnaie").value(hasItem(DEFAULT_MONNAIE.toString())))
-            .andExpect(jsonPath("$.[*].montant").value(hasItem(DEFAULT_MONTANT.intValue())))
-            .andExpect(jsonPath("$.[*].dateRetour").value(hasItem(sameInstant(DEFAULT_DATE_RETOUR))))
-            .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
-            .andExpect(jsonPath("$.[*].num").value(hasItem(DEFAULT_NUM)))
-            .andExpect(jsonPath("$.[*].paiement").value(hasItem(DEFAULT_PAIEMENT.toString())));
-    }
-
 
     @Test
     @Transactional
@@ -278,7 +248,7 @@ public class CaisseResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(caisse.getId().intValue()))
             .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE.intValue()))
-            .andExpect(jsonPath("$.dateDuJour").value(sameInstant(DEFAULT_DATE_DU_JOUR)))
+            .andExpect(jsonPath("$.dateDuJour").value(DEFAULT_DATE_DU_JOUR.toString()))
             .andExpect(jsonPath("$.nom").value(DEFAULT_NOM.toString()))
             .andExpect(jsonPath("$.prenom").value(DEFAULT_PRENOM.toString()))
             .andExpect(jsonPath("$.typeID").value(DEFAULT_TYPE_ID.toString()))
@@ -286,7 +256,7 @@ public class CaisseResourceIntTest {
             .andExpect(jsonPath("$.serviceConcerne").value(DEFAULT_SERVICE_CONCERNE.toString()))
             .andExpect(jsonPath("$.monnaie").value(DEFAULT_MONNAIE.toString()))
             .andExpect(jsonPath("$.montant").value(DEFAULT_MONTANT.intValue()))
-            .andExpect(jsonPath("$.dateRetour").value(sameInstant(DEFAULT_DATE_RETOUR)))
+            .andExpect(jsonPath("$.dateRetour").value(DEFAULT_DATE_RETOUR.toString()))
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE.toString()))
             .andExpect(jsonPath("$.num").value(DEFAULT_NUM))
             .andExpect(jsonPath("$.paiement").value(DEFAULT_PAIEMENT.toString()));

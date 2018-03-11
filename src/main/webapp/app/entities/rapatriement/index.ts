@@ -6,3 +6,4 @@ export * from './rapatriement-delete-dialog.component';
 export * from './rapatriement-detail.component';
 export * from './rapatriement.component';
 export * from './rapatriement.route';
+export * from './rapatriement-dto.model';

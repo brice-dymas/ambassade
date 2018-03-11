@@ -84,16 +84,22 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.visa.dateEmission" for="field_dateEmission">Date Emission</label>
-            <div class="d-flex">
-                <input id="field_dateEmission" type="datetime-local" class="form-control" name="dateEmission" [(ngModel)]="visa.dateEmission"
+            <div class="input-group">
+                <input id="field_dateEmission" type="text" class="form-control" name="dateEmission" ngbDatepicker  #dateEmissionDp="ngbDatepicker" [(ngModel)]="visa.dateEmission"
                 />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateEmissionDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.visa.dateExpiration" for="field_dateExpiration">Date Expiration</label>
-            <div class="d-flex">
-                <input id="field_dateExpiration" type="datetime-local" class="form-control" name="dateExpiration" [(ngModel)]="visa.dateExpiration"
+            <div class="input-group">
+                <input id="field_dateExpiration" type="text" class="form-control" name="dateExpiration" ngbDatepicker  #dateExpirationDp="ngbDatepicker" [(ngModel)]="visa.dateExpiration"
                 />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateExpirationDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
         </div>
         <div class="form-group">

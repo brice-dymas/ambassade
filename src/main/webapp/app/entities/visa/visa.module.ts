@@ -15,6 +15,7 @@ import {
     visaPopupRoute,
     VisaResolvePagingParams,
 } from './';
+import {VisaSearchComponent} from './visa-search.component';
 
 const ENTITY_STATES = [
     ...visaRoute,
@@ -33,6 +34,7 @@ const ENTITY_STATES = [
         VisaDeleteDialogComponent,
         VisaPopupComponent,
         VisaDeletePopupComponent,
+        VisaSearchComponent,
     ],
     entryComponents: [
         VisaComponent,

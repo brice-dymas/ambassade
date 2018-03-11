@@ -35,7 +35,7 @@
         },
         {
             "fieldName": "dateNaissance",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "documentID",
@@ -60,7 +60,7 @@
         },
         {
             "fieldName": "dateRapatriement",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "frontiere",

@@ -15,6 +15,7 @@ import {
     rapatriementPopupRoute,
     RapatriementResolvePagingParams,
 } from './';
+import {RapatriementSearchComponent} from './rapatriement-search.component';
 
 const ENTITY_STATES = [
     ...rapatriementRoute,
@@ -33,6 +34,7 @@ const ENTITY_STATES = [
         RapatriementDeleteDialogComponent,
         RapatriementPopupComponent,
         RapatriementDeletePopupComponent,
+        RapatriementSearchComponent,
     ],
     entryComponents: [
         RapatriementComponent,

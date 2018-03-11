@@ -51,11 +51,11 @@
         },
         {
             "fieldName": "dateEmission",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "dateExpiration",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "validePour",

@@ -7,6 +7,7 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Passeport } from './passeport.model';
 import { PasseportService } from './passeport.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
+import {PasseportModelDTO} from './passeport-dto.model';
 
 @Component({
     selector: 'jhi-passeport',
@@ -56,6 +57,12 @@ currentAccount: any;
                 (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+    searchPasseport(passeport: PasseportModelDTO) {
+        this.passeportService.search(passeport).subscribe(
+            (res: HttpResponse<Passeport[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -97,7 +104,17 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInPasseports() {
-        this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => this.loadAll());
+        // this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => {
+            console.log(response);
+            if (typeof response.content === 'string') {
+                console.log('query');
+                return this.loadAll();
+            }else {
+                console.log('search');
+                return this.searchPasseport(response.content);
+            }
+        });
     }
 
     sort() {

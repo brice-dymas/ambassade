@@ -54,6 +54,7 @@
             "email.placeholder": "Votre email"
         },
         "messages": {
+            "and": "Et le ",
             "info": {
                 "authenticated": {
                     "prefix": "Si vous voulez vous ",
@@ -98,6 +99,7 @@
     },
     "entity": {
         "action": {
+            "and": "Et le ",
             "addblob": "Ajouter blob",
             "addimage": "Ajouter image",
             "back": "Retour",
@@ -106,7 +108,8 @@
             "delete": "Supprimer",
             "open": "Ouvrir",
             "save": "Sauvegarder",
-            "view": "Voir"
+            "view": "Voir",
+            "search": "Rechercher"
         },
         "detail": {
             "field": "Champs",

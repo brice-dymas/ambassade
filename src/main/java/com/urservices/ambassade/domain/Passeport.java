@@ -8,8 +8,10 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
+
+import com.urservices.ambassade.domain.enumeration.Statut;
 
 /**
  * A Passeport.
@@ -30,29 +32,33 @@ public class Passeport implements Serializable {
     @Column(name = "numero_formulaire", nullable = false)
     private Long numeroFormulaire;
 
+    @NotNull
     @Size(max = 30)
-    @Column(name = "nom", length = 30)
+    @Column(name = "nom", length = 30, nullable = false)
     private String nom;
 
+    @NotNull
     @Size(max = 40)
-    @Column(name = "prenom", length = 40)
+    @Column(name = "prenom", length = 40, nullable = false)
     private String prenom;
 
     @Size(max = 15)
     @Column(name = "numero_passeport", length = 15)
     private String numeroPasseport;
 
+    @NotNull
     @Size(max = 20)
-    @Column(name = "ne_le", length = 20)
+    @Column(name = "ne_le", length = 20, nullable = false)
     private String neLe;
 
+    @NotNull
     @Size(max = 30)
-    @Column(name = "lieu_naissance", length = 30)
+    @Column(name = "lieu_naissance", length = 30, nullable = false)
     private String lieuNaissance;
 
-    @Size(max = 20)
-    @Column(name = "etat_civil", length = 20)
-    private String etatCivil;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "etat_civil")
+    private Statut etatCivil;
 
     @Column(name = "adresse")
     private String adresse;
@@ -69,24 +75,26 @@ public class Passeport implements Serializable {
     @Column(name = "pays_emetteur", length = 25)
     private String paysEmetteur;
 
-    @Column(name = "soumis_le")
-    private ZonedDateTime soumisLe;
+    @NotNull
+    @Column(name = "soumis_le", nullable = false)
+    private LocalDate soumisLe;
 
     @Column(name = "delivre_le")
-    private ZonedDateTime delivreLe;
+    private LocalDate delivreLe;
 
+    @NotNull
     @DecimalMin(value = "0")
-    @Column(name = "montant", precision=10, scale=2)
+    @Column(name = "montant", precision=10, scale=2, nullable = false)
     private BigDecimal montant;
 
     @Column(name = "remarques")
     private String remarques;
 
     @Column(name = "date_emission")
-    private ZonedDateTime dateEmission;
+    private LocalDate dateEmission;
 
     @Column(name = "date_expiration")
-    private ZonedDateTime dateExpiration;
+    private LocalDate dateExpiration;
 
     @Column(name = "remarques_r")
     private String remarquesR;
@@ -190,16 +198,16 @@ public class Passeport implements Serializable {
         this.lieuNaissance = lieuNaissance;
     }
 
-    public String getEtatCivil() {
+    public Statut getEtatCivil() {
         return etatCivil;
     }
 
-    public Passeport etatCivil(String etatCivil) {
+    public Passeport etatCivil(Statut etatCivil) {
         this.etatCivil = etatCivil;
         return this;
     }
 
-    public void setEtatCivil(String etatCivil) {
+    public void setEtatCivil(Statut etatCivil) {
         this.etatCivil = etatCivil;
     }
 
@@ -255,29 +263,29 @@ public class Passeport implements Serializable {
         this.paysEmetteur = paysEmetteur;
     }
 
-    public ZonedDateTime getSoumisLe() {
+    public LocalDate getSoumisLe() {
         return soumisLe;
     }
 
-    public Passeport soumisLe(ZonedDateTime soumisLe) {
+    public Passeport soumisLe(LocalDate soumisLe) {
         this.soumisLe = soumisLe;
         return this;
     }
 
-    public void setSoumisLe(ZonedDateTime soumisLe) {
+    public void setSoumisLe(LocalDate soumisLe) {
         this.soumisLe = soumisLe;
     }
 
-    public ZonedDateTime getDelivreLe() {
+    public LocalDate getDelivreLe() {
         return delivreLe;
     }
 
-    public Passeport delivreLe(ZonedDateTime delivreLe) {
+    public Passeport delivreLe(LocalDate delivreLe) {
         this.delivreLe = delivreLe;
         return this;
     }
 
-    public void setDelivreLe(ZonedDateTime delivreLe) {
+    public void setDelivreLe(LocalDate delivreLe) {
         this.delivreLe = delivreLe;
     }
 
@@ -307,29 +315,29 @@ public class Passeport implements Serializable {
         this.remarques = remarques;
     }
 
-    public ZonedDateTime getDateEmission() {
+    public LocalDate getDateEmission() {
         return dateEmission;
     }
 
-    public Passeport dateEmission(ZonedDateTime dateEmission) {
+    public Passeport dateEmission(LocalDate dateEmission) {
         this.dateEmission = dateEmission;
         return this;
     }
 
-    public void setDateEmission(ZonedDateTime dateEmission) {
+    public void setDateEmission(LocalDate dateEmission) {
         this.dateEmission = dateEmission;
     }
 
-    public ZonedDateTime getDateExpiration() {
+    public LocalDate getDateExpiration() {
         return dateExpiration;
     }
 
-    public Passeport dateExpiration(ZonedDateTime dateExpiration) {
+    public Passeport dateExpiration(LocalDate dateExpiration) {
         this.dateExpiration = dateExpiration;
         return this;
     }
 
-    public void setDateExpiration(ZonedDateTime dateExpiration) {
+    public void setDateExpiration(LocalDate dateExpiration) {
         this.dateExpiration = dateExpiration;
     }
 

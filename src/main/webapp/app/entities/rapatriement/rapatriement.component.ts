@@ -7,6 +7,7 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'n
 import { Rapatriement } from './rapatriement.model';
 import { RapatriementService } from './rapatriement.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
+import {RapatriementDtoModel} from './rapatriement-dto.model';
 
 @Component({
     selector: 'jhi-rapatriement',
@@ -55,6 +56,12 @@ currentAccount: any;
             sort: this.sort()}).subscribe(
                 (res: HttpResponse<Rapatriement[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+    searchRapatriement(rapatriement: RapatriementDtoModel) {
+        this.rapatriementService.search(rapatriement).subscribe(
+            (res: HttpResponse<Rapatriement[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
     loadPage(page: number) {
@@ -106,7 +113,17 @@ currentAccount: any;
         return this.dataUtils.openFile(contentType, field);
     }
     registerChangeInRapatriements() {
-        this.eventSubscriber = this.eventManager.subscribe('rapatriementListModification', (response) => this.loadAll());
+        // this.eventSubscriber = this.eventManager.subscribe('rapatriementListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('rapatriementListModification', (response) => {
+            console.log(response);
+            if (typeof response.content === 'string') {
+                console.log('query');
+                return this.loadAll();
+            }else {
+                console.log('search Rapatriement');
+                return this.searchRapatriement(response.content);
+            }
+        });
     }
 
     sort() {

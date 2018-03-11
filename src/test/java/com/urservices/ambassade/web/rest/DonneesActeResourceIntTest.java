@@ -23,13 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-import static com.urservices.ambassade.web.rest.TestUtil.sameInstant;
 import static com.urservices.ambassade.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -50,8 +47,8 @@ public class DonneesActeResourceIntTest {
     private static final String DEFAULT_REFERENCE = "AAAAAAAAAA";
     private static final String UPDATED_REFERENCE = "BBBBBBBBBB";
 
-    private static final ZonedDateTime DEFAULT_DATE_DU_JOUR_CHIFFRE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE_DU_JOUR_CHIFFRE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_DATE_DU_JOUR_CHIFFRE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_DU_JOUR_CHIFFRE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_REGISTRE_SPECIAL_RD = "AAAAAAAAAA";
     private static final String UPDATED_REGISTRE_SPECIAL_RD = "BBBBBBBBBB";
@@ -68,8 +65,8 @@ public class DonneesActeResourceIntTest {
     private static final String DEFAULT_NUMERO = "AAAAAAAAAA";
     private static final String UPDATED_NUMERO = "BBBBBBBBBB";
 
-    private static final ZonedDateTime DEFAULT_DATE_NAISSANCE_CHIFFRE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_DATE_NAISSANCE_CHIFFRE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final LocalDate DEFAULT_DATE_NAISSANCE_CHIFFRE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_NAISSANCE_CHIFFRE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_NOM_PERE = "AAAAAAAAAA";
     private static final String UPDATED_NOM_PERE = "BBBBBBBBBB";
@@ -86,8 +83,8 @@ public class DonneesActeResourceIntTest {
     private static final Sexe DEFAULT_SEXE = Sexe.MASCULIN;
     private static final Sexe UPDATED_SEXE = Sexe.FEMININ;
 
-    private static final Statut DEFAULT_STATUT = Statut.LEGITIME;
-    private static final Statut UPDATED_STATUT = Statut.NATUREL;
+    private static final Statut DEFAULT_STATUT = Statut.CELIBATAIRE;
+    private static final Statut UPDATED_STATUT = Statut.MARIE;
 
     private static final String DEFAULT_VILLE_NAISSANCE = "AAAAAAAAAA";
     private static final String UPDATED_VILLE_NAISSANCE = "BBBBBBBBBB";
@@ -337,13 +334,13 @@ public class DonneesActeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(donneesActe.getId().intValue())))
             .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.toString())))
-            .andExpect(jsonPath("$.[*].dateDuJourChiffre").value(hasItem(sameInstant(DEFAULT_DATE_DU_JOUR_CHIFFRE))))
+            .andExpect(jsonPath("$.[*].dateDuJourChiffre").value(hasItem(DEFAULT_DATE_DU_JOUR_CHIFFRE.toString())))
             .andExpect(jsonPath("$.[*].registreSpecialRD").value(hasItem(DEFAULT_REGISTRE_SPECIAL_RD.toString())))
             .andExpect(jsonPath("$.[*].nomEnfant").value(hasItem(DEFAULT_NOM_ENFANT.toString())))
             .andExpect(jsonPath("$.[*].registre").value(hasItem(DEFAULT_REGISTRE.toString())))
             .andExpect(jsonPath("$.[*].annee").value(hasItem(DEFAULT_ANNEE)))
             .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO.toString())))
-            .andExpect(jsonPath("$.[*].dateNaissanceChiffre").value(hasItem(sameInstant(DEFAULT_DATE_NAISSANCE_CHIFFRE))))
+            .andExpect(jsonPath("$.[*].dateNaissanceChiffre").value(hasItem(DEFAULT_DATE_NAISSANCE_CHIFFRE.toString())))
             .andExpect(jsonPath("$.[*].nomPere").value(hasItem(DEFAULT_NOM_PERE.toString())))
             .andExpect(jsonPath("$.[*].prenomPere").value(hasItem(DEFAULT_PRENOM_PERE.toString())))
             .andExpect(jsonPath("$.[*].nomMere").value(hasItem(DEFAULT_NOM_MERE.toString())))
@@ -378,13 +375,13 @@ public class DonneesActeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(donneesActe.getId().intValue()))
             .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE.toString()))
-            .andExpect(jsonPath("$.dateDuJourChiffre").value(sameInstant(DEFAULT_DATE_DU_JOUR_CHIFFRE)))
+            .andExpect(jsonPath("$.dateDuJourChiffre").value(DEFAULT_DATE_DU_JOUR_CHIFFRE.toString()))
             .andExpect(jsonPath("$.registreSpecialRD").value(DEFAULT_REGISTRE_SPECIAL_RD.toString()))
             .andExpect(jsonPath("$.nomEnfant").value(DEFAULT_NOM_ENFANT.toString()))
             .andExpect(jsonPath("$.registre").value(DEFAULT_REGISTRE.toString()))
             .andExpect(jsonPath("$.annee").value(DEFAULT_ANNEE))
             .andExpect(jsonPath("$.numero").value(DEFAULT_NUMERO.toString()))
-            .andExpect(jsonPath("$.dateNaissanceChiffre").value(sameInstant(DEFAULT_DATE_NAISSANCE_CHIFFRE)))
+            .andExpect(jsonPath("$.dateNaissanceChiffre").value(DEFAULT_DATE_NAISSANCE_CHIFFRE.toString()))
             .andExpect(jsonPath("$.nomPere").value(DEFAULT_NOM_PERE.toString()))
             .andExpect(jsonPath("$.prenomPere").value(DEFAULT_PRENOM_PERE.toString()))
             .andExpect(jsonPath("$.nomMere").value(DEFAULT_NOM_MERE.toString()))

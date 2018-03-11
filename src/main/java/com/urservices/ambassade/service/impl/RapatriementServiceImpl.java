@@ -1,5 +1,6 @@
 package com.urservices.ambassade.service.impl;
 
+import com.urservices.ambassade.domain.enumeration.Sexe;
 import com.urservices.ambassade.service.RapatriementService;
 import com.urservices.ambassade.domain.Rapatriement;
 import com.urservices.ambassade.repository.RapatriementRepository;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 
 /**
@@ -73,5 +76,30 @@ public class RapatriementServiceImpl implements RapatriementService {
     public void delete(Long id) {
         log.debug("Request to delete Rapatriement : {}", id);
         rapatriementRepository.delete(id);
+    }
+
+    /**
+     * searchAll the rapatriement with all parameters.
+     *
+     * @param reference
+     * @param numeroDossier
+     * @param nom
+     * @param prenom
+     * @param dateNaissanceDeb
+     * @param documentID
+     * @param sexe
+     * @param motif
+     * @param dateRapatriementDeb
+     * @param frontiere
+     * @param pageable
+     */
+    @Override
+    public Page<Rapatriement> searchAll(Integer reference, String numeroDossier, String nom, String prenom,
+                                        LocalDate dateNaissanceDeb, LocalDate dateNaissanceFin, String documentID,
+                                        Sexe sexe, String motif, LocalDate dateRapatriementDeb, LocalDate dateRapatriementFin,
+                                        String frontiere, Pageable pageable) {
+        return rapatriementRepository.searchAll(reference,"%"+numeroDossier+"%","%"+nom+"%",
+            "%"+prenom+"%",dateNaissanceDeb, dateNaissanceFin,"%"+documentID+"%",sexe,"%"+motif+"%",
+            dateRapatriementDeb, dateRapatriementFin,"%"+frontiere+"%",pageable);
     }
 }
