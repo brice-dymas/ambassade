@@ -36,7 +36,8 @@ export class PasseportService {
     }
 
     search(passeport: PasseportModelDTO): Observable<HttpResponse<Passeport[]>> {
-        const options = createRequestOption(passeport);
+        const copy = this.convertPasseportSearch(passeport);
+        const options = createRequestOption(copy);
         return this.http.get<Passeport[]>(this.resourceUrl, { params: options,  observe: 'response'})
             .map((res: HttpResponse<Passeport[]>) => this.convertArrayResponse(res));
     }
@@ -94,6 +95,30 @@ export class PasseportService {
             .convertLocalDateToServer(passeport.dateEmission);
         copy.dateExpiration = this.dateUtils
             .convertLocalDateToServer(passeport.dateExpiration);
+        return copy;
+    }
+
+    /**
+     * Convert a Passeport to a JSON which can be sent to the server.
+     */
+    private convertPasseportSearch(passeport: PasseportModelDTO): PasseportModelDTO {
+        const copy: PasseportModelDTO = Object.assign({}, passeport);
+        copy.soumisLe = this.dateUtils
+            .convertLocalDateToServer(passeport.soumisLe);
+        copy.soumisLeFin = this.dateUtils
+            .convertLocalDateToServer(passeport.soumisLeFin);
+        copy.delivreLe = this.dateUtils
+            .convertLocalDateToServer(passeport.delivreLe);
+        copy.delivreLeFin = this.dateUtils
+            .convertLocalDateToServer(passeport.delivreLeFin);
+        copy.dateEmission = this.dateUtils
+            .convertLocalDateToServer(passeport.dateEmission);
+        copy.dateEmissionFin = this.dateUtils
+            .convertLocalDateToServer(passeport.dateEmissionFin);
+        copy.dateExpiration = this.dateUtils
+            .convertLocalDateToServer(passeport.dateExpiration);
+        copy.dateExpirationFin = this.dateUtils
+            .convertLocalDateToServer(passeport.dateExpirationFin);
         return copy;
     }
 }

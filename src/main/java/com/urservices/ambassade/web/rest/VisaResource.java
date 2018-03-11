@@ -96,10 +96,6 @@ public class VisaResource {
     public ResponseEntity<List<Visa>> getAllVisas(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Visas");
 
-        System.out.println("WebRequest = "+webRequest.getParameterMap());
-
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
         String nom = webRequest.getParameter("nom") !=null ? webRequest.getParameter("nom"):"";
         String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
         String nationalite = webRequest.getParameter("nationalite") !=null ? webRequest.getParameter("nationalite"):"";
@@ -117,25 +113,20 @@ public class VisaResource {
         String adresse = webRequest.getParameter("adresse") !=null ? webRequest.getParameter("adresse"):"";
         String remarques = webRequest.getParameter("remarques") !=null ? webRequest.getParameter("remarques"):"";
 
-        String dateEmissionDebStr = webRequest.getParameter("dateEmissionDeb") !=null &&
-            !webRequest.getParameter("dateEmissionDeb").isEmpty() ? webRequest.getParameter("dateEmissionDeb"): "1970-01-01";
+        String dateEmissionDebStr = webRequest.getParameter("dateEmission") !=null &&
+            !webRequest.getParameter("dateEmission").isEmpty() ? webRequest.getParameter("dateEmission"): "1970-01-01";
         String dateEmissionFinStr = webRequest.getParameter("dateEmissionFin") !=null &&
             !webRequest.getParameter("dateEmissionFin").isEmpty() ? webRequest.getParameter("dateEmissionFin"):LocalDate.now().toString();
-        String dateExpirationDebStr = webRequest.getParameter("dateExpirationDeb") !=null &&
-            !webRequest.getParameter("dateExpirationDeb").isEmpty() ? webRequest.getParameter("dateExpirationDeb"): "1970-01-01";
+        String dateExpirationDebStr = webRequest.getParameter("dateExpiration") !=null &&
+            !webRequest.getParameter("dateExpiration").isEmpty() ? webRequest.getParameter("dateExpiration"): "1970-01-01";
         String dateExpirationFinStr = webRequest.getParameter("dateExpirationFin") !=null &&
             !webRequest.getParameter("dateExpirationFin").isEmpty() ? webRequest.getParameter("dateExpirationFin"):LocalDate.now().toString();
 
-//        LocalDate dateEmissionDeb= LocalDate.parse(dateEmissionDebStr, formatter);
-//        LocalDate dateEmissionFin= LocalDate.parse(dateEmissionFinStr, formatter);
-//        LocalDate dateExpirationDeb= LocalDate.parse(dateExpirationDebStr, formatter);
-//        LocalDate dateExpirationFin= LocalDate.parse(dateExpirationFinStr, formatter);
         LocalDate dateEmissionDeb= LocalDate.parse(dateEmissionDebStr);
         LocalDate dateEmissionFin= LocalDate.parse(dateEmissionFinStr);
         LocalDate dateExpirationDeb= LocalDate.parse(dateExpirationDebStr);
         LocalDate dateExpirationFin= LocalDate.parse(dateExpirationFinStr);
 
-        System.out.println("WebRequest = "+webRequest);
         Page<Visa> page = visaService.searchAll(nom,prenom,nationalite,numeroPasseport,cedula,numeroVisa,dateEmissionDeb, dateEmissionFin,
             dateExpirationDeb, dateExpirationFin, validePour,nombreEntree,type,categorie,taxes,adresse,remarques,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/visas");

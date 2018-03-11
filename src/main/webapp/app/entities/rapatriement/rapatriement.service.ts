@@ -36,7 +36,8 @@ export class RapatriementService {
     }
 
     search(rapatriement: RapatriementDtoModel): Observable<HttpResponse<Rapatriement[]>> {
-        const options = createRequestOption(rapatriement);
+        const copy = this.convertSearch(rapatriement);
+        const options = createRequestOption(copy);
         return this.http.get<Rapatriement[]>(this.resourceUrl, { params: options,  observe: 'response'})
             .map((res: HttpResponse<Rapatriement[]>) => this.convertArrayResponse(res));
     }
@@ -86,6 +87,22 @@ export class RapatriementService {
             .convertLocalDateToServer(rapatriement.dateNaissance);
         copy.dateRapatriement = this.dateUtils
             .convertLocalDateToServer(rapatriement.dateRapatriement);
+        return copy;
+    }
+
+    /**
+     * Convert a RapatriementDtoModel to a JSON which can be sent to the server.
+     */
+    private convertSearch(rapatriement: RapatriementDtoModel): RapatriementDtoModel {
+        const copy: RapatriementDtoModel = Object.assign({}, rapatriement);
+        copy.dateNaissance = this.dateUtils
+            .convertLocalDateToServer(rapatriement.dateNaissance);
+        copy.dateNaissanceFin = this.dateUtils
+            .convertLocalDateToServer(rapatriement.dateNaissanceFin);
+        copy.dateRapatriement = this.dateUtils
+            .convertLocalDateToServer(rapatriement.dateRapatriement);
+        copy.dateRapatriementFin = this.dateUtils
+            .convertLocalDateToServer(rapatriement.dateRapatriementFin);
         return copy;
     }
 }
