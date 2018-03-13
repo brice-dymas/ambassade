@@ -15,6 +15,7 @@ import {
     produitPopupRoute,
     ProduitResolvePagingParams,
 } from './';
+import {ProduitSearchComponent} from './produit-search.component';
 
 const ENTITY_STATES = [
     ...produitRoute,
@@ -33,6 +34,7 @@ const ENTITY_STATES = [
         ProduitDeleteDialogComponent,
         ProduitPopupComponent,
         ProduitDeletePopupComponent,
+        ProduitSearchComponent,
     ],
     entryComponents: [
         ProduitComponent,
