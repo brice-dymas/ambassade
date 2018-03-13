@@ -18,6 +18,7 @@ export class PasseportDialogComponent implements OnInit {
 
     passeport: Passeport;
     isSaving: boolean;
+    neLeDp: any;
     soumisLeDp: any;
     delivreLeDp: any;
     dateEmissionDp: any;

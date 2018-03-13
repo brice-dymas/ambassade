@@ -38,7 +38,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="ne_le" type="varchar(20)">
+            <column name="ne_le" type="date">
                 <constraints nullable="false" />
             </column>
 

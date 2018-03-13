@@ -16,6 +16,7 @@ export class PasseportModelDTO implements BaseEntity {
         public prenom?: string,
         public numeroPasseport?: string,
         public neLe?: string,
+        public neLeFin?: string,
         public lieuNaissance?: string,
         public etatCivil?: Statuts,
         public adresse?: string,

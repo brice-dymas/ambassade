@@ -101,7 +101,6 @@ public class PasseportResource {
         String nom = webRequest.getParameter("nom") !=null ? webRequest.getParameter("nom"):"";
         String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
         String numeroPasseport = webRequest.getParameter("numeroPasseport") !=null ? webRequest.getParameter("numeroPasseport"):"";
-        String neLe = webRequest.getParameter("neLe") !=null ? webRequest.getParameter("neLe"):"";
         String lieuNaissance = webRequest.getParameter("lieuNaissance") !=null ? webRequest.getParameter("lieuNaissance"):"";
         List<Statut> etatCivils  = webRequest.getParameter("etatCivil") !=null  && !webRequest.getParameter("etatCivil").isEmpty() ?
             Arrays.asList(Statut.valueOf(webRequest.getParameter("etatCivil"))):Arrays.asList(Statut.values());
@@ -113,6 +112,8 @@ public class PasseportResource {
             new BigDecimal(webRequest.getParameter("montant")):new BigDecimal(0.0);
         String remarques = webRequest.getParameter("remarques") !=null ? webRequest.getParameter("remarques"):"";
 
+        String neLeDebStr = webRequest.getParameter("neLe") !=null && !webRequest.getParameter("neLe").isEmpty()
+            ? webRequest.getParameter("neLe"):"1970-01-01";
         String soumisLeDebStr = webRequest.getParameter("soumisLe") !=null && !webRequest.getParameter("soumisLe").isEmpty()
             ? webRequest.getParameter("soumisLe"):"1970-01-01";
         String delivreLeDebStr = webRequest.getParameter("delivreLe") !=null && !webRequest.getParameter("delivreLe").isEmpty()
@@ -122,7 +123,8 @@ public class PasseportResource {
         String dateExpirationDebStr= webRequest.getParameter("dateExpiration") !=null && !webRequest.getParameter("dateExpiration").isEmpty()
             ? webRequest.getParameter("dateExpirationDeb"):"1970-01-01";
 
-
+        String neLeFinStr = webRequest.getParameter("neLeFin") !=null && !webRequest.getParameter("neLeFin").isEmpty()
+            ? webRequest.getParameter("neLeFin"): LocalDate.now().toString();
         String soumisLeFinStr = webRequest.getParameter("soumisLeFin") !=null && !webRequest.getParameter("soumisLeFin").isEmpty()
             ? webRequest.getParameter("soumisLeFin"): LocalDate.now().toString();
         String delivreLeFinStr = webRequest.getParameter("delivreLeFin") !=null && !webRequest.getParameter("delivreLeFin").isEmpty()
@@ -132,11 +134,13 @@ public class PasseportResource {
         String dateExpirationFinStr= webRequest.getParameter("dateExpirationFin") !=null && !webRequest.getParameter("dateExpirationFin").isEmpty()
             ? webRequest.getParameter("dateExpirationFin"):LocalDate.now().toString();
 
+        LocalDate neLeDeb = LocalDate.parse(neLeDebStr);
         LocalDate soumisLeDeb = LocalDate.parse(soumisLeDebStr);
         LocalDate delivreLeDeb = LocalDate.parse(delivreLeDebStr);
         LocalDate dateEmissionDeb = LocalDate.parse(dateEmissionDebStr);
         LocalDate dateExpirationDeb = LocalDate.parse(dateExpirationDebStr);
 
+        LocalDate neLeFin = LocalDate.parse(neLeFinStr);
         LocalDate soumisLeFin = LocalDate.parse(soumisLeFinStr);
         LocalDate delivreLeFin = LocalDate.parse(delivreLeFinStr);
         LocalDate dateEmissionFin = LocalDate.parse(dateEmissionFinStr);
@@ -147,7 +151,7 @@ public class PasseportResource {
         String sms2 = webRequest.getParameter("sms2") !=null ? webRequest.getParameter("sms2"):"";
         String documents = webRequest.getParameter("documents") !=null ? webRequest.getParameter("documents"):"";
 
-        Page<Passeport> page = passeportService.searchAll(nom,prenom,numeroPasseport,neLe,lieuNaissance,etatCivils,
+        Page<Passeport> page = passeportService.searchAll(nom,prenom,numeroPasseport,neLeDeb, neLeFin,lieuNaissance,etatCivils,
             adresse,telephone,nif,paysEmetteur,soumisLeDeb, soumisLeFin, delivreLeDeb, delivreLeFin, montant,remarques,
             dateEmissionDeb, dateEmissionFin, dateExpirationDeb, dateExpirationFin, remarquesR,sms,sms2,documents,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/passeports");

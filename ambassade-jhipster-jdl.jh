@@ -3,7 +3,7 @@ entity Passeport {
     nom String maxlength(30) required
     prenom String maxlength(40) required
     numeroPasseport String maxlength(15)
-    neLe String maxlength(20) required
+    neLe LocalDate required
     lieuNaissance String maxlength(30) required
     etatCivil Statut
     adresse String

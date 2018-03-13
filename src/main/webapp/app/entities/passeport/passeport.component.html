@@ -50,7 +50,7 @@
                 <td>{{passeport.nom}}</td>
                 <td>{{passeport.prenom}}</td>
                 <td>{{passeport.numeroPasseport}}</td>
-                <td>{{passeport.neLe}}</td>
+                <td>{{passeport.neLe | date:'mediumDate'}}</td>
                 <td>{{passeport.lieuNaissance}}</td>
                 <td jhiTranslate="{{'ambassadeApp.Statut.' + passeport.etatCivil}}">{{passeport.etatCivil}}</td>
                 <td>{{passeport.adresse}}</td>

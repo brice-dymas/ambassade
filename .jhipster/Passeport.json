@@ -39,12 +39,10 @@
         },
         {
             "fieldName": "neLe",
-            "fieldType": "String",
+            "fieldType": "LocalDate",
             "fieldValidateRules": [
-                "maxlength",
                 "required"
-            ],
-            "fieldValidateRulesMaxlength": 20
+            ]
         },
         {
             "fieldName": "lieuNaissance",

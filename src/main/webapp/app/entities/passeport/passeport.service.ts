@@ -71,6 +71,8 @@ export class PasseportService {
      */
     private convertItemFromServer(passeport: Passeport): Passeport {
         const copy: Passeport = Object.assign({}, passeport);
+        copy.neLe = this.dateUtils
+            .convertLocalDateFromServer(passeport.neLe);
         copy.soumisLe = this.dateUtils
             .convertLocalDateFromServer(passeport.soumisLe);
         copy.delivreLe = this.dateUtils
@@ -87,6 +89,8 @@ export class PasseportService {
      */
     private convert(passeport: Passeport): Passeport {
         const copy: Passeport = Object.assign({}, passeport);
+        copy.neLe = this.dateUtils
+            .convertLocalDateToServer(passeport.neLe);
         copy.soumisLe = this.dateUtils
             .convertLocalDateToServer(passeport.soumisLe);
         copy.delivreLe = this.dateUtils
@@ -103,6 +107,10 @@ export class PasseportService {
      */
     private convertPasseportSearch(passeport: PasseportModelDTO): PasseportModelDTO {
         const copy: PasseportModelDTO = Object.assign({}, passeport);
+        copy.neLe = this.dateUtils
+            .convertLocalDateToServer(passeport.neLe);
+        copy.neLeFin = this.dateUtils
+            .convertLocalDateToServer(passeport.neLeFin);
         copy.soumisLe = this.dateUtils
             .convertLocalDateToServer(passeport.soumisLe);
         copy.soumisLeFin = this.dateUtils
