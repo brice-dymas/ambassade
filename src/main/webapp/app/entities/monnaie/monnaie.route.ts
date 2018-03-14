@@ -44,6 +44,14 @@ export const monnaieRoute: Routes = [
             pageTitle: 'ambassadeApp.monnaie.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'monnaie/search',
+        component: MonnaieComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.monnaie.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 

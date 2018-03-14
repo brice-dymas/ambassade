@@ -56,6 +56,12 @@ currentAccount: any;
                 (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+    searchMonnaie(monnaie: Monnaie) {
+        this.monnaieService.search(monnaie).subscribe(
+            (res: HttpResponse<Monnaie[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -97,8 +103,14 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInMonnaies() {
-        this.eventSubscriber = this.eventManager.subscribe('monnaieListModification', (response) => this.loadAll());
-    }
+        // this.eventSubscriber = this.eventManager.subscribe('monnaieListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('monnaieListModification', (response) => {
+            if (typeof response.content === 'string') {
+                return this.loadAll();
+            }else {
+                return this.searchMonnaie(response.content);
+            }
+        });    }
 
     sort() {
         const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];

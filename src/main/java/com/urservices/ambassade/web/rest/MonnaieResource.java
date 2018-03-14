@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -90,9 +91,15 @@ public class MonnaieResource {
      */
     @GetMapping("/monnaies")
     @Timed
-    public ResponseEntity<List<Monnaie>> getAllMonnaies(Pageable pageable) {
+    public ResponseEntity<List<Monnaie>> getAllMonnaies(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Monnaies");
-        Page<Monnaie> page = monnaieService.findAll(pageable);
+
+        String type = webRequest.getParameter("type") != null ? webRequest.getParameter("type") : "";
+        String produit = webRequest.getParameter("produit") != null ? webRequest.getParameter("produit") : "";
+        Long montant = (webRequest.getParameter("montant") != null && !webRequest.getParameter("montant").equals(""))
+            ? Long.valueOf(webRequest.getParameter("montant")) : null;
+
+        Page<Monnaie> page = monnaieService.searchAll(type,produit,montant,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/monnaies");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
