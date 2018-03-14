@@ -15,7 +15,7 @@ export class Passeport implements BaseEntity {
         public nom?: string,
         public prenom?: string,
         public numeroPasseport?: string,
-        public neLe?: string,
+        public neLe?: any,
         public lieuNaissance?: string,
         public etatCivil?: Statut,
         public adresse?: string,

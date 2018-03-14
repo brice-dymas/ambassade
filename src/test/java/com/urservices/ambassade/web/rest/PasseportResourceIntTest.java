@@ -55,8 +55,8 @@ public class PasseportResourceIntTest {
     private static final String DEFAULT_NUMERO_PASSEPORT = "AAAAAAAAAA";
     private static final String UPDATED_NUMERO_PASSEPORT = "BBBBBBBBBB";
 
-    private static final String DEFAULT_NE_LE = "AAAAAAAAAA";
-    private static final String UPDATED_NE_LE = "BBBBBBBBBB";
+    private static final LocalDate DEFAULT_NE_LE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_NE_LE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_LIEU_NAISSANCE = "AAAAAAAAAA";
     private static final String UPDATED_LIEU_NAISSANCE = "BBBBBBBBBB";

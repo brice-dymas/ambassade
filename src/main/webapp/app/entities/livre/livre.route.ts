@@ -44,6 +44,14 @@ export const livreRoute: Routes = [
             pageTitle: 'ambassadeApp.livre.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'livre/search',
+        component: LivreComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.livre.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 

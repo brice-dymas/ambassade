@@ -36,7 +36,8 @@ export class VisaService {
     }
 
     search(visa: VisaDtoModel): Observable<HttpResponse<Visa[]>> {
-        const options = createRequestOption(visa);
+        const copy = this.convertSearch(visa);
+        const options = createRequestOption(copy);
         return this.http.get<Visa[]>(this.resourceUrl, { params: options,  observe: 'response'})
             .map((res: HttpResponse<Visa[]>) => this.convertArrayResponse(res));
     }
@@ -86,6 +87,22 @@ export class VisaService {
             .convertLocalDateToServer(visa.dateEmission);
         copy.dateExpiration = this.dateUtils
             .convertLocalDateToServer(visa.dateExpiration);
+        return copy;
+    }
+
+    /**
+     * Convert a Visa to a JSON which can be sent to the server.
+     */
+    private convertSearch(visa: VisaDtoModel): VisaDtoModel {
+        const copy: VisaDtoModel = Object.assign({}, visa);
+        copy.dateEmission = this.dateUtils
+            .convertLocalDateToServer(visa.dateEmission);
+        copy.dateEmissionFin = this.dateUtils
+            .convertLocalDateToServer(visa.dateEmissionFin);
+        copy.dateExpiration = this.dateUtils
+            .convertLocalDateToServer(visa.dateExpiration);
+        copy.dateExpirationFin = this.dateUtils
+            .convertLocalDateToServer(visa.dateExpirationFin);
         return copy;
     }
 }

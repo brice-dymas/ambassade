@@ -44,9 +44,9 @@ public class Livre implements Serializable {
     @Column(name = "etagere", length = 50)
     private String etagere;
 
-    @Size(max = 4)
-    @Column(name = "annee", length = 4)
-    private String annee;
+    @Min(value = 1970)
+    @Column(name = "annee")
+    private Integer annee;
 
     @Size(max = 50)
     @Column(name = "categorie", length = 50)
@@ -55,16 +55,13 @@ public class Livre implements Serializable {
     @Column(name = "resume")
     private String resume;
 
-    @Size(max = 2)
-    @Column(name = "quantite", length = 2)
-    private String quantite;
+    @Min(value = 0L)
+    @Column(name = "quantite")
+    private Long quantite;
 
     @Size(max = 50)
     @Column(name = "disponible", length = 50)
     private String disponible;
-
-    @Column(name = "created_by_php_runner")
-    private Integer createdByPHPRunner;
 
     @Size(max = 4)
     @Column(name = "page", length = 4)
@@ -203,16 +200,16 @@ public class Livre implements Serializable {
         this.etagere = etagere;
     }
 
-    public String getAnnee() {
+    public Integer getAnnee() {
         return annee;
     }
 
-    public Livre annee(String annee) {
+    public Livre annee(Integer annee) {
         this.annee = annee;
         return this;
     }
 
-    public void setAnnee(String annee) {
+    public void setAnnee(Integer annee) {
         this.annee = annee;
     }
 
@@ -242,16 +239,16 @@ public class Livre implements Serializable {
         this.resume = resume;
     }
 
-    public String getQuantite() {
+    public Long getQuantite() {
         return quantite;
     }
 
-    public Livre quantite(String quantite) {
+    public Livre quantite(Long quantite) {
         this.quantite = quantite;
         return this;
     }
 
-    public void setQuantite(String quantite) {
+    public void setQuantite(Long quantite) {
         this.quantite = quantite;
     }
 
@@ -266,19 +263,6 @@ public class Livre implements Serializable {
 
     public void setDisponible(String disponible) {
         this.disponible = disponible;
-    }
-
-    public Integer getCreatedByPHPRunner() {
-        return createdByPHPRunner;
-    }
-
-    public Livre createdByPHPRunner(Integer createdByPHPRunner) {
-        this.createdByPHPRunner = createdByPHPRunner;
-        return this;
-    }
-
-    public void setCreatedByPHPRunner(Integer createdByPHPRunner) {
-        this.createdByPHPRunner = createdByPHPRunner;
     }
 
     public String getPage() {
@@ -519,12 +503,11 @@ public class Livre implements Serializable {
             ", titre='" + getTitre() + "'" +
             ", edition='" + getEdition() + "'" +
             ", etagere='" + getEtagere() + "'" +
-            ", annee='" + getAnnee() + "'" +
+            ", annee=" + getAnnee() +
             ", categorie='" + getCategorie() + "'" +
             ", resume='" + getResume() + "'" +
-            ", quantite='" + getQuantite() + "'" +
+            ", quantite=" + getQuantite() +
             ", disponible='" + getDisponible() + "'" +
-            ", createdByPHPRunner=" + getCreatedByPHPRunner() +
             ", page='" + getPage() + "'" +
             ", consultation='" + getConsultation() + "'" +
             ", origine='" + getOrigine() + "'" +

@@ -32,6 +32,12 @@ export class MonnaieService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
+    search(monnaie: Monnaie): Observable<HttpResponse<Monnaie[]>> {
+        const options = createRequestOption(monnaie);
+        return this.http.get<Monnaie[]>(this.resourceUrl, { params: options,  observe: 'response'})
+            .map((res: HttpResponse<Monnaie[]>) => this.convertArrayResponse(res));
+    }
+
     query(req?: any): Observable<HttpResponse<Monnaie[]>> {
         const options = createRequestOption(req);
         return this.http.get<Monnaie[]>(this.resourceUrl, { params: options, observe: 'response' })

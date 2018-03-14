@@ -98,11 +98,9 @@ public class PasseportResource {
     @Timed
     public ResponseEntity<List<Passeport>> getAllPasseports(WebRequest webRequest,Pageable pageable) {
         log.debug("REST request to get a page of Passeports");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String nom = webRequest.getParameter("nom") !=null ? webRequest.getParameter("nom"):"";
         String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
         String numeroPasseport = webRequest.getParameter("numeroPasseport") !=null ? webRequest.getParameter("numeroPasseport"):"";
-        String neLe = webRequest.getParameter("neLe") !=null ? webRequest.getParameter("neLe"):"";
         String lieuNaissance = webRequest.getParameter("lieuNaissance") !=null ? webRequest.getParameter("lieuNaissance"):"";
         List<Statut> etatCivils  = webRequest.getParameter("etatCivil") !=null  && !webRequest.getParameter("etatCivil").isEmpty() ?
             Arrays.asList(Statut.valueOf(webRequest.getParameter("etatCivil"))):Arrays.asList(Statut.values());
@@ -114,15 +112,19 @@ public class PasseportResource {
             new BigDecimal(webRequest.getParameter("montant")):new BigDecimal(0.0);
         String remarques = webRequest.getParameter("remarques") !=null ? webRequest.getParameter("remarques"):"";
 
-        String soumisLeDebStr = webRequest.getParameter("soumisLeDeb") !=null && !webRequest.getParameter("soumisLeDeb").isEmpty()
-            ? webRequest.getParameter("soumisLeDeb"):"1970-01-01";
-        String delivreLeDebStr = webRequest.getParameter("delivreLeDeb") !=null && !webRequest.getParameter("delivreLeDeb").isEmpty()
-            ? webRequest.getParameter("delivreLeDeb"):"1970-01-01";
-        String dateEmissionDebStr = webRequest.getParameter("dateEmissionDeb") !=null && !webRequest.getParameter("dateEmissionDeb").isEmpty()
-            ? webRequest.getParameter("dateEmissionDeb"):"1970-01-01";
-        String dateExpirationDebStr= webRequest.getParameter("dateExpirationDeb") !=null && !webRequest.getParameter("dateExpirationDeb").isEmpty()
+        String neLeDebStr = webRequest.getParameter("neLe") !=null && !webRequest.getParameter("neLe").isEmpty()
+            ? webRequest.getParameter("neLe"):"1970-01-01";
+        String soumisLeDebStr = webRequest.getParameter("soumisLe") !=null && !webRequest.getParameter("soumisLe").isEmpty()
+            ? webRequest.getParameter("soumisLe"):"1970-01-01";
+        String delivreLeDebStr = webRequest.getParameter("delivreLe") !=null && !webRequest.getParameter("delivreLe").isEmpty()
+            ? webRequest.getParameter("delivreLe"):"1970-01-01";
+        String dateEmissionDebStr = webRequest.getParameter("dateEmission") !=null && !webRequest.getParameter("dateEmission").isEmpty()
+            ? webRequest.getParameter("dateEmission"):"1970-01-01";
+        String dateExpirationDebStr= webRequest.getParameter("dateExpiration") !=null && !webRequest.getParameter("dateExpiration").isEmpty()
             ? webRequest.getParameter("dateExpirationDeb"):"1970-01-01";
 
+        String neLeFinStr = webRequest.getParameter("neLeFin") !=null && !webRequest.getParameter("neLeFin").isEmpty()
+            ? webRequest.getParameter("neLeFin"): LocalDate.now().toString();
         String soumisLeFinStr = webRequest.getParameter("soumisLeFin") !=null && !webRequest.getParameter("soumisLeFin").isEmpty()
             ? webRequest.getParameter("soumisLeFin"): LocalDate.now().toString();
         String delivreLeFinStr = webRequest.getParameter("delivreLeFin") !=null && !webRequest.getParameter("delivreLeFin").isEmpty()
@@ -132,54 +134,24 @@ public class PasseportResource {
         String dateExpirationFinStr= webRequest.getParameter("dateExpirationFin") !=null && !webRequest.getParameter("dateExpirationFin").isEmpty()
             ? webRequest.getParameter("dateExpirationFin"):LocalDate.now().toString();
 
-        System.out.println("soumisLeDeb = "+soumisLeDebStr);
-        System.out.println("delivreLeDeb = "+delivreLeDebStr);
-        System.out.println("dateEmissionDeb = "+dateEmissionDebStr);
-        System.out.println("dateExpirationDeb = "+dateExpirationDebStr);
-
-        System.out.println("soumisLeFin = "+soumisLeFinStr);
-        System.out.println("delivreLeFin = "+delivreLeFinStr);
-        System.out.println("dateEmissionFin = "+dateEmissionFinStr);
-        System.out.println("dateExpirationFin = "+dateExpirationFinStr);
-
+        LocalDate neLeDeb = LocalDate.parse(neLeDebStr);
         LocalDate soumisLeDeb = LocalDate.parse(soumisLeDebStr);
         LocalDate delivreLeDeb = LocalDate.parse(delivreLeDebStr);
         LocalDate dateEmissionDeb = LocalDate.parse(dateEmissionDebStr);
         LocalDate dateExpirationDeb = LocalDate.parse(dateExpirationDebStr);
 
+        LocalDate neLeFin = LocalDate.parse(neLeFinStr);
         LocalDate soumisLeFin = LocalDate.parse(soumisLeFinStr);
         LocalDate delivreLeFin = LocalDate.parse(delivreLeFinStr);
         LocalDate dateEmissionFin = LocalDate.parse(dateEmissionFinStr);
         LocalDate dateExpirationFin = LocalDate.parse(dateExpirationFinStr);
-
-//        LocalDate soumisLeDeb = LocalDate.parse(soumisLeDebStr,formatter);
-//        LocalDate delivreLeDeb = LocalDate.parse(delivreLeDebStr,formatter);
-//        LocalDate dateEmissionDeb = LocalDate.parse(dateEmissionDebStr,formatter);
-//        LocalDate dateExpirationDeb = LocalDate.parse(dateExpirationDebStr,formatter);
-//
-//        LocalDate soumisLeFin = LocalDate.parse(soumisLeFinStr,formatter);
-//        LocalDate delivreLeFin = LocalDate.parse(delivreLeFinStr,formatter);
-//        LocalDate dateEmissionFin = LocalDate.parse(dateEmissionFinStr,formatter);
-//        LocalDate dateExpirationFin = LocalDate.parse(dateExpirationFinStr,formatter);
-
-        System.out.println("soumisLeDeb = "+soumisLeDeb);
-        System.out.println("delivreLeDeb = "+delivreLeDeb);
-        System.out.println("dateEmissionDeb = "+dateEmissionDeb);
-        System.out.println("dateExpirationDeb = "+dateExpirationDeb);
-
-        System.out.println("soumisLeFin = "+soumisLeFin);
-        System.out.println("delivreLeFin = "+delivreLeFin);
-        System.out.println("dateEmissionFin = "+dateEmissionFin);
-        System.out.println("dateExpirationFin = "+dateExpirationFin);
-
 
         String remarquesR = webRequest.getParameter("remarquesR") !=null ? webRequest.getParameter("remarquesR"):"";
         String sms = webRequest.getParameter("sms") !=null ? webRequest.getParameter("sms"):"";
         String sms2 = webRequest.getParameter("sms2") !=null ? webRequest.getParameter("sms2"):"";
         String documents = webRequest.getParameter("documents") !=null ? webRequest.getParameter("documents"):"";
 
-//        Page<Passeport> page = passeportService.findAll(pageable);
-        Page<Passeport> page = passeportService.searchAll(nom,prenom,numeroPasseport,neLe,lieuNaissance,etatCivils,
+        Page<Passeport> page = passeportService.searchAll(nom,prenom,numeroPasseport,neLeDeb, neLeFin,lieuNaissance,etatCivils,
             adresse,telephone,nif,paysEmetteur,soumisLeDeb, soumisLeFin, delivreLeDeb, delivreLeFin, montant,remarques,
             dateEmissionDeb, dateEmissionFin, dateExpirationDeb, dateExpirationFin, remarquesR,sms,sms2,documents,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/passeports");

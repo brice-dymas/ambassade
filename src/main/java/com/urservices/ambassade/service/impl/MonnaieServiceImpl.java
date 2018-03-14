@@ -75,4 +75,21 @@ public class MonnaieServiceImpl implements MonnaieService {
         log.debug("Request to delete Monnaie : {}", id);
         monnaieRepository.delete(id);
     }
+
+    /**
+     * Get Monnaie using params.
+     *
+     * @param type     the type of the entity
+     * @param produit
+     * @param montant
+     * @param pageable @return the entity
+     */
+    @Override
+    public Page<Monnaie> searchAll(String type, String produit, Long montant, Pageable pageable) {
+        if (montant != null){
+            return monnaieRepository.searchAll("%"+ type+"%","%"+ produit+"%",montant,pageable);
+        }else {
+            return monnaieRepository.findByTypeAndProduit("%"+ type+"%","%"+ produit+"%",pageable);
+        }
+    }
 }

@@ -54,8 +54,8 @@ public class LivreResourceIntTest {
     private static final String DEFAULT_ETAGERE = "AAAAAAAAAA";
     private static final String UPDATED_ETAGERE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_ANNEE = "AAAA";
-    private static final String UPDATED_ANNEE = "BBBB";
+    private static final Integer DEFAULT_ANNEE = 1970;
+    private static final Integer UPDATED_ANNEE = 1971;
 
     private static final String DEFAULT_CATEGORIE = "AAAAAAAAAA";
     private static final String UPDATED_CATEGORIE = "BBBBBBBBBB";
@@ -63,14 +63,11 @@ public class LivreResourceIntTest {
     private static final String DEFAULT_RESUME = "AAAAAAAAAA";
     private static final String UPDATED_RESUME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_QUANTITE = "AA";
-    private static final String UPDATED_QUANTITE = "BB";
+    private static final Long DEFAULT_QUANTITE = 0L;
+    private static final Long UPDATED_QUANTITE = 1L;
 
     private static final String DEFAULT_DISPONIBLE = "AAAAAAAAAA";
     private static final String UPDATED_DISPONIBLE = "BBBBBBBBBB";
-
-    private static final Integer DEFAULT_CREATED_BY_PHP_RUNNER = 1;
-    private static final Integer UPDATED_CREATED_BY_PHP_RUNNER = 2;
 
     private static final String DEFAULT_PAGE = "AAAA";
     private static final String UPDATED_PAGE = "BBBB";
@@ -171,7 +168,6 @@ public class LivreResourceIntTest {
             .resume(DEFAULT_RESUME)
             .quantite(DEFAULT_QUANTITE)
             .disponible(DEFAULT_DISPONIBLE)
-            .createdByPHPRunner(DEFAULT_CREATED_BY_PHP_RUNNER)
             .page(DEFAULT_PAGE)
             .consultation(DEFAULT_CONSULTATION)
             .origine(DEFAULT_ORIGINE)
@@ -221,7 +217,6 @@ public class LivreResourceIntTest {
         assertThat(testLivre.getResume()).isEqualTo(DEFAULT_RESUME);
         assertThat(testLivre.getQuantite()).isEqualTo(DEFAULT_QUANTITE);
         assertThat(testLivre.getDisponible()).isEqualTo(DEFAULT_DISPONIBLE);
-        assertThat(testLivre.getCreatedByPHPRunner()).isEqualTo(DEFAULT_CREATED_BY_PHP_RUNNER);
         assertThat(testLivre.getPage()).isEqualTo(DEFAULT_PAGE);
         assertThat(testLivre.getConsultation()).isEqualTo(DEFAULT_CONSULTATION);
         assertThat(testLivre.getOrigine()).isEqualTo(DEFAULT_ORIGINE);
@@ -293,12 +288,11 @@ public class LivreResourceIntTest {
             .andExpect(jsonPath("$.[*].titre").value(hasItem(DEFAULT_TITRE.toString())))
             .andExpect(jsonPath("$.[*].edition").value(hasItem(DEFAULT_EDITION.toString())))
             .andExpect(jsonPath("$.[*].etagere").value(hasItem(DEFAULT_ETAGERE.toString())))
-            .andExpect(jsonPath("$.[*].annee").value(hasItem(DEFAULT_ANNEE.toString())))
+            .andExpect(jsonPath("$.[*].annee").value(hasItem(DEFAULT_ANNEE)))
             .andExpect(jsonPath("$.[*].categorie").value(hasItem(DEFAULT_CATEGORIE.toString())))
             .andExpect(jsonPath("$.[*].resume").value(hasItem(DEFAULT_RESUME.toString())))
-            .andExpect(jsonPath("$.[*].quantite").value(hasItem(DEFAULT_QUANTITE.toString())))
+            .andExpect(jsonPath("$.[*].quantite").value(hasItem(DEFAULT_QUANTITE.intValue())))
             .andExpect(jsonPath("$.[*].disponible").value(hasItem(DEFAULT_DISPONIBLE.toString())))
-            .andExpect(jsonPath("$.[*].createdByPHPRunner").value(hasItem(DEFAULT_CREATED_BY_PHP_RUNNER)))
             .andExpect(jsonPath("$.[*].page").value(hasItem(DEFAULT_PAGE.toString())))
             .andExpect(jsonPath("$.[*].consultation").value(hasItem(DEFAULT_CONSULTATION.toString())))
             .andExpect(jsonPath("$.[*].origine").value(hasItem(DEFAULT_ORIGINE.toString())))
@@ -333,12 +327,11 @@ public class LivreResourceIntTest {
             .andExpect(jsonPath("$.titre").value(DEFAULT_TITRE.toString()))
             .andExpect(jsonPath("$.edition").value(DEFAULT_EDITION.toString()))
             .andExpect(jsonPath("$.etagere").value(DEFAULT_ETAGERE.toString()))
-            .andExpect(jsonPath("$.annee").value(DEFAULT_ANNEE.toString()))
+            .andExpect(jsonPath("$.annee").value(DEFAULT_ANNEE))
             .andExpect(jsonPath("$.categorie").value(DEFAULT_CATEGORIE.toString()))
             .andExpect(jsonPath("$.resume").value(DEFAULT_RESUME.toString()))
-            .andExpect(jsonPath("$.quantite").value(DEFAULT_QUANTITE.toString()))
+            .andExpect(jsonPath("$.quantite").value(DEFAULT_QUANTITE.intValue()))
             .andExpect(jsonPath("$.disponible").value(DEFAULT_DISPONIBLE.toString()))
-            .andExpect(jsonPath("$.createdByPHPRunner").value(DEFAULT_CREATED_BY_PHP_RUNNER))
             .andExpect(jsonPath("$.page").value(DEFAULT_PAGE.toString()))
             .andExpect(jsonPath("$.consultation").value(DEFAULT_CONSULTATION.toString()))
             .andExpect(jsonPath("$.origine").value(DEFAULT_ORIGINE.toString()))
@@ -388,7 +381,6 @@ public class LivreResourceIntTest {
             .resume(UPDATED_RESUME)
             .quantite(UPDATED_QUANTITE)
             .disponible(UPDATED_DISPONIBLE)
-            .createdByPHPRunner(UPDATED_CREATED_BY_PHP_RUNNER)
             .page(UPDATED_PAGE)
             .consultation(UPDATED_CONSULTATION)
             .origine(UPDATED_ORIGINE)
@@ -425,7 +417,6 @@ public class LivreResourceIntTest {
         assertThat(testLivre.getResume()).isEqualTo(UPDATED_RESUME);
         assertThat(testLivre.getQuantite()).isEqualTo(UPDATED_QUANTITE);
         assertThat(testLivre.getDisponible()).isEqualTo(UPDATED_DISPONIBLE);
-        assertThat(testLivre.getCreatedByPHPRunner()).isEqualTo(UPDATED_CREATED_BY_PHP_RUNNER);
         assertThat(testLivre.getPage()).isEqualTo(UPDATED_PAGE);
         assertThat(testLivre.getConsultation()).isEqualTo(UPDATED_CONSULTATION);
         assertThat(testLivre.getOrigine()).isEqualTo(UPDATED_ORIGINE);

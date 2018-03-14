@@ -32,6 +32,12 @@ export class LivreService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
+    search(livre: Livre): Observable<HttpResponse<Livre[]>> {
+        const options = createRequestOption(livre);
+        return this.http.get<Livre[]>(this.resourceUrl, { params: options,  observe: 'response'})
+            .map((res: HttpResponse<Livre[]>) => this.convertArrayResponse(res));
+    }
+
     query(req?: any): Observable<HttpResponse<Livre[]>> {
         const options = createRequestOption(req);
         return this.http.get<Livre[]>(this.resourceUrl, { params: options, observe: 'response' })

@@ -44,4 +44,12 @@ public interface MonnaieService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    /**
+     * Get Monnaie using params.
+     *
+     * @param type the type of the entity
+     * @return the entity
+     */
+    Page<Monnaie> searchAll(String type, String produit,Long montant, Pageable pageable);
 }

@@ -47,9 +47,8 @@ public class Passeport implements Serializable {
     private String numeroPasseport;
 
     @NotNull
-    @Size(max = 20)
-    @Column(name = "ne_le", length = 20, nullable = false)
-    private String neLe;
+    @Column(name = "ne_le", nullable = false)
+    private LocalDate neLe;
 
     @NotNull
     @Size(max = 30)
@@ -172,16 +171,16 @@ public class Passeport implements Serializable {
         this.numeroPasseport = numeroPasseport;
     }
 
-    public String getNeLe() {
+    public LocalDate getNeLe() {
         return neLe;
     }
 
-    public Passeport neLe(String neLe) {
+    public Passeport neLe(LocalDate neLe) {
         this.neLe = neLe;
         return this;
     }
 
-    public void setNeLe(String neLe) {
+    public void setNeLe(LocalDate neLe) {
         this.neLe = neLe;
     }
 

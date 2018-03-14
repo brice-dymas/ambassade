@@ -74,4 +74,10 @@ public class ProduitServiceImpl implements ProduitService {
         log.debug("Request to delete Produit : {}", id);
         produitRepository.delete(id);
     }
+
+    @Override
+    public Page<Produit> searchAll(String monnaie, String nomProduit, Long montant, Pageable pageable) {
+        return produitRepository.findByMonnaieAndProduitAndMontant("%"+ monnaie+"%","%"+
+            nomProduit+"%",montant,pageable);
+    }
 }

@@ -45,11 +45,11 @@
         },
         {
             "fieldName": "annee",
-            "fieldType": "String",
+            "fieldType": "Integer",
             "fieldValidateRules": [
-                "maxlength"
+                "min"
             ],
-            "fieldValidateRulesMaxlength": 4
+            "fieldValidateRulesMin": 1970
         },
         {
             "fieldName": "categorie",
@@ -65,11 +65,11 @@
         },
         {
             "fieldName": "quantite",
-            "fieldType": "String",
+            "fieldType": "Long",
             "fieldValidateRules": [
-                "maxlength"
+                "min"
             ],
-            "fieldValidateRulesMaxlength": 2
+            "fieldValidateRulesMin": 0
         },
         {
             "fieldName": "disponible",
@@ -78,10 +78,6 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 50
-        },
-        {
-            "fieldName": "createdByPHPRunner",
-            "fieldType": "Integer"
         },
         {
             "fieldName": "page",

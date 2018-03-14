@@ -74,16 +74,17 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.neLe" for="field_neLe">Ne Le</label>
-            <input type="text" class="form-control" name="neLe" id="field_neLe"
-                [(ngModel)]="passeport.neLe" required maxlength="20"/>
+            <div class="input-group">
+                <input id="field_neLe" type="text" class="form-control" name="neLe" ngbDatepicker  #neLeDp="ngbDatepicker" [(ngModel)]="passeport.neLe"
+                required/>
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="neLeDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
             <div [hidden]="!(editForm.controls.neLe?.dirty && editForm.controls.neLe?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.neLe?.errors?.required" jhiTranslate="entity.validation.required">
                    This field is required.
-                </small>
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.neLe?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
-                   This field cannot be longer than 20 characters.
                 </small>
             </div>
         </div>

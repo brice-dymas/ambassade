@@ -1,0 +1,39 @@
+<form name="searchForm" role="form" novalidate (ngSubmit)="search()" #searchForm="ngForm">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.montant.monnaie" for="field_monnaie">Monnaie</label>
+                <input type="text" class="form-control" name="monnaie" id="field_monnaie"
+                       [(ngModel)]="formModel.monnaie" maxlength="50"/>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.montant.montant" for="field_montant">Montant</label>
+                <input type="number" class="form-control" name="montant" id="field_montant" #montant="ngModel"
+                       [(ngModel)]="formModel.montant" min="0"/>
+                <div [hidden]="!(montant?.dirty && montant?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!montant?.errors?.number" jhiTranslate="entity.validation.number">
+                        This field should be a number.
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.montant.produit" for="field_produit">Produit</label>
+                <input type="text" class="form-control" name="produit" id="field_produit"
+                       [(ngModel)]="formModel.nomProduit" maxlength="40"/>
+            </div>
+        </div>
+    </div>
+    <!--<div class="modal-body">-->
+
+    <!--</div>-->
+    <div class="modal-footer">
+        <button type="submit"  class="btn btn-primary">
+            <span class="fa fa-search"></span>&nbsp;<span jhiTranslate="entity.action.search">Save</span>
+        </button>
+    </div>
+</form>

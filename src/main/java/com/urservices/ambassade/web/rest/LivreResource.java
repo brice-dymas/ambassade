@@ -2,6 +2,7 @@ package com.urservices.ambassade.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.urservices.ambassade.domain.Livre;
+import com.urservices.ambassade.domain.enumeration.Statut;
 import com.urservices.ambassade.service.LivreService;
 import com.urservices.ambassade.web.rest.errors.BadRequestAlertException;
 import com.urservices.ambassade.web.rest.util.HeaderUtil;
@@ -15,11 +16,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,11 +94,45 @@ public class LivreResource {
      */
     @GetMapping("/livres")
     @Timed
-    public ResponseEntity<List<Livre>> getAllLivres(Pageable pageable) {
+    public ResponseEntity<List<Livre>> getAllLivres(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Livres");
-        Page<Livre> page = livreService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/livres");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+
+        Long quantite =  webRequest.getParameter("quantite") !=null && webRequest.getParameter("quantite") !="" ?
+            Long.valueOf(webRequest.getParameter("quantite")): null;
+        Integer annee =  webRequest.getParameter("annee") !=null && webRequest.getParameter("annee") !="" ?
+            Integer.valueOf(webRequest.getParameter("annee")): null;
+        String codeISBN = webRequest.getParameter("codeISBN") !=null ? webRequest.getParameter("codeISBN"):"";
+        String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
+        String auteur = webRequest.getParameter("auteur") !=null ? webRequest.getParameter("auteur"):"";
+        String titre = webRequest.getParameter("titre") !=null ? webRequest.getParameter("titre"):"";
+        String edition = webRequest.getParameter("edition") !=null ? webRequest.getParameter("edition"):"";
+        String etagere = webRequest.getParameter("etagere") !=null ? webRequest.getParameter("etagere"):"";
+        String categorie = webRequest.getParameter("categorie") !=null ? webRequest.getParameter("categorie"):"";
+        String resume = webRequest.getParameter("resume") !=null ? webRequest.getParameter("resume"):"";
+        String disponible = webRequest.getParameter("disponible") !=null ? webRequest.getParameter("disponible"):"";
+        String page = webRequest.getParameter("page") !=null ? webRequest.getParameter("page"):"";
+        String consultation = webRequest.getParameter("consultation") !=null ? webRequest.getParameter("consultation"):"";
+        String origine = webRequest.getParameter("origine") !=null ? webRequest.getParameter("origine"):"";
+        String sousTitre = webRequest.getParameter("sousTitre") !=null ? webRequest.getParameter("sousTitre"):"";
+        String collection = webRequest.getParameter("collection") !=null ? webRequest.getParameter("collection"):"";
+        String impression = webRequest.getParameter("impression") !=null ? webRequest.getParameter("impression"):"";
+        String format = webRequest.getParameter("format") !=null ? webRequest.getParameter("format"):"";
+        String index = webRequest.getParameter("index") !=null ? webRequest.getParameter("index"):"";
+        String bibliographie = webRequest.getParameter("bibliographie") !=null ? webRequest.getParameter("bibliographie"):"";
+        String lieuEdition = webRequest.getParameter("lieuEdition") !=null ? webRequest.getParameter("lieuEdition"):"";
+        String lieuImpression = webRequest.getParameter("lieuImpression") !=null ? webRequest.getParameter("lieuImpression"):"";
+        String illustration = webRequest.getParameter("illustration") !=null ? webRequest.getParameter("illustration"):"";
+        String observation= webRequest.getParameter("observation") !=null ? webRequest.getParameter("observation"):"";
+        String statistique= webRequest.getParameter("statistique") !=null ? webRequest.getParameter("statistique"):"";
+        String glossaire = webRequest.getParameter("glossaire") !=null ? webRequest.getParameter("glossaire"):"";
+
+//        Page<Livre> pageLivre = livreService.findAll(pageable);
+        Page<Livre> pageLivre = livreService.searchAll(codeISBN,auteur,titre,edition,etagere,annee,categorie,resume,
+            quantite,disponible,page,consultation,origine,sousTitre,collection,impression,format,index,bibliographie,
+            lieuEdition,lieuImpression,illustration,observation,prenom,statistique,glossaire,pageable);
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(pageLivre, "/api/livres");
+        return new ResponseEntity<>(pageLivre.getContent(), headers, HttpStatus.OK);
     }
 
     /**

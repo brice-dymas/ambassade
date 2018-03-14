@@ -15,6 +15,7 @@ import {
     monnaiePopupRoute,
     MonnaieResolvePagingParams,
 } from './';
+import {MonnaieSearchComponent} from './monnaie-search.component';
 
 const ENTITY_STATES = [
     ...monnaieRoute,
@@ -33,6 +34,7 @@ const ENTITY_STATES = [
         MonnaieDeleteDialogComponent,
         MonnaiePopupComponent,
         MonnaieDeletePopupComponent,
+        MonnaieSearchComponent,
     ],
     entryComponents: [
         MonnaieComponent,

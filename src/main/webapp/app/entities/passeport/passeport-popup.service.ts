@@ -29,6 +29,13 @@ export class PasseportPopupService {
                 this.passeportService.find(id)
                     .subscribe((passeportResponse: HttpResponse<Passeport>) => {
                         const passeport: Passeport = passeportResponse.body;
+                        if (passeport.neLe) {
+                            passeport.neLe = {
+                                year: passeport.neLe.getFullYear(),
+                                month: passeport.neLe.getMonth() + 1,
+                                day: passeport.neLe.getDate()
+                            };
+                        }
                         if (passeport.soumisLe) {
                             passeport.soumisLe = {
                                 year: passeport.soumisLe.getFullYear(),

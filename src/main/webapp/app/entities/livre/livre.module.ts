@@ -15,6 +15,7 @@ import {
     livrePopupRoute,
     LivreResolvePagingParams,
 } from './';
+import {LivreSearchComponent} from './livre-search.component';
 
 const ENTITY_STATES = [
     ...livreRoute,
@@ -33,6 +34,7 @@ const ENTITY_STATES = [
         LivreDeleteDialogComponent,
         LivrePopupComponent,
         LivreDeletePopupComponent,
+        LivreSearchComponent,
     ],
     entryComponents: [
         LivreComponent,

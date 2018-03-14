@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -90,9 +91,15 @@ public class ProduitResource {
      */
     @GetMapping("/produits")
     @Timed
-    public ResponseEntity<List<Produit>> getAllProduits(Pageable pageable) {
+    public ResponseEntity<List<Produit>> getAllProduits(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Produits");
-        Page<Produit> page = produitService.findAll(pageable);
+
+        String monnaie = webRequest.getParameter("monnaie") != null ? webRequest.getParameter("monnaie") : "";
+        String produit = webRequest.getParameter("nomProduit") != null ? webRequest.getParameter("nomProduit") : "";
+        Long montant = (webRequest.getParameter("montant") != null && !webRequest.getParameter("montant").equals(""))
+            ? Long.valueOf(webRequest.getParameter("montant")) : 0;
+//        Page<Produit> page = produitService.findAll(pageable);
+        Page<Produit> page = produitService.searchAll(monnaie,produit,montant,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/produits");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

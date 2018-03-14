@@ -56,6 +56,12 @@ currentAccount: any;
                 (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+    search(produit: Produit) {
+        this.produitService.search(produit).subscribe(
+            (res: HttpResponse<Produit[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -97,7 +103,15 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInProduits() {
-        this.eventSubscriber = this.eventManager.subscribe('produitListModification', (response) => this.loadAll());
+        // this.eventSubscriber = this.eventManager.subscribe('produitListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('produitListModification', (response) => {
+            console.log(response);
+            if (typeof response.content === 'string') {
+                return this.loadAll();
+            }else {
+                return this.search(response.content);
+            }
+        });
     }
 
     sort() {

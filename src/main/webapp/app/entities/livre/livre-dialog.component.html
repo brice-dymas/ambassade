@@ -73,12 +73,16 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.livre.annee" for="field_annee">Annee</label>
-            <input type="text" class="form-control" name="annee" id="field_annee"
-                [(ngModel)]="livre.annee" maxlength="4"/>
+            <input type="number" class="form-control" name="annee" id="field_annee"
+                [(ngModel)]="livre.annee" min="1970"/>
             <div [hidden]="!(editForm.controls.annee?.dirty && editForm.controls.annee?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.annee?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4 }">
-                   This field cannot be longer than 4 characters.
+                    [hidden]="!editForm.controls.annee?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1970 }">
+                    This field should be at least 1970.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.annee?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
                 </small>
             </div>
         </div>
@@ -100,12 +104,16 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.livre.quantite" for="field_quantite">Quantite</label>
-            <input type="text" class="form-control" name="quantite" id="field_quantite"
-                [(ngModel)]="livre.quantite" maxlength="2"/>
+            <input type="number" class="form-control" name="quantite" id="field_quantite"
+                [(ngModel)]="livre.quantite" min="0"/>
             <div [hidden]="!(editForm.controls.quantite?.dirty && editForm.controls.quantite?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.quantite?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 2 }">
-                   This field cannot be longer than 2 characters.
+                    [hidden]="!editForm.controls.quantite?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 0 }">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.quantite?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
                 </small>
             </div>
         </div>
@@ -119,11 +127,6 @@
                    This field cannot be longer than 50 characters.
                 </small>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.createdByPHPRunner" for="field_createdByPHPRunner">Created By PHP Runner</label>
-            <input type="number" class="form-control" name="createdByPHPRunner" id="field_createdByPHPRunner"
-                [(ngModel)]="livre.createdByPHPRunner" />
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.livre.page" for="field_page">Page</label>

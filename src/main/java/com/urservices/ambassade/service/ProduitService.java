@@ -39,4 +39,6 @@ public interface ProduitService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    Page<Produit> searchAll(String monnaie, String nomProduit,Long montant, Pageable pageable);
 }

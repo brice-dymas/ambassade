@@ -44,6 +44,14 @@ export const produitRoute: Routes = [
             pageTitle: 'ambassadeApp.produit.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'produit/search',
+        component: ProduitComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.produit.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
