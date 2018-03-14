@@ -42,7 +42,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="annee" type="varchar(4)">
+            <column name="annee" type="integer">
                 <constraints nullable="true" />
             </column>
 
@@ -54,15 +54,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="quantite" type="varchar(2)">
+            <column name="quantite" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <column name="disponible" type="varchar(50)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="created_by_php_runner" type="integer">
                 <constraints nullable="true" />
             </column>
 

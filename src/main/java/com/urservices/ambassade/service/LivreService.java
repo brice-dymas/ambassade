@@ -39,4 +39,10 @@ public interface LivreService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    Page<Livre> searchAll(String codeISBN, String auteur, String titre, String edition, String etagere, Integer annee,
+                          String categorie, String resume, Long quantite, String disponible, String page,
+                          String consultation, String origine, String sousTitre, String collection, String impression,
+                          String format, String index, String bibliographie, String lieuEdition, String lieuImpression,
+                          String illustration, String observation, String prenom, String statistique, String glossaire,Pageable pageable);
 }

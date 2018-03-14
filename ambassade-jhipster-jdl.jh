@@ -58,12 +58,11 @@ entity Livre {
 	titre String maxlength(100)
 	edition String maxlength(50)
     etagere String maxlength(50)
-    annee String maxlength(4)
+    annee Integer min(1970)
     categorie String maxlength(50)
     resume String
-    quantite String maxlength(2)
+    quantite Long min(0)
     disponible String maxlength(50)
-    createdByPHPRunner Integer
     page String maxlength(4)
     consultation String
     origine String maxlength(50)
