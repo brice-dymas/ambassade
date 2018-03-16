@@ -7,6 +7,7 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Caisse } from './caisse.model';
 import { CaisseService } from './caisse.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
+import {CaisseSearchModel} from './caisse-search.model';
 
 @Component({
     selector: 'jhi-caisse',
@@ -56,6 +57,12 @@ currentAccount: any;
                 (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+    searchCaisse(caisse: CaisseSearchModel) {
+        this.caisseService.search(caisse).subscribe(
+            (res: HttpResponse<Caisse[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -97,7 +104,14 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInCaisses() {
-        this.eventSubscriber = this.eventManager.subscribe('caisseListModification', (response) => this.loadAll());
+        // this.eventSubscriber = this.eventManager.subscribe('caisseListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('caisseListModification', (response) => {
+            if (typeof response.content === 'string') {
+                return this.loadAll();
+            }else {
+                return this.searchCaisse(response.content);
+            }
+        });
     }
 
     sort() {

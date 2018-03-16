@@ -15,6 +15,7 @@ import {
     categoriePopupRoute,
     CategorieResolvePagingParams,
 } from './';
+import {CategorieSearchComponent} from './categorie-search.component';
 
 const ENTITY_STATES = [
     ...categorieRoute,
@@ -33,6 +34,7 @@ const ENTITY_STATES = [
         CategorieDeleteDialogComponent,
         CategoriePopupComponent,
         CategorieDeletePopupComponent,
+        CategorieSearchComponent
     ],
     entryComponents: [
         CategorieComponent,

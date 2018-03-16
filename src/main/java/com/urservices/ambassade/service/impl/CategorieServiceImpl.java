@@ -74,4 +74,9 @@ public class CategorieServiceImpl implements CategorieService {
         log.debug("Request to delete Categorie : {}", id);
         categorieRepository.delete(id);
     }
+
+    @Override
+    public Page<Categorie> search(String nomCategorie, Pageable pageable) {
+        return categorieRepository.search("%"+nomCategorie+"%",pageable);
+    }
 }

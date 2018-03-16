@@ -28,7 +28,9 @@
             "dateRetour": "Date Retour",
             "telephone": "Telephone",
             "num": "Num",
-            "paiement": "Paiement"
+            "paiement": "Paiement",
+            "dateDuJourSearch": "Date Du Jour between ",
+            "dateRetourSearch": "Date Retour between "
         }
     }
 }

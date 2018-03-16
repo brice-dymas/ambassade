@@ -7,6 +7,7 @@ import { CaisseComponent } from './caisse.component';
 import { CaisseDetailComponent } from './caisse-detail.component';
 import { CaissePopupComponent } from './caisse-dialog.component';
 import { CaisseDeletePopupComponent } from './caisse-delete-dialog.component';
+import {CaisseSearchComponent} from './caisse-search.component';
 
 @Injectable()
 export class CaisseResolvePagingParams implements Resolve<any> {
@@ -39,6 +40,14 @@ export const caisseRoute: Routes = [
     }, {
         path: 'caisse/:id',
         component: CaisseDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.caisse.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'caisse/search',
+        component: CaisseSearchComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'ambassadeApp.caisse.home.title'

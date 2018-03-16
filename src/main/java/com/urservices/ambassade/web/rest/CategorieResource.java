@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -90,9 +91,12 @@ public class CategorieResource {
      */
     @GetMapping("/categories")
     @Timed
-    public ResponseEntity<List<Categorie>> getAllCategories(Pageable pageable) {
+    public ResponseEntity<List<Categorie>> getAllCategories(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Categories");
-        Page<Categorie> page = categorieService.findAll(pageable);
+
+        String nomCategorie = webRequest.getParameter("nomCategorie") != null ? webRequest.getParameter("nomCategorie") : "";
+
+        Page<Categorie> page = categorieService.search(nomCategorie,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categories");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

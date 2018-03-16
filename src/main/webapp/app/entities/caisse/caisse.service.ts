@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Caisse } from './caisse.model';
 import { createRequestOption } from '../../shared';
+import {CaisseSearchModel} from './caisse-search.model';
 
 export type EntityResponseType = HttpResponse<Caisse>;
 
@@ -32,6 +33,13 @@ export class CaisseService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<Caisse>(`${this.resourceUrl}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    search(caisse: CaisseSearchModel): Observable<HttpResponse<Caisse[]>> {
+        const copy = this.convertSearch(caisse);
+        const options = createRequestOption(copy);
+        return this.http.get<Caisse[]>(this.resourceUrl, { params: options,  observe: 'response'})
+            .map((res: HttpResponse<Caisse[]>) => this.convertArrayResponse(res));
     }
 
     query(req?: any): Observable<HttpResponse<Caisse[]>> {
@@ -79,6 +87,22 @@ export class CaisseService {
             .convertLocalDateToServer(caisse.dateDuJour);
         copy.dateRetour = this.dateUtils
             .convertLocalDateToServer(caisse.dateRetour);
+        return copy;
+    }
+
+    /**
+     * Convert a Caisse to a JSON which can be sent to the server.
+     */
+    private convertSearch(caisse: CaisseSearchModel): CaisseSearchModel {
+        const copy: CaisseSearchModel = Object.assign({}, caisse);
+        copy.dateDuJour = this.dateUtils
+            .convertLocalDateToServer(caisse.dateDuJour);
+        copy.dateDuJourFin = this.dateUtils
+            .convertLocalDateToServer(caisse.dateDuJourFin);
+        copy.dateRetour = this.dateUtils
+            .convertLocalDateToServer(caisse.dateRetour);
+        copy.dateRetourFin = this.dateUtils
+            .convertLocalDateToServer(caisse.dateRetourFin);
         return copy;
     }
 }

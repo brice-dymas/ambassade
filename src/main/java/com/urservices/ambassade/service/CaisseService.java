@@ -4,6 +4,9 @@ import com.urservices.ambassade.domain.Caisse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 /**
  * Service Interface for managing Caisse.
  */
@@ -39,4 +42,9 @@ public interface CaisseService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    Page<Caisse> search(Long reference, LocalDate dateDuJourDeb, LocalDate dateDuJourFin,String nom, String prenom, String typeID,
+                        String numeroID, String serviceConcerne, String monnaie, BigDecimal montant,
+                        LocalDate dateRetourDeb,LocalDate dateRetourFin, String telephone, Integer num, String paiement,
+                        Pageable pageable);
 }

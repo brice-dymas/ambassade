@@ -56,6 +56,12 @@ currentAccount: any;
                 (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+    searchCategorie(categorie: Categorie) {
+        this.categorieService.search(categorie).subscribe(
+            (res: HttpResponse<Categorie[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -97,7 +103,14 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInCategories() {
-        this.eventSubscriber = this.eventManager.subscribe('categorieListModification', (response) => this.loadAll());
+        // this.eventSubscriber = this.eventManager.subscribe('categorieListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('categorieListModification', (response) => {
+            if (typeof response.content === 'string') {
+                return this.loadAll();
+            }else {
+                return this.searchCategorie(response.content);
+            }
+        });
     }
 
     sort() {
