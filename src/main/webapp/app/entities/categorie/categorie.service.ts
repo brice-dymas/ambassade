@@ -32,6 +32,12 @@ export class CategorieService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
+    search(categorie: Categorie): Observable<HttpResponse<Categorie[]>> {
+        const options = createRequestOption(categorie);
+        return this.http.get<Categorie[]>(this.resourceUrl, { params: options,  observe: 'response'})
+            .map((res: HttpResponse<Categorie[]>) => this.convertArrayResponse(res));
+    }
+
     query(req?: any): Observable<HttpResponse<Categorie[]>> {
         const options = createRequestOption(req);
         return this.http.get<Categorie[]>(this.resourceUrl, { params: options, observe: 'response' })

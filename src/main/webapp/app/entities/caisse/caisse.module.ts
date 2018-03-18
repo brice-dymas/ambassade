@@ -15,6 +15,7 @@ import {
     caissePopupRoute,
     CaisseResolvePagingParams,
 } from './';
+import {CaisseSearchComponent} from './caisse-search.component';
 
 const ENTITY_STATES = [
     ...caisseRoute,
@@ -33,6 +34,7 @@ const ENTITY_STATES = [
         CaisseDeleteDialogComponent,
         CaissePopupComponent,
         CaisseDeletePopupComponent,
+        CaisseSearchComponent,
     ],
     entryComponents: [
         CaisseComponent,

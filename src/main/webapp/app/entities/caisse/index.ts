@@ -6,3 +6,4 @@ export * from './caisse-delete-dialog.component';
 export * from './caisse-detail.component';
 export * from './caisse.component';
 export * from './caisse.route';
+export * from './caisse-search.model';

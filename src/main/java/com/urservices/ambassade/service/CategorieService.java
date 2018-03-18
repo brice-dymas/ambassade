@@ -39,4 +39,6 @@ public interface CategorieService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    Page<Categorie> search(String nomCategorie, Pageable pageable);
 }

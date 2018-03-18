@@ -10,6 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 
 /**
  * Service Implementation for managing Caisse.
@@ -73,5 +76,15 @@ public class CaisseServiceImpl implements CaisseService {
     public void delete(Long id) {
         log.debug("Request to delete Caisse : {}", id);
         caisseRepository.delete(id);
+    }
+
+    @Override
+    public Page<Caisse> search(Long reference, LocalDate dateDuJourDeb, LocalDate dateDuJourFin, String nom, String prenom,
+                               String typeID, String numeroID, String serviceConcerne, String monnaie, BigDecimal montant,
+                               LocalDate dateRetourDeb, LocalDate dateRetourFin, String telephone, Integer num,
+                               String paiement, Pageable pageable) {
+        return caisseRepository.search(reference,dateDuJourDeb,dateDuJourFin,"%"+nom,"%"+prenom+"%",
+            "%"+typeID+"%","%"+numeroID+"%","%"+serviceConcerne+"%","%"+monnaie+"%",
+            montant,dateRetourDeb,dateRetourFin,"%"+telephone+"%",num,"%"+paiement+"%",pageable);
     }
 }

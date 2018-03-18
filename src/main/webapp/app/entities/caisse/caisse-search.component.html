@@ -1,0 +1,166 @@
+<form name="searchForm" role="form" novalidate (ngSubmit)="save()" #searchForm="ngForm">
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.reference" for="field_reference">Reference</label>
+                <input type="number" class="form-control" name="reference" id="field_reference"
+                       [(ngModel)]="formModel.reference"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.nom" for="field_nom">Nom</label>
+                <input type="text" class="form-control" name="nom" id="field_nom"
+                       [(ngModel)]="formModel.nom" maxlength="50"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.dateDuJourSearch"
+                       for="field_dateDuJour">Date Du Jour</label>
+                <div class="input-group">
+                    <input id="field_dateDuJour" type="text" class="form-control" name="dateDuJour" ngbDatepicker
+                           #dateDuJourDp="ngbDatepicker" [(ngModel)]="formModel.dateDuJour"
+                    />
+                    <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateDuJourDp.toggle()"><i
+                        class="fa fa-calendar"></i></button>
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="entity.action.and" for="field_dateDuJourFin">Date Du
+                    Jour</label>
+                <div class="input-group">
+                    <input id="field_dateDuJourFin" type="text" class="form-control" name="dateDuJourFin" ngbDatepicker
+                           #dateDuJourFinDp="ngbDatepicker" [(ngModel)]="formModel.dateDuJourFin"
+                    />
+                    <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateDuJourFinDp.toggle()"><i
+                        class="fa fa-calendar"></i></button>
+                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.prenom"
+                       for="field_prenom">Prenom</label>
+                <input type="text" class="form-control" name="prenom" id="field_prenom"
+                       [(ngModel)]="formModel.prenom" maxlength="50"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.typeID" for="field_typeID">Type
+                    ID</label>
+                <input type="text" class="form-control" name="typeID" id="field_typeID"
+                       [(ngModel)]="formModel.typeID" maxlength="50"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.numeroID" for="field_numeroID">Numero
+                    ID</label>
+                <input type="text" class="form-control" name="numeroID" id="field_numeroID"
+                       [(ngModel)]="formModel.numeroID" maxlength="50"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.serviceConcerne"
+                       for="field_serviceConcerne">Service Concerne</label>
+                <input type="text" class="form-control" name="serviceConcerne" id="field_serviceConcerne"
+                       [(ngModel)]="formModel.serviceConcerne" maxlength="50"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.monnaie"
+                       for="field_monnaie">Monnaie</label>
+                <input type="text" class="form-control" name="monnaie" id="field_monnaie"
+                       [(ngModel)]="formModel.monnaie" maxlength="50"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.montant"
+                       for="field_montant">Montant</label>
+                <input type="number" class="form-control" name="montant" id="field_montant"
+                       [(ngModel)]="formModel.montant"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.dateRetourSearch" for="field_dateRetour">Date
+                    Retour</label>
+                <div class="input-group">
+                    <input id="field_dateRetour" type="text" class="form-control" name="dateRetour" ngbDatepicker
+                           #dateRetourDp="ngbDatepicker" [(ngModel)]="formModel.dateRetour"
+                    />
+                    <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateRetourDp.toggle()"><i
+                        class="fa fa-calendar"></i></button>
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="entity.action.and" for="field_dateRetourFin">Date
+                    Retour</label>
+                <div class="input-group">
+                    <input id="field_dateRetourFin" type="text" class="form-control" name="dateRetourFin" ngbDatepicker
+                           #dateRetourFinDp="ngbDatepicker" [(ngModel)]="formModel.dateRetourFin"
+                    />
+                    <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateRetourFinDp.toggle()"><i
+                        class="fa fa-calendar"></i></button>
+                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.telephone" for="field_telephone">Telephone</label>
+                <input type="text" class="form-control" name="telephone" id="field_telephone"
+                       [(ngModel)]="formModel.telephone" maxlength="50"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.num" for="field_num">Num</label>
+                <input type="number" class="form-control" name="num" id="field_num"
+                       [(ngModel)]="formModel.num"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.paiement" for="field_paiement">Paiement</label>
+                <input type="text" class="form-control" name="paiement" id="field_paiement"
+                       [(ngModel)]="formModel.paiement" maxlength="50"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-sm btn-danger" data-dismiss="modal" (click)="search()">
+            <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-sm btn-primary">
+            <span class="fa fa-search"></span>&nbsp;<span jhiTranslate="entity.action.search">search</span>
+        </button>
+    </div>
+</form>
