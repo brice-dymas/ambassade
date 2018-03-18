@@ -8,6 +8,8 @@ import { JhiDateUtils } from 'ng-jhipster';
 import { DonneesActe } from './donnees-acte.model';
 import { createRequestOption } from '../../shared';
 
+import {DonneesActeSearchModel} from './donnees-acte-search.model';
+
 export type EntityResponseType = HttpResponse<DonneesActe>;
 
 @Injectable()
@@ -37,6 +39,13 @@ export class DonneesActeService {
     query(req?: any): Observable<HttpResponse<DonneesActe[]>> {
         const options = createRequestOption(req);
         return this.http.get<DonneesActe[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .map((res: HttpResponse<DonneesActe[]>) => this.convertArrayResponse(res));
+    }
+
+    search(donneesActe: DonneesActeSearchModel): Observable<HttpResponse<DonneesActe[]>> {
+        const copy = this.convertSearch(donneesActe);
+        const options = createRequestOption(copy);
+        return this.http.get<DonneesActe[]>(this.resourceUrl, { params: options,  observe: 'response'})
             .map((res: HttpResponse<DonneesActe[]>) => this.convertArrayResponse(res));
     }
 
@@ -79,6 +88,22 @@ export class DonneesActeService {
             .convertLocalDateToServer(donneesActe.dateDuJourChiffre);
         copy.dateNaissanceChiffre = this.dateUtils
             .convertLocalDateToServer(donneesActe.dateNaissanceChiffre);
+        return copy;
+    }
+
+    /**
+     * Convert a DonneesActeSearchModel to a JSON which can be sent to the server.
+     */
+    private convertSearch(donneesActe: DonneesActeSearchModel): DonneesActeSearchModel {
+        const copy: DonneesActeSearchModel = Object.assign({}, donneesActe);
+        copy.dateDuJourChiffre = this.dateUtils
+            .convertLocalDateToServer(donneesActe.dateDuJourChiffre);
+        copy.dateDuJourChiffreFin = this.dateUtils
+            .convertLocalDateToServer(donneesActe.dateDuJourChiffreFin);
+        copy.dateNaissanceChiffre = this.dateUtils
+            .convertLocalDateToServer(donneesActe.dateNaissanceChiffre);
+        copy.dateNaissanceChiffreFin = this.dateUtils
+            .convertLocalDateToServer(donneesActe.dateNaissanceChiffreFin);
         return copy;
     }
 }

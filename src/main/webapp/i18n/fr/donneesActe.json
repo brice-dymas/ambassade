@@ -42,7 +42,9 @@
             "livre": "Livre",
             "notes": "Notes",
             "feuille": "Feuille",
-            "acte": "Acte"
+            "acte": "Acte",
+            "dateDuJourChiffreSearch": "Date Du Jour Chiffre entre",
+            "dateNaissanceChiffreSearch": "Date Naissance Chiffre entre"
         }
     }
 }

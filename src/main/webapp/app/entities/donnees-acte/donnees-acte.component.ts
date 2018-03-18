@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { DonneesActe } from './donnees-acte.model';
+import { DonneesActeSearchModel } from './donnees-acte-search.model';
 import { DonneesActeService } from './donnees-acte.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
 
@@ -57,6 +58,12 @@ currentAccount: any;
                 (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+    searchDonneesActe(donneesActe: DonneesActeSearchModel) {
+        this.donneesActeService.search(donneesActe).subscribe(
+            (res: HttpResponse<DonneesActe[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -106,7 +113,14 @@ currentAccount: any;
         return this.dataUtils.openFile(contentType, field);
     }
     registerChangeInDonneesActes() {
-        this.eventSubscriber = this.eventManager.subscribe('donneesActeListModification', (response) => this.loadAll());
+        // this.eventSubscriber = this.eventManager.subscribe('donneesActeListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('donneesActeListModification', (response) => {
+            if (typeof response.content === 'string') {
+                return this.loadAll();
+            }else {
+                return this.searchDonneesActe(response.content);
+            }
+        });
     }
 
     sort() {

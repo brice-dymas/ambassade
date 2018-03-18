@@ -7,6 +7,7 @@ import { DonneesActeComponent } from './donnees-acte.component';
 import { DonneesActeDetailComponent } from './donnees-acte-detail.component';
 import { DonneesActePopupComponent } from './donnees-acte-dialog.component';
 import { DonneesActeDeletePopupComponent } from './donnees-acte-delete-dialog.component';
+import {DonneesActeSearchModel} from './donnees-acte-search.model';
 
 @Injectable()
 export class DonneesActeResolvePagingParams implements Resolve<any> {
@@ -39,6 +40,14 @@ export const donneesActeRoute: Routes = [
     }, {
         path: 'donnees-acte/:id',
         component: DonneesActeDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.donneesActe.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'donnees-acte/search',
+        component: DonneesActeSearchModel,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'ambassadeApp.donneesActe.home.title'

@@ -1,5 +1,7 @@
 package com.urservices.ambassade.service.impl;
 
+import com.urservices.ambassade.domain.enumeration.Sexe;
+import com.urservices.ambassade.domain.enumeration.Statut;
 import com.urservices.ambassade.service.DonneesActeService;
 import com.urservices.ambassade.domain.DonneesActe;
 import com.urservices.ambassade.repository.DonneesActeRepository;
@@ -9,6 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.util.List;
 
 
 /**
@@ -73,5 +78,23 @@ public class DonneesActeServiceImpl implements DonneesActeService {
     public void delete(Long id) {
         log.debug("Request to delete DonneesActe : {}", id);
         donneesActeRepository.delete(id);
+    }
+
+    @Override
+    public Page<DonneesActe> searchAll(String reference, String registreSpecialRD, String nomEnfant, LocalDate dateDuJourChiffreDeb,
+                                       LocalDate dateDuJourChiffreFin, String registre, List<Statut> statut, String numero,
+                                       String nomPere, String prenomPere, String nomMere, String prenomMere,
+                                       LocalDate dateNaissanceChiffreDeb, LocalDate dateNaissanceChiffreFin, Integer annee,
+                                       List<Sexe> sexe, String villeNaissance, String adressePere, String adresseMere,
+                                       String temoins1, String temoins2, String idPere, String idMere, String juridiction,
+                                       String livre, String notes, String feuille, String acte, Pageable pageable) {
+        return donneesActeRepository.searchAll("%"+reference+"%","%"+registreSpecialRD+"%",
+            "%"+nomEnfant+"%",dateDuJourChiffreDeb,dateDuJourChiffreFin,"%"+ registre+"%",statut,
+            "%"+numero+"%","%"+nomPere+"%","%"+prenomPere+"%","%"+nomMere+"%",
+            "%"+prenomMere+"%",dateNaissanceChiffreDeb,dateNaissanceChiffreFin,annee,sexe,
+            "%"+villeNaissance+"%","%"+adressePere+"%","%"+adresseMere+"%",
+            "%"+temoins1+"%","%"+temoins2+"%","%"+idPere+"%","%"+idMere+"%",
+            "%"+juridiction+"%","%"+livre+"%","%"+notes+"%","%"+feuille+"%","%"+acte+"%",
+            pageable);
     }
 }

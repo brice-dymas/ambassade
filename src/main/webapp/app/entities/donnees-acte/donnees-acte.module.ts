@@ -16,6 +16,8 @@ import {
     DonneesActeResolvePagingParams,
 } from './';
 
+import {DonneesActeSearchComponent} from './donnees-acte-search.component';
+
 const ENTITY_STATES = [
     ...donneesActeRoute,
     ...donneesActePopupRoute,
@@ -33,6 +35,7 @@ const ENTITY_STATES = [
         DonneesActeDeleteDialogComponent,
         DonneesActePopupComponent,
         DonneesActeDeletePopupComponent,
+        DonneesActeSearchComponent,
     ],
     entryComponents: [
         DonneesActeComponent,

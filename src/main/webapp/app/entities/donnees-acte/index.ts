@@ -6,3 +6,4 @@ export * from './donnees-acte-delete-dialog.component';
 export * from './donnees-acte-detail.component';
 export * from './donnees-acte.component';
 export * from './donnees-acte.route';
+export * from './donnees-acte-search.model';
