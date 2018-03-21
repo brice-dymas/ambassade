@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AmbassadeSharedModule } from '../../shared';
+import { ExcelService} from '../../excel.services';
 import {
     CategorieService,
     CategoriePopupService,
@@ -47,6 +48,7 @@ const ENTITY_STATES = [
         CategorieService,
         CategoriePopupService,
         CategorieResolvePagingParams,
+        ExcelService,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

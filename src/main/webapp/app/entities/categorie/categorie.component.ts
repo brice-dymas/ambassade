@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -7,12 +7,16 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Categorie } from './categorie.model';
 import { CategorieService } from './categorie.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
+import { ExcelService } from '../../excel.services';
+import { TableExport } from 'tableexport';
+
+import * as jsPDF from 'jspdf';
 
 @Component({
     selector: 'jhi-categorie',
     templateUrl: './categorie.component.html'
 })
-export class CategorieComponent implements OnInit, OnDestroy {
+export class CategorieComponent implements OnInit, OnDestroy, AfterViewChecked {
 
 currentAccount: any;
     categories: Categorie[];
@@ -28,6 +32,10 @@ currentAccount: any;
     predicate: any;
     previousPage: any;
     reverse: any;
+    te: TableExport;
+    exportData: any;
+
+    @ViewChild('content') content: ElementRef;
 
     constructor(
         private categorieService: CategorieService,
@@ -36,7 +44,8 @@ currentAccount: any;
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private excelService: ExcelService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe((data) => {
@@ -44,6 +53,7 @@ currentAccount: any;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
+            this.excelService = excelService;
         });
     }
 
@@ -94,6 +104,13 @@ currentAccount: any;
         });
         this.registerChangeInCategories();
     }
+    ngAfterViewChecked(): void {
+        this.te = new TableExport(document.querySelector('#default-table'), {
+            formats: ['xlsx'],
+            exportButtons: false,
+            ignoreCols: [2],
+        });
+    }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
@@ -121,6 +138,27 @@ currentAccount: any;
         return result;
     }
 
+    exportToExcel(event) {
+        // console.log('Categoeirs to export = ', this.categories);
+        // this.excelService.exportAsExcelFile(this.categories, 'categories');
+        this.exportData = this.te.getExportData()['default-table']['xlsx'];
+        this.te.export2file(this.exportData.data, this.exportData.mimeType, this.exportData.filename, this.exportData.fileExtension);
+    }
+    downloadPDF() {
+        const doc = new jsPDF();
+        const specialElementHandlers = {
+            '#editor': function(element, renderer) {
+                return true;
+            }
+        };
+        const content = this.content.nativeElement;
+
+        doc.fromHTML(content.innerHTML, 15, 15, {
+            'width': 190,
+            // 'elementHandlers': specialElementHandlers
+        });
+        doc.save('monTest2.pdf');
+    }
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
