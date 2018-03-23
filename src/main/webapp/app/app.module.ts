@@ -27,6 +27,7 @@ import {
     ActiveMenuDirective,
     ErrorComponent
 } from './layouts';
+import 'angular2-navigate-with-data';
 
 @NgModule({
     imports: [

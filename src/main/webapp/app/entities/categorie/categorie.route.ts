@@ -8,6 +8,7 @@ import { CategorieDetailComponent } from './categorie-detail.component';
 import { CategoriePopupComponent } from './categorie-dialog.component';
 import { CategorieDeletePopupComponent } from './categorie-delete-dialog.component';
 import {CategorieSearchComponent} from './categorie-search.component';
+import {PrintComponent} from '../print/print.component';
 
 @Injectable()
 export class CategorieResolvePagingParams implements Resolve<any> {
@@ -48,6 +49,14 @@ export const categorieRoute: Routes = [
     }, {
         path: 'categorie/search',
         component: CategorieSearchComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.categorie.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'print',
+        component: PrintComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'ambassadeApp.categorie.home.title'

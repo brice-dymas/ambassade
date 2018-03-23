@@ -8,7 +8,9 @@
             </span>
         </button>&nbsp;
         <button (click)="exportToExcel()" class="btn btn-warning">Export to excel</button>&nbsp;
-        <button (click)="downloadPDF()" class="btn btn-info">Export to PDF</button>
+        <!--<button (click)="downloadPDF()" class="btn btn-info">Export to PDF</button>-->
+        <button (click)="printPage()" type="submit" [routerLink]="['../print']"
+                class="btn btn-info">Export to PDF</button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>

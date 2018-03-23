@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -34,8 +34,11 @@ currentAccount: any;
     reverse: any;
     te: TableExport;
     exportData: any;
+    message: any;
 
     @ViewChild('content') content: ElementRef;
+
+    @Output() messageEvent = new EventEmitter<any>();
 
     constructor(
         private categorieService: CategorieService,
@@ -120,7 +123,6 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInCategories() {
-        // this.eventSubscriber = this.eventManager.subscribe('categorieListModification', (response) => this.loadAll());
         this.eventSubscriber = this.eventManager.subscribe('categorieListModification', (response) => {
             if (typeof response.content === 'string') {
                 return this.loadAll();
@@ -137,7 +139,14 @@ currentAccount: any;
         }
         return result;
     }
-
+    printPage() {
+        // this.eventManager.broadcast({ name: 'categorieListPrint', content: this.categories});
+        // this.messageEvent.emit(this.categories);
+        this.router.navigateByData({
+            url: ['/print'],
+            data: this.categories
+        });
+    }
     exportToExcel(event) {
         // console.log('Categoeirs to export = ', this.categories);
         // this.excelService.exportAsExcelFile(this.categories, 'categories');
@@ -165,6 +174,7 @@ currentAccount: any;
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
         this.categories = data;
+        this.message =  data;
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);

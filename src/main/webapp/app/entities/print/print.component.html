@@ -1,0 +1,20 @@
+<div *ngIf="dataContent">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th *ngFor="let titre of dataHeader">
+                    {{titre}}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr  *ngFor="let donnee of dataContent">
+                <td *ngFor="let titre of dataHeader">
+                    {{donnee[titre]}}
+                    <!--<td>{{donnee[titre]}}</td>-->
+                    <!--<td>{{donnee[titre]}}</td>-->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
