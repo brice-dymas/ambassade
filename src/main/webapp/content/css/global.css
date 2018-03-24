@@ -1,7 +1,7 @@
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
-
+/*
 body, h1, h2, h3, h4 {
     font-weight: 300;
 }
@@ -18,7 +18,7 @@ a {
 a:hover {
     color: #533f03;
     font-weight: bold;
-}
+}*/
 
 /* ==========================================================================
 Browser Upgrade Prompt
@@ -207,5 +207,32 @@ ui bootstrap tweaks
     text-overflow: ellipsis;
     white-space: nowrap;
  }
+
+/* ==========================================================================
+Global theme color
+========================================================================== */
+.theme-bg-blue {
+    background-color: #00084A!important;
+}
+
+.theme-blue-text {
+    color: #00084A!important;
+}
+
+.theme-border-blue {
+    border-color: #00084A!important;
+}
+
+.theme-bg-red {
+    background-color: #D60021!important;
+}
+
+.theme-red-text {
+    color: #D60021!important;
+}
+
+.theme-border-red {
+    border-color: #D60021!important;
+}
 
 /* jhipster-needle-css-add-main JHipster will add new css style */
