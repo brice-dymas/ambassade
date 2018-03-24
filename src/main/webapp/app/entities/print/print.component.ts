@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
 import {Router} from '@angular/router';
 import { ExcelService } from '../../excel.services';
 import { TableExport } from 'tableexport';
@@ -8,14 +8,17 @@ import * as jsPDF from 'jspdf';
     selector: 'jhi-print',
     templateUrl: './print.component.html'
 })
-export class PrintComponent implements OnInit {
+export class PrintComponent implements OnInit, AfterViewChecked {
 
     routeData: any;
     dataContent: any;
-    content: any;
+    property: any;
+    // content: any;
     dataHeader: any;
     te: TableExport;
     exportData: any;
+
+    @ViewChild('content') content: ElementRef;
 
     constructor(
         private router: Router,
@@ -27,11 +30,13 @@ export class PrintComponent implements OnInit {
     ngOnInit() {
         const datas = this.router.getNavigatedData();
         this.buildData(datas);
-        datas.forEach(function(data) {
-            console.log('data  = ', data);
+    }
+
+    ngAfterViewChecked(): void {
+        this.te = new TableExport(document.querySelector('#default-table'), {
+            formats: ['xlsx'],
+            exportButtons: false,
         });
-        console.log('dataContent = ', this.dataContent);
-        console.log('dataHeader = ', this.dataHeader);
     }
 
     trackId(index: number, item: any) {
@@ -55,13 +60,15 @@ export class PrintComponent implements OnInit {
         doc.fromHTML(content.innerHTML, 15, 15, {
             'width': 190,
         });
-        doc.save('monTest2.pdf');
+        doc.save('download.pdf');
     }
 
     buildData(objs) {
-        const obj = objs[0];
-        this.dataHeader = Object.getOwnPropertyNames (obj);
-        this.dataContent = objs;
+        console.log('objs = ', objs);
+        // const obj = objs[0];
+        this.dataHeader = objs.dataHeader;
+        this.dataContent = objs.dataContent;
+        this.property = objs.property;
 
     }
 }

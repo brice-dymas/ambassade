@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewChecked, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -8,17 +8,14 @@ import { Categorie } from './categorie.model';
 import { CategorieService } from './categorie.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
 import { ExcelService } from '../../excel.services';
-import { TableExport } from 'tableexport';
-
-import * as jsPDF from 'jspdf';
 
 @Component({
     selector: 'jhi-categorie',
     templateUrl: './categorie.component.html'
 })
-export class CategorieComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class CategorieComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    currentAccount: any;
     categories: Categorie[];
     error: any;
     success: any;
@@ -32,13 +29,7 @@ currentAccount: any;
     predicate: any;
     previousPage: any;
     reverse: any;
-    te: TableExport;
-    exportData: any;
     message: any;
-
-    @ViewChild('content') content: ElementRef;
-
-    @Output() messageEvent = new EventEmitter<any>();
 
     constructor(
         private categorieService: CategorieService,
@@ -65,8 +56,8 @@ currentAccount: any;
             page: this.page - 1,
             size: this.itemsPerPage,
             sort: this.sort()}).subscribe(
-                (res: HttpResponse<Categorie[]>) => this.onSuccess(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+            (res: HttpResponse<Categorie[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
     searchCategorie(categorie: Categorie) {
@@ -107,13 +98,6 @@ currentAccount: any;
         });
         this.registerChangeInCategories();
     }
-    ngAfterViewChecked(): void {
-        this.te = new TableExport(document.querySelector('#default-table'), {
-            formats: ['xlsx'],
-            exportButtons: false,
-            ignoreCols: [2],
-        });
-    }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
@@ -140,34 +124,22 @@ currentAccount: any;
         return result;
     }
     printPage() {
-        // this.eventManager.broadcast({ name: 'categorieListPrint', content: this.categories});
-        // this.messageEvent.emit(this.categories);
+        const callVerbose: {
+            dataHeader: any;
+            dataContent: any;
+            property: any;
+        } = {
+            dataHeader: ['ambassadeApp.categorie.id', 'ambassadeApp.categorie.nomCategorie'],
+            dataContent: this.categories,
+            property: Object.getOwnPropertyNames(this.categories[0]),
+        };
         this.router.navigateByData({
             url: ['/print'],
-            data: this.categories
+            // data: this.categories
+            data: callVerbose
         });
     }
-    exportToExcel(event) {
-        // console.log('Categoeirs to export = ', this.categories);
-        // this.excelService.exportAsExcelFile(this.categories, 'categories');
-        this.exportData = this.te.getExportData()['default-table']['xlsx'];
-        this.te.export2file(this.exportData.data, this.exportData.mimeType, this.exportData.filename, this.exportData.fileExtension);
-    }
-    downloadPDF() {
-        const doc = new jsPDF();
-        const specialElementHandlers = {
-            '#editor': function(element, renderer) {
-                return true;
-            }
-        };
-        const content = this.content.nativeElement;
 
-        doc.fromHTML(content.innerHTML, 15, 15, {
-            'width': 190,
-            // 'elementHandlers': specialElementHandlers
-        });
-        doc.save('monTest2.pdf');
-    }
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
