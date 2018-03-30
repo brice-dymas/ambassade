@@ -8,6 +8,7 @@ import { Categorie } from './categorie.model';
 import { CategorieService } from './categorie.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
 import { ExcelService } from '../../excel.services';
+import {UserService} from '../../shared/user/user.service';
 
 @Component({
     selector: 'jhi-categorie',
@@ -39,9 +40,12 @@ export class CategorieComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager,
-        private excelService: ExcelService
+        private excelService: ExcelService,
+        private userService: UserService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
+        const oto = this.userService.authorities();
+        console.log('oto = ', oto);
         this.routeData = this.activatedRoute.data.subscribe((data) => {
             this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
@@ -95,6 +99,7 @@ export class CategorieComponent implements OnInit, OnDestroy {
         this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
+            console.log('account = ', account);
         });
         this.registerChangeInCategories();
     }

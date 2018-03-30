@@ -33,7 +33,7 @@ export class PrintComponent implements OnInit, AfterViewChecked {
     }
 
     ngAfterViewChecked(): void {
-        this.te = new TableExport(document.querySelector('#default-table'), {
+        this.te = new TableExport(document.querySelector('#content'), {
             formats: ['xlsx'],
             exportButtons: false,
         });
@@ -44,7 +44,7 @@ export class PrintComponent implements OnInit, AfterViewChecked {
     }
 
     exportToExcel(event) {
-        this.exportData = this.te.getExportData()['default-table']['xlsx'];
+        this.exportData = this.te.getExportData()['content']['xlsx'];
         this.te.export2file(this.exportData.data, this.exportData.mimeType, this.exportData.filename, this.exportData.fileExtension);
     }
 

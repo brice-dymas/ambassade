@@ -11,6 +11,10 @@ public final class AuthoritiesConstants {
 
     public static final String ANONYMOUS = "ROLE_ANONYMOUS";
 
+    public static final String CATEGORIE_MANAGER = "ROLE_CATEGORIE_MANAGER";
+
+    public static final String CATEGORIE_VIEWER = "ROLE_CATEGORIE_VIEWER";
+
     private AuthoritiesConstants() {
     }
 }
