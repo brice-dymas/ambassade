@@ -12,136 +12,168 @@
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="rapatriement.id" readonly />
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.reference" for="field_reference">Reference</label>
-            <input type="number" class="form-control" name="reference" id="field_reference"
-                [(ngModel)]="rapatriement.reference" required/>
-            <div [hidden]="!(editForm.controls.reference?.dirty && editForm.controls.reference?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.reference?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-                <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.reference?.errors?.number" jhiTranslate="entity.validation.number">
-                    This field should be a number.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.numeroDossier" for="field_numeroDossier">Numero Dossier</label>
-            <input type="text" class="form-control" name="numeroDossier" id="field_numeroDossier"
-                [(ngModel)]="rapatriement.numeroDossier" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.numeroDossier?.dirty && editForm.controls.numeroDossier?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.numeroDossier?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.nom" for="field_nom">Nom</label>
-            <input type="text" class="form-control" name="nom" id="field_nom"
-                [(ngModel)]="rapatriement.nom" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.nom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.prenom" for="field_prenom">Prenom</label>
-            <input type="text" class="form-control" name="prenom" id="field_prenom"
-                [(ngModel)]="rapatriement.prenom" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.prenom?.dirty && editForm.controls.prenom?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.prenom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.dateNaissance" for="field_dateNaissance">Date Naissance</label>
-            <div class="input-group">
-                <input id="field_dateNaissance" type="text" class="form-control" name="dateNaissance" ngbDatepicker  #dateNaissanceDp="ngbDatepicker" [(ngModel)]="rapatriement.dateNaissance"
-                />
-                <span class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="dateNaissanceDp.toggle()"><i class="fa fa-calendar"></i></button>
-                </span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.documentID" for="field_documentID">Document ID</label>
-            <input type="text" class="form-control" name="documentID" id="field_documentID"
-                [(ngModel)]="rapatriement.documentID" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.documentID?.dirty && editForm.controls.documentID?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.documentID?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.sexe" for="field_sexe">Sexe</label>
-            <select class="form-control" name="sexe" [(ngModel)]="rapatriement.sexe" id="field_sexe" >
-                <option value="MASCULIN">{{'ambassadeApp.Sexe.MASCULIN' | translate}}</option>
-                <option value="FEMININ">{{'ambassadeApp.Sexe.FEMININ' | translate}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.motif" for="field_motif">Motif</label>
-            <input type="text" class="form-control" name="motif" id="field_motif"
-                [(ngModel)]="rapatriement.motif" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.motif?.dirty && editForm.controls.motif?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.motif?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.dateRapatriement" for="field_dateRapatriement">Date Rapatriement</label>
-            <div class="input-group">
-                <input id="field_dateRapatriement" type="text" class="form-control" name="dateRapatriement" ngbDatepicker  #dateRapatriementDp="ngbDatepicker" [(ngModel)]="rapatriement.dateRapatriement"
-                />
-                <span class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="dateRapatriementDp.toggle()"><i class="fa fa-calendar"></i></button>
-                </span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.frontiere" for="field_frontiere">Frontiere</label>
-            <input type="text" class="form-control" name="frontiere" id="field_frontiere"
-                [(ngModel)]="rapatriement.frontiere" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.frontiere?.dirty && editForm.controls.frontiere?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.frontiere?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.documentScanne" for="field_documentScanne">Document Scanne</label>
-            <div>
-                <div *ngIf="rapatriement.documentScanne" class="form-text text-danger clearfix">
-                    <a class="pull-left" (click)="openFile(rapatriement.documentScanneContentType, rapatriement.documentScanne)" jhiTranslate="entity.action.open">open</a><br>
-                    <span class="pull-left">{{rapatriement.documentScanneContentType}}, {{byteSize(rapatriement.documentScanne)}}</span>
-                    <button type="button" (click)="rapatriement.documentScanne=null;rapatriement.documentScanneContentType=null;"
-                            class="btn btn-secondary btn-xs pull-right">
-                        <span class="fa fa-times"></span>
-                    </button>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.reference" for="field_reference">Reference</label>
+                    <input type="number" class="form-control" name="reference" id="field_reference"
+                           [(ngModel)]="rapatriement.reference" required/>
+                    <div [hidden]="!(editForm.controls.reference?.dirty && editForm.controls.reference?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.reference?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.reference?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
                 </div>
-                <input type="file" id="file_documentScanne" (change)="setFileData($event, rapatriement, 'documentScanne', false)" jhiTranslate="entity.action.addblob"/>
             </div>
-            <input type="hidden" class="form-control" name="documentScanne" id="field_documentScanne"
-                [(ngModel)]="rapatriement.documentScanne" />
-            <input type="hidden" class="form-control" name="documentScanneContentType" id="field_documentScanneContentType"
-                [(ngModel)]="rapatriement.documentScanneContentType" />
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.numeroDossier" for="field_numeroDossier">Numero Dossier</label>
+                    <input type="text" class="form-control" name="numeroDossier" id="field_numeroDossier"
+                           [(ngModel)]="rapatriement.numeroDossier" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.numeroDossier?.dirty && editForm.controls.numeroDossier?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.numeroDossier?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.nom" for="field_nom">Nom</label>
+                    <input type="text" class="form-control" name="nom" id="field_nom"
+                           [(ngModel)]="rapatriement.nom" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.nom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.createdByPHPRunner" for="field_createdByPHPRunner">Created By PHP Runner</label>
-            <input type="number" class="form-control" name="createdByPHPRunner" id="field_createdByPHPRunner"
-                [(ngModel)]="rapatriement.createdByPHPRunner" />
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.prenom" for="field_prenom">Prenom</label>
+                    <input type="text" class="form-control" name="prenom" id="field_prenom"
+                           [(ngModel)]="rapatriement.prenom" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.prenom?.dirty && editForm.controls.prenom?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.prenom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.dateNaissance" for="field_dateNaissance">Date Naissance</label>
+                    <div class="input-group">
+                        <input id="field_dateNaissance" type="text" class="form-control" name="dateNaissance" ngbDatepicker  #dateNaissanceDp="ngbDatepicker" [(ngModel)]="rapatriement.dateNaissance"
+                        />
+                        <span class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dateNaissanceDp.toggle()"><i class="fa fa-calendar"></i></button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.documentID" for="field_documentID">Document ID</label>
+                    <input type="text" class="form-control" name="documentID" id="field_documentID"
+                           [(ngModel)]="rapatriement.documentID" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.documentID?.dirty && editForm.controls.documentID?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.documentID?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.sexe" for="field_sexe">Sexe</label>
+                    <select class="form-control" name="sexe" [(ngModel)]="rapatriement.sexe" id="field_sexe" >
+                        <option value="MASCULIN">{{'ambassadeApp.Sexe.MASCULIN' | translate}}</option>
+                        <option value="FEMININ">{{'ambassadeApp.Sexe.FEMININ' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.motif" for="field_motif">Motif</label>
+                    <input type="text" class="form-control" name="motif" id="field_motif"
+                           [(ngModel)]="rapatriement.motif" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.motif?.dirty && editForm.controls.motif?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.motif?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.dateRapatriement" for="field_dateRapatriement">Date Rapatriement</label>
+                    <div class="input-group">
+                        <input id="field_dateRapatriement" type="text" class="form-control" name="dateRapatriement" ngbDatepicker  #dateRapatriementDp="ngbDatepicker" [(ngModel)]="rapatriement.dateRapatriement"
+                        />
+                        <span class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dateRapatriementDp.toggle()"><i class="fa fa-calendar"></i></button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.frontiere" for="field_frontiere">Frontiere</label>
+                    <input type="text" class="form-control" name="frontiere" id="field_frontiere"
+                           [(ngModel)]="rapatriement.frontiere" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.frontiere?.dirty && editForm.controls.frontiere?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.frontiere?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.createdByPHPRunner" for="field_createdByPHPRunner">Created By PHP Runner</label>
+                    <input type="number" class="form-control" name="createdByPHPRunner" id="field_createdByPHPRunner"
+                           [(ngModel)]="rapatriement.createdByPHPRunner" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.documentScanne" for="field_documentScanne">Document Scanne</label>
+                    <div>
+                        <div *ngIf="rapatriement.documentScanne" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(rapatriement.documentScanneContentType, rapatriement.documentScanne)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{rapatriement.documentScanneContentType}}, {{byteSize(rapatriement.documentScanne)}}</span>
+                            <button type="button" (click)="rapatriement.documentScanne=null;rapatriement.documentScanneContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <span class="fa fa-times"></span>
+                            </button>
+                        </div>
+                        <input type="file" id="file_documentScanne" (change)="setFileData($event, rapatriement, 'documentScanne', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="documentScanne" id="field_documentScanne"
+                           [(ngModel)]="rapatriement.documentScanne" />
+                    <input type="hidden" class="form-control" name="documentScanneContentType" id="field_documentScanneContentType"
+                           [(ngModel)]="rapatriement.documentScanneContentType" />
+                </div>
+            </div>
         </div>
 
     </div>

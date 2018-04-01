@@ -1,7 +1,7 @@
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
-
+/*
 body, h1, h2, h3, h4 {
     font-weight: 300;
 }
@@ -18,7 +18,7 @@ a {
 a:hover {
     color: #533f03;
     font-weight: bold;
-}
+}*/
 
 /* ==========================================================================
 Browser Upgrade Prompt
@@ -33,6 +33,15 @@ Browser Upgrade Prompt
 /* ==========================================================================
 Generic styles
 ========================================================================== */
+.modal-content {
+    position: relative;
+    display: table; /* This is important */
+    overflow-y: auto;
+    overflow-x: auto;
+    width: 150%;
+    min-width: 300px;
+    margin-left: -200px!important;
+}
 
 /* Error highlight on input fields */
 .ng-valid[required], .ng-valid.required  {
@@ -43,8 +52,21 @@ Generic styles
   border-left: 5px solid red;
 }
 
-/* other generic styles */
+.footer-basic {
+    padding:40px 0;
+    background-color:#ffffff;
+    color:#4b4c4d;
+}
 
+.footer-basic .copyright {
+    margin-top:15px;
+    text-align:center;
+    font-size:13px;
+    color:#aaa;
+    margin-bottom:0;
+}
+
+/* other generic styles */
 .jh-card {
     padding: 1.5%;
     margin-top: 20px;
@@ -207,5 +229,32 @@ ui bootstrap tweaks
     text-overflow: ellipsis;
     white-space: nowrap;
  }
+
+/* ==========================================================================
+Global theme color
+========================================================================== */
+.theme-bg-blue {
+    background-color: #00084A!important;
+}
+
+.theme-blue-text {
+    color: #00084A!important;
+}
+
+.theme-border-blue {
+    border-color: #00084A!important;
+}
+
+.theme-bg-red {
+    background-color: #D60021!important;
+}
+
+.theme-red-text {
+    color: #D60021!important;
+}
+
+.theme-border-red {
+    border-color: #D60021!important;
+}
 
 /* jhipster-needle-css-add-main JHipster will add new css style */

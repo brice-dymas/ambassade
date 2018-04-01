@@ -4,57 +4,68 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="ambassadeApp.rapatriement.reference">Reference</span></dt>
-        <dd>
-            <span>{{rapatriement.reference}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.rapatriement.numeroDossier">Numero Dossier</span></dt>
-        <dd>
-            <span>{{rapatriement.numeroDossier}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.rapatriement.nom">Nom</span></dt>
-        <dd>
-            <span>{{rapatriement.nom}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.rapatriement.prenom">Prenom</span></dt>
-        <dd>
-            <span>{{rapatriement.prenom}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.rapatriement.dateNaissance">Date Naissance</span></dt>
-        <dd>
-            <span>{{rapatriement.dateNaissance | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.rapatriement.documentID">Document ID</span></dt>
-        <dd>
-            <span>{{rapatriement.documentID}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.rapatriement.sexe">Sexe</span></dt>
-        <dd>
-            <span jhiTranslate="{{'ambassadeApp.Sexe.' + rapatriement.sexe}}">{{rapatriement.sexe}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.rapatriement.motif">Motif</span></dt>
-        <dd>
-            <span>{{rapatriement.motif}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.rapatriement.dateRapatriement">Date Rapatriement</span></dt>
-        <dd>
-            <span>{{rapatriement.dateRapatriement | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.rapatriement.frontiere">Frontiere</span></dt>
-        <dd>
-            <span>{{rapatriement.frontiere}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.rapatriement.documentScanne">Document Scanne</span></dt>
-        <dd>
-            <div *ngIf="rapatriement.documentScanne">
-                <a (click)="openFile(rapatriement.documentScanneContentType, rapatriement.documentScanne)" jhiTranslate="entity.action.open">open</a>
-                {{rapatriement.documentScanneContentType}}, {{byteSize(rapatriement.documentScanne)}}
+        <div class="card light">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.rapatriement.reference">Reference</label> : &nbsp;
+                        <span>{{rapatriement.reference}}</span>
+                    </div>
+                    <div class="row col-md-3">
+                        <label jhiTranslate="ambassadeApp.rapatriement.numeroDossier">Numero Dossier</label> : &nbsp;
+                        <span>{{rapatriement.numeroDossier}}</span>
+                    </div>
+                    <div class="row col-md-3">
+                        <label jhiTranslate="ambassadeApp.rapatriement.nom">Nom</label> : &nbsp;
+                        <span>{{rapatriement.nom}}</span>
+                    </div>
+                    <div class="row col-md-3">
+                        <label jhiTranslate="ambassadeApp.rapatriement.prenom">Prenom</label> : &nbsp;
+                        <span>{{rapatriement.prenom}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.rapatriement.dateNaissance">Date Naissance</label> : &nbsp;
+                        <span>{{rapatriement.dateNaissance | date:'mediumDate'}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.rapatriement.documentID">Document ID</label> : &nbsp;
+                        <span>{{rapatriement.documentID}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.rapatriement.sexe">Sexe</label> : &nbsp;
+                        <span jhiTranslate="{{'ambassadeApp.Sexe.' + rapatriement.sexe}}">{{rapatriement.sexe}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.rapatriement.motif">Motif</label> : &nbsp;
+                        <span>{{rapatriement.motif}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.rapatriement.dateRapatriement">Date Rapatriement</label> : &nbsp;
+                        <span>{{rapatriement.dateRapatriement | date:'mediumDate'}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.rapatriement.frontiere">Frontiere</label> : &nbsp;
+                        <span>{{rapatriement.frontiere}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.rapatriement.documentScanne">Document Scanne</label>
+                            <div *ngIf="rapatriement.documentScanne">
+                                <a (click)="openFile(rapatriement.documentScanneContentType, rapatriement.documentScanne)" jhiTranslate="entity.action.open">open</a> : &nbsp;{{rapatriement.documentScanneContentType}}, {{byteSize(rapatriement.documentScanne)}}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.rapatriement.createdByPHPRunner">Created By PHP Runner</label> : &nbsp;
+                        <span>{{rapatriement.createdByPHPRunner}}</span>
+                    </div>
+                </div>
             </div>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.rapatriement.createdByPHPRunner">Created By PHP Runner</span></dt>
-        <dd>
-            <span>{{rapatriement.createdByPHPRunner}}</span>
-        </dd>
+        </div>
     </dl>
 
     <button type="submit"

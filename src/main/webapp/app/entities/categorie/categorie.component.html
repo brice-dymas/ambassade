@@ -9,7 +9,6 @@
         </button>&nbsp;
             <button *jhiHasAnyAuthority="['ROLE_CATEGORIE_MANAGER','ROLE_USER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
                     class="btn btn-info">Imprimer</button>
-sando
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
@@ -18,15 +17,15 @@ sando
     </div>
     <br/>
     <div class="table-responsive" *ngIf="categories">
-        <table id="default-table" class="table table-striped">
-            <thead>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="nomCategorie"><span jhiTranslate="ambassadeApp.categorie.nomCategorie">Nom Categorie</span> <span class="fa fa-sort"></span></th>
-            <th></th>
+            <th>Actions</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="table-sm">
             <tr *ngFor="let categorie of categories ;trackBy: trackId">
                 <td><a [routerLink]="['../categorie', categorie.id ]">{{categorie.id}}</a></td>
                 <td>{{categorie.nomCategorie}}</td>

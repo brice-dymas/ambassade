@@ -12,290 +12,359 @@
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="livre.id" readonly />
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.codeISBN" for="field_codeISBN">Code ISBN</label>
-            <input type="text" class="form-control" name="codeISBN" id="field_codeISBN"
-                [(ngModel)]="livre.codeISBN" required maxlength="50"/>
-            <div [hidden]="!(editForm.controls.codeISBN?.dirty && editForm.controls.codeISBN?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.codeISBN?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.codeISBN?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.codeISBN" for="field_codeISBN">Code ISBN</label>
+                    <input type="text" class="form-control" name="codeISBN" id="field_codeISBN"
+                           [(ngModel)]="livre.codeISBN" required maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.codeISBN?.dirty && editForm.controls.codeISBN?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.codeISBN?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.codeISBN?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.auteur" for="field_auteur">Auteur</label>
+                    <input type="text" class="form-control" name="auteur" id="field_auteur"
+                           [(ngModel)]="livre.auteur" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.auteur?.dirty && editForm.controls.auteur?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.auteur?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.titre" for="field_titre">Titre</label>
+                    <input type="text" class="form-control" name="titre" id="field_titre"
+                           [(ngModel)]="livre.titre" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.titre?.dirty && editForm.controls.titre?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.titre?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                            This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.auteur" for="field_auteur">Auteur</label>
-            <input type="text" class="form-control" name="auteur" id="field_auteur"
-                [(ngModel)]="livre.auteur" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.auteur?.dirty && editForm.controls.auteur?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.auteur?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.edition" for="field_edition">Edition</label>
+                    <input type="text" class="form-control" name="edition" id="field_edition"
+                           [(ngModel)]="livre.edition" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.edition?.dirty && editForm.controls.edition?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.edition?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.etagere" for="field_etagere">Etagere</label>
+                    <input type="text" class="form-control" name="etagere" id="field_etagere"
+                           [(ngModel)]="livre.etagere" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.etagere?.dirty && editForm.controls.etagere?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.etagere?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+<div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.annee" for="field_annee">Annee</label>
+                    <input type="text" class="form-control" name="annee" id="field_annee"
+                           [(ngModel)]="livre.annee" maxlength="4"/>
+                    <div [hidden]="!(editForm.controls.annee?.dirty && editForm.controls.annee?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.annee?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4 }">
+                            This field cannot be longer than 4 characters.
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.titre" for="field_titre">Titre</label>
-            <input type="text" class="form-control" name="titre" id="field_titre"
-                [(ngModel)]="livre.titre" maxlength="100"/>
-            <div [hidden]="!(editForm.controls.titre?.dirty && editForm.controls.titre?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.titre?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
-                   This field cannot be longer than 100 characters.
-                </small>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.categorie" for="field_categorie">Categorie</label>
+                    <input type="text" class="form-control" name="categorie" id="field_categorie"
+                           [(ngModel)]="livre.categorie" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.categorie?.dirty && editForm.controls.categorie?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.categorie?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.resume" for="field_resume">Resume</label>
+                    <input type="text" class="form-control" name="resume" id="field_resume"
+                           [(ngModel)]="livre.resume" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.quantite" for="field_quantite">Quantite</label>
+                    <input type="text" class="form-control" name="quantite" id="field_quantite"
+                           [(ngModel)]="livre.quantite" maxlength="2"/>
+                    <div [hidden]="!(editForm.controls.quantite?.dirty && editForm.controls.quantite?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.quantite?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 2 }">
+                            This field cannot be longer than 2 characters.
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.edition" for="field_edition">Edition</label>
-            <input type="text" class="form-control" name="edition" id="field_edition"
-                [(ngModel)]="livre.edition" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.edition?.dirty && editForm.controls.edition?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.edition?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.disponible" for="field_disponible">Disponible</label>
+                    <input type="text" class="form-control" name="disponible" id="field_disponible"
+                           [(ngModel)]="livre.disponible" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.disponible?.dirty && editForm.controls.disponible?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.disponible?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.createdByPHPRunner" for="field_createdByPHPRunner">Created By PHP Runner</label>
+                    <input type="number" class="form-control" name="createdByPHPRunner" id="field_createdByPHPRunner"
+                           [(ngModel)]="livre.createdByPHPRunner" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.page" for="field_page">Page</label>
+                    <input type="text" class="form-control" name="page" id="field_page"
+                           [(ngModel)]="livre.page" maxlength="4"/>
+                    <div [hidden]="!(editForm.controls.page?.dirty && editForm.controls.page?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.page?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4 }">
+                            This field cannot be longer than 4 characters.
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.etagere" for="field_etagere">Etagere</label>
-            <input type="text" class="form-control" name="etagere" id="field_etagere"
-                [(ngModel)]="livre.etagere" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.etagere?.dirty && editForm.controls.etagere?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.etagere?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.consultation" for="field_consultation">Consultation</label>
+                    <input type="text" class="form-control" name="consultation" id="field_consultation"
+                           [(ngModel)]="livre.consultation" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.origine" for="field_origine">Origine</label>
+                    <input type="text" class="form-control" name="origine" id="field_origine"
+                           [(ngModel)]="livre.origine" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.origine?.dirty && editForm.controls.origine?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.origine?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.sousTitre" for="field_sousTitre">Sous Titre</label>
+                    <input type="text" class="form-control" name="sousTitre" id="field_sousTitre"
+                           [(ngModel)]="livre.sousTitre" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.sousTitre?.dirty && editForm.controls.sousTitre?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.sousTitre?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                            This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.annee" for="field_annee">Annee</label>
-            <input type="number" class="form-control" name="annee" id="field_annee"
-                [(ngModel)]="livre.annee" min="1970"/>
-            <div [hidden]="!(editForm.controls.annee?.dirty && editForm.controls.annee?.invalid)">
-                <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.annee?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1970 }">
-                    This field should be at least 1970.
-                </small>
-                <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.annee?.errors?.number" jhiTranslate="entity.validation.number">
-                    This field should be a number.
-                </small>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.collection" for="field_collection">Collection</label>
+                    <input type="text" class="form-control" name="collection" id="field_collection"
+                           [(ngModel)]="livre.collection" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.collection?.dirty && editForm.controls.collection?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.collection?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.impression" for="field_impression">Impression</label>
+                    <input type="text" class="form-control" name="impression" id="field_impression"
+                           [(ngModel)]="livre.impression" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.impression?.dirty && editForm.controls.impression?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.impression?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.format" for="field_format">Format</label>
+                    <input type="text" class="form-control" name="format" id="field_format"
+                           [(ngModel)]="livre.format" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.format?.dirty && editForm.controls.format?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.format?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.categorie" for="field_categorie">Categorie</label>
-            <input type="text" class="form-control" name="categorie" id="field_categorie"
-                [(ngModel)]="livre.categorie" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.categorie?.dirty && editForm.controls.categorie?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.categorie?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.index" for="field_index">Index</label>
+                    <input type="text" class="form-control" name="index" id="field_index"
+                           [(ngModel)]="livre.index" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.index?.dirty && editForm.controls.index?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.index?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.bibliographie" for="field_bibliographie">Bibliographie</label>
+                    <input type="text" class="form-control" name="bibliographie" id="field_bibliographie"
+                           [(ngModel)]="livre.bibliographie" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.bibliographie?.dirty && editForm.controls.bibliographie?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.bibliographie?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.lieuEdition" for="field_lieuEdition">Lieu Edition</label>
+                    <input type="text" class="form-control" name="lieuEdition" id="field_lieuEdition"
+                           [(ngModel)]="livre.lieuEdition" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.lieuEdition?.dirty && editForm.controls.lieuEdition?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.lieuEdition?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.resume" for="field_resume">Resume</label>
-            <input type="text" class="form-control" name="resume" id="field_resume"
-                [(ngModel)]="livre.resume" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.quantite" for="field_quantite">Quantite</label>
-            <input type="number" class="form-control" name="quantite" id="field_quantite"
-                [(ngModel)]="livre.quantite" min="0"/>
-            <div [hidden]="!(editForm.controls.quantite?.dirty && editForm.controls.quantite?.invalid)">
-                <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.quantite?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 0 }">
-                    This field should be at least 0.
-                </small>
-                <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.quantite?.errors?.number" jhiTranslate="entity.validation.number">
-                    This field should be a number.
-                </small>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.lieuImpression" for="field_lieuImpression">Lieu Impression</label>
+                    <input type="text" class="form-control" name="lieuImpression" id="field_lieuImpression"
+                           [(ngModel)]="livre.lieuImpression" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.lieuImpression?.dirty && editForm.controls.lieuImpression?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.lieuImpression?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.illustration" for="field_illustration">Illustration</label>
+                    <input type="text" class="form-control" name="illustration" id="field_illustration"
+                           [(ngModel)]="livre.illustration" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.illustration?.dirty && editForm.controls.illustration?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.illustration?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.observation" for="field_observation">Observation</label>
+                    <input type="text" class="form-control" name="observation" id="field_observation"
+                           [(ngModel)]="livre.observation" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.observation?.dirty && editForm.controls.observation?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.observation?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.disponible" for="field_disponible">Disponible</label>
-            <input type="text" class="form-control" name="disponible" id="field_disponible"
-                [(ngModel)]="livre.disponible" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.disponible?.dirty && editForm.controls.disponible?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.disponible?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.prenom" for="field_prenom">Prenom</label>
+                    <input type="text" class="form-control" name="prenom" id="field_prenom"
+                           [(ngModel)]="livre.prenom" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.prenom?.dirty && editForm.controls.prenom?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.prenom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.page" for="field_page">Page</label>
-            <input type="text" class="form-control" name="page" id="field_page"
-                [(ngModel)]="livre.page" maxlength="4"/>
-            <div [hidden]="!(editForm.controls.page?.dirty && editForm.controls.page?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.page?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 4 }">
-                   This field cannot be longer than 4 characters.
-                </small>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.statistique" for="field_statistique">Statistique</label>
+                    <input type="text" class="form-control" name="statistique" id="field_statistique"
+                           [(ngModel)]="livre.statistique" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.statistique?.dirty && editForm.controls.statistique?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.statistique?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.consultation" for="field_consultation">Consultation</label>
-            <input type="text" class="form-control" name="consultation" id="field_consultation"
-                [(ngModel)]="livre.consultation" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.origine" for="field_origine">Origine</label>
-            <input type="text" class="form-control" name="origine" id="field_origine"
-                [(ngModel)]="livre.origine" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.origine?.dirty && editForm.controls.origine?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.origine?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.sousTitre" for="field_sousTitre">Sous Titre</label>
-            <input type="text" class="form-control" name="sousTitre" id="field_sousTitre"
-                [(ngModel)]="livre.sousTitre" maxlength="100"/>
-            <div [hidden]="!(editForm.controls.sousTitre?.dirty && editForm.controls.sousTitre?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.sousTitre?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
-                   This field cannot be longer than 100 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.collection" for="field_collection">Collection</label>
-            <input type="text" class="form-control" name="collection" id="field_collection"
-                [(ngModel)]="livre.collection" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.collection?.dirty && editForm.controls.collection?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.collection?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.impression" for="field_impression">Impression</label>
-            <input type="text" class="form-control" name="impression" id="field_impression"
-                [(ngModel)]="livre.impression" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.impression?.dirty && editForm.controls.impression?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.impression?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.format" for="field_format">Format</label>
-            <input type="text" class="form-control" name="format" id="field_format"
-                [(ngModel)]="livre.format" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.format?.dirty && editForm.controls.format?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.format?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.index" for="field_index">Index</label>
-            <input type="text" class="form-control" name="index" id="field_index"
-                [(ngModel)]="livre.index" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.index?.dirty && editForm.controls.index?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.index?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.bibliographie" for="field_bibliographie">Bibliographie</label>
-            <input type="text" class="form-control" name="bibliographie" id="field_bibliographie"
-                [(ngModel)]="livre.bibliographie" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.bibliographie?.dirty && editForm.controls.bibliographie?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.bibliographie?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.lieuEdition" for="field_lieuEdition">Lieu Edition</label>
-            <input type="text" class="form-control" name="lieuEdition" id="field_lieuEdition"
-                [(ngModel)]="livre.lieuEdition" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.lieuEdition?.dirty && editForm.controls.lieuEdition?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.lieuEdition?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.lieuImpression" for="field_lieuImpression">Lieu Impression</label>
-            <input type="text" class="form-control" name="lieuImpression" id="field_lieuImpression"
-                [(ngModel)]="livre.lieuImpression" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.lieuImpression?.dirty && editForm.controls.lieuImpression?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.lieuImpression?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.illustration" for="field_illustration">Illustration</label>
-            <input type="text" class="form-control" name="illustration" id="field_illustration"
-                [(ngModel)]="livre.illustration" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.illustration?.dirty && editForm.controls.illustration?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.illustration?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.observation" for="field_observation">Observation</label>
-            <input type="text" class="form-control" name="observation" id="field_observation"
-                [(ngModel)]="livre.observation" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.observation?.dirty && editForm.controls.observation?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.observation?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.prenom" for="field_prenom">Prenom</label>
-            <input type="text" class="form-control" name="prenom" id="field_prenom"
-                [(ngModel)]="livre.prenom" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.prenom?.dirty && editForm.controls.prenom?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.prenom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.statistique" for="field_statistique">Statistique</label>
-            <input type="text" class="form-control" name="statistique" id="field_statistique"
-                [(ngModel)]="livre.statistique" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.statistique?.dirty && editForm.controls.statistique?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.statistique?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="ambassadeApp.livre.glossaire" for="field_glossaire">Glossaire</label>
-            <input type="text" class="form-control" name="glossaire" id="field_glossaire"
-                [(ngModel)]="livre.glossaire" maxlength="50"/>
-            <div [hidden]="!(editForm.controls.glossaire?.dirty && editForm.controls.glossaire?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.glossaire?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
-                </small>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.livre.glossaire" for="field_glossaire">Glossaire</label>
+                    <input type="text" class="form-control" name="glossaire" id="field_glossaire"
+                           [(ngModel)]="livre.glossaire" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.glossaire?.dirty && editForm.controls.glossaire?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.glossaire?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
 

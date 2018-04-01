@@ -6,6 +6,7 @@ Navbar
     color: #ccc
 }
 
+/*
 .jh-navbar {
     background-color: #353d47;
     padding: .2em 1em;
@@ -47,6 +48,7 @@ Navbar
 .jh-navbar .jh-navbar-toggler:hover {
     color: #fff;
 }
+*/
 
 @media screen and (min-width: 768px) {
     .jh-navbar-toggler {
@@ -73,7 +75,7 @@ Logo styles
 }
 
 .logo .logo-img {
-    height: 45px;
+    height: 50px;
     display: inline-block;
     vertical-align: middle;
     width: 70px;
@@ -81,7 +83,76 @@ Logo styles
 
 .logo-img {
     height: 100%;
-    background: url("../../../content/images/logo-jhipster.png") no-repeat center center;
+    background: url("../../../content/images/coat-of-arms.png") no-repeat center center;
     background-size: contain;
     width: 100%;
+}
+
+/* ==========================================================================
+Custom Haiti style template
+========================================================================== */
+.navbar .main-navbar {
+    height: 100%!important;
+}
+
+.navbar .navbar-collapse .nav-item .nav-link {
+    padding:10px 20px 10px 20px;
+    font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color:rgba(255,255,255,0.85);
+}
+
+.navbar .navbar-collapse .nav-item .nav-link:hover {
+    color:#ffffff;
+    font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color:rgba(0,0,0,0.5);
+    padding-left:20px;
+    padding-right:20px;
+}
+
+.main-navbar .nav-link:hover {
+    color:#ffffff;
+    font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color:rgba(0,0,0,0.5)!important;
+}
+
+.navbar .navbar-collapse .nav-item .nav-link {
+    height:100%;
+}
+
+.navbar .navbar-collapse .main-navbar .nav-item .nav-link {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.plat {
+    border-radius:0px;
+}
+
+.main-navbar li.nav-item a.nav-link {
+    display:grid;
+    text-align: center!important;
+}
+
+.main-navbar li.nav-item a.nav-link i {
+    font-size:14px;
+}
+
+.main-navbar li.nav-item a.nav-link i.fa {
+    margin-bottom: 2px;
+}
+
+.main-navbar li.nav-item a.nav-link span {
+    font-size:14px;
+}
+
+.active {
+    background-color:rgba(0,0,0,0.5)!important;
+    height: 100%!important;
+}
+
+.dropdown-item {
+    -moz-transition:opacity 0.2s 0.01s ease-in-out, left 0.2s 0.1s ease-out, visibility 0.1s 0.1s linear;
+    -webkit-transition:opacity 0.2s 0.01s ease-in-out, left 0.2s 0.1s ease-out, visibility 0.1s 0.1s linear;
+    -o-transition:opacity 0.2s 0.01s ease-in-out, left 0.2s 0.1s ease-out, visibility 0.1s 0.1s linear;
+    transition:opacity 0.2s 0.01s ease-in-out, left 0.2s 0.1s ease-out, visibility 0.1s 0.1s linear;
 }
