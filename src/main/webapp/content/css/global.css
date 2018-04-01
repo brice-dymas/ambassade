@@ -33,6 +33,15 @@ Browser Upgrade Prompt
 /* ==========================================================================
 Generic styles
 ========================================================================== */
+.modal-content {
+    position: relative;
+    display: table; /* This is important */
+    overflow-y: auto;
+    overflow-x: auto;
+    width: 150%;
+    min-width: 300px;
+    margin-left: -200px!important;
+}
 
 /* Error highlight on input fields */
 .ng-valid[required], .ng-valid.required  {

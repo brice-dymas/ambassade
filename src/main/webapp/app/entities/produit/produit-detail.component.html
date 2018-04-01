@@ -4,18 +4,24 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="ambassadeApp.produit.nomProduit">Nom Produit</span></dt>
-        <dd>
-            <span>{{produit.nomProduit}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.produit.monnaie">Monnaie</span></dt>
-        <dd>
-            <span>{{produit.monnaie}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.produit.montant">Montant</span></dt>
-        <dd>
-            <span>{{produit.montant}}</span>
-        </dd>
+        <div class="card bg-light">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label jhiTranslate="ambassadeApp.produit.nomProduit">Nom Produit</label> : &nbsp;
+                        <span>{{produit.nomProduit}}</span>
+                    </div>
+                    <div class="col-md-4">
+                        <label jhiTranslate="ambassadeApp.produit.monnaie">Monnaie</label> : &nbsp;
+                        <span>{{produit.monnaie}}</span>
+                    </div>
+                    <div class="col-md-4">
+                        <label jhiTranslate="ambassadeApp.produit.montant">Montant</label> : &nbsp;
+                        <span>{{produit.montant}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </dl>
 
     <button type="submit"
@@ -28,7 +34,7 @@
             [routerLink]="['/', { outlets: { popup: 'produit/'+ produit.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-primary">
+            class="btn btn-primary pull-right">
         <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

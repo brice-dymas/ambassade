@@ -4,90 +4,111 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="ambassadeApp.passeport.numeroFormulaire">Numero Formulaire</span></dt>
-        <dd>
-            <span>{{passeport.numeroFormulaire}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.nom">Nom</span></dt>
-        <dd>
-            <span>{{passeport.nom}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.prenom">Prenom</span></dt>
-        <dd>
-            <span>{{passeport.prenom}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.numeroPasseport">Numero Passeport</span></dt>
-        <dd>
-            <span>{{passeport.numeroPasseport}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.neLe">Ne Le</span></dt>
-        <dd>
-            <span>{{passeport.neLe}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.lieuNaissance">Lieu Naissance</span></dt>
-        <dd>
-            <span>{{passeport.lieuNaissance}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.etatCivil">Etat Civil</span></dt>
-        <dd>
-            <span jhiTranslate="{{'ambassadeApp.Statut.' + passeport.etatCivil}}">{{passeport.etatCivil}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.adresse">Adresse</span></dt>
-        <dd>
-            <span>{{passeport.adresse}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.telephone">Telephone</span></dt>
-        <dd>
-            <span>{{passeport.telephone}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.nif">Nif</span></dt>
-        <dd>
-            <span>{{passeport.nif}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.paysEmetteur">Pays Emetteur</span></dt>
-        <dd>
-            <span>{{passeport.paysEmetteur}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.soumisLe">Soumis Le</span></dt>
-        <dd>
-            <span>{{passeport.soumisLe | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.delivreLe">Delivre Le</span></dt>
-        <dd>
-            <span>{{passeport.delivreLe | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.montant">Montant</span></dt>
-        <dd>
-            <span>{{passeport.montant}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.remarques">Remarques</span></dt>
-        <dd>
-            <span>{{passeport.remarques}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.dateEmission">Date Emission</span></dt>
-        <dd>
-            <span>{{passeport.dateEmission | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.dateExpiration">Date Expiration</span></dt>
-        <dd>
-            <span>{{passeport.dateExpiration | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.remarquesR">Remarques R</span></dt>
-        <dd>
-            <span>{{passeport.remarquesR}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.sms">Sms</span></dt>
-        <dd>
-            <span>{{passeport.sms}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.sms2">Sms 2</span></dt>
-        <dd>
-            <span>{{passeport.sms2}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.passeport.documents">Documents</span></dt>
-        <dd>
-            <span>{{passeport.documents}}</span>
-        </dd>
+        <div class="card bg-light">
+            <div class="card-body plat">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.numeroFormulaire">Numero Formulaire</label> : &nbsp;
+                        <span>{{passeport.numeroFormulaire}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.nom">Nom</label> : &nbsp;
+                        <span>{{passeport.nom}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.prenom">Prenom</label> : &nbsp;
+                        <span>{{passeport.prenom}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.numeroPasseport">Numero Passeport</label> : &nbsp;
+                        <span>{{passeport.numeroPasseport}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.neLe">Ne Le</label> : &nbsp;
+                        <span>{{passeport.neLe}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.lieuNaissance">Lieu Naissance</label> : &nbsp;
+                        <span>{{passeport.lieuNaissance}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.etatCivil">Etat Civil</label> : &nbsp;
+                        <span jhiTranslate="{{'ambassadeApp.Statut.' + passeport.etatCivil}}">{{passeport.etatCivil}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.adresse">Adresse</label> : &nbsp;
+                        <span>{{passeport.adresse}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.telephone">Telephone</label> : &nbsp;
+                        <span>{{passeport.telephone}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.nif">Nif</label> : &nbsp;
+                        <span>{{passeport.nif}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.paysEmetteur">Pays Emetteur</label> : &nbsp;
+                        <span>{{passeport.paysEmetteur}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.soumisLe">Soumis Le</label> : &nbsp;
+                        <span>{{passeport.soumisLe | date:'mediumDate'}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.delivreLe">Delivre Le</label> : &nbsp;
+                        <span>{{passeport.delivreLe | date:'mediumDate'}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.montant">Montant</label> : &nbsp;
+                        <span>{{passeport.montant}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.remarques">Remarques</label> : &nbsp;
+                        <span>{{passeport.remarques}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.dateEmission">Date Emission</label> : &nbsp;
+                        <span>{{passeport.dateEmission | date:'mediumDate'}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.dateExpiration">Date Expiration</label> : &nbsp;
+                        <span>{{passeport.dateExpiration | date:'mediumDate'}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.remarquesR">Remarques R</label> : &nbsp;
+                        <span>{{passeport.remarquesR}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.sms">Sms</label> : &nbsp;
+                        <span>{{passeport.sms}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.sms2">Sms 2</label> : &nbsp;
+                        <span>{{passeport.sms2}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.passeport.documents">Documents</label> : &nbsp;
+                        <span>{{passeport.documents}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </dl>
 
     <button type="submit"
@@ -100,7 +121,7 @@
             [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-primary">
+            class="btn btn-primary pull-right">
         <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

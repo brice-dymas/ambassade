@@ -13,17 +13,17 @@
     </div>
     <br/>
     <div class="table-responsive" *ngIf="monnaies">
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="type"><span jhiTranslate="ambassadeApp.monnaie.type">Type</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="montant"><span jhiTranslate="ambassadeApp.monnaie.montant">Montant</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="produit"><span jhiTranslate="ambassadeApp.monnaie.produit">Produit</span> <span class="fa fa-sort"></span></th>
-            <th></th>
+            <th>Actions</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="table-sm">
             <tr *ngFor="let monnaie of monnaies ;trackBy: trackId">
                 <td><a [routerLink]="['../monnaie', monnaie.id ]">{{monnaie.id}}</a></td>
                 <td>{{monnaie.type}}</td>

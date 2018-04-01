@@ -4,10 +4,16 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="ambassadeApp.categorie.nomCategorie">Nom Categorie</span></dt>
-        <dd>
-            <span>{{categorie.nomCategorie}}</span>
-        </dd>
+        <div class="card bg-light">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label jhiTranslate="ambassadeApp.categorie.nomCategorie">Nom Categorie</label> : &nbsp;
+                        <span>{{categorie.nomCategorie}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </dl>
 
     <button type="submit"
@@ -20,7 +26,7 @@
             [routerLink]="['/', { outlets: { popup: 'categorie/'+ categorie.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-primary">
+            class="btn btn-primary pull-right">
         <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

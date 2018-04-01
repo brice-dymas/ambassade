@@ -4,114 +4,138 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="ambassadeApp.livre.codeISBN">Code ISBN</span></dt>
-        <dd>
-            <span>{{livre.codeISBN}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.auteur">Auteur</span></dt>
-        <dd>
-            <span>{{livre.auteur}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.titre">Titre</span></dt>
-        <dd>
-            <span>{{livre.titre}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.edition">Edition</span></dt>
-        <dd>
-            <span>{{livre.edition}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.etagere">Etagere</span></dt>
-        <dd>
-            <span>{{livre.etagere}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.annee">Annee</span></dt>
-        <dd>
-            <span>{{livre.annee}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.categorie">Categorie</span></dt>
-        <dd>
-            <span>{{livre.categorie}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.resume">Resume</span></dt>
-        <dd>
-            <span>{{livre.resume}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.quantite">Quantite</span></dt>
-        <dd>
-            <span>{{livre.quantite}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.disponible">Disponible</span></dt>
-        <dd>
-            <span>{{livre.disponible}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.createdByPHPRunner">Created By PHP Runner</span></dt>
-        <dd>
-            <span>{{livre.createdByPHPRunner}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.page">Page</span></dt>
-        <dd>
-            <span>{{livre.page}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.consultation">Consultation</span></dt>
-        <dd>
-            <span>{{livre.consultation}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.origine">Origine</span></dt>
-        <dd>
-            <span>{{livre.origine}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.sousTitre">Sous Titre</span></dt>
-        <dd>
-            <span>{{livre.sousTitre}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.collection">Collection</span></dt>
-        <dd>
-            <span>{{livre.collection}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.impression">Impression</span></dt>
-        <dd>
-            <span>{{livre.impression}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.format">Format</span></dt>
-        <dd>
-            <span>{{livre.format}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.index">Index</span></dt>
-        <dd>
-            <span>{{livre.index}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.bibliographie">Bibliographie</span></dt>
-        <dd>
-            <span>{{livre.bibliographie}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.lieuEdition">Lieu Edition</span></dt>
-        <dd>
-            <span>{{livre.lieuEdition}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.lieuImpression">Lieu Impression</span></dt>
-        <dd>
-            <span>{{livre.lieuImpression}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.illustration">Illustration</span></dt>
-        <dd>
-            <span>{{livre.illustration}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.observation">Observation</span></dt>
-        <dd>
-            <span>{{livre.observation}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.prenom">Prenom</span></dt>
-        <dd>
-            <span>{{livre.prenom}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.statistique">Statistique</span></dt>
-        <dd>
-            <span>{{livre.statistique}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.livre.glossaire">Glossaire</span></dt>
-        <dd>
-            <span>{{livre.glossaire}}</span>
-        </dd>
+        <div class="card bg-light">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.codeISBN">Code ISBN</label> : &nbsp;
+                        <span>{{livre.codeISBN}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.auteur">Auteur</label> : &nbsp;
+                        <span>{{livre.auteur}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.titre">Titre</label> : &nbsp;
+                        <span>{{livre.titre}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.edition">Edition</label> : &nbsp;
+                        <span>{{livre.edition}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.etagere">Etagere</label> : &nbsp;
+                        <span>{{livre.etagere}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.annee">Annee</label> : &nbsp;
+                        <span>{{livre.annee}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.categorie">Categorie</label> : &nbsp;
+                        <span>{{livre.categorie}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.resume">Resume</label> : &nbsp;
+                        <span>{{livre.resume}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.quantite">Quantite</label> : &nbsp;
+                        <span>{{livre.quantite}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.disponible">Disponible</label> : &nbsp;
+                        <span>{{livre.disponible}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.createdByPHPRunner">Created By PHP Runner</label> : &nbsp;
+                        <span>{{livre.createdByPHPRunner}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.page">Page</label> : &nbsp;
+                        <span>{{livre.page}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.consultation">Consultation</label> : &nbsp;
+                        <span>{{livre.consultation}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.origine">Origine</label> : &nbsp;
+                        <span>{{livre.origine}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.sousTitre">Sous Titre</label> : &nbsp;
+                        <span>{{livre.sousTitre}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.collection">Collection</label> : &nbsp;
+                        <span>{{livre.collection}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.impression">Impression</label> : &nbsp;
+                        <span>{{livre.impression}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.format">Format</label> : &nbsp;
+                        <span>{{livre.format}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.index">Index</label> : &nbsp;
+                        <span>{{livre.index}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.bibliographie">Bibliographie</label> : &nbsp;
+                        <span>{{livre.bibliographie}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.lieuEdition">Lieu Edition</label> : &nbsp;
+                        <span>{{livre.lieuEdition}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.lieuImpression">Lieu Impression</label> : &nbsp;
+                        <span>{{livre.lieuImpression}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.illustration">Illustration</label> : &nbsp;
+                        <span>{{livre.illustration}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.observation">Observation</label> : &nbsp;
+                        <span>{{livre.observation}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.prenom">Prenom</label> : &nbsp;
+                        <span>{{livre.prenom}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.statistique">Statistique</label> : &nbsp;
+                        <span>{{livre.statistique}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.livre.glossaire">Glossaire</label> : &nbsp;
+                        <span>{{livre.glossaire}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </dl>
 
     <button type="submit"
@@ -124,7 +148,7 @@
             [routerLink]="['/', { outlets: { popup: 'livre/'+ livre.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-primary">
+            class="btn btn-primary pull-right">
         <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

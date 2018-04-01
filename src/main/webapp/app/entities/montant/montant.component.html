@@ -14,8 +14,8 @@
         <jhi-montant-search></jhi-montant-search>
     </div>
     <div class="table-responsive" *ngIf="montants">
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="monnaie"><span jhiTranslate="ambassadeApp.montant.monnaie">Monnaie</span> <span class="fa fa-sort"></span></th>
@@ -24,7 +24,7 @@
             <th></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="table-sm">
             <tr *ngFor="let montant of montants ;trackBy: trackId">
                 <td><a [routerLink]="['../montant', montant.id ]">{{montant.id}}</a></td>
                 <td>{{montant.monnaie}}</td>
