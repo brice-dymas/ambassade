@@ -17,8 +17,8 @@
     </div>
     <br/>
     <div class="table-responsive" *ngIf="rapatriements">
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="reference"><span jhiTranslate="ambassadeApp.rapatriement.reference">Reference</span> <span class="fa fa-sort"></span></th>
@@ -26,17 +26,17 @@
             <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.rapatriement.nom">Nom</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="prenom"><span jhiTranslate="ambassadeApp.rapatriement.prenom">Prenom</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="dateNaissance"><span jhiTranslate="ambassadeApp.rapatriement.dateNaissance">Date Naissance</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="documentID"><span jhiTranslate="ambassadeApp.rapatriement.documentID">Document ID</span> <span class="fa fa-sort"></span></th>
+            <!-- <th jhiSortBy="documentID"><span jhiTranslate="ambassadeApp.rapatriement.documentID">Document ID</span> <span class="fa fa-sort"></span></th> -->
             <th jhiSortBy="sexe"><span jhiTranslate="ambassadeApp.rapatriement.sexe">Sexe</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="motif"><span jhiTranslate="ambassadeApp.rapatriement.motif">Motif</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="dateRapatriement"><span jhiTranslate="ambassadeApp.rapatriement.dateRapatriement">Date Rapatriement</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="frontiere"><span jhiTranslate="ambassadeApp.rapatriement.frontiere">Frontiere</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="documentScanne"><span jhiTranslate="ambassadeApp.rapatriement.documentScanne">Document Scanne</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="createdByPHPRunner"><span jhiTranslate="ambassadeApp.rapatriement.createdByPHPRunner">Created By PHP Runner</span> <span class="fa fa-sort"></span></th>
-            <th></th>
+            <!-- <th jhiSortBy="documentScanne"><span jhiTranslate="ambassadeApp.rapatriement.documentScanne">Document Scanne</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdByPHPRunner"><span jhiTranslate="ambassadeApp.rapatriement.createdByPHPRunner">Created By PHP Runner</span> <span class="fa fa-sort"></span></th> -->
+            <th>Actions</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="table-sm">
             <tr *ngFor="let rapatriement of rapatriements ;trackBy: trackId">
                 <td><a [routerLink]="['../rapatriement', rapatriement.id ]">{{rapatriement.id}}</a></td>
                 <td>{{rapatriement.reference}}</td>
@@ -44,16 +44,16 @@
                 <td>{{rapatriement.nom}}</td>
                 <td>{{rapatriement.prenom}}</td>
                 <td>{{rapatriement.dateNaissance | date:'mediumDate'}}</td>
-                <td>{{rapatriement.documentID}}</td>
+                <!-- <td>{{rapatriement.documentID}}</td> -->
                 <td jhiTranslate="{{'ambassadeApp.Sexe.' + rapatriement.sexe}}">{{rapatriement.sexe}}</td>
                 <td>{{rapatriement.motif}}</td>
                 <td>{{rapatriement.dateRapatriement | date:'mediumDate'}}</td>
                 <td>{{rapatriement.frontiere}}</td>
-                <td>
+                <!-- <td>
                     <a *ngIf="rapatriement.documentScanne" (click)="openFile(rapatriement.documentScanneContentType, rapatriement.documentScanne)" jhiTranslate="entity.action.open">open</a>
                     <span *ngIf="rapatriement.documentScanne">{{rapatriement.documentScanneContentType}}, {{byteSize(rapatriement.documentScanne)}}</span>
                 </td>
-                <td>{{rapatriement.createdByPHPRunner}}</td>
+                <td>{{rapatriement.createdByPHPRunner}}</td> -->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

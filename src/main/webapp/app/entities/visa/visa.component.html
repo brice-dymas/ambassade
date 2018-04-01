@@ -17,31 +17,31 @@
     </div>
     <br/>
     <div class="table-responsive" *ngIf="visas">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.visa.nom">Nom</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="prenom"><span jhiTranslate="ambassadeApp.visa.prenom">Prenom</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="nationalite"><span jhiTranslate="ambassadeApp.visa.nationalite">Nationalite</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="numeroPasseport"><span jhiTranslate="ambassadeApp.visa.numeroPasseport">Numero Passeport</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="cedula"><span jhiTranslate="ambassadeApp.visa.cedula">Cedula</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="numeroVisa"><span jhiTranslate="ambassadeApp.visa.numeroVisa">Numero Visa</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="dateEmission"><span jhiTranslate="ambassadeApp.visa.dateEmission">Date Emission</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="dateExpiration"><span jhiTranslate="ambassadeApp.visa.dateExpiration">Date Expiration</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="validePour"><span jhiTranslate="ambassadeApp.visa.validePour">Valide Pour</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="nombreEntree"><span jhiTranslate="ambassadeApp.visa.nombreEntree">Nombre Entree</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="type"><span jhiTranslate="ambassadeApp.visa.type">Type</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="categorie"><span jhiTranslate="ambassadeApp.visa.categorie">Categorie</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="taxes"><span jhiTranslate="ambassadeApp.visa.taxes">Taxes</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="adresse"><span jhiTranslate="ambassadeApp.visa.adresse">Adresse</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="remarques"><span jhiTranslate="ambassadeApp.visa.remarques">Remarques</span> <span class="fa fa-sort"></span></th>
-            <th></th>
-            </tr>
+        <table class="table table-striped table-bordered table-sm" style="font-size: 14px!important;font-weight: 100!important;">
+            <thead class="thead-dark">
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
+                    <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.visa.nom">Nom</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="prenom"><span jhiTranslate="ambassadeApp.visa.prenom">Prenom</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="nationalite"><span jhiTranslate="ambassadeApp.visa.nationalite">Nationalite</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="numeroPasseport"><span jhiTranslate="ambassadeApp.visa.numeroPasseport">Numero Passeport</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="cedula"><span jhiTranslate="ambassadeApp.visa.cedula">Cedula</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="numeroVisa"><span jhiTranslate="ambassadeApp.visa.numeroVisa">Numero Visa</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="dateEmission"><span jhiTranslate="ambassadeApp.visa.dateEmission">Date Emission</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="dateExpiration"><span jhiTranslate="ambassadeApp.visa.dateExpiration">Date Expiration</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="validePour"><span jhiTranslate="ambassadeApp.visa.validePour">Valide Pour</span> <span class="fa fa-sort"></span></th>
+                    <!-- <th jhiSortBy="nombreEntree"><span jhiTranslate="ambassadeApp.visa.nombreEntree">Nombre Entree</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="type"><span jhiTranslate="ambassadeApp.visa.type">Type</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="categorie"><span jhiTranslate="ambassadeApp.visa.categorie">Categorie</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="taxes"><span jhiTranslate="ambassadeApp.visa.taxes">Taxes</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="adresse"><span jhiTranslate="ambassadeApp.visa.adresse">Adresse</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="remarques"><span jhiTranslate="ambassadeApp.visa.remarques">Remarques</span> <span class="fa fa-sort"></span></th> -->
+                    <th>Actions</th>
+                </tr>
             </thead>
             <tbody>
             <tr *ngFor="let visa of visas ;trackBy: trackId">
-                <td><a [routerLink]="['../visa', visa.id ]">{{visa.id}}</a></td>
+                <!-- <td><a [routerLink]="['../visa', visa.id ]">{{visa.id}}</a></td> -->
                 <td>{{visa.nom}}</td>
                 <td>{{visa.prenom}}</td>
                 <td>{{visa.nationalite}}</td>
@@ -51,12 +51,12 @@
                 <td>{{visa.dateEmission | date:'mediumDate'}}</td>
                 <td>{{visa.dateExpiration | date:'mediumDate'}}</td>
                 <td>{{visa.validePour}}</td>
-                <td>{{visa.nombreEntree}}</td>
+                <!-- <td>{{visa.nombreEntree}}</td>
                 <td>{{visa.type}}</td>
                 <td>{{visa.categorie}}</td>
                 <td>{{visa.taxes}}</td>
                 <td>{{visa.adresse}}</td>
-                <td>{{visa.remarques}}</td>
+                <!-- <td>{{visa.remarques}}</td> -->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

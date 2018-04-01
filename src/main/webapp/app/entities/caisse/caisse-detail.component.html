@@ -4,58 +4,81 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="ambassadeApp.caisse.reference">Reference</span></dt>
-        <dd>
-            <span>{{caisse.reference}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.caisse.dateDuJour">Date Du Jour</span></dt>
-        <dd>
-            <span>{{caisse.dateDuJour | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.caisse.nom">Nom</span></dt>
-        <dd>
-            <span>{{caisse.nom}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.caisse.prenom">Prenom</span></dt>
-        <dd>
-            <span>{{caisse.prenom}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.caisse.typeID">Type ID</span></dt>
-        <dd>
-            <span>{{caisse.typeID}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.caisse.numeroID">Numero ID</span></dt>
-        <dd>
-            <span>{{caisse.numeroID}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.caisse.serviceConcerne">Service Concerne</span></dt>
-        <dd>
-            <span>{{caisse.serviceConcerne}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</span></dt>
-        <dd>
-            <span>{{caisse.monnaie}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.caisse.montant">Montant</span></dt>
-        <dd>
-            <span>{{caisse.montant}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.caisse.dateRetour">Date Retour</span></dt>
-        <dd>
-            <span>{{caisse.dateRetour | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.caisse.telephone">Telephone</span></dt>
-        <dd>
-            <span>{{caisse.telephone}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.caisse.num">Num</span></dt>
-        <dd>
-            <span>{{caisse.num}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.caisse.paiement">Paiement</span></dt>
-        <dd>
-            <span>{{caisse.paiement}}</span>
-        </dd>
+        <div class="card bg-light">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.reference">Reference</label> : &nbsp;
+                        <span>{{caisse.reference}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.dateDuJour">Date Du Jour</label> : &nbsp;
+                        <span>{{caisse.dateDuJour | date:'mediumDate'}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.nom">Nom</label> : &nbsp;
+                        <span>{{caisse.nom}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.prenom">Prenom</label> : &nbsp;
+                        <span>{{caisse.prenom}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.typeID">Type ID</label> : &nbsp;
+                        <span>{{caisse.typeID}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.numeroID">Numero ID</label> : &nbsp;
+                        <span>{{caisse.numeroID}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.serviceConcerne">Service Concerne</label> : &nbsp;
+                        <span>{{caisse.serviceConcerne}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</label> : &nbsp;
+                        <span>{{caisse.monnaie}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</label> : &nbsp;
+                        <span>{{caisse.monnaie}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.montant">Montant</label> : &nbsp;
+                        <span>{{caisse.montant}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.dateRetour">Date Retour</label> : &nbsp;
+                        <span>{{caisse.dateRetour | date:'mediumDate'}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.telephone">Telephone</label> : &nbsp;
+                        <span>{{caisse.telephone}}</span>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.telephone">Telephone</label> : &nbsp;
+                        <span>{{caisse.telephone}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.num">Num</label> : &nbsp;
+                        <span>{{caisse.num}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <label jhiTranslate="ambassadeApp.caisse.paiement">Paiement</label> : &nbsp;
+                        <span>{{caisse.paiement}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </dl>
 
     <button type="submit"
@@ -68,7 +91,7 @@
             [routerLink]="['/', { outlets: { popup: 'caisse/'+ caisse.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-primary">
+            class="btn btn-primary pull-right">
         <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>
