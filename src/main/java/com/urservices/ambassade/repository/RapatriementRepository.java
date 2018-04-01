@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 /**
@@ -21,7 +22,7 @@ public interface RapatriementRepository extends JpaRepository<Rapatriement, Long
     @Query("SELECT R FROM Rapatriement R WHERE R.reference >= :reference " +
         "AND R.numeroDossier LIKE :numeroDossier AND R.nom LIKE :nom AND R.prenom LIKE :prenom " +
         "AND R.dateNaissance >= :dateNaissanceDeb AND R.dateNaissance <= :dateNaissanceFin " +
-        "AND R.documentID LIKE :documentID AND R.sexe = :sexe AND R.motif LIKE :motif " +
+        "AND R.documentID LIKE :documentID AND R.sexe IN :sexe AND R.motif LIKE :motif " +
         "AND R.dateRapatriement >= :dateRapatriementDeb AND R.dateRapatriement <= :dateRapatriementFin " +
         "AND R.frontiere LIKE :frontiere")
     Page<Rapatriement> searchAll(@Param("reference") Integer reference,
@@ -31,7 +32,7 @@ public interface RapatriementRepository extends JpaRepository<Rapatriement, Long
                                  @Param("dateNaissanceDeb") LocalDate dateNaissanceDeb,
                                  @Param("dateNaissanceFin") LocalDate dateNaissanceFin,
                                  @Param("documentID") String documentID,
-                                 @Param("sexe") Sexe sexe,
+                                 @Param("sexe") List<Sexe> sexe,
                                  @Param("motif") String motif,
                                  @Param("dateRapatriementDeb") LocalDate dateRapatriementDeb,
                                  @Param("dateRapatriementFin") LocalDate dateRapatriementFin,

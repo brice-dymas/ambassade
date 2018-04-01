@@ -6,7 +6,9 @@
             <span  jhiTranslate="ambassadeApp.caisse.home.createLabel">
             Create new Caisse
             </span>
-        </button>
+        </button>&nbsp;
+        <button *jhiHasAnyAuthority="['ROLE_CAISSE_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
+                class="btn btn-info">Imprimer</button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>

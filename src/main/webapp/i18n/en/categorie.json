@@ -16,7 +16,8 @@
             "detail": {
                 "title": "Categorie"
             },
-            "nomCategorie": "Nom Categorie"
+            "nomCategorie": "Category Name",
+            "id": "Identifiant"
         }
     }
 }

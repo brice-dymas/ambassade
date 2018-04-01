@@ -6,7 +6,9 @@
             <span  jhiTranslate="ambassadeApp.donneesActe.home.createLabel">
             Create new Donnees Acte
             </span>
-        </button>
+        </button>&nbsp;
+        <button *jhiHasAnyAuthority="['ROLE_DONNEES_ACTE_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
+                class="btn btn-info">Imprimer</button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>

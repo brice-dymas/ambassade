@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 /**
@@ -96,7 +97,7 @@ public class RapatriementServiceImpl implements RapatriementService {
     @Override
     public Page<Rapatriement> searchAll(Integer reference, String numeroDossier, String nom, String prenom,
                                         LocalDate dateNaissanceDeb, LocalDate dateNaissanceFin, String documentID,
-                                        Sexe sexe, String motif, LocalDate dateRapatriementDeb, LocalDate dateRapatriementFin,
+                                        List<Sexe> sexe, String motif, LocalDate dateRapatriementDeb, LocalDate dateRapatriementFin,
                                         String frontiere, Pageable pageable) {
         return rapatriementRepository.searchAll(reference,"%"+numeroDossier+"%","%"+nom+"%",
             "%"+prenom+"%",dateNaissanceDeb, dateNaissanceFin,"%"+documentID+"%",sexe,"%"+motif+"%",

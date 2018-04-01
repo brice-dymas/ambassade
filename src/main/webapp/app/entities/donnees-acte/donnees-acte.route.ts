@@ -8,6 +8,7 @@ import { DonneesActeDetailComponent } from './donnees-acte-detail.component';
 import { DonneesActePopupComponent } from './donnees-acte-dialog.component';
 import { DonneesActeDeletePopupComponent } from './donnees-acte-delete-dialog.component';
 import {DonneesActeSearchModel} from './donnees-acte-search.model';
+import {PrintComponent} from '../print/print.component';
 
 @Injectable()
 export class DonneesActeResolvePagingParams implements Resolve<any> {
@@ -53,6 +54,14 @@ export const donneesActeRoute: Routes = [
             pageTitle: 'ambassadeApp.donneesActe.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'print',
+        component: PrintComponent,
+        data: {
+            authorities: ['ROLE_DONNEES_ACTE_MANAGER'],
+            pageTitle: 'ambassadeApp.donneesActe.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
@@ -61,7 +70,7 @@ export const donneesActePopupRoute: Routes = [
         path: 'donnees-acte-new',
         component: DonneesActePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_DONNEES_ACTE_MANAGER'],
             pageTitle: 'ambassadeApp.donneesActe.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -71,7 +80,7 @@ export const donneesActePopupRoute: Routes = [
         path: 'donnees-acte/:id/edit',
         component: DonneesActePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_DONNEES_ACTE_MANAGER'],
             pageTitle: 'ambassadeApp.donneesActe.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -81,7 +90,7 @@ export const donneesActePopupRoute: Routes = [
         path: 'donnees-acte/:id/delete',
         component: DonneesActeDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_DONNEES_ACTE_MANAGER'],
             pageTitle: 'ambassadeApp.donneesActe.home.title'
         },
         canActivate: [UserRouteAccessService],

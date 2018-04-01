@@ -7,8 +7,9 @@
             Create new Categorie
             </span>
         </button>&nbsp;
-        <button (click)="exportToExcel()" class="btn btn-warning">Export to excel</button>&nbsp;
-        <button (click)="downloadPDF()" class="btn btn-info">Export to PDF</button>
+            <button *jhiHasAnyAuthority="['ROLE_CATEGORIE_MANAGER','ROLE_USER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
+                    class="btn btn-info">Imprimer</button>
+sando
     </h2>
     <jhi-alert></jhi-alert>
     <br/>

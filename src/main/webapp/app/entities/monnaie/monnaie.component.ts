@@ -120,6 +120,25 @@ currentAccount: any;
         return result;
     }
 
+    printPage() {
+        const callVerbose: {
+            dataHeader: any;
+            dataContent: any;
+            property: any;
+        } = {
+            dataHeader: ['ambassadeApp.monnaie.type',
+                'ambassadeApp.monnaie.montant',
+                'ambassadeApp.monnaie.produit'],
+            dataContent: this.monnaies,
+            property: Object.getOwnPropertyNames(this.monnaies[0]),
+        };
+        this.router.navigateByData({
+            url: ['/print'],
+            // data: this.categories
+            data: callVerbose
+        });
+    }
+
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');

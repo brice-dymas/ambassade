@@ -7,6 +7,7 @@ import { ProduitComponent } from './produit.component';
 import { ProduitDetailComponent } from './produit-detail.component';
 import { ProduitPopupComponent } from './produit-dialog.component';
 import { ProduitDeletePopupComponent } from './produit-delete-dialog.component';
+import {PrintComponent} from '../print/print.component';
 
 @Injectable()
 export class ProduitResolvePagingParams implements Resolve<any> {
@@ -52,6 +53,14 @@ export const produitRoute: Routes = [
             pageTitle: 'ambassadeApp.produit.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'print',
+        component: PrintComponent,
+        data: {
+            authorities: ['ROLE_PRODUIT_MANAGER'],
+            pageTitle: 'ambassadeApp.produit.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
@@ -60,7 +69,7 @@ export const produitPopupRoute: Routes = [
         path: 'produit-new',
         component: ProduitPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_PRODUIT_MANAGER'],
             pageTitle: 'ambassadeApp.produit.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -70,7 +79,7 @@ export const produitPopupRoute: Routes = [
         path: 'produit/:id/edit',
         component: ProduitPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_PRODUIT_MANAGER'],
             pageTitle: 'ambassadeApp.produit.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -80,7 +89,7 @@ export const produitPopupRoute: Routes = [
         path: 'produit/:id/delete',
         component: ProduitDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_PRODUIT_MANAGER'],
             pageTitle: 'ambassadeApp.produit.home.title'
         },
         canActivate: [UserRouteAccessService],

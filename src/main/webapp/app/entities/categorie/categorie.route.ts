@@ -8,6 +8,7 @@ import { CategorieDetailComponent } from './categorie-detail.component';
 import { CategoriePopupComponent } from './categorie-dialog.component';
 import { CategorieDeletePopupComponent } from './categorie-delete-dialog.component';
 import {CategorieSearchComponent} from './categorie-search.component';
+import {PrintComponent} from '../print/print.component';
 
 @Injectable()
 export class CategorieResolvePagingParams implements Resolve<any> {
@@ -53,6 +54,14 @@ export const categorieRoute: Routes = [
             pageTitle: 'ambassadeApp.categorie.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'print',
+        component: PrintComponent,
+        data: {
+            authorities: ['ROLE_CATEGORIE_MANAGER'],
+            pageTitle: 'ambassadeApp.categorie.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
@@ -61,7 +70,7 @@ export const categoriePopupRoute: Routes = [
         path: 'categorie-new',
         component: CategoriePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_CATEGORIE_MANAGER'],
             pageTitle: 'ambassadeApp.categorie.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -71,7 +80,7 @@ export const categoriePopupRoute: Routes = [
         path: 'categorie/:id/edit',
         component: CategoriePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_CATEGORIE_MANAGER'],
             pageTitle: 'ambassadeApp.categorie.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -81,7 +90,7 @@ export const categoriePopupRoute: Routes = [
         path: 'categorie/:id/delete',
         component: CategorieDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_CATEGORIE_MANAGER'],
             pageTitle: 'ambassadeApp.categorie.home.title'
         },
         canActivate: [UserRouteAccessService],

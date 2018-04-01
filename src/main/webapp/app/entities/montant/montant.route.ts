@@ -7,6 +7,7 @@ import { MontantComponent } from './montant.component';
 import { MontantDetailComponent } from './montant-detail.component';
 import { MontantPopupComponent } from './montant-dialog.component';
 import { MontantDeletePopupComponent } from './montant-delete-dialog.component';
+import {PrintComponent} from '../print/print.component';
 
 @Injectable()
 export class MontantResolvePagingParams implements Resolve<any> {
@@ -52,6 +53,14 @@ export const montantRoute: Routes = [
             pageTitle: 'ambassadeApp.montant.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'print',
+        component: PrintComponent,
+        data: {
+            authorities: ['ROLE_MONTANT_MANAGER'],
+            pageTitle: 'ambassadeApp.montant.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
@@ -60,7 +69,7 @@ export const montantPopupRoute: Routes = [
         path: 'montant-new',
         component: MontantPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_MONTANT_MANAGER'],
             pageTitle: 'ambassadeApp.montant.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -70,7 +79,7 @@ export const montantPopupRoute: Routes = [
         path: 'montant/:id/edit',
         component: MontantPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_MONTANT_MANAGER'],
             pageTitle: 'ambassadeApp.montant.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -80,7 +89,7 @@ export const montantPopupRoute: Routes = [
         path: 'montant/:id/delete',
         component: MontantDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_MONTANT_MANAGER'],
             pageTitle: 'ambassadeApp.montant.home.title'
         },
         canActivate: [UserRouteAccessService],

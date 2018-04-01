@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -7,18 +7,15 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Categorie } from './categorie.model';
 import { CategorieService } from './categorie.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
-import { ExcelService } from '../../excel.services';
-import { TableExport } from 'tableexport';
-
-import * as jsPDF from 'jspdf';
+import {UserService} from '../../shared/user/user.service';
 
 @Component({
     selector: 'jhi-categorie',
     templateUrl: './categorie.component.html'
 })
-export class CategorieComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class CategorieComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    currentAccount: any;
     categories: Categorie[];
     error: any;
     success: any;
@@ -32,10 +29,7 @@ currentAccount: any;
     predicate: any;
     previousPage: any;
     reverse: any;
-    te: TableExport;
-    exportData: any;
-
-    @ViewChild('content') content: ElementRef;
+    message: any;
 
     constructor(
         private categorieService: CategorieService,
@@ -45,15 +39,16 @@ currentAccount: any;
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager,
-        private excelService: ExcelService
+        private userService: UserService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
+        const oto = this.userService.authorities();
+        console.log('oto = ', oto);
         this.routeData = this.activatedRoute.data.subscribe((data) => {
             this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
-            this.excelService = excelService;
         });
     }
 
@@ -62,8 +57,8 @@ currentAccount: any;
             page: this.page - 1,
             size: this.itemsPerPage,
             sort: this.sort()}).subscribe(
-                (res: HttpResponse<Categorie[]>) => this.onSuccess(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
+            (res: HttpResponse<Categorie[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
     searchCategorie(categorie: Categorie) {
@@ -101,15 +96,9 @@ currentAccount: any;
         this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
+            console.log('account = ', account);
         });
         this.registerChangeInCategories();
-    }
-    ngAfterViewChecked(): void {
-        this.te = new TableExport(document.querySelector('#default-table'), {
-            formats: ['xlsx'],
-            exportButtons: false,
-            ignoreCols: [2],
-        });
     }
 
     ngOnDestroy() {
@@ -120,7 +109,6 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInCategories() {
-        // this.eventSubscriber = this.eventManager.subscribe('categorieListModification', (response) => this.loadAll());
         this.eventSubscriber = this.eventManager.subscribe('categorieListModification', (response) => {
             if (typeof response.content === 'string') {
                 return this.loadAll();
@@ -137,34 +125,30 @@ currentAccount: any;
         }
         return result;
     }
-
-    exportToExcel(event) {
-        // console.log('Categoeirs to export = ', this.categories);
-        // this.excelService.exportAsExcelFile(this.categories, 'categories');
-        this.exportData = this.te.getExportData()['default-table']['xlsx'];
-        this.te.export2file(this.exportData.data, this.exportData.mimeType, this.exportData.filename, this.exportData.fileExtension);
-    }
-    downloadPDF() {
-        const doc = new jsPDF();
-        const specialElementHandlers = {
-            '#editor': function(element, renderer) {
-                return true;
-            }
+    printPage() {
+        const callVerbose: {
+            dataHeader: any;
+            dataContent: any;
+            property: any;
+        } = {
+            dataHeader: ['ambassadeApp.categorie.id', 'ambassadeApp.categorie.nomCategorie'],
+            dataContent: this.categories,
+            property: Object.getOwnPropertyNames(this.categories[0]),
         };
-        const content = this.content.nativeElement;
-
-        doc.fromHTML(content.innerHTML, 15, 15, {
-            'width': 190,
-            // 'elementHandlers': specialElementHandlers
+        this.router.navigateByData({
+            url: ['/print'],
+            // data: this.categories
+            data: callVerbose
         });
-        doc.save('monTest2.pdf');
     }
+
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
         this.categories = data;
+        this.message =  data;
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);

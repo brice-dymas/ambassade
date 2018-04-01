@@ -7,6 +7,7 @@ import { LivreComponent } from './livre.component';
 import { LivreDetailComponent } from './livre-detail.component';
 import { LivrePopupComponent } from './livre-dialog.component';
 import { LivreDeletePopupComponent } from './livre-delete-dialog.component';
+import {PrintComponent} from '../print/print.component';
 
 @Injectable()
 export class LivreResolvePagingParams implements Resolve<any> {
@@ -52,6 +53,14 @@ export const livreRoute: Routes = [
             pageTitle: 'ambassadeApp.livre.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'print',
+        component: PrintComponent,
+        data: {
+            authorities: ['ROLE_LIVRE_MANAGER'],
+            pageTitle: 'ambassadeApp.livre.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
@@ -60,7 +69,7 @@ export const livrePopupRoute: Routes = [
         path: 'livre-new',
         component: LivrePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_LIVRE_MANAGER'],
             pageTitle: 'ambassadeApp.livre.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -70,7 +79,7 @@ export const livrePopupRoute: Routes = [
         path: 'livre/:id/edit',
         component: LivrePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_LIVRE_MANAGER'],
             pageTitle: 'ambassadeApp.livre.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -80,7 +89,7 @@ export const livrePopupRoute: Routes = [
         path: 'livre/:id/delete',
         component: LivreDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_LIVRE_MANAGER'],
             pageTitle: 'ambassadeApp.livre.home.title'
         },
         canActivate: [UserRouteAccessService],
