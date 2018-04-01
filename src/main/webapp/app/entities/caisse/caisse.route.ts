@@ -8,6 +8,7 @@ import { CaisseDetailComponent } from './caisse-detail.component';
 import { CaissePopupComponent } from './caisse-dialog.component';
 import { CaisseDeletePopupComponent } from './caisse-delete-dialog.component';
 import {CaisseSearchComponent} from './caisse-search.component';
+import {PrintComponent} from '../print/print.component';
 
 @Injectable()
 export class CaisseResolvePagingParams implements Resolve<any> {
@@ -53,6 +54,14 @@ export const caisseRoute: Routes = [
             pageTitle: 'ambassadeApp.caisse.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'print',
+        component: PrintComponent,
+        data: {
+            authorities: ['ROLE_CAISSE_MANAGER'],
+            pageTitle: 'ambassadeApp.categorie.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
@@ -61,7 +70,7 @@ export const caissePopupRoute: Routes = [
         path: 'caisse-new',
         component: CaissePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_CAISSE_MANAGER'],
             pageTitle: 'ambassadeApp.caisse.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -71,7 +80,7 @@ export const caissePopupRoute: Routes = [
         path: 'caisse/:id/edit',
         component: CaissePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_CAISSE_MANAGER'],
             pageTitle: 'ambassadeApp.caisse.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -81,7 +90,7 @@ export const caissePopupRoute: Routes = [
         path: 'caisse/:id/delete',
         component: CaisseDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_CAISSE_MANAGER'],
             pageTitle: 'ambassadeApp.caisse.home.title'
         },
         canActivate: [UserRouteAccessService],

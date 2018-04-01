@@ -58,7 +58,7 @@ export const categorieRoute: Routes = [
         path: 'print',
         component: PrintComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_CATEGORIE_MANAGER'],
             pageTitle: 'ambassadeApp.categorie.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -70,7 +70,7 @@ export const categoriePopupRoute: Routes = [
         path: 'categorie-new',
         component: CategoriePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_CATEGORIE_MANAGER'],
             pageTitle: 'ambassadeApp.categorie.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -80,7 +80,7 @@ export const categoriePopupRoute: Routes = [
         path: 'categorie/:id/edit',
         component: CategoriePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_CATEGORIE_MANAGER'],
             pageTitle: 'ambassadeApp.categorie.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -90,7 +90,7 @@ export const categoriePopupRoute: Routes = [
         path: 'categorie/:id/delete',
         component: CategorieDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_CATEGORIE_MANAGER'],
             pageTitle: 'ambassadeApp.categorie.home.title'
         },
         canActivate: [UserRouteAccessService],

@@ -7,8 +7,9 @@
             Create new Categorie
             </span>
         </button>&nbsp;
-        <button *jhiHasAnyAuthority="['ROLE_CATEGORIE_MANAGER','ROLE_USER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
-                class="btn btn-info">Imprimer</button>
+            <button *jhiHasAnyAuthority="['ROLE_CATEGORIE_MANAGER','ROLE_USER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
+                    class="btn btn-info">Imprimer</button>
+sando
     </h2>
     <jhi-alert></jhi-alert>
     <br/>

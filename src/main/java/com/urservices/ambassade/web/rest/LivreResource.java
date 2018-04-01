@@ -98,9 +98,9 @@ public class LivreResource {
         log.debug("REST request to get a page of Livres");
 
         Long quantite =  webRequest.getParameter("quantite") !=null && webRequest.getParameter("quantite") !="" ?
-            Long.valueOf(webRequest.getParameter("quantite")): null;
+            Long.valueOf(webRequest.getParameter("quantite")): 0;
         Integer annee =  webRequest.getParameter("annee") !=null && webRequest.getParameter("annee") !="" ?
-            Integer.valueOf(webRequest.getParameter("annee")): null;
+            Integer.valueOf(webRequest.getParameter("annee")): 0;
         String codeISBN = webRequest.getParameter("codeISBN") !=null ? webRequest.getParameter("codeISBN"):"";
         String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
         String auteur = webRequest.getParameter("auteur") !=null ? webRequest.getParameter("auteur"):"";

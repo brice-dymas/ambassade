@@ -131,12 +131,53 @@ currentAccount: any;
         return result;
     }
 
+    printPage() {
+        const callVerbose: {
+            dataHeader: any;
+            dataContent: any;
+            property: any;
+        } = {
+            dataHeader: ['ambassadeApp.donneesActe.reference',
+                'ambassadeApp.donneesActe.dateDuJourChiffre',
+                'ambassadeApp.donneesActe.nomEnfant',
+                'ambassadeApp.donneesActe.villeNaissance',
+                'ambassadeApp.donneesActe.annee',
+                'ambassadeApp.donneesActe.nomPere',
+                'ambassadeApp.donneesActe.prenomPere',
+                'ambassadeApp.donneesActe.adressePere',
+                'ambassadeApp.donneesActe.nomMere',
+                'ambassadeApp.donneesActe.prenomMere',
+                'ambassadeApp.donneesActe.adresseMere',
+                'ambassadeApp.donneesActe.juridiction'],
+            dataContent: this.donneesActes,
+            property: ['reference',
+                'dateDuJourChiffre',
+                'nomEnfant',
+                'villeNaissance',
+                'annee',
+                'nomPere',
+                'prenomPere',
+                'adressePere',
+                'nomMere',
+                'prenomMere',
+                'adresseMere',
+                'juridiction'],
+            // property: Object.getOwnPropertyNames(this.donneesActes[0]),
+        };
+        this.router.navigateByData({
+            url: ['/print'],
+            // data: this.categories
+            data: callVerbose
+        });
+    }
+
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
         this.donneesActes = data;
+        console.log('donneesActes', this.donneesActes);
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);

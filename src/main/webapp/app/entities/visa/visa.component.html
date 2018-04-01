@@ -6,7 +6,9 @@
             <span  jhiTranslate="ambassadeApp.visa.home.createLabel">
             Create new Visa
             </span>
-        </button>
+        </button>&nbsp;
+        <button *jhiHasAnyAuthority="['ROLE_VISA_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
+                class="btn btn-info">Imprimer</button>
     </h2>
     <jhi-alert></jhi-alert>
     <br>

@@ -7,6 +7,7 @@ import { RapatriementComponent } from './rapatriement.component';
 import { RapatriementDetailComponent } from './rapatriement-detail.component';
 import { RapatriementPopupComponent } from './rapatriement-dialog.component';
 import { RapatriementDeletePopupComponent } from './rapatriement-delete-dialog.component';
+import {PrintComponent} from '../print/print.component';
 
 @Injectable()
 export class RapatriementResolvePagingParams implements Resolve<any> {
@@ -52,6 +53,14 @@ export const rapatriementRoute: Routes = [
             pageTitle: 'ambassadeApp.rapatriement.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'print',
+        component: PrintComponent,
+        data: {
+            authorities: ['ROLE_RAPATRIEMENT_MANAGER'],
+            pageTitle: 'ambassadeApp.rapatriement.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
@@ -60,7 +69,7 @@ export const rapatriementPopupRoute: Routes = [
         path: 'rapatriement-new',
         component: RapatriementPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_RAPATRIEMENT_MANAGER'],
             pageTitle: 'ambassadeApp.rapatriement.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -70,7 +79,7 @@ export const rapatriementPopupRoute: Routes = [
         path: 'rapatriement/:id/edit',
         component: RapatriementPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_RAPATRIEMENT_MANAGER'],
             pageTitle: 'ambassadeApp.rapatriement.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -80,7 +89,7 @@ export const rapatriementPopupRoute: Routes = [
         path: 'rapatriement/:id/delete',
         component: RapatriementDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_RAPATRIEMENT_MANAGER'],
             pageTitle: 'ambassadeApp.rapatriement.home.title'
         },
         canActivate: [UserRouteAccessService],

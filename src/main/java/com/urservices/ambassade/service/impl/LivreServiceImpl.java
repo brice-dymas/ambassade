@@ -81,37 +81,37 @@ public class LivreServiceImpl implements LivreService {
                           String consultation, String origine, String sousTitre, String collection, String impression,
                           String format, String index, String bibliographie, String lieuEdition, String lieuImpression,
                           String illustration, String observation, String prenom, String statistique, String glossaire,Pageable pageable){
-        if (quantite==null && annee==null){
-            return livreRepository.search("%"+ codeISBN+"%",auteur+"%","%"+titre+"%","%"+edition+"%",
-                "%"+etagere+"%","%"+categorie+"%","%"+resume+"%","%"+disponible+"%","%"+page+"%",
-                "%"+ consultation+"%","%"+origine+"%","%"+sousTitre+"%","%"+collection+"%",
-                "%"+impression+"%","%"+format+"%","%"+index+"%","%"+bibliographie+"%",
-                "%"+lieuEdition+"%","%"+ lieuImpression+"%","%"+illustration+"%",
-                "%"+observation+"%","%"+prenom+"%","%"+statistique+"%","%"+glossaire+"%",pageable);
-        }else {
-            if (quantite==null && annee!=null){
-                return livreRepository.searchWithAnnee(annee,"%"+ codeISBN+"%",auteur+"%","%"+titre+"%","%"+edition+"%",
-                    "%"+etagere+"%","%"+categorie+"%","%"+resume+"%","%"+disponible+"%","%"+page+"%",
-                    "%"+ consultation+"%","%"+origine+"%","%"+sousTitre+"%","%"+collection+"%",
-                    "%"+impression+"%","%"+format+"%","%"+index+"%","%"+bibliographie+"%",
-                    "%"+lieuEdition+"%","%"+ lieuImpression+"%","%"+illustration+"%",
-                    "%"+observation+"%","%"+prenom+"%","%"+statistique+"%","%"+glossaire+"%",pageable);
-            }
-            if (quantite!=null && annee==null){
-                return livreRepository.searchWithQuantite(quantite,"%"+ codeISBN+"%",auteur+"%","%"+titre+"%","%"+edition+"%",
-                    "%"+etagere+"%","%"+categorie+"%","%"+resume+"%","%"+disponible+"%","%"+page+"%",
-                    "%"+ consultation+"%","%"+origine+"%","%"+sousTitre+"%","%"+collection+"%",
-                    "%"+impression+"%","%"+format+"%","%"+index+"%","%"+bibliographie+"%",
-                    "%"+lieuEdition+"%","%"+ lieuImpression+"%","%"+illustration+"%",
-                    "%"+observation+"%","%"+prenom+"%","%"+statistique+"%","%"+glossaire+"%",pageable);
-            }else {
+//        if (quantite==null && annee==null){
+//            return livreRepository.search("%"+ codeISBN+"%",auteur+"%","%"+titre+"%","%"+edition+"%",
+//                "%"+etagere+"%","%"+categorie+"%","%"+resume+"%","%"+disponible+"%","%"+page+"%",
+//                "%"+ consultation+"%","%"+origine+"%","%"+sousTitre+"%","%"+collection+"%",
+//                "%"+impression+"%","%"+format+"%","%"+index+"%","%"+bibliographie+"%",
+//                "%"+lieuEdition+"%","%"+ lieuImpression+"%","%"+illustration+"%",
+//                "%"+observation+"%","%"+prenom+"%","%"+statistique+"%","%"+glossaire+"%",pageable);
+//        }else {
+//            if (quantite==null && annee!=null){
+//                return livreRepository.searchWithAnnee(annee,"%"+ codeISBN+"%",auteur+"%","%"+titre+"%","%"+edition+"%",
+//                    "%"+etagere+"%","%"+categorie+"%","%"+resume+"%","%"+disponible+"%","%"+page+"%",
+//                    "%"+ consultation+"%","%"+origine+"%","%"+sousTitre+"%","%"+collection+"%",
+//                    "%"+impression+"%","%"+format+"%","%"+index+"%","%"+bibliographie+"%",
+//                    "%"+lieuEdition+"%","%"+ lieuImpression+"%","%"+illustration+"%",
+//                    "%"+observation+"%","%"+prenom+"%","%"+statistique+"%","%"+glossaire+"%",pageable);
+//            }
+//            if (quantite!=null && annee==null){
+//                return livreRepository.searchWithQuantite(quantite,"%"+ codeISBN+"%",auteur+"%","%"+titre+"%","%"+edition+"%",
+//                    "%"+etagere+"%","%"+categorie+"%","%"+resume+"%","%"+disponible+"%","%"+page+"%",
+//                    "%"+ consultation+"%","%"+origine+"%","%"+sousTitre+"%","%"+collection+"%",
+//                    "%"+impression+"%","%"+format+"%","%"+index+"%","%"+bibliographie+"%",
+//                    "%"+lieuEdition+"%","%"+ lieuImpression+"%","%"+illustration+"%",
+//                    "%"+observation+"%","%"+prenom+"%","%"+statistique+"%","%"+glossaire+"%",pageable);
+//            }else {
                 return livreRepository.searchAll(quantite, annee,"%"+ codeISBN+"%",auteur+"%","%"+titre+"%","%"+edition+"%",
                     "%"+etagere+"%","%"+categorie+"%","%"+resume+"%","%"+disponible+"%","%"+page+"%",
                     "%"+ consultation+"%","%"+origine+"%","%"+sousTitre+"%","%"+collection+"%",
                     "%"+impression+"%","%"+format+"%","%"+index+"%","%"+bibliographie+"%",
                     "%"+lieuEdition+"%","%"+ lieuImpression+"%","%"+illustration+"%",
                     "%"+observation+"%","%"+prenom+"%","%"+statistique+"%","%"+glossaire+"%",pageable);
-            }
-        }
+//            }
+//        }
     }
 }

@@ -134,6 +134,40 @@ currentAccount: any;
         return result;
     }
 
+    printPage() {
+        const callVerbose: {
+            dataHeader: any;
+            dataContent: any;
+            property: any;
+        } = {
+            dataHeader: ['ambassadeApp.rapatriement.reference',
+                'ambassadeApp.rapatriement.numeroDossier',
+                'ambassadeApp.rapatriement.nom',
+                'ambassadeApp.rapatriement.prenom',
+                'ambassadeApp.rapatriement.dateNaissance',
+                'ambassadeApp.rapatriement.sexe',
+                'ambassadeApp.rapatriement.motif',
+                'ambassadeApp.rapatriement.dateRapatriement',
+                'ambassadeApp.rapatriement.frontiere'],
+            dataContent: this.rapatriements,
+            // property: Object.getOwnPropertyNames(this.rapatriements[0]),
+            property: ['reference',
+                'numeroDossier',
+                'nom',
+                'prenom',
+                'dateNaissance',
+                'sexe',
+                'motif',
+                'dateRapatriement',
+                'frontiere'],
+        };
+        this.router.navigateByData({
+            url: ['/print'],
+            // data: this.categories
+            data: callVerbose
+        });
+    }
+
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');

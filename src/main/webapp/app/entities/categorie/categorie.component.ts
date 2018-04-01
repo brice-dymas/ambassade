@@ -7,7 +7,6 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Categorie } from './categorie.model';
 import { CategorieService } from './categorie.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
-import { ExcelService } from '../../excel.services';
 import {UserService} from '../../shared/user/user.service';
 
 @Component({
@@ -40,7 +39,6 @@ export class CategorieComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager,
-        private excelService: ExcelService,
         private userService: UserService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -51,7 +49,6 @@ export class CategorieComponent implements OnInit, OnDestroy {
             this.previousPage = data.pagingParams.page;
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
-            this.excelService = excelService;
         });
     }
 

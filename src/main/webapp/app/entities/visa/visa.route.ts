@@ -7,6 +7,7 @@ import { VisaComponent } from './visa.component';
 import { VisaDetailComponent } from './visa-detail.component';
 import { VisaPopupComponent } from './visa-dialog.component';
 import { VisaDeletePopupComponent } from './visa-delete-dialog.component';
+import {PrintComponent} from '../print/print.component';
 
 @Injectable()
 export class VisaResolvePagingParams implements Resolve<any> {
@@ -52,6 +53,14 @@ export const visaRoute: Routes = [
             pageTitle: 'ambassadeApp.visa.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'print',
+        component: PrintComponent,
+        data: {
+            authorities: ['ROLE_VISA_MANAGER'],
+            pageTitle: 'ambassadeApp.visa.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
@@ -60,7 +69,7 @@ export const visaPopupRoute: Routes = [
         path: 'visa-new',
         component: VisaPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_VISA_MANAGER'],
             pageTitle: 'ambassadeApp.visa.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -70,7 +79,7 @@ export const visaPopupRoute: Routes = [
         path: 'visa/:id/edit',
         component: VisaPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_VISA_MANAGER'],
             pageTitle: 'ambassadeApp.visa.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -80,7 +89,7 @@ export const visaPopupRoute: Routes = [
         path: 'visa/:id/delete',
         component: VisaDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_VISA_MANAGER'],
             pageTitle: 'ambassadeApp.visa.home.title'
         },
         canActivate: [UserRouteAccessService],

@@ -24,6 +24,7 @@ import java.net.URISyntaxException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,7 +104,8 @@ public class RapatriementResource {
         String nom = webRequest.getParameter("nom") !=null ? webRequest.getParameter("nom"):"";
         String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
         String documentID = webRequest.getParameter("documentID") !=null ? webRequest.getParameter("documentID"):"";
-        Sexe sexe= webRequest.getParameter("sexe") !=null ? Sexe.valueOf(webRequest.getParameter("sexe")): Sexe.MASCULIN;
+        List<Sexe> sexe = webRequest.getParameter("sexe") !=null && !webRequest.getParameter("sexe").isEmpty()
+            ? Arrays.asList(Sexe.valueOf(webRequest.getParameter("sexe"))) : Arrays.asList(Sexe.values());
         String motif = webRequest.getParameter("motif") !=null ? webRequest.getParameter("motif"):"";
         String frontiere = webRequest.getParameter("frontiere") !=null ? webRequest.getParameter("frontiere"):"";
 

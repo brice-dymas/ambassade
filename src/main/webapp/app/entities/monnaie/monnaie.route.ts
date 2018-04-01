@@ -7,6 +7,7 @@ import { MonnaieComponent } from './monnaie.component';
 import { MonnaieDetailComponent } from './monnaie-detail.component';
 import { MonnaiePopupComponent } from './monnaie-dialog.component';
 import { MonnaieDeletePopupComponent } from './monnaie-delete-dialog.component';
+import {PrintComponent} from '../print/print.component';
 
 @Injectable()
 export class MonnaieResolvePagingParams implements Resolve<any> {
@@ -52,6 +53,14 @@ export const monnaieRoute: Routes = [
             pageTitle: 'ambassadeApp.monnaie.home.title'
         },
         canActivate: [UserRouteAccessService]
+    }, {
+        path: 'print',
+        component: PrintComponent,
+        data: {
+            authorities: ['ROLE_MONNAIE_MANAGER'],
+            pageTitle: 'ambassadeApp.monnaie.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }
 ];
 
@@ -60,7 +69,7 @@ export const monnaiePopupRoute: Routes = [
         path: 'monnaie-new',
         component: MonnaiePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_MONNAIE_MANAGER'],
             pageTitle: 'ambassadeApp.monnaie.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -70,7 +79,7 @@ export const monnaiePopupRoute: Routes = [
         path: 'monnaie/:id/edit',
         component: MonnaiePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_MONNAIE_MANAGER'],
             pageTitle: 'ambassadeApp.monnaie.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -80,7 +89,7 @@ export const monnaiePopupRoute: Routes = [
         path: 'monnaie/:id/delete',
         component: MonnaieDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_MONNAIE_MANAGER'],
             pageTitle: 'ambassadeApp.monnaie.home.title'
         },
         canActivate: [UserRouteAccessService],
