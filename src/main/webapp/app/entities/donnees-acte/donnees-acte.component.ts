@@ -113,19 +113,12 @@ currentAccount: any;
         return this.dataUtils.openFile(contentType, field);
     }
     registerChangeInDonneesActes() {
-<<<<<<< HEAD
         // this.eventSubscriber = this.eventManager.subscribe('donneesActeListModification', (response) => this.loadAll());
-=======
->>>>>>> 62af50d... amélioration de passport
         this.eventSubscriber = this.eventManager.subscribe('donneesActeListModification', (response) => {
             if (typeof response.content === 'string') {
                 return this.loadAll();
             }else {
-<<<<<<< HEAD
                 return this.searchDonneesActe(response.content);
-=======
-                return this.searchDonneesActes(response.content);
->>>>>>> 62af50d... amélioration de passport
             }
         });
     }

@@ -99,11 +99,11 @@ public class CategorieResource {
 
         String nomCategorie = webRequest.getParameter("nomCategorie") != null ? webRequest.getParameter("nomCategorie") : "";
 
-        Page<Categorie> page = categorieService.search(nomCategorie,pageable);
+        Page<Categorie> page = categorieService.findAll(nomCategorie,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categories");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-    
+
     /**
      * GET  /categories/search : search the categories.
      *
