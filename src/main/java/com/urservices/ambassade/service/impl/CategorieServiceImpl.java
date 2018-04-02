@@ -1,7 +1,10 @@
 package com.urservices.ambassade.service.impl;
 
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.urservices.ambassade.service.CategorieService;
 import com.urservices.ambassade.domain.Categorie;
+import com.urservices.ambassade.domain.QCategorie;
 import com.urservices.ambassade.repository.CategorieRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,7 +79,17 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public Page<Categorie> search(String nomCategorie, Pageable pageable) {
-        return categorieRepository.search("%"+nomCategorie+"%",pageable);
+    public Page<Categorie> findAll(String nomCategorie, Pageable pageable) {
+        log.debug("Request to get all Categories from search");
+        QCategorie categorie = QCategorie.categorie;
+        BooleanExpression predicate;
+        if(nomCategorie!=null){
+            predicate = categorie.nomCategorie.like("%"+nomCategorie+"%");
+            predicate = predicate.and(categorie.id.eq(1L));
+            return categorieRepository.findAll(predicate,pageable);
+        }else{
+            return categorieRepository.findAll(pageable);
+        }
+
     }
 }

@@ -34,4 +34,5 @@ export class Passeport implements BaseEntity {
         public documents?: string,
     ) {
     }
+
 }

@@ -40,5 +40,5 @@ public interface CategorieService {
      */
     void delete(Long id);
 
-    Page<Categorie> search(String nomCategorie, Pageable pageable);
+    public Page<Categorie> findAll(String parameter, Pageable pageable);
 }

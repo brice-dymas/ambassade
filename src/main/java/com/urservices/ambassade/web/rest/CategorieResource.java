@@ -1,7 +1,9 @@
 package com.urservices.ambassade.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.querydsl.core.types.Predicate;
 import com.urservices.ambassade.domain.Categorie;
+import com.urservices.ambassade.domain.QCategorie;
 import com.urservices.ambassade.service.CategorieService;
 import com.urservices.ambassade.web.rest.errors.BadRequestAlertException;
 import com.urservices.ambassade.web.rest.util.HeaderUtil;
@@ -23,6 +25,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.context.request.WebRequest;
 
 /**
  * REST controller for managing Categorie.
@@ -96,7 +99,23 @@ public class CategorieResource {
 
         String nomCategorie = webRequest.getParameter("nomCategorie") != null ? webRequest.getParameter("nomCategorie") : "";
 
-        Page<Categorie> page = categorieService.search(nomCategorie,pageable);
+        Page<Categorie> page = categorieService.findAll(nomCategorie,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categories");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /categories/search : search the categories.
+     *
+     * @param webRequest
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of categories in body
+     */
+    @GetMapping("/categories/search")
+    @Timed
+    public ResponseEntity<List<Categorie>> searchCategories(WebRequest webRequest,Pageable pageable) {
+        log.debug("REST request to get a page of Categories through research");
+        Page<Categorie> page = categorieService.findAll(webRequest.getParameter("nomCategorie"), pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categories");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
