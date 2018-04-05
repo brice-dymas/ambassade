@@ -1,7 +1,9 @@
 package com.urservices.ambassade.service.impl;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.urservices.ambassade.service.MontantService;
 import com.urservices.ambassade.domain.Montant;
+import com.urservices.ambassade.domain.QMontant;
 import com.urservices.ambassade.repository.MontantRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,18 +80,34 @@ public class MontantServiceImpl implements MontantService {
     @Override
     public Page<Montant> findByMonnaieAndProduitAndMontant(String monnaie, String produit, Long montant, Pageable pageable) {
         log.debug("Request to get Monnaie with monnaie: {}, produit: {}, and montant: {}", monnaie, produit, montant);
-        if(monnaie.isEmpty() && produit.isEmpty() && montant==null) {
-        	return this.findAll(pageable);
-        }else {
-	        if (montant == null){
-	            return montantRepository.findByMonnaieAndProduit("%"+monnaie+"%", "%"+produit+"%",
-	                pageable);
-	        }else {
-	            Page<Montant> page = montantRepository.findByMonnaieAndProduitAndMontant("%"+monnaie+"%", "%"+produit+"%", montant,
-	                pageable);
-	            System.out.println(page.getContent());
-	            return page;
-	        }
+        QMontant montant1 = QMontant.montant1;
+        Boolean added = false;
+        BooleanExpression predicate = null;
+        
+        if(monnaie!=null && !monnaie.isEmpty()){
+            predicate = montant1.monnaie.likeIgnoreCase(monnaie);
+        }
+        
+        if(produit!=null && !produit.isEmpty()){
+            if(added){
+                predicate = predicate.and(montant1.produit.likeIgnoreCase(produit));
+            }else{
+                predicate = montant1.produit.likeIgnoreCase(produit);
+            }
+        }
+        
+        if(montant!=null){
+            if(added){
+                predicate = predicate.and(montant1.montant.eq(montant));
+            }else{
+                predicate = montant1.montant.eq(montant);
+            }
+        }
+        
+        if(predicate !=null){
+            return montantRepository.findAll(predicate,pageable);
+        }else{
+            return montantRepository.findAll(pageable);
         }
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.*;
 
 import java.time.LocalDate;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
 
 /**
@@ -16,7 +17,7 @@ import java.time.LocalDate;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface VisaRepository extends JpaRepository<Visa, Long> {
+public interface VisaRepository extends JpaRepository<Visa, Long>, QueryDslPredicateExecutor<Visa> {
     @Query("SELECT R FROM Visa R WHERE R.nom LIKE :nom AND R.prenom LIKE :prenom AND R.nationalite LIKE :nationalite " +
         "AND R.numeroPasseport LIKE :numeroPasseport AND R.cedula LIKE :cedula AND R.numeroVisa >= :numeroVisa " +
         "AND R.dateEmission >= :dateEmissionDeb AND R.dateEmission <= :dateEmissionFin " +

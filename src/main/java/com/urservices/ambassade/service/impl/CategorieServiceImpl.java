@@ -83,9 +83,8 @@ public class CategorieServiceImpl implements CategorieService {
         log.debug("Request to get all Categories from search");
         QCategorie categorie = QCategorie.categorie;
         BooleanExpression predicate;
-        if(nomCategorie!=null){
+        if(nomCategorie!=null && !nomCategorie.isEmpty()){
             predicate = categorie.nomCategorie.like("%"+nomCategorie+"%");
-            predicate = predicate.and(categorie.id.eq(1L));
             return categorieRepository.findAll(predicate,pageable);
         }else{
             return categorieRepository.findAll(pageable);

@@ -1,7 +1,9 @@
 package com.urservices.ambassade.service.impl;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.urservices.ambassade.service.CaisseService;
 import com.urservices.ambassade.domain.Caisse;
+import com.urservices.ambassade.domain.QCaisse;
 import com.urservices.ambassade.repository.CaisseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,8 +86,76 @@ public class CaisseServiceImpl implements CaisseService {
                                String typeID, String numeroID, String serviceConcerne, String monnaie, BigDecimal montant,
                                LocalDate dateRetourDeb, LocalDate dateRetourFin, String telephone, Integer num,
                                String paiement, Pageable pageable) {
-        return caisseRepository.search(reference,dateDuJourDeb,dateDuJourFin,"%"+nom,"%"+prenom+"%",
-            "%"+typeID+"%","%"+numeroID+"%","%"+serviceConcerne+"%","%"+monnaie+"%",
-            montant,dateRetourDeb,dateRetourFin,"%"+telephone+"%",num,"%"+paiement+"%",pageable);
+        
+        
+        //TO DO Reference doit être string
+        //retirer typeID, numeroId, montant,num,monnaie,paiement
+        
+        QCaisse caisse = QCaisse.caisse;
+        Boolean added = false;
+        BooleanExpression predicate = null;
+        
+        if(nom!=null && !nom.isEmpty()){
+            predicate = caisse.nom.likeIgnoreCase(nom);
+        }
+        
+        if(prenom!=null && !prenom.isEmpty()){
+            if(added){
+                predicate = predicate.and(caisse.prenom.likeIgnoreCase(prenom));
+            }else{
+                predicate = caisse.prenom.likeIgnoreCase(prenom);
+            }
+        }
+        
+        if(serviceConcerne!=null && !serviceConcerne.isEmpty()){
+            if(added){
+                predicate = predicate.and(caisse.serviceConcerne.likeIgnoreCase(serviceConcerne));
+            }else{
+                predicate = caisse.serviceConcerne.likeIgnoreCase(serviceConcerne);
+            }
+        }
+        
+        if(telephone!=null && !telephone.isEmpty()){
+            if(added){
+                predicate = predicate.and(caisse.telephone.likeIgnoreCase(telephone));
+            }else{
+                predicate = caisse.telephone.likeIgnoreCase(telephone);
+            }
+        }
+        
+        if(dateDuJourDeb!=null){
+            if(added){
+                predicate = predicate.and(caisse.dateDuJour.goe(dateDuJourDeb));
+            }else{
+                predicate = caisse.dateDuJour.goe(dateDuJourDeb);
+            }
+        }
+        if(dateDuJourFin!=null){
+            if(added){
+                predicate = predicate.and(caisse.dateDuJour.loe(dateDuJourFin));
+            }else{
+                predicate = caisse.dateDuJour.loe(dateDuJourFin);
+            }
+        }
+        if(dateRetourDeb!=null){
+            if(added){
+                predicate = predicate.and(caisse.dateRetour.goe(dateRetourDeb));
+            }else{
+                predicate = caisse.dateRetour.goe(dateRetourDeb);
+            }
+        }
+        if(dateRetourFin!=null){
+            if(added){
+                predicate = predicate.and(caisse.dateRetour.loe(dateRetourFin));
+            }else{
+                predicate = caisse.dateRetour.loe(dateRetourFin);
+            }
+        }
+        
+        if(predicate !=null){
+            return caisseRepository.findAll(predicate,pageable);
+        }else{
+            return caisseRepository.findAll(pageable);
+        }
     }
 }

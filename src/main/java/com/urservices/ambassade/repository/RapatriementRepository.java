@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface RapatriementRepository extends JpaRepository<Rapatriement, Long> {
+public interface RapatriementRepository extends JpaRepository<Rapatriement, Long>, QueryDslPredicateExecutor<Rapatriement> {
     @Query("SELECT R FROM Rapatriement R WHERE R.reference >= :reference " +
         "AND R.numeroDossier LIKE :numeroDossier AND R.nom LIKE :nom AND R.prenom LIKE :prenom " +
         "AND R.dateNaissance >= :dateNaissanceDeb AND R.dateNaissance <= :dateNaissanceFin " +

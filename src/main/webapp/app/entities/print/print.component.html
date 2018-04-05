@@ -1,27 +1,35 @@
-<div id="content" *ngIf="dataContent" #content>
-    <br>
-    <h1>PAGE D'IMPRESSION DE DONNEES</h1>&nbsp;
+<div style='text-align: center'>
+    <h3>PAGE D'IMPRESSION DE DONNEES</h3>
     <button (click)="exportToExcel()" class="btn btn-warning">Export to excel</button>&nbsp;
     <!--<button (click)="downloadPDF()" class="btn btn-info">Export to PDF</button>-->
-    <button (click)="downloadPDF()" type="submit" [routerLink]="['../print']"
-            class="btn btn-info">Export to PDF</button>
-    <br>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th *ngFor="let titre of dataHeader">
-                    <span jhiTranslate="{{titre}}"></span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr  *ngFor="let donnee of dataContent">
-                <td *ngFor="let nom of property">
-                    {{donnee[nom]}}
-                    <!--<td>{{donnee[titre]}}</td>-->
-                    <!--<td>{{donnee[titre]}}</td>-->
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <button (click)="downloadPDF()" type="submit" [routerLink]="['../print']" class="btn btn-info">Export to PDF</button>
+</div>
+<br/>
+<div *ngIf="dataContent" class="paper container">
+    <div class="row" id="content">
+        <div class="col-12 col A4 landscape">
+            <div style='text-align: center'>
+                <h4 class="card-title">My awesome Paper card!</h4>
+            </div>
+            <br/>&nbsp;
+            <table>
+                <thead>
+                    <tr>
+                        <th *ngFor="let titre of dataHeader">
+                            <span jhiTranslate="{{titre}}"></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let donnee of dataContent">
+                        <td *ngFor="let nom of property">
+                            {{donnee[nom]}}
+                            <!--<td>{{donnee[titre]}}</td>-->
+                            <!--<td>{{donnee[titre]}}</td>-->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
