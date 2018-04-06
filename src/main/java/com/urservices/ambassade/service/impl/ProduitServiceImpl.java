@@ -1,5 +1,8 @@
 package com.urservices.ambassade.service.impl;
 
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.urservices.ambassade.domain.QProduit;
 import com.urservices.ambassade.service.ProduitService;
 import com.urservices.ambassade.domain.Produit;
 import com.urservices.ambassade.repository.ProduitRepository;
@@ -79,7 +82,41 @@ public class ProduitServiceImpl implements ProduitService {
 
     @Override
     public Page<Produit> searchAll(String monnaie, String nomProduit, Long montant, Pageable pageable) {
-        return produitRepository.findByMonnaieAndProduitAndMontant("%"+ monnaie+"%","%"+
-            nomProduit+"%",montant,pageable);
+        return produitRepository.findByMonnaieAndProduitAndMontant("%" + monnaie + "%", "%" +
+            nomProduit + "%", montant, pageable);
+    }
+
+    @Override
+    public Page<Produit> findAll(String monnaie, String nomProduit, Long montant, Pageable pageable) {
+        log.debug("Request to get all Produits");
+        QProduit produit = QProduit.produit;
+        BooleanExpression predicate = null;
+        boolean added = false;
+        if (monnaie != null && !monnaie.isEmpty()) {
+            predicate = produit.monnaie.likeIgnoreCase(monnaie);
+            added = true;
+        }
+        if (nomProduit != null && !monnaie.isEmpty()) {
+            if (added) {
+                predicate = predicate.and(produit.nomProduit.likeIgnoreCase(nomProduit));
+            } else {
+                predicate = produit.nomProduit.likeIgnoreCase(nomProduit);
+                added = true;
+            }
+        }
+        if (montant != null) {
+            if (added) {
+                predicate = predicate.and(produit.montant.eq(montant));
+            } else {
+                predicate = produit.montant.eq(montant);
+            }
+        }
+        if (predicate != null) {
+            System.out.println("Produit predicate contains parameters");
+            return produitRepository.findAll(predicate, pageable);
+        } else {
+            System.out.println("Produit predicate do not contain parameters");
+            return produitRepository.findAll(pageable);
+        }
     }
 }

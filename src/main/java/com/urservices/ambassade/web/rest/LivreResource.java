@@ -97,39 +97,62 @@ public class LivreResource {
     public ResponseEntity<List<Livre>> getAllLivres(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Livres");
 
-        Long quantite =  webRequest.getParameter("quantite") !=null && webRequest.getParameter("quantite") !="" ?
-            Long.valueOf(webRequest.getParameter("quantite")): 0;
-        Integer annee =  webRequest.getParameter("annee") !=null && webRequest.getParameter("annee") !="" ?
-            Integer.valueOf(webRequest.getParameter("annee")): 0;
-        String codeISBN = webRequest.getParameter("codeISBN") !=null ? webRequest.getParameter("codeISBN"):"";
-        String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
-        String auteur = webRequest.getParameter("auteur") !=null ? webRequest.getParameter("auteur"):"";
-        String titre = webRequest.getParameter("titre") !=null ? webRequest.getParameter("titre"):"";
-        String edition = webRequest.getParameter("edition") !=null ? webRequest.getParameter("edition"):"";
-        String etagere = webRequest.getParameter("etagere") !=null ? webRequest.getParameter("etagere"):"";
-        String categorie = webRequest.getParameter("categorie") !=null ? webRequest.getParameter("categorie"):"";
-        String resume = webRequest.getParameter("resume") !=null ? webRequest.getParameter("resume"):"";
-        String disponible = webRequest.getParameter("disponible") !=null ? webRequest.getParameter("disponible"):"";
-        String page = webRequest.getParameter("page") !=null ? webRequest.getParameter("page"):"";
-        String consultation = webRequest.getParameter("consultation") !=null ? webRequest.getParameter("consultation"):"";
-        String origine = webRequest.getParameter("origine") !=null ? webRequest.getParameter("origine"):"";
-        String sousTitre = webRequest.getParameter("sousTitre") !=null ? webRequest.getParameter("sousTitre"):"";
-        String collection = webRequest.getParameter("collection") !=null ? webRequest.getParameter("collection"):"";
-        String impression = webRequest.getParameter("impression") !=null ? webRequest.getParameter("impression"):"";
-        String format = webRequest.getParameter("format") !=null ? webRequest.getParameter("format"):"";
-        String index = webRequest.getParameter("index") !=null ? webRequest.getParameter("index"):"";
-        String bibliographie = webRequest.getParameter("bibliographie") !=null ? webRequest.getParameter("bibliographie"):"";
-        String lieuEdition = webRequest.getParameter("lieuEdition") !=null ? webRequest.getParameter("lieuEdition"):"";
-        String lieuImpression = webRequest.getParameter("lieuImpression") !=null ? webRequest.getParameter("lieuImpression"):"";
-        String illustration = webRequest.getParameter("illustration") !=null ? webRequest.getParameter("illustration"):"";
-        String observation= webRequest.getParameter("observation") !=null ? webRequest.getParameter("observation"):"";
-        String statistique= webRequest.getParameter("statistique") !=null ? webRequest.getParameter("statistique"):"";
-        String glossaire = webRequest.getParameter("glossaire") !=null ? webRequest.getParameter("glossaire"):"";
+        Long quantite =  webRequest.getParameter("quantite") !=null && !webRequest.getParameter("quantite").isEmpty() ?
+            Long.valueOf(webRequest.getParameter("quantite")): null;
+        Integer annee =  webRequest.getParameter("annee") !=null && !webRequest.getParameter("annee").isEmpty() ?
+            Integer.valueOf(webRequest.getParameter("annee")): null;
+        String codeISBN = webRequest.getParameter("codeISBN") !=null && !webRequest.getParameter("codeISBN").isEmpty()
+            ? webRequest.getParameter("codeISBN"):  null;
+        String prenom = webRequest.getParameter("prenom") !=null && !webRequest.getParameter("prenom").isEmpty()
+            ? webRequest.getParameter("prenom"):  null;
+        String auteur = webRequest.getParameter("auteur") !=null && !webRequest.getParameter("auteur").isEmpty()
+            ? webRequest.getParameter("auteur"):  null;
+        String titre = webRequest.getParameter("titre") !=null && !webRequest.getParameter("titre").isEmpty()
+            ? webRequest.getParameter("titre"):  null;
+        String edition = webRequest.getParameter("edition") !=null && !webRequest.getParameter("edition").isEmpty()
+            ? webRequest.getParameter("edition"):  null;
+        String etagere = webRequest.getParameter("etagere") !=null && !webRequest.getParameter("etagere").isEmpty()
+            ? webRequest.getParameter("etagere"):  null;
+        String categorie = webRequest.getParameter("categorie") !=null && !webRequest.getParameter("categorie").isEmpty()
+            ? webRequest.getParameter("categorie"):  null;
+        String resume = webRequest.getParameter("resume") !=null && !webRequest.getParameter("resume").isEmpty()
+            ? webRequest.getParameter("resume"):  null;
+        String disponible = webRequest.getParameter("disponible") !=null && !webRequest.getParameter("disponible").isEmpty()
+            ? webRequest.getParameter("disponible"):  null;
+        String page = webRequest.getParameter("page") !=null && !webRequest.getParameter("page").isEmpty()
+            ? webRequest.getParameter("page"):  null;
+        String consultation = webRequest.getParameter("consultation") !=null && !webRequest.getParameter("consultation").isEmpty()
+            ? webRequest.getParameter("consultation"):  null;
+        String origine = webRequest.getParameter("origine") !=null && !webRequest.getParameter("origine").isEmpty()
+            ? webRequest.getParameter("origine"):  null;
+        String sousTitre = webRequest.getParameter("sousTitre") !=null && !webRequest.getParameter("sousTitre").isEmpty()
+            ? webRequest.getParameter("sousTitre"):  null;
+        String collection = webRequest.getParameter("collection") !=null && !webRequest.getParameter("collection").isEmpty()
+            ? webRequest.getParameter("collection"):  null;
+        String impression = webRequest.getParameter("impression") !=null && !webRequest.getParameter("impression").isEmpty()
+            ? webRequest.getParameter("impression"):  null;
+        String format = webRequest.getParameter("format") !=null && !webRequest.getParameter("format").isEmpty()
+            ? webRequest.getParameter("format"):  null;
+        String index = webRequest.getParameter("index") !=null && !webRequest.getParameter("index").isEmpty()
+            ? webRequest.getParameter("index"):  null;
+        String bibliographie = webRequest.getParameter("bibliographie") !=null && !webRequest.getParameter("bibliographie").isEmpty()
+            ? webRequest.getParameter("bibliographie"):  null;
+        String lieuEdition = webRequest.getParameter("lieuEdition") !=null && !webRequest.getParameter("lieuEdition").isEmpty()
+            ? webRequest.getParameter("lieuEdition"):  null;
+        String lieuImpression = webRequest.getParameter("lieuImpression") !=null && !webRequest.getParameter("lieuImpression").isEmpty()
+            ? webRequest.getParameter("lieuImpression"):  null;
+        String illustration = webRequest.getParameter("illustration") !=null && !webRequest.getParameter("illustration").isEmpty()
+            ? webRequest.getParameter("illustration"):  null;
+        String observation= webRequest.getParameter("observation") !=null && !webRequest.getParameter("observation").isEmpty()
+            ? webRequest.getParameter("observation"):  null;
+        String statistique= webRequest.getParameter("statistique") !=null && !webRequest.getParameter("statistique").isEmpty()
+            ? webRequest.getParameter("statistique"):  null;
+        String glossaire = webRequest.getParameter("glossaire") !=null && !webRequest.getParameter("glossaire").isEmpty()
+            ? webRequest.getParameter("glossaire"):  null;
 
 //        Page<Livre> pageLivre = livreService.findAll(pageable);
-        Page<Livre> pageLivre = livreService.searchAll(codeISBN,auteur,titre,edition,etagere,annee,categorie,resume,
-            quantite,disponible,page,consultation,origine,sousTitre,collection,impression,format,index,bibliographie,
-            lieuEdition,lieuImpression,illustration,observation,prenom,statistique,glossaire,pageable);
+        Page<Livre> pageLivre = livreService.findAll(codeISBN,auteur,titre,edition,etagere,annee,categorie,
+            quantite,disponible,origine,collection,format,lieuEdition,lieuImpression,prenom,pageable);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(pageLivre, "/api/livres");
         return new ResponseEntity<>(pageLivre.getContent(), headers, HttpStatus.OK);

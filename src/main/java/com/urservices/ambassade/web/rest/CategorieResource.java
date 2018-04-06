@@ -97,7 +97,7 @@ public class CategorieResource {
     public ResponseEntity<List<Categorie>> getAllCategories(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Categories");
 
-        String nomCategorie = webRequest.getParameter("nomCategorie") != null ? webRequest.getParameter("nomCategorie") : "";
+        String nomCategorie = webRequest.getParameter("nomCategorie") != null ? webRequest.getParameter("nomCategorie") : null;
 
         Page<Categorie> page = categorieService.findAll(nomCategorie,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categories");

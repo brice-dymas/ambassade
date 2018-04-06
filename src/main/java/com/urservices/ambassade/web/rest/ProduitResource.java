@@ -94,12 +94,13 @@ public class ProduitResource {
     public ResponseEntity<List<Produit>> getAllProduits(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Produits");
 
-        String monnaie = webRequest.getParameter("monnaie") != null ? webRequest.getParameter("monnaie") : "";
-        String produit = webRequest.getParameter("nomProduit") != null ? webRequest.getParameter("nomProduit") : "";
+        String monnaie = webRequest.getParameter("monnaie") != null ? webRequest.getParameter("monnaie") : null;
+        String produit = webRequest.getParameter("nomProduit") != null ? webRequest.getParameter("nomProduit") : null;
         Long montant = (webRequest.getParameter("montant") != null && !webRequest.getParameter("montant").equals(""))
-            ? Long.valueOf(webRequest.getParameter("montant")) : 0;
+            ? Long.valueOf(webRequest.getParameter("montant")) : null;
 //        Page<Produit> page = produitService.findAll(pageable);
-        Page<Produit> page = produitService.searchAll(monnaie,produit,montant,pageable);
+//        Page<Produit> page = produitService.searchAll(monnaie,produit,montant,pageable);
+        Page<Produit> page = produitService.findAll(monnaie,produit,montant,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/produits");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

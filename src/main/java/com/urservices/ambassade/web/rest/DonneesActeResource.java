@@ -98,55 +98,75 @@ public class DonneesActeResource {
     public ResponseEntity<List<DonneesActe>> getAllDonneesActes(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of DonneesActes");
 
-        String reference = webRequest.getParameter("reference") !=null ? webRequest.getParameter("reference"):"";
-        String registreSpecialRD = webRequest.getParameter("registreSpecialRD") !=null ? webRequest.getParameter("registreSpecialRD"):"";
-        String nomEnfant = webRequest.getParameter("nomEnfant") !=null ? webRequest.getParameter("nomEnfant"):"";
-        String registre = webRequest.getParameter("registre") !=null ? webRequest.getParameter("registre"):"";
-        String numero = webRequest.getParameter("numero") !=null ? webRequest.getParameter("numero"):"";
-        String nomPere = webRequest.getParameter("nomPere") !=null ? webRequest.getParameter("nomPere"):"";
-        String prenomPere = webRequest.getParameter("prenomPere") !=null ? webRequest.getParameter("prenomPere"):"";
-        String nomMere = webRequest.getParameter("nomMere") !=null ? webRequest.getParameter("nomMere"):"";
-        String prenomMere = webRequest.getParameter("prenomMere") !=null ? webRequest.getParameter("prenomMere"):"";
-        String villeNaissance = webRequest.getParameter("villeNaissance") !=null ? webRequest.getParameter("villeNaissance"):"";
-        String adressePere = webRequest.getParameter("adressePere") !=null ? webRequest.getParameter("adressePere"):"";
-        String adresseMere = webRequest.getParameter("adresseMere") !=null ? webRequest.getParameter("adresseMere"):"";
-        String temoins1 = webRequest.getParameter("temoins1") !=null ? webRequest.getParameter("temoins1"):"";
-        String temoins2 = webRequest.getParameter("temoins2") !=null ? webRequest.getParameter("temoins2"):"";
-        String idPere = webRequest.getParameter("idPere") !=null ? webRequest.getParameter("idPere"):"";
-        String idMere = webRequest.getParameter("idMere") !=null ? webRequest.getParameter("idMere"):"";
-        String juridiction = webRequest.getParameter("juridiction") !=null ? webRequest.getParameter("juridiction"):"";
-        String livre = webRequest.getParameter("livre") !=null ? webRequest.getParameter("livre"):"";
-        String notes = webRequest.getParameter("notes") !=null ? webRequest.getParameter("notes"):"";
-        String feuille = webRequest.getParameter("feuille") !=null ? webRequest.getParameter("feuille"):"";
-        String acte = webRequest.getParameter("acte") !=null ? webRequest.getParameter("acte"):"";
+        String reference = webRequest.getParameter("reference") !=null && !webRequest.getParameter("reference").isEmpty() ?
+            webRequest.getParameter("reference"): null;
+        String registreSpecialRD = webRequest.getParameter("registreSpecialRD") !=null &&
+            !webRequest.getParameter("registreSpecialRD").isEmpty() ? webRequest.getParameter("registreSpecialRD"): null;
+        String nomEnfant = webRequest.getParameter("nomEnfant") !=null && !webRequest.getParameter("nomEnfant").isEmpty() ?
+            webRequest.getParameter("nomEnfant"): null;
+        String registre = webRequest.getParameter("registre") !=null && !webRequest.getParameter("registre").isEmpty() ?
+            webRequest.getParameter("registre"): null;
+        String numero = webRequest.getParameter("numero") !=null && !webRequest.getParameter("numero").isEmpty() ?
+            webRequest.getParameter("numero"): null;
+        String nomPere = webRequest.getParameter("nomPere") !=null && !webRequest.getParameter("nomPere").isEmpty() ?
+            webRequest.getParameter("nomPere"): null;
+        String prenomPere = webRequest.getParameter("prenomPere") !=null && !webRequest.getParameter("prenomPere").isEmpty() ?
+            webRequest.getParameter("prenomPere"):null;
+        String nomMere = webRequest.getParameter("nomMere") !=null && webRequest.getParameter("nomMere").isEmpty() ?
+            webRequest.getParameter("nomMere"):null;
+        String prenomMere = webRequest.getParameter("prenomMere") !=null && !webRequest.getParameter("prenomMere").isEmpty() ?
+            webRequest.getParameter("prenomMere"):null;
+        String villeNaissance = webRequest.getParameter("villeNaissance") !=null && !webRequest.getParameter("villeNaissance").isEmpty()
+            ? webRequest.getParameter("villeNaissance"):null;
+        String adressePere = webRequest.getParameter("adressePere") !=null && !webRequest.getParameter("adressePere").isEmpty()
+            ? webRequest.getParameter("adressePere"):null;
+        String adresseMere = webRequest.getParameter("adresseMere") !=null && !webRequest.getParameter("adresseMere").isEmpty()
+            ? webRequest.getParameter("adresseMere"):null;
+        String temoins1 = webRequest.getParameter("temoins1") !=null && !webRequest.getParameter("temoins1").isEmpty()
+            ? webRequest.getParameter("temoins1"):null;
+        String temoins2 = webRequest.getParameter("temoins2") !=null && !webRequest.getParameter("temoins2").isEmpty()
+            ? webRequest.getParameter("temoins2"):null;
+        String idPere = webRequest.getParameter("idPere") !=null && !webRequest.getParameter("idPere").isEmpty()
+            ? webRequest.getParameter("idPere"):null;
+        String idMere = webRequest.getParameter("idMere") !=null && !webRequest.getParameter("idMere").isEmpty()
+            ? webRequest.getParameter("idMere"):null;
+        String juridiction = webRequest.getParameter("juridiction") !=null && !webRequest.getParameter("juridiction").isEmpty()
+            ? webRequest.getParameter("juridiction"):null;
+        String livre = webRequest.getParameter("livre") !=null && !webRequest.getParameter("livre").isEmpty()
+            ? webRequest.getParameter("livre"):null;
+        String notes = webRequest.getParameter("notes") !=null && !webRequest.getParameter("notes").isEmpty()
+            ? webRequest.getParameter("notes"):null;
+        String feuille = webRequest.getParameter("feuille") !=null && !webRequest.getParameter("feuille").isEmpty()
+            ? webRequest.getParameter("feuille"):null;
+        String acte = webRequest.getParameter("acte") !=null && !webRequest.getParameter("acte").isEmpty()
+            ? webRequest.getParameter("acte"):null;
         Integer annee = webRequest.getParameter("annee") !=null && !webRequest.getParameter("annee").isEmpty()
-            ? Integer.valueOf(webRequest.getParameter("annee")):1970;
+            ? Integer.valueOf(webRequest.getParameter("annee")): null;
 
-        List<Sexe> sexe = webRequest.getParameter("sexe") !=null && !webRequest.getParameter("sexe").isEmpty()
-            ? Arrays.asList(Sexe.valueOf(webRequest.getParameter("sexe"))) : Arrays.asList(Sexe.values());
-        List<Statut> statut  = webRequest.getParameter("statut") !=null  && !webRequest.getParameter("statut").isEmpty() ?
-            Arrays.asList(Statut.valueOf(webRequest.getParameter("statut"))):Arrays.asList(Statut.values());
+        Sexe sexe = webRequest.getParameter("sexe") !=null && !webRequest.getParameter("sexe").isEmpty()
+            ?Sexe.valueOf(webRequest.getParameter("sexe")) : null;
+        Statut statut  = webRequest.getParameter("statut") !=null  && !webRequest.getParameter("statut").isEmpty() ?
+            Statut.valueOf(webRequest.getParameter("statut")):null;
+        String  dateNaissanceChiffreDebStr = webRequest.getParameter("dateNaissanceChiffre") !=null &&
+            !webRequest.getParameter("dateNaissanceChiffre").isEmpty()? webRequest.getParameter("dateNaissanceChiffre"): null;
 
         String dateDuJourChiffreDebStr = webRequest.getParameter("dateDuJourChiffre") !=null &&
-            !webRequest.getParameter("dateDuJourChiffre").isEmpty()? webRequest.getParameter("dateDuJourChiffre"): "1970-01-01";;
-        String dateDuJourChiffreFinStr = webRequest.getParameter("dateDuJourChiffreFin") !=null &&
-            !webRequest.getParameter("dateDuJourChiffreFin").isEmpty()? webRequest.getParameter("dateDuJourChiffreFin"):
-            LocalDate.now().toString();
-        String  dateNaissanceChiffreDebStr = webRequest.getParameter("dateNaissanceChiffre") !=null &&
-            !webRequest.getParameter("dateNaissanceChiffre").isEmpty()? webRequest.getParameter("dateNaissanceChiffre"): "1970-01-01";;
-        String dateNaissanceChiffreFinStr = webRequest.getParameter("dateNaissanceChiffreFin") !=null &&
-            !webRequest.getParameter("dateNaissanceChiffreFin").isEmpty()?
-            webRequest.getParameter("dateNaissanceChiffreFin"): LocalDate.now().toString();
+            !webRequest.getParameter("dateDuJourChiffre").isEmpty()? webRequest.getParameter("dateDuJourChiffre"): null;
 
-        LocalDate dateDuJourChiffreDeb = LocalDate.parse(dateDuJourChiffreDebStr);
-        LocalDate dateDuJourChiffreFin = LocalDate.parse(dateDuJourChiffreFinStr);
-        LocalDate dateNaissanceChiffreDeb = LocalDate.parse(dateNaissanceChiffreDebStr);
-        LocalDate dateNaissanceChiffreFin = LocalDate.parse(dateNaissanceChiffreFinStr);
+        LocalDate dateDuJourChiffreDeb = null;
+        LocalDate dateNaissanceChiffreDeb = null;
+        if ( dateDuJourChiffreDebStr != null && !dateDuJourChiffreDebStr.isEmpty()){
+            dateDuJourChiffreDeb = LocalDate.parse(dateDuJourChiffreDebStr);
 
-        Page<DonneesActe> page = donneesActeService.searchAll(reference,registreSpecialRD,nomEnfant,dateDuJourChiffreDeb,
-            dateDuJourChiffreFin,registre,statut,numero,nomPere,prenomPere,nomMere,prenomMere,dateNaissanceChiffreDeb,
-            dateNaissanceChiffreFin,annee,sexe,villeNaissance,adressePere,adresseMere,temoins1,temoins2,idPere,idMere,
-            juridiction,livre,notes,feuille,acte,pageable);
+        }
+        if (dateNaissanceChiffreDebStr != null && !dateNaissanceChiffreDebStr.isEmpty()){
+            dateNaissanceChiffreDeb = LocalDate.parse(dateNaissanceChiffreDebStr);
+        }
+
+        Page<DonneesActe> page = donneesActeService.findAll(reference,nomEnfant,dateDuJourChiffreDeb,
+            registre,statut,nomPere,prenomPere,nomMere,prenomMere,dateNaissanceChiffreDeb,
+            annee,sexe,villeNaissance,adressePere,adresseMere,juridiction,livre,acte,pageable);
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/donnees-actes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
