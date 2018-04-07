@@ -1,5 +1,7 @@
 package com.urservices.ambassade.service.impl;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.urservices.ambassade.domain.QDonneesActe;
 import com.urservices.ambassade.domain.enumeration.Sexe;
 import com.urservices.ambassade.domain.enumeration.Statut;
 import com.urservices.ambassade.service.DonneesActeService;
@@ -96,5 +98,179 @@ public class DonneesActeServiceImpl implements DonneesActeService {
             "%"+temoins1+"%","%"+temoins2+"%","%"+idPere+"%","%"+idMere+"%",
             "%"+juridiction+"%","%"+livre+"%","%"+notes+"%","%"+feuille+"%","%"+acte+"%",
             pageable);
+    }
+
+    @Override
+    public Page<DonneesActe> findAll(String reference, String nomEnfant, LocalDate dateDuJourChiffreDeb,LocalDate dateDuJourChiffreFin,
+                                     String registre, Statut statut, String nomPere, String prenomPere,
+                                     String nomMere, String prenomMere, LocalDate dateNaissanceChiffreDeb, LocalDate dateNaissanceChiffreFin,
+                                     Integer annee, Sexe sexe, String villeNaissance, String adressePere, String adresseMere,
+                                     String juridiction, String livre, String acte, Pageable pageable) {
+        QDonneesActe donneesActe = QDonneesActe.donneesActe;
+        BooleanExpression predicate = null;
+        boolean added = true;
+        if (reference != null){
+            predicate = donneesActe.reference.likeIgnoreCase("%"+reference+"%");
+            added = true;
+        }
+        if (nomEnfant  !=  null){
+            if(added){
+                predicate = predicate.and(donneesActe.nomEnfant.likeIgnoreCase("%"+nomEnfant+"%"));
+            }else {
+                predicate = donneesActe.nomEnfant.likeIgnoreCase("%"+nomEnfant+"%");
+                added =  true;
+            }
+        }
+        if (dateDuJourChiffreDeb != null){
+            if(added){
+                if (dateDuJourChiffreFin !=  null){
+                    predicate = predicate.and(donneesActe.dateDuJourChiffre.between(dateDuJourChiffreDeb,dateDuJourChiffreFin));
+                }else {
+                    predicate =  predicate.and(donneesActe.dateDuJourChiffre.eq(dateDuJourChiffreDeb));
+                }
+
+            }else {
+                if (dateDuJourChiffreFin !=  null){
+                    predicate = donneesActe.dateDuJourChiffre.between(dateDuJourChiffreDeb,dateDuJourChiffreFin);
+                }else {
+                    predicate =  donneesActe.dateDuJourChiffre.eq(dateDuJourChiffreDeb);
+                }
+                added =  true;
+            }
+        }
+        if (registre != null){
+            if(added){
+                predicate = predicate.and(donneesActe.registre.likeIgnoreCase("%"+registre+"%"));
+            }else {
+                predicate = donneesActe.registre.likeIgnoreCase("%"+registre+"%");
+                added =  true;
+            }
+        }
+        if (statut != null){
+            if(added){
+                predicate = predicate.and(donneesActe.statut.eq(statut));
+            }else {
+                predicate = donneesActe.statut.eq(statut);
+                added =  true;
+            }
+        }
+        if (nomPere != null){
+            if(added){
+                predicate = predicate.and(donneesActe.nomPere.likeIgnoreCase("%"+nomPere+"%"));
+            }else {
+                predicate = donneesActe.nomPere.likeIgnoreCase("%"+nomPere+"%");
+                added =  true;
+            }
+        }
+        if (prenomPere != null){
+            if(added){
+                predicate = predicate.and(donneesActe.prenomPere.likeIgnoreCase("%"+prenomPere+"%"));
+            }else {
+                predicate = donneesActe.prenomPere.likeIgnoreCase("%"+prenomPere+"%");
+                added =  true;
+            }
+        }
+        if (nomMere != null){
+            if(added){
+                predicate = predicate.and(donneesActe.nomMere.likeIgnoreCase("%"+nomMere+"%"));
+            }else {
+                predicate = donneesActe.nomMere.likeIgnoreCase("%"+nomMere+"%");
+                added =  true;
+            }
+        }
+        if (prenomMere != null){
+            if(added){
+                predicate = predicate.and(donneesActe.prenomMere.likeIgnoreCase("%"+prenomMere+"%"));
+            }else {
+                predicate = donneesActe.prenomMere.likeIgnoreCase("%"+prenomMere+"%");
+                added =  true;
+            }
+        }
+        if (dateNaissanceChiffreDeb != null){
+            if(added){
+                if (dateNaissanceChiffreFin !=  null){
+                    predicate = predicate.and(donneesActe.dateNaissanceChiffre.between(dateNaissanceChiffreDeb,dateNaissanceChiffreFin));
+                }else {
+                    predicate =  predicate.and(donneesActe.dateNaissanceChiffre.eq(dateNaissanceChiffreDeb));
+                }
+
+            }else {
+                if (dateNaissanceChiffreFin !=  null){
+                    predicate = donneesActe.dateNaissanceChiffre.between(dateNaissanceChiffreDeb,dateNaissanceChiffreFin);
+                }else {
+                    predicate =  donneesActe.dateNaissanceChiffre.eq(dateNaissanceChiffreDeb);
+                }
+                added =  true;
+            }
+        }
+        if (sexe != null){
+            if(added){
+                predicate = predicate.and(donneesActe.sexe.eq(sexe));
+            }else {
+                predicate = donneesActe.sexe.eq(sexe);
+                added =  true;
+            }
+        }
+        if (annee != null){
+            if(added){
+                predicate = predicate.and(donneesActe.annee.eq(annee));
+            }else {
+                predicate = donneesActe.annee.eq(annee);
+                added =  true;
+            }
+        }
+        if (villeNaissance != null){
+            if(added){
+                predicate = predicate.and(donneesActe.villeNaissance.likeIgnoreCase("%"+villeNaissance+"%"));
+            }else {
+                predicate = donneesActe.villeNaissance.likeIgnoreCase("%"+villeNaissance+"%");
+                added =  true;
+            }
+        }
+        if (adressePere != null){
+            if(added){
+                predicate = predicate.and(donneesActe.adressePere.likeIgnoreCase("%"+adressePere+"%"));
+            }else {
+                predicate = donneesActe.adressePere.likeIgnoreCase("%"+adressePere+"%");
+                added =  true;
+            }
+        }
+        if (adresseMere != null){
+            if(added){
+                predicate = predicate.and(donneesActe.adresseMere.likeIgnoreCase("%"+adresseMere+"%"));
+            }else {
+                predicate = donneesActe.adresseMere.likeIgnoreCase("%"+adresseMere+"%");
+                added =  true;
+            }
+        }
+        if (juridiction != null){
+            if(added){
+                predicate = predicate.and(donneesActe.juridiction.likeIgnoreCase("%"+juridiction+"%"));
+            }else {
+                predicate = donneesActe.juridiction.likeIgnoreCase("%"+juridiction+"%");
+                added =  true;
+            }
+        }
+        if (livre != null){
+            if(added){
+                predicate = predicate.and(donneesActe.livre.likeIgnoreCase("%"+livre+"%"));
+            }else {
+                predicate = donneesActe.livre.likeIgnoreCase("%"+livre+"%");
+                added =  true;
+            }
+        }
+        if (acte != null){
+            if(added){
+                predicate = predicate.and(donneesActe.acte.likeIgnoreCase("%"+acte+"%"));
+            }else {
+                predicate = donneesActe.acte.likeIgnoreCase("%"+acte+"%");
+            }
+        }
+
+        if (predicate  !=  null){
+            return donneesActeRepository.findAll(predicate, pageable);
+        }else {
+            return donneesActeRepository.findAll(pageable);
+        }
     }
 }

@@ -1,14 +1,20 @@
 <div>
     <h2>
-        <span jhiTranslate="ambassadeApp.rapatriement.home.title">Rapatriements</span>
-        <button class="btn btn-primary float-right jh-create-entity create-rapatriement" [routerLink]="['/', { outlets: { popup: ['rapatriement-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span  jhiTranslate="ambassadeApp.rapatriement.home.createLabel">
-            Create new Rapatriement
-            </span>
-        </button>&nbsp;
-        <button *jhiHasAnyAuthority="['ROLE_RAPATRIEMENT_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
-                class="btn btn-info">Imprimer</button>
+        <div class="row">
+            <div class="col-md-6">
+                <span jhiTranslate="ambassadeApp.rapatriement.home.title">Rapatriements</span>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-blue btn-sm float-right jh-create-entity create-rapatriement" [routerLink]="['/', { outlets: { popup: ['rapatriement-new'] } }]">
+                    <span class="fa fa-pencil-square-o"></span>
+                    <span  jhiTranslate="ambassadeApp.rapatriement.home.createLabel">Create new Rapatriement</span>
+                </button>
+                </button>&nbsp;
+                <button *jhiHasAnyAuthority="['ROLE_RAPATRIEMENT_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
+                        class="btn btn-info">Imprimer</button>
+            </div>
+        </div>
+        <div class="title-bullet"><span></span></div>
     </h2>
     <jhi-alert></jhi-alert>
     <br>
@@ -18,9 +24,9 @@
     <br/>
     <div class="table-responsive" *ngIf="rapatriements">
         <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
+            <thead class="theme-bg-blue text-white">
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
             <th jhiSortBy="reference"><span jhiTranslate="ambassadeApp.rapatriement.reference">Reference</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="numeroDossier"><span jhiTranslate="ambassadeApp.rapatriement.numeroDossier">Numero Dossier</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.rapatriement.nom">Nom</span> <span class="fa fa-sort"></span></th>
@@ -38,7 +44,7 @@
             </thead>
             <tbody class="table-sm">
             <tr *ngFor="let rapatriement of rapatriements ;trackBy: trackId">
-                <td><a [routerLink]="['../rapatriement', rapatriement.id ]">{{rapatriement.id}}</a></td>
+                <!-- <td><a [routerLink]="['../rapatriement', rapatriement.id ]">{{rapatriement.id}}</a></td> -->
                 <td>{{rapatriement.reference}}</td>
                 <td>{{rapatriement.numeroDossier}}</td>
                 <td>{{rapatriement.nom}}</td>
@@ -49,16 +55,18 @@
                 <td>{{rapatriement.motif}}</td>
                 <td>{{rapatriement.dateRapatriement | date:'mediumDate'}}</td>
                 <td>{{rapatriement.frontiere}}</td>
-                <!-- <td>
+                <!--
+                <td>
                     <a *ngIf="rapatriement.documentScanne" (click)="openFile(rapatriement.documentScanneContentType, rapatriement.documentScanne)" jhiTranslate="entity.action.open">open</a>
                     <span *ngIf="rapatriement.documentScanne">{{rapatriement.documentScanneContentType}}, {{byteSize(rapatriement.documentScanne)}}</span>
                 </td>
-                <td>{{rapatriement.createdByPHPRunner}}</td> -->
+                <td>{{rapatriement.createdByPHPRunner}}</td>
+                 -->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../rapatriement', rapatriement.id ]"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-primary btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
@@ -66,8 +74,8 @@
                                 [routerLink]="['/', { outlets: { popup: 'rapatriement/'+ rapatriement.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
+                                class="btn btn-blue btn-sm">
+                            <span class="fa fa-pencil-square-o"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
@@ -75,7 +83,7 @@
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
+                            <span class="fa fa-trash"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>
@@ -85,11 +93,17 @@
         </table>
     </div>
     <div *ngIf="rapatriements && rapatriements.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="text-sm-left">
+                    <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pull-right">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div>
         </div>
     </div>
 </div>

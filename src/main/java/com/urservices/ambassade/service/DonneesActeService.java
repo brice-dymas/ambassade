@@ -53,4 +53,10 @@ public interface DonneesActeService {
                                 Integer annee, List<Sexe> sexe, String villeNaissance, String adressePere,
                                 String adresseMere, String temoins1, String temoins2, String idPere, String idMere,
                                 String juridiction, String livre, String notes, String feuille, String acte, Pageable pageable);
+
+    Page<DonneesActe> findAll(String reference, String nomEnfant, LocalDate dateDuJourChiffreDeb,LocalDate dateDuJourChiffreFin,
+                              String registre, Statut statut, String nomPere, String prenomPere,
+                              String nomMere, String prenomMere, LocalDate dateNaissanceChiffreDeb, LocalDate dateNaissanceChiffreFin,
+                              Integer annee, Sexe sexe, String villeNaissance, String adressePere, String adresseMere,
+                              String juridiction, String livre, String acte, Pageable pageable);
 }

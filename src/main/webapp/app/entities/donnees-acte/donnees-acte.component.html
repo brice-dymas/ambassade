@@ -1,14 +1,19 @@
 <div>
     <h2>
-        <span jhiTranslate="ambassadeApp.donneesActe.home.title">Donnees Actes</span>
-        <button class="btn btn-primary float-right jh-create-entity create-donnees-acte" [routerLink]="['/', { outlets: { popup: ['donnees-acte-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span  jhiTranslate="ambassadeApp.donneesActe.home.createLabel">
-            Create new Donnees Acte
-            </span>
-        </button>&nbsp;
-        <button *jhiHasAnyAuthority="['ROLE_DONNEES_ACTE_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
-                class="btn btn-info">Imprimer</button>
+        <div class="row">
+            <div class="col-md-6">
+                <span jhiTranslate="ambassadeApp.donneesActe.home.title">Donnees Actes</span>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-blue btn-sm float-right jh-create-entity create-donnees-acte" [routerLink]="['/', { outlets: { popup: ['donnees-acte-new'] } }]">
+                    <span class="fa fa-pencil-square-o"></span>
+                    <span  jhiTranslate="ambassadeApp.donneesActe.home.createLabel">Create new Donnees Acte</span>
+                </button>&nbsp;
+                <button *jhiHasAnyAuthority="['ROLE_DONNEES_ACTE_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
+                        class="btn btn-info">Imprimer</button>
+            </div>
+        </div>
+        <div class="title-bullet"><span></span></div>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
@@ -16,12 +21,11 @@
         <jhi-donnees-acte-search></jhi-donnees-acte-search>
     </div>
     <br/>
-    <jhi-donnees-acte-search></jhi-donnees-acte-search>
     <div class="table-responsive" *ngIf="donneesActes">
         <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
+            <thead class="theme-bg-blue text-white">
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
             <th jhiSortBy="reference"><span jhiTranslate="ambassadeApp.donneesActe.reference">Reference</span> <span class="fa fa-sort"></span></th>
             <!-- <th jhiSortBy="dateDuJourChiffre"><span jhiTranslate="ambassadeApp.donneesActe.dateDuJourChiffre">Date Du Jour Chiffre</span> <span class="fa fa-sort"></span></th> -->
             <th jhiSortBy="registreSpecialRD"><span jhiTranslate="ambassadeApp.donneesActe.registreSpecialRD">Registre Special RD</span> <span class="fa fa-sort"></span></th>
@@ -54,7 +58,7 @@
             </thead>
             <tbody class="table-sm">
             <tr *ngFor="let donneesActe of donneesActes ;trackBy: trackId">
-                <td><a [routerLink]="['../donnees-acte', donneesActe.id ]">{{donneesActe.id}}</a></td>
+                <!-- <td><a [routerLink]="['../donnees-acte', donneesActe.id ]">{{donneesActe.id}}</a></td> -->
                 <td>{{donneesActe.reference}}</td>
                 <!-- <td>{{donneesActe.dateDuJourChiffre | date:'mediumDate'}}</td> -->
                 <td>{{donneesActe.registreSpecialRD}}</td>
@@ -89,7 +93,7 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../donnees-acte', donneesActe.id ]"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-primary btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
@@ -97,8 +101,8 @@
                                 [routerLink]="['/', { outlets: { popup: 'donnees-acte/'+ donneesActe.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
+                                class="btn btn-blue btn-sm">
+                            <span class="fa fa-pencil-square-o"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
@@ -106,7 +110,7 @@
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
+                            <span class="fa fa-trash"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>

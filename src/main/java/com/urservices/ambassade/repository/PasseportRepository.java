@@ -4,6 +4,7 @@ import com.urservices.ambassade.domain.Passeport;
 import com.urservices.ambassade.domain.enumeration.Statut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface PasseportRepository extends JpaRepository<Passeport, Long> {
+public interface PasseportRepository extends JpaRepository<Passeport, Long>, QueryDslPredicateExecutor<Passeport> {
     @Query("SELECT P FROM Passeport P WHERE P.nom LIKE :nom AND P.prenom LIKE :prenom AND P.numeroPasseport LIKE :numeroPasseport " +
         " AND P.neLe BETWEEN :neLeDeb AND :neLeFin AND P.lieuNaissance LIKE :lieuNaissance AND P.etatCivil IN :etatCivil AND P.adresse LIKE :adresse " +
         " AND P.telephone LIKE :telephone AND P.nif LIKE :nif AND P.paysEmetteur LIKE :paysEmetteur AND P.soumisLe >= :soumisLeDeb " +

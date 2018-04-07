@@ -20,5 +20,6 @@ export class DonneesActeSearchComponent implements OnInit {
 
     search() {
         this.eventManager.broadcast({ name: 'donneesActeListModification', content: this.formModel});
+        console.log('DonneesActeSearchComponent this.formModel ', this.formModel);
     }
 }

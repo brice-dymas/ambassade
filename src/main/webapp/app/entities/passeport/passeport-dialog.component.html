@@ -1,22 +1,24 @@
 <form class="plat" name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
-    <div class="modal-header">
+    <div class="modal-header theme-bg-blue text-white">
         <h4 class="modal-title" id="myPasseportLabel" jhiTranslate="ambassadeApp.passeport.home.createOrEditLabel">Create or edit a Passeport</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+        <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
+        <!--
         <div class="form-group" [hidden]="!passeport.id">
             <label for="id" jhiTranslate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="passeport.id" readonly />
         </div>
+        -->
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.numeroFormulaire" for="field_numeroFormulaire">Numero Formulaire</label>
-                    <input type="number" class="form-control" name="numeroFormulaire" id="field_numeroFormulaire"
+                    <input type="number" class="form-control form-control-sm" name="numeroFormulaire" id="field_numeroFormulaire"
                            [(ngModel)]="passeport.numeroFormulaire" required min="0"/>
                     <div [hidden]="!(editForm.controls.numeroFormulaire?.dirty && editForm.controls.numeroFormulaire?.invalid)">
                         <small class="form-text text-danger"
@@ -37,7 +39,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.nom" for="field_nom">Nom</label>
-                    <input type="text" class="form-control" name="nom" id="field_nom"
+                    <input type="text" class="form-control form-control-sm" name="nom" id="field_nom"
                            [(ngModel)]="passeport.nom" required maxlength="30"/>
                     <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
                         <small class="form-text text-danger"
@@ -54,7 +56,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.prenom" for="field_prenom">Prenom</label>
-                    <input type="text" class="form-control" name="prenom" id="field_prenom"
+                    <input type="text" class="form-control form-control-sm" name="prenom" id="field_prenom"
                            [(ngModel)]="passeport.prenom" required maxlength="40"/>
                     <div [hidden]="!(editForm.controls.prenom?.dirty && editForm.controls.prenom?.invalid)">
                         <small class="form-text text-danger"
@@ -73,7 +75,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.numeroPasseport" for="field_numeroPasseport">Numero Passeport</label>
-                    <input type="text" class="form-control" name="numeroPasseport" id="field_numeroPasseport"
+                    <input type="text" class="form-control form-control-sm" name="numeroPasseport" id="field_numeroPasseport"
                            [(ngModel)]="passeport.numeroPasseport" maxlength="15"/>
                     <div [hidden]="!(editForm.controls.numeroPasseport?.dirty && editForm.controls.numeroPasseport?.invalid)">
                         <small class="form-text text-danger"
@@ -86,7 +88,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.neLe" for="field_neLe">Ne Le</label>
-                    <input type="text" class="form-control" name="neLe" id="field_neLe"
+                    <input type="text" class="form-control form-control-sm" name="neLe" id="field_neLe"
                            [(ngModel)]="passeport.neLe" required maxlength="20"/>
                     <div [hidden]="!(editForm.controls.neLe?.dirty && editForm.controls.neLe?.invalid)">
                         <small class="form-text text-danger"
@@ -103,7 +105,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.lieuNaissance" for="field_lieuNaissance">Lieu Naissance</label>
-                    <input type="text" class="form-control" name="lieuNaissance" id="field_lieuNaissance"
+                    <input type="text" class="form-control form-control-sm" name="lieuNaissance" id="field_lieuNaissance"
                            [(ngModel)]="passeport.lieuNaissance" required maxlength="30"/>
                     <div [hidden]="!(editForm.controls.lieuNaissance?.dirty && editForm.controls.lieuNaissance?.invalid)">
                         <small class="form-text text-danger"
@@ -122,7 +124,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.etatCivil" for="field_etatCivil">Etat Civil</label>
-                    <select class="form-control" name="etatCivil" [(ngModel)]="passeport.etatCivil" id="field_etatCivil" >
+                    <select class="form-control form-control-sm" name="etatCivil" [(ngModel)]="passeport.etatCivil" id="field_etatCivil" >
                         <option value="CELIBATAIRE">{{'ambassadeApp.Statut.CELIBATAIRE' | translate}}</option>
                         <option value="MARIE">{{'ambassadeApp.Statut.MARIE' | translate}}</option>
                         <option value="DIVORCE">{{'ambassadeApp.Statut.DIVORCE' | translate}}</option>
@@ -134,14 +136,14 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.adresse" for="field_adresse">Adresse</label>
-                    <input type="text" class="form-control" name="adresse" id="field_adresse"
+                    <input type="text" class="form-control form-control-sm" name="adresse" id="field_adresse"
                            [(ngModel)]="passeport.adresse" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.telephone" for="field_telephone">Telephone</label>
-                    <input type="text" class="form-control" name="telephone" id="field_telephone"
+                    <input type="text" class="form-control form-control-sm" name="telephone" id="field_telephone"
                            [(ngModel)]="passeport.telephone" maxlength="15"/>
                     <div [hidden]="!(editForm.controls.telephone?.dirty && editForm.controls.telephone?.invalid)">
                         <small class="form-text text-danger"
@@ -156,7 +158,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.nif" for="field_nif">Nif</label>
-                    <input type="text" class="form-control" name="nif" id="field_nif"
+                    <input type="text" class="form-control form-control-sm" name="nif" id="field_nif"
                            [(ngModel)]="passeport.nif" maxlength="20"/>
                     <div [hidden]="!(editForm.controls.nif?.dirty && editForm.controls.nif?.invalid)">
                         <small class="form-text text-danger"
@@ -169,7 +171,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.paysEmetteur" for="field_paysEmetteur">Pays Emetteur</label>
-                    <input type="text" class="form-control" name="paysEmetteur" id="field_paysEmetteur"
+                    <input type="text" class="form-control form-control-sm" name="paysEmetteur" id="field_paysEmetteur"
                            [(ngModel)]="passeport.paysEmetteur" maxlength="25"/>
                     <div [hidden]="!(editForm.controls.paysEmetteur?.dirty && editForm.controls.paysEmetteur?.invalid)">
                         <small class="form-text text-danger"
@@ -183,10 +185,10 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.soumisLe" for="field_soumisLe">Soumis Le</label>
                     <div class="input-group">
-                        <input id="field_soumisLe" type="text" class="form-control" name="soumisLe" ngbDatepicker  #soumisLeDp="ngbDatepicker" [(ngModel)]="passeport.soumisLe"
+                        <input id="field_soumisLe" type="text" class="form-control form-control-sm" name="soumisLe" ngbDatepicker  #soumisLeDp="ngbDatepicker" [(ngModel)]="passeport.soumisLe"
                                required/>
                         <span class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="soumisLeDp.toggle()"><i class="fa fa-calendar"></i></button>
+                    <button type="button" class="btn btn-blue btn-sm" (click)="soumisLeDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
                     </div>
                     <div [hidden]="!(editForm.controls.soumisLe?.dirty && editForm.controls.soumisLe?.invalid)">
@@ -203,10 +205,10 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.delivreLe" for="field_delivreLe">Delivre Le</label>
                     <div class="input-group">
-                        <input id="field_delivreLe" type="text" class="form-control" name="delivreLe" ngbDatepicker  #delivreLeDp="ngbDatepicker" [(ngModel)]="passeport.delivreLe"
+                        <input id="field_delivreLe" type="text" class="form-control form-control-sm" name="delivreLe" ngbDatepicker  #delivreLeDp="ngbDatepicker" [(ngModel)]="passeport.delivreLe"
                         />
                         <span class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="delivreLeDp.toggle()"><i class="fa fa-calendar"></i></button>
+                    <button type="button" class="btn btn-blue btn-sm" (click)="delivreLeDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
                     </div>
                 </div>
@@ -214,7 +216,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.montant" for="field_montant">Montant</label>
-                    <input type="number" class="form-control" name="montant" id="field_montant"
+                    <input type="number" class="form-control form-control-sm" name="montant" id="field_montant"
                            [(ngModel)]="passeport.montant" required min="0"/>
                     <div [hidden]="!(editForm.controls.montant?.dirty && editForm.controls.montant?.invalid)">
                         <small class="form-text text-danger"
@@ -235,7 +237,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.remarques" for="field_remarques">Remarques</label>
-                    <input type="text" class="form-control" name="remarques" id="field_remarques"
+                    <input type="text" class="form-control form-control-sm" name="remarques" id="field_remarques"
                            [(ngModel)]="passeport.remarques" />
                 </div>
             </div>
@@ -245,10 +247,10 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateEmission" for="field_dateEmission">Date Emission</label>
                     <div class="input-group">
-                        <input id="field_dateEmission" type="text" class="form-control" name="dateEmission" ngbDatepicker  #dateEmissionDp="ngbDatepicker" [(ngModel)]="passeport.dateEmission"
+                        <input id="field_dateEmission" type="text" class="form-control form-control-sm" name="dateEmission" ngbDatepicker  #dateEmissionDp="ngbDatepicker" [(ngModel)]="passeport.dateEmission"
                         />
                         <span class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="dateEmissionDp.toggle()"><i class="fa fa-calendar"></i></button>
+                    <button type="button" class="btn btn-blue btn-sm" (click)="dateEmissionDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
                     </div>
                 </div>
@@ -257,10 +259,10 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateExpiration" for="field_dateExpiration">Date Expiration</label>
                     <div class="input-group">
-                        <input id="field_dateExpiration" type="text" class="form-control" name="dateExpiration" ngbDatepicker  #dateExpirationDp="ngbDatepicker" [(ngModel)]="passeport.dateExpiration"
+                        <input id="field_dateExpiration" type="text" class="form-control form-control-sm" name="dateExpiration" ngbDatepicker  #dateExpirationDp="ngbDatepicker" [(ngModel)]="passeport.dateExpiration"
                         />
                         <span class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="dateExpirationDp.toggle()"><i class="fa fa-calendar"></i></button>
+                    <button type="button" class="btn btn-blue btn-sm" (click)="dateExpirationDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
                     </div>
                 </div>
@@ -268,7 +270,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.remarquesR" for="field_remarquesR">Remarques R</label>
-                    <input type="text" class="form-control" name="remarquesR" id="field_remarquesR"
+                    <input type="text" class="form-control form-control-sm" name="remarquesR" id="field_remarquesR"
                            [(ngModel)]="passeport.remarquesR" />
                 </div>
             </div>
@@ -277,7 +279,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.sms" for="field_sms">Sms</label>
-                    <input type="text" class="form-control" name="sms" id="field_sms"
+                    <input type="text" class="form-control form-control-sm" name="sms" id="field_sms"
                            [(ngModel)]="passeport.sms" maxlength="15"/>
                     <div [hidden]="!(editForm.controls.sms?.dirty && editForm.controls.sms?.invalid)">
                         <small class="form-text text-danger"
@@ -290,7 +292,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.sms2" for="field_sms2">Sms 2</label>
-                    <input type="text" class="form-control" name="sms2" id="field_sms2"
+                    <input type="text" class="form-control form-control-sm" name="sms2" id="field_sms2"
                            [(ngModel)]="passeport.sms2" maxlength="60"/>
                     <div [hidden]="!(editForm.controls.sms2?.dirty && editForm.controls.sms2?.invalid)">
                         <small class="form-text text-danger"
@@ -303,7 +305,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.documents" for="field_documents">Documents</label>
-                    <input type="text" class="form-control" name="documents" id="field_documents"
+                    <input type="text" class="form-control form-control-sm" name="documents" id="field_documents"
                            [(ngModel)]="passeport.documents" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.documents?.dirty && editForm.controls.documents?.invalid)">
                         <small class="form-text text-danger"
@@ -316,11 +318,11 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-blue btn-sm">
+            <span class="fa fa-download"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>
 </form>

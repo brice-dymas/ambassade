@@ -3,6 +3,7 @@ package com.urservices.ambassade.repository;
 import com.urservices.ambassade.domain.Livre;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +15,7 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface LivreRepository extends JpaRepository<Livre, Long> {
+public interface LivreRepository extends JpaRepository<Livre, Long>, QueryDslPredicateExecutor<Livre> {
 
     @Query("SELECT L FROM Livre L WHERE L.codeISBN LIKE :codeISBN AND L.auteur LIKE :auteur AND L.titre LIKE :titre " +
         "AND L.edition LIKE :edition AND L.etagere LIKE :etagere AND L.categorie LIKE :categorie " +

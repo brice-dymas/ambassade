@@ -6,6 +6,7 @@ import com.urservices.ambassade.domain.enumeration.Sexe;
 import com.urservices.ambassade.domain.enumeration.Statut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface DonneesActeRepository extends JpaRepository<DonneesActe, Long> {
+public interface DonneesActeRepository extends JpaRepository<DonneesActe, Long>, QueryDslPredicateExecutor<DonneesActe> {
     @Query("SELECT P FROM DonneesActe P WHERE P.reference LIKE :reference AND P.registreSpecialRD LIKE :registreSpecialRD " +
         "AND P.nomEnfant LIKE :nomEnfant AND P.dateDuJourChiffre BETWEEN :dateDuJourChiffreDeb AND :dateDuJourChiffreFin " +
         "AND P.registre LIKE :registre AND P.statut IN :statut AND P.numero LIKE :numero " +

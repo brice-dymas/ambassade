@@ -3,9 +3,9 @@
     "ambassadeApp": {
         "visa" : {
             "home": {
-                "title": "Visas",
-                "createLabel": "Créer un nouveau Visa",
-                "createOrEditLabel": "Créer ou éditer un Visa"
+                "title": "Liste des Visa",
+                "createLabel": "Nouveau Visa",
+                "createOrEditLabel": "Nouveau Visa"
             },
             "created": "Un nouveau Visa a été créé avec l'identifiant {{ param }}",
             "updated": "Le Visa avec l'identifiant {{ param }} a été mis à jour",
@@ -17,17 +17,17 @@
                 "title": "Visa"
             },
             "nom": "Nom",
-            "prenom": "Prenom",
+            "prenom": "Prénom",
             "nationalite": "Nationalite",
-            "numeroPasseport": "Numero Passeport",
+            "numeroPasseport": "Numéro Passeport",
             "cedula": "Cedula",
-            "numeroVisa": "Numero Visa",
+            "numeroVisa": "Numéro Visa",
             "dateEmission": "Date Emission",
             "dateExpiration": "Date Expiration",
             "validePour": "Valide Pour",
-            "nombreEntree": "Nombre Entree",
+            "nombreEntree": "Nombre Entrée",
             "type": "Type",
-            "categorie": "Categorie",
+            "categorie": "Catégorie",
             "taxes": "Taxes",
             "adresse": "Adresse",
             "remarques": "Remarques",

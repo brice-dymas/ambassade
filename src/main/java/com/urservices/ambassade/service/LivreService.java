@@ -45,4 +45,8 @@ public interface LivreService {
                           String consultation, String origine, String sousTitre, String collection, String impression,
                           String format, String index, String bibliographie, String lieuEdition, String lieuImpression,
                           String illustration, String observation, String prenom, String statistique, String glossaire,Pageable pageable);
+
+    Page<Livre> findAll(String codeISBN, String auteur, String titre, String edition, String etagere, Integer annee,
+                        String categorie, Long quantite, String disponible, String origine, String collection,
+                        String format, String lieuEdition, String lieuImpression, String prenom, Pageable pageable);
 }

@@ -41,4 +41,6 @@ public interface ProduitService {
     void delete(Long id);
 
     Page<Produit> searchAll(String monnaie, String nomProduit,Long montant, Pageable pageable);
+
+    Page<Produit> findAll(String monnaie, String nomProduit,Long montant, Pageable pageable);
 }
