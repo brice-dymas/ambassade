@@ -153,8 +153,17 @@ public class DonneesActeResource {
         String dateDuJourChiffreDebStr = webRequest.getParameter("dateDuJourChiffre") !=null &&
             !webRequest.getParameter("dateDuJourChiffre").isEmpty()? webRequest.getParameter("dateDuJourChiffre"): null;
 
+        String  dateNaissanceChiffreFinStr = webRequest.getParameter("dateNaissanceChiffreFin") !=null &&
+            !webRequest.getParameter("dateNaissanceChiffreFin").isEmpty()? webRequest.getParameter("dateNaissanceChiffreFin"): null;
+
+        String dateDuJourChiffreFinStr = webRequest.getParameter("dateDuJourChiffreFin") !=null &&
+            !webRequest.getParameter("dateDuJourChiffreFin").isEmpty()? webRequest.getParameter("dateDuJourChiffreFin"): null;
+
         LocalDate dateDuJourChiffreDeb = null;
         LocalDate dateNaissanceChiffreDeb = null;
+        LocalDate dateDuJourChiffreFin = null;
+        LocalDate dateNaissanceChiffreFin = null;
+
         if ( dateDuJourChiffreDebStr != null && !dateDuJourChiffreDebStr.isEmpty()){
             dateDuJourChiffreDeb = LocalDate.parse(dateDuJourChiffreDebStr);
 
@@ -162,9 +171,16 @@ public class DonneesActeResource {
         if (dateNaissanceChiffreDebStr != null && !dateNaissanceChiffreDebStr.isEmpty()){
             dateNaissanceChiffreDeb = LocalDate.parse(dateNaissanceChiffreDebStr);
         }
+        if ( dateDuJourChiffreFinStr != null && !dateDuJourChiffreFinStr.isEmpty()){
+            dateDuJourChiffreFin = LocalDate.parse(dateDuJourChiffreFinStr);
 
-        Page<DonneesActe> page = donneesActeService.findAll(reference,nomEnfant,dateDuJourChiffreDeb,
-            registre,statut,nomPere,prenomPere,nomMere,prenomMere,dateNaissanceChiffreDeb,
+        }
+        if (dateNaissanceChiffreFinStr != null && !dateNaissanceChiffreFinStr.isEmpty()){
+            dateNaissanceChiffreFin = LocalDate.parse(dateNaissanceChiffreFinStr);
+        }
+
+        Page<DonneesActe> page = donneesActeService.findAll(reference,nomEnfant,dateDuJourChiffreDeb,dateDuJourChiffreFin,
+            registre,statut,nomPere,prenomPere,nomMere,prenomMere,dateNaissanceChiffreDeb,dateNaissanceChiffreFin,
             annee,sexe,villeNaissance,adressePere,adresseMere,juridiction,livre,acte,pageable);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/donnees-actes");

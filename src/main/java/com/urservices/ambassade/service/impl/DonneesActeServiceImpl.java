@@ -101,10 +101,10 @@ public class DonneesActeServiceImpl implements DonneesActeService {
     }
 
     @Override
-    public Page<DonneesActe> findAll(String reference, String nomEnfant, LocalDate dateDuJourChiffre,
+    public Page<DonneesActe> findAll(String reference, String nomEnfant, LocalDate dateDuJourChiffreDeb,LocalDate dateDuJourChiffreFin,
                                      String registre, Statut statut, String nomPere, String prenomPere,
-                                     String nomMere, String prenomMere, LocalDate dateNaissanceChiffre, Integer annee,
-                                     Sexe sexe, String villeNaissance, String adressePere, String adresseMere,
+                                     String nomMere, String prenomMere, LocalDate dateNaissanceChiffreDeb, LocalDate dateNaissanceChiffreFin,
+                                     Integer annee, Sexe sexe, String villeNaissance, String adressePere, String adresseMere,
                                      String juridiction, String livre, String acte, Pageable pageable) {
         QDonneesActe donneesActe = QDonneesActe.donneesActe;
         BooleanExpression predicate = null;
@@ -121,11 +121,20 @@ public class DonneesActeServiceImpl implements DonneesActeService {
                 added =  true;
             }
         }
-        if (dateDuJourChiffre != null){
+        if (dateDuJourChiffreDeb != null){
             if(added){
-                predicate = predicate.and(donneesActe.dateDuJourChiffre.eq(dateDuJourChiffre));
+                if (dateDuJourChiffreFin !=  null){
+                    predicate = predicate.and(donneesActe.dateDuJourChiffre.between(dateDuJourChiffreDeb,dateDuJourChiffreFin));
+                }else {
+                    predicate =  predicate.and(donneesActe.dateDuJourChiffre.eq(dateDuJourChiffreDeb));
+                }
+
             }else {
-                predicate = donneesActe.dateDuJourChiffre.eq(dateDuJourChiffre);
+                if (dateDuJourChiffreFin !=  null){
+                    predicate = donneesActe.dateDuJourChiffre.between(dateDuJourChiffreDeb,dateDuJourChiffreFin);
+                }else {
+                    predicate =  donneesActe.dateDuJourChiffre.eq(dateDuJourChiffreDeb);
+                }
                 added =  true;
             }
         }
@@ -177,11 +186,20 @@ public class DonneesActeServiceImpl implements DonneesActeService {
                 added =  true;
             }
         }
-        if (dateNaissanceChiffre != null){
+        if (dateNaissanceChiffreDeb != null){
             if(added){
-                predicate = predicate.and(donneesActe.dateNaissanceChiffre.eq(dateNaissanceChiffre));
+                if (dateNaissanceChiffreFin !=  null){
+                    predicate = predicate.and(donneesActe.dateNaissanceChiffre.between(dateNaissanceChiffreDeb,dateNaissanceChiffreFin));
+                }else {
+                    predicate =  predicate.and(donneesActe.dateNaissanceChiffre.eq(dateNaissanceChiffreDeb));
+                }
+
             }else {
-                predicate = donneesActe.dateNaissanceChiffre.eq(dateNaissanceChiffre);
+                if (dateNaissanceChiffreFin !=  null){
+                    predicate = donneesActe.dateNaissanceChiffre.between(dateNaissanceChiffreDeb,dateNaissanceChiffreFin);
+                }else {
+                    predicate =  donneesActe.dateNaissanceChiffre.eq(dateNaissanceChiffreDeb);
+                }
                 added =  true;
             }
         }

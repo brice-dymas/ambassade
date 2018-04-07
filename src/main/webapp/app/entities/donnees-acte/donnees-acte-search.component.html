@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.dateDuJourChiffre"
+                <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.dateDuJourChiffreSearch"
                        for="field_dateDuJourChiffre">Date Du Jour Chiffre</label>
                 <div class="input-group">
                     <input id="field_dateDuJourChiffre" type="text" class="form-control" name="dateDuJourChiffre"
@@ -26,12 +26,31 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
+                <label class="form-control-label" jhiTranslate="global.messages.and"
+                       for="field_dateDuJourChiffreFin">Date Du Jour Chiffre</label>
+                <div class="input-group">
+                    <input id="field_dateDuJourChiffreFin" type="text" class="form-control" name="dateDuJourChiffreFin"
+                           ngbDatepicker #dateDuJourChiffreFinDp="ngbDatepicker"
+                           [(ngModel)]="formModel.dateDuJourChiffreFin"
+                    />
+                    <span class="input-group-append">
+                <button type="button" class="btn btn-secondary" (click)="dateDuJourChiffreFinDp.toggle()"><i
+                    class="fa fa-calendar"></i></button>
+            </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
                 <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.nomEnfant"
                        for="field_nomEnfant">Nom Enfant</label>
                 <input type="text" class="form-control" name="nomEnfant" id="field_nomEnfant"
                        [(ngModel)]="formModel.nomEnfant" maxlength="40"/>
             </div>
         </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.registre"
@@ -40,9 +59,6 @@
                        [(ngModel)]="formModel.registre" maxlength="10"/>
             </div>
         </div>
-    </div>
-
-    <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.annee" for="field_annee">Annee</label>
@@ -60,7 +76,19 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.dateNaissanceChiffre"
+                <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.sexe" for="field_sexe">Sexe</label>
+                <select class="form-control" name="sexe" [(ngModel)]="formModel.sexe" id="field_sexe" >
+                    <option value="MASCULIN">{{'ambassadeApp.Sexe.MASCULIN' | translate}}</option>
+                    <option value="FEMININ">{{'ambassadeApp.Sexe.FEMININ' | translate}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.dateNaissanceChiffreSearch"
                        for="field_dateNaissanceChiffre">Date Naissance Chiffre</label>
                 <div class="input-group">
                     <input id="field_dateNaissanceChiffre" type="text" class="form-control"
@@ -75,16 +103,19 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.sexe" for="field_sexe">Sexe</label>
-                <select class="form-control" name="sexe" [(ngModel)]="formModel.sexe" id="field_sexe" >
-                    <option value="MASCULIN">{{'ambassadeApp.Sexe.MASCULIN' | translate}}</option>
-                    <option value="FEMININ">{{'ambassadeApp.Sexe.FEMININ' | translate}}</option>
-                </select>
+                <label class="form-control-label" jhiTranslate="global.messages.and"
+                       for="field_dateNaissanceChiffreFin">Date Naissance Chiffre</label>
+                <div class="input-group">
+                    <input id="field_dateNaissanceChiffreFin" type="text" class="form-control"
+                           name="dateNaissanceChiffre" ngbDatepicker #dateNaissanceChiffreFinDp="ngbDatepicker"
+                           [(ngModel)]="formModel.dateNaissanceChiffreFin"/>
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dateNaissanceChiffreFinDp.toggle()"><i
+                            class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.nomMere" for="field_nomMere">Nom
@@ -101,6 +132,9 @@
                        [(ngModel)]="formModel.prenomMere" maxlength="40"/>
             </div>
         </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.statut"
@@ -122,9 +156,6 @@
                        [(ngModel)]="formModel.villeNaissance" maxlength="35"/>
             </div>
         </div>
-    </div>
-
-    <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.adressePere"
@@ -141,6 +172,8 @@
                        [(ngModel)]="formModel.adresseMere" maxlength="150"/>
             </div>
         </div>
+    </div>
+    <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.juridiction"
@@ -157,8 +190,6 @@
                        [(ngModel)]="formModel.livre" maxlength="50"/>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.acte" for="field_acte">Acte</label>

@@ -45,16 +45,10 @@ public interface PasseportService {
      */
     void delete(Long id);
 
-    Page<Passeport> searchAll(String nom, String prenom,
-                              String numeroPasseport, LocalDate neLeDeb,LocalDate neLeFin,
-                              String lieuNaissance, List<Statut> etatCivils,
-                              String adresse, String telephone,
-                              String nif, String paysEmetteur,
-                              LocalDate soumisLeDeb, LocalDate soumisLeFin,
-                              LocalDate delivreLeDeb, LocalDate delivreLeFin,
-                              BigDecimal montant, String remarques,
-                              LocalDate dateEmissionDeb, LocalDate dateEmissionFin,
-                              LocalDate dateExpirationDeb, LocalDate dateExpirationFin,
-                              String remarquesR, String sms,
-                              String sms2, String documents, Pageable pageable);
+    Page<Passeport> searchAll(String nom, String prenom, String numeroPasseport, LocalDate neLeDeb, LocalDate neLeFin,
+                              String lieuNaissance, Statut etatCivil, String adresse, String paysEmetteur,
+                              LocalDate soumisLeDeb, LocalDate soumisLeFin, LocalDate delivreLeDeb,
+                              LocalDate delivreLeFin, BigDecimal montant,LocalDate dateEmissionDeb,
+                              LocalDate dateEmissionFin, LocalDate dateExpirationDeb, LocalDate dateExpirationFin,
+                              String documents, Pageable pageable);
 }

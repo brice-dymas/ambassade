@@ -6,249 +6,309 @@
         <div class="card-body plat">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.nom" for="field_nom">Nom</label>
-                            <input type="text" class="form-control" name="nom" id="field_nom"
-                                   [(ngModel)]="formModel.nom" maxlength="30"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.prenom" for="field_prenom">Prenom</label>
-                            <input type="text" class="form-control" name="prenom" id="field_prenom"
-                                   [(ngModel)]="formModel.prenom" maxlength="40"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.neLe" for="field_neLe">Ne Le</label>
-                            <input type="text" class="form-control" name="neLe" id="field_neLe"
-                                   [(ngModel)]="formModel.neLe" maxlength="20"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.lieuNaissance" for="field_lieuNaissance">Lieu Naissance</label>
-                            <input type="text" class="form-control" name="lieuNaissance" id="field_lieuNaissance"
-                                   [(ngModel)]="formModel.lieuNaissance" maxlength="30"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.etatCivil" for="field_etatCivil">Etat Civil</label>
-                            <select class="form-control" name="etatCivil" [(ngModel)]="formModel.etatCivil" id="field_etatCivil" >
-                                <option value="CELIBATAIRE">{{'ambassadeApp.Statut.CELIBATAIRE' | translate}}</option>
-                                <option value="MARIE">{{'ambassadeApp.Statut.MARIE' | translate}}</option>
-                                <option value="DIVORCE">{{'ambassadeApp.Statut.DIVORCE' | translate}}</option>
-                                <option value="SEPARE">{{'ambassadeApp.Statut.SEPARE' | translate}}</option>
-                                <option value="VEUF">{{'ambassadeApp.Statut.VEUF' | translate}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.adresse" for="field_adresse">Adresse</label>
-                            <input type="text" class="form-control" name="adresse" id="field_adresse"
-                                   [(ngModel)]="formModel.adresse" />
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.telephone" for="field_telephone">Telephone</label>
-                            <input type="text" class="form-control" name="telephone" id="field_telephone"
-                                   [(ngModel)]="formModel.telephone" maxlength="15"/>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.nom"
+                               for="field_nom">Nom</label>
+                        <input type="text" class="form-control" name="nom" id="field_nom"
+                               [(ngModel)]="formModel.nom" maxlength="30"/>
                     </div>
                 </div>
-
                 <div class="col-md-3">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.numeroFormulaire" for="field_numeroFormulaire">Numero Formulaire</label>
-                            <input type="number" class="form-control" name="numeroFormulaire" id="field_numeroFormulaire"
-                                   [(ngModel)]="formModel.numeroFormulaire" required min="0"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.numeroPasseport" for="field_numeroPasseport">Numero Passeport</label>
-                            <input type="text" class="form-control" name="numeroPasseport" id="field_numeroPasseport"
-                                   [(ngModel)]="formModel.numeroPasseport" maxlength="15"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.paysEmetteur" for="field_paysEmetteur">Pays Emetteur</label>
-                            <input type="text" class="form-control" name="paysEmetteur" id="field_paysEmetteur"
-                                   [(ngModel)]="formModel.paysEmetteur" maxlength="25"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.delivreLeSearch" for="field_delivreLe">Delivre Le</label>
-                            <div class="input-group">
-                                <input id="field_delivreLe" type="text" class="form-control" name="delivreLe" ngbDatepicker  #delivreLeDp="ngbDatepicker" [(ngModel)]="formModel.delivreLe"
-                                />
-                                <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" (click)="delivreLeDp.toggle()"><i class="fa fa-calendar"></i></button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateExpirationSearch" for="field_dateExpiration">Date Expiration</label>
-                            <div class="input-group">
-                                <input id="field_dateExpiration" type="text" class="form-control" name="dateExpiration" ngbDatepicker  #dateExpirationDp="ngbDatepicker" [(ngModel)]="formModel.dateExpiration"
-                                />
-                                <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" (click)="dateExpirationDp.toggle()"><i class="fa fa-calendar"></i></button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.montant" for="field_montant">Montant</label>
-                            <input type="number" class="form-control" name="montant" id="field_montant"
-                                   [(ngModel)]="formModel.montant" min="0"/>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.prenom"
+                               for="field_prenom">Prenom</label>
+                        <input type="text" class="form-control" name="prenom" id="field_prenom"
+                               [(ngModel)]="formModel.prenom" maxlength="40"/>
                     </div>
                 </div>
-
                 <div class="col-md-3">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.nif" for="field_nif">Nif</label>
-                            <input type="text" class="form-control" name="nif" id="field_nif"
-                                   [(ngModel)]="formModel.nif" maxlength="20"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="global.messages.between" for="field_delivreLeFin">Et Le</label>
-                            <div class="input-group">
-                                <input id="field_delivreLeFin" type="text" class="form-control" name="delivreLeFin" ngbDatepicker  #delivreLeDp="ngbDatepicker" [(ngModel)]="formModel.delivreLeFin"
-                                />
-                                <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" (click)="delivreLeDp.toggle()"><i class="fa fa-calendar"></i></button>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.neLeSearch"
+                               for="field_neLe">Ne Le</label>
+                        <div class="input-group">
+                            <input id="field_neLe" type="text" class="form-control" name="neLe" ngbDatepicker
+                                   #neLeDp="ngbDatepicker" [(ngModel)]="formModel.neLe"
+                            />
+                            <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="neLeDp.toggle()"><i
+                                        class="fa fa-calendar"></i></button>
                                 </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateEmissionSearch" for="field_dateEmission">Date Emission</label>
-                            <div class="input-group">
-                                <input id="field_dateEmission" type="text" class="form-control" name="dateEmission" ngbDatepicker  #dateEmissionDp="ngbDatepicker" [(ngModel)]="formModel.dateEmission"
-                                />
-                                <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" (click)="dateEmissionDp.toggle()"><i class="fa fa-calendar"></i></button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="global.messages.between" for="field_dateEmissionFin">Date Emission</label>
-                            <div class="input-group">
-                                <input id="field_dateEmissionFin" type="text" class="form-control" name="dateEmissionFin" ngbDatepicker  #dateEmissionDp="ngbDatepicker" [(ngModel)]="formModel.dateEmissionFin"
-                                />
-                                <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" (click)="dateEmissionDp.toggle()"><i class="fa fa-calendar"></i></button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="global.messages.between" for="field_dateExpirationFin">Date Expiration</label>
-                            <div class="input-group">
-                                <input id="field_dateExpirationFin" type="text" class="form-control" name="dateExpirationFin" ngbDatepicker  #dateExpirationDp="ngbDatepicker" [(ngModel)]="formModel.dateExpirationFin"
-                                />
-                                <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" (click)="dateExpirationDp.toggle()"><i class="fa fa-calendar"></i></button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.soumisLeSearch" for="field_soumisLe">Soumis Le</label>
-                            <div class="input-group">
-                                <input id="field_soumisLe" type="text" class="form-control" name="soumisLe" ngbDatepicker  #soumisLeDp="ngbDatepicker" [(ngModel)]="formModel.soumisLe"
-                                />
-                                <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" (click)="soumisLeDp.toggle()"><i class="fa fa-calendar"></i></button>
-                                </span>
-                            </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-3">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.remarquesR" for="field_remarquesR">Remarques R</label>
-                            <input type="text" class="form-control" name="remarquesR" id="field_remarquesR"
-                                   [(ngModel)]="formModel.remarquesR" />
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.remarques" for="field_remarques">Remarques</label>
-                            <input type="text" class="form-control" name="remarques" id="field_remarques"
-                                   [(ngModel)]="formModel.remarques" />
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.sms" for="field_sms">Sms</label>
-                            <input type="text" class="form-control" name="sms" id="field_sms"
-                                   [(ngModel)]="formModel.sms" maxlength="15"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.sms2" for="field_sms2">Sms 2</label>
-                            <input type="text" class="form-control" name="sms2" id="field_sms2"
-                                   [(ngModel)]="formModel.sms2" maxlength="60"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.documents" for="field_documents">Documents</label>
-                            <input type="text" class="form-control" name="documents" id="field_documents"
-                                   [(ngModel)]="formModel.documents" maxlength="50"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="global.messages.between" for="field_soumisLeFin">Soumis Le</label>
-                            <div class="input-group">
-                                <input id="field_soumisLeFin" type="text" class="form-control" name="soumisLeFin" ngbDatepicker  #soumisLeDp="ngbDatepicker" [(ngModel)]="formModel.soumisLeFin"
-                                />
-                                <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" (click)="soumisLeDp.toggle()"><i class="fa fa-calendar"></i></button>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="global.messages.and" for="field_neLeFin">Ne
+                            Le</label>
+                        <div class="input-group">
+                            <input id="field_neLeFin" type="text" class="form-control" name="neLeFin" ngbDatepicker
+                                   #neLeFinDp="ngbDatepicker" [(ngModel)]="formModel.neLeFin"
+                            />
+                            <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="neLeFinDp.toggle()"><i
+                                        class="fa fa-calendar"></i></button>
                                 </span>
-                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="mt-5 pull-right">
-                    <!--<div class="modal-footer">-->
-                    <button type="reset" class="btn btn-secondary btn-danger">
-                        <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                    </button>&nbsp;
-                    <button type="submit" class="btn btn-primary">
-                        <span class="fa fa-fi"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                    </button>
-                    <!--</div>-->
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.lieuNaissance"
+                               for="field_lieuNaissance">Lieu Naissance</label>
+                        <input type="text" class="form-control" name="lieuNaissance" id="field_lieuNaissance"
+                               [(ngModel)]="formModel.lieuNaissance" maxlength="30"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.etatCivil"
+                               for="field_etatCivil">Etat Civil</label>
+                        <select class="form-control" name="etatCivil" [(ngModel)]="formModel.etatCivil"
+                                id="field_etatCivil">
+                            <option value="CELIBATAIRE">{{'ambassadeApp.Statut.CELIBATAIRE' | translate}}</option>
+                            <option value="MARIE">{{'ambassadeApp.Statut.MARIE' | translate}}</option>
+                            <option value="DIVORCE">{{'ambassadeApp.Statut.DIVORCE' | translate}}</option>
+                            <option value="SEPARE">{{'ambassadeApp.Statut.SEPARE' | translate}}</option>
+                            <option value="VEUF">{{'ambassadeApp.Statut.VEUF' | translate}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.adresse"
+                               for="field_adresse">Adresse</label>
+                        <input type="text" class="form-control" name="adresse" id="field_adresse"
+                               [(ngModel)]="formModel.adresse"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.paysEmetteur"
+                               for="field_paysEmetteur">Pays Emetteur</label>
+                        <input type="text" class="form-control" name="paysEmetteur" id="field_paysEmetteur"
+                               [(ngModel)]="formModel.paysEmetteur" maxlength="25"/>
+                    </div>
+                </div>
+                <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                <!--<label class="form-control-label" jhiTranslate="ambassadeApp.passeport.telephone" for="field_telephone">Telephone</label>-->
+                <!--<input type="text" class="form-control" name="telephone" id="field_telephone"-->
+                <!--[(ngModel)]="formModel.telephone" maxlength="15"/>-->
+                <!--</div>-->
+                <!--</div>-->
+            </div>
+
+            <div class="row">
+                <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                <!--<label class="form-control-label" jhiTranslate="ambassadeApp.passeport.numeroFormulaire" for="field_numeroFormulaire">Numero Formulaire</label>-->
+                <!--<input type="number" class="form-control" name="numeroFormulaire" id="field_numeroFormulaire"-->
+                <!--[(ngModel)]="formModel.numeroFormulaire" required min="0"/>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.delivreLeSearch"
+                               for="field_delivreLe">Delivre Le</label>
+                        <div class="input-group">
+                            <input id="field_delivreLe" type="text" class="form-control" name="delivreLe" ngbDatepicker
+                                   #delivreLeDp="ngbDatepicker" [(ngModel)]="formModel.delivreLe"
+                            />
+                            <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="delivreLeDp.toggle()"><i
+                                        class="fa fa-calendar"></i></button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="global.messages.and" for="field_delivreLeFin">Delivre
+                            Le</label>
+                        <div class="input-group">
+                            <input id="field_delivreLeFin" type="text" class="form-control" name="delivreLeFin"
+                                   ngbDatepicker #delivreLeFinDp="ngbDatepicker" [(ngModel)]="formModel.delivreLeFin"
+                            />
+                            <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="delivreLeFinDp.toggle()"><i
+                                        class="fa fa-calendar"></i></button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateExpirationSearch"
+                               for="field_dateExpiration">Date Expiration</label>
+                        <div class="input-group">
+                            <input id="field_dateExpiration" type="text" class="form-control" name="dateExpiration"
+                                   ngbDatepicker #dateExpirationDp="ngbDatepicker"
+                                   [(ngModel)]="formModel.dateExpiration"
+                            />
+                            <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dateExpirationDp.toggle()"><i
+                                        class="fa fa-calendar"></i></button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="global.messages.and"
+                               for="field_dateExpirationFin">Date Expiration</label>
+                        <div class="input-group">
+                            <input id="field_dateExpirationFin" type="text" class="form-control"
+                                   name="dateExpirationFin" ngbDatepicker #dateExpirationDp="ngbDatepicker"
+                                   [(ngModel)]="formModel.dateExpirationFin"
+                            />
+                            <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dateExpirationDp.toggle()"><i
+                                        class="fa fa-calendar"></i></button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                <!--<label class="form-control-label" jhiTranslate="ambassadeApp.passeport.nif" for="field_nif">Nif</label>-->
+                <!--<input type="text" class="form-control" name="nif" id="field_nif"-->
+                <!--[(ngModel)]="formModel.nif" maxlength="20"/>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateEmissionSearch"
+                               for="field_dateEmission">Date Emission</label>
+                        <div class="input-group">
+                            <input id="field_dateEmission" type="text" class="form-control" name="dateEmission"
+                                   ngbDatepicker #dateEmissionDp="ngbDatepicker" [(ngModel)]="formModel.dateEmission"
+                            />
+                            <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dateEmissionDp.toggle()"><i
+                                        class="fa fa-calendar"></i></button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="global.messages.and"
+                               for="field_dateEmissionFin">Date Emission</label>
+                        <div class="input-group">
+                            <input id="field_dateEmissionFin" type="text" class="form-control" name="dateEmissionFin"
+                                   ngbDatepicker #dateEmissionDp="ngbDatepicker" [(ngModel)]="formModel.dateEmissionFin"
+                            />
+                            <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dateEmissionDp.toggle()"><i
+                                        class="fa fa-calendar"></i></button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.soumisLeSearch"
+                               for="field_soumisLe">Soumis Le</label>
+                        <div class="input-group">
+                            <input id="field_soumisLe" type="text" class="form-control" name="soumisLe" ngbDatepicker
+                                   #soumisLeDp="ngbDatepicker" [(ngModel)]="formModel.soumisLe"
+                            />
+                            <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="soumisLeDp.toggle()"><i
+                                        class="fa fa-calendar"></i></button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="global.messages.and" for="field_soumisLeFin">Soumis
+                            Le</label>
+                        <div class="input-group">
+                            <input id="field_soumisLeFin" type="text" class="form-control" name="soumisLeFin"
+                                   ngbDatepicker #soumisLeDp="ngbDatepicker" [(ngModel)]="formModel.soumisLeFin"
+                            />
+                            <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="soumisLeDp.toggle()"><i
+                                        class="fa fa-calendar"></i></button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                <!--<label class="form-control-label" jhiTranslate="ambassadeApp.passeport.remarquesR" for="field_remarquesR">Remarques R</label>-->
+                <!--<input type="text" class="form-control" name="remarquesR" id="field_remarquesR"-->
+                <!--[(ngModel)]="formModel.remarquesR" />-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                <!--<label class="form-control-label" jhiTranslate="ambassadeApp.passeport.remarques" for="field_remarques">Remarques</label>-->
+                <!--<input type="text" class="form-control" name="remarques" id="field_remarques"-->
+                <!--[(ngModel)]="formModel.remarques" />-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                <!--<label class="form-control-label" jhiTranslate="ambassadeApp.passeport.sms" for="field_sms">Sms</label>-->
+                <!--<input type="text" class="form-control" name="sms" id="field_sms"-->
+                <!--[(ngModel)]="formModel.sms" maxlength="15"/>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                <!--<label class="form-control-label" jhiTranslate="ambassadeApp.passeport.sms2" for="field_sms2">Sms 2</label>-->
+                <!--<input type="text" class="form-control" name="sms2" id="field_sms2"-->
+                <!--[(ngModel)]="formModel.sms2" maxlength="60"/>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.montant"
+                               for="field_montant">Montant</label>
+                        <input type="number" class="form-control" name="montant" id="field_montant"
+                               [(ngModel)]="formModel.montant" min="0"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.documents"
+                               for="field_documents">Documents</label>
+                        <input type="text" class="form-control" name="documents" id="field_documents"
+                               [(ngModel)]="formModel.documents" maxlength="50"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.numeroPasseport"
+                               for="field_numeroPasseport">Numero Passeport</label>
+                        <input type="text" class="form-control" name="numeroPasseport" id="field_numeroPasseport"
+                               [(ngModel)]="formModel.numeroPasseport" maxlength="15"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5 pull-right">
+                <!--<div class="modal-footer">-->
+                <button type="reset" class="btn btn-secondary btn-danger">
+                    <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>&nbsp;
+                <button type="submit" class="btn btn-primary">
+                    <span class="fa fa-fi"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+                <!--</div>-->
+            </div>
         </div>
+    </div>
 
     </div>
     <!--</div>-->
