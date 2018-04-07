@@ -1,22 +1,24 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
-    <div class="modal-header">
+    <div class="modal-header theme-bg-blue text-white">
         <h4 class="modal-title" id="myMonnaieLabel" jhiTranslate="ambassadeApp.monnaie.home.createOrEditLabel">Create or edit a Monnaie</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+        <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
+        <!--
         <div class="form-group" [hidden]="!monnaie.id">
             <label for="id" jhiTranslate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="monnaie.id" readonly />
         </div>
+        -->
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.monnaie.type" for="field_type">Type</label>
-                    <input type="text" class="form-control" name="type" id="field_type"
+                    <input type="text" class="form-control form-control-sm" name="type" id="field_type"
                            [(ngModel)]="monnaie.type" maxlength="40"/>
                     <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
                         <small class="form-text text-danger"
@@ -29,14 +31,14 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.monnaie.montant" for="field_montant">Montant</label>
-                    <input type="number" class="form-control" name="montant" id="field_montant"
+                    <input type="number" class="form-control form-control-sm" name="montant" id="field_montant"
                            [(ngModel)]="monnaie.montant" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.monnaie.produit" for="field_produit">Produit</label>
-                    <input type="text" class="form-control" name="produit" id="field_produit"
+                    <input type="text" class="form-control form-control-sm" name="produit" id="field_produit"
                            [(ngModel)]="monnaie.produit" maxlength="40"/>
                     <div [hidden]="!(editForm.controls.produit?.dirty && editForm.controls.produit?.invalid)">
                         <small class="form-text text-danger"
@@ -50,11 +52,11 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-blue btn-sm">
+            <span class="fa fa-download"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>
 </form>

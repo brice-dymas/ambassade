@@ -1,13 +1,18 @@
 <div>
     <h2>
-        <span jhiTranslate="ambassadeApp.montant.home.title">Montants</span>
-        <button class="btn btn-primary float-right jh-create-entity create-montant" [routerLink]="['/', { outlets: { popup: ['montant-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span  jhiTranslate="ambassadeApp.montant.home.createLabel">
-            Create new Montant
-            </span>
-        </button>
+        <div class="row">
+            <div class="col-md-6">
+                <span jhiTranslate="ambassadeApp.montant.home.title">Montants</span>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-blue btn-sm float-right jh-create-entity create-montant" [routerLink]="['/', { outlets: { popup: ['montant-new'] } }]">
+                    <span class="fa fa-pencil-square-o"></span>
+                    <span  jhiTranslate="ambassadeApp.montant.home.createLabel">Create new Montant</span>
+                </button>
+            </div>
+        </div>
     </h2>
+    <div class="title-bullet"><span></span></div>
     <jhi-alert></jhi-alert>
     <br/>
     <div>
@@ -15,9 +20,9 @@
     </div>
     <div class="table-responsive" *ngIf="montants">
         <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
+            <thead class="theme-bg-blue text-white">
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
             <th jhiSortBy="monnaie"><span jhiTranslate="ambassadeApp.montant.monnaie">Monnaie</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="montant"><span jhiTranslate="ambassadeApp.montant.montant">Montant</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="produit"><span jhiTranslate="ambassadeApp.montant.produit">Produit</span> <span class="fa fa-sort"></span></th>
@@ -26,7 +31,7 @@
             </thead>
             <tbody class="table-sm">
             <tr *ngFor="let montant of montants ;trackBy: trackId">
-                <td><a [routerLink]="['../montant', montant.id ]">{{montant.id}}</a></td>
+                <!-- <td><a [routerLink]="['../montant', montant.id ]">{{montant.id}}</a></td> -->
                 <td>{{montant.monnaie}}</td>
                 <td>{{montant.montant}}</td>
                 <td>{{montant.produit}}</td>
@@ -34,7 +39,7 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../montant', montant.id ]"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-primary btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
@@ -42,7 +47,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'montant/'+ montant.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
+                                class="btn btn-blue btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
@@ -51,7 +56,7 @@
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
+                            <span class="fa fa-trash"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>
@@ -61,11 +66,17 @@
         </table>
     </div>
     <div *ngIf="montants && montants.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="text-sm-left">
+                    <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pull-right">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div>
         </div>
     </div>
 </div>

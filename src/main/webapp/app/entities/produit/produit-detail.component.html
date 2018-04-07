@@ -1,7 +1,13 @@
 
 <div *ngIf="produit">
-    <h2><span jhiTranslate="ambassadeApp.produit.detail.title">Produit</span> {{produit.id}}</h2>
-    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <h2><span jhiTranslate="ambassadeApp.produit.detail.title">Produit</span> {{produit.id}}</h2>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+    <div class="title-bullet"><span></span></div>
+
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
         <div class="card bg-light">
@@ -26,7 +32,7 @@
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-info">
+            class="btn btn-info btn-sm">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
@@ -34,7 +40,7 @@
             [routerLink]="['/', { outlets: { popup: 'produit/'+ produit.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-primary pull-right">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            class="btn btn-blue pull-right btn-sm">
+        <span class="fa fa-pencil-square-o"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

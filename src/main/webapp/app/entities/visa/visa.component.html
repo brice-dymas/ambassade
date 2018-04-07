@@ -1,12 +1,17 @@
 <div>
     <h2>
-        <span jhiTranslate="ambassadeApp.visa.home.title">Visas</span>
-        <button class="btn btn-primary float-right jh-create-entity create-visa" [routerLink]="['/', { outlets: { popup: ['visa-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span  jhiTranslate="ambassadeApp.visa.home.createLabel">
-            Create new Visa
-            </span>
-        </button>
+        <div class="row">
+            <div class="col-md-6">
+                <span jhiTranslate="ambassadeApp.visa.home.title">Visas</span>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-blue btn-sm float-right jh-create-entity create-visa" [routerLink]="['/', { outlets: { popup: ['visa-new'] } }]">
+                    <span class="fa fa-pencil-square-o"></span>
+                    <span  jhiTranslate="ambassadeApp.visa.home.createLabel">Create new Visa</span>
+                </button>
+            </div>
+        </div>
+        <div class="title-bullet"><span></span></div>
     </h2>
     <jhi-alert></jhi-alert>
     <br>
@@ -15,8 +20,8 @@
     </div>
     <br/>
     <div class="table-responsive" *ngIf="visas">
-        <table class="table table-striped table-bordered table-sm" style="font-size: 14px!important;font-weight: 100!important;">
-            <thead class="thead-dark">
+        <table class="table table-striped table-bordered" style="font-size: 14px!important;font-weight: 100!important;">
+            <thead class="theme-bg-blue text-white">
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                     <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
                     <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.visa.nom">Nom</span> <span class="fa fa-sort"></span></th>
@@ -59,7 +64,7 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../visa', visa.id ]"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-primary btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
@@ -67,7 +72,7 @@
                                 [routerLink]="['/', { outlets: { popup: 'visa/'+ visa.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
+                                class="btn btn-blue btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
@@ -76,7 +81,7 @@
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
+                            <span class="fa fa-trash"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>

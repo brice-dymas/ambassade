@@ -1,12 +1,17 @@
 <div>
     <h2>
-        <span jhiTranslate="ambassadeApp.livre.home.title">Livres</span>
-        <button class="btn btn-primary float-right jh-create-entity create-livre" [routerLink]="['/', { outlets: { popup: ['livre-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span  jhiTranslate="ambassadeApp.livre.home.createLabel">
-            Create new Livre
-            </span>
-        </button>
+        <div class="row">
+            <div class="col-md-6">
+                <span jhiTranslate="ambassadeApp.livre.home.title">Livres</span>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-blue btn-sm float-right jh-create-entity create-livre" [routerLink]="['/', { outlets: { popup: ['livre-new'] } }]">
+                    <span class="fa fa-pencil-square-o"></span>
+                    <span  jhiTranslate="ambassadeApp.livre.home.createLabel">Create new Livre</span>
+                </button>
+            </div>
+        </div>
+        <div class="title-bullet"><span></span></div>
     </h2>
     <jhi-alert></jhi-alert>
     <div class="row">
@@ -14,9 +19,9 @@
     <br/>
     <div class="table-responsive" *ngIf="livres">
         <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
+            <thead class="theme-bg-blue text-white">
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
                 <th jhiSortBy="codeISBN"><span jhiTranslate="ambassadeApp.livre.codeISBN">Code ISBN</span> <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="auteur"><span jhiTranslate="ambassadeApp.livre.auteur">Auteur</span> <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="titre"><span jhiTranslate="ambassadeApp.livre.titre">Titre</span> <span class="fa fa-sort"></span></th>
@@ -49,7 +54,7 @@
             </thead>
             <tbody class="table-sm">
             <tr *ngFor="let livre of livres ;trackBy: trackId">
-                <td><a [routerLink]="['../livre', livre.id ]">{{livre.id}}</a></td>
+                <!-- <td><a [routerLink]="['../livre', livre.id ]">{{livre.id}}</a></td> -->
                 <td>{{livre.codeISBN}}</td>
                 <td>{{livre.auteur}}</td>
                 <td>{{livre.titre}}</td>
@@ -60,12 +65,13 @@
                 <!-- <td>{{livre.resume}}</td> -->
                 <td>{{livre.quantite}}</td>
                 <td>{{livre.disponible}}</td>
-                <!-- <td>{{livre.createdByPHPRunner}}</td>
+                <!--
+                <td>{{livre.createdByPHPRunner}}</td>
                 <td>{{livre.page}}</td>
                 <td>{{livre.consultation}}</td>
                 <td>{{livre.origine}}</td>
                 <td>{{livre.sousTitre}}</td>
-                <!-- <td>{{livre.collection}}</td>
+                <td>{{livre.collection}}</td>
                 <td>{{livre.impression}}</td>
                 <td>{{livre.format}}</td>
                 <td>{{livre.index}}</td>
@@ -76,29 +82,22 @@
                 <td>{{livre.observation}}</td>
                 <td>{{livre.prenom}}</td>
                 <td>{{livre.statistique}}</td>
-                <td>{{livre.glossaire}}</td> -->
+                <td>{{livre.glossaire}}</td>
+                 -->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../livre', livre.id ]"
-                                class="btn btn-info btn-sm">
+                        <button type="submit" [routerLink]="['../livre', livre.id ]" class="btn btn-primary btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'livre/'+ livre.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
+                                [routerLink]="['/', { outlets: { popup: 'livre/'+ livre.id + '/edit'} }]" replaceUrl="true" queryParamsHandling="merge" class="btn btn-blue btn-sm">
+                            <span class="fa fa-pencil-square-o"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'livre/'+ livre.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
+                                [routerLink]="['/', { outlets: { popup: 'livre/'+ livre.id + '/delete'} }]" replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
+                            <span class="fa fa-trash"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>
@@ -108,11 +107,17 @@
         </table>
     </div>
     <div *ngIf="livres && livres.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="text-sm-left">
+                    <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pull-right">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div>
         </div>
     </div>
 </div>

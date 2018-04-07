@@ -1,22 +1,24 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
-    <div class="modal-header">
+    <div class="modal-header theme-bg-blue text-white">
         <h4 class="modal-title" id="myLivreLabel" jhiTranslate="ambassadeApp.livre.home.createOrEditLabel">Create or edit a Livre</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+        <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
+        <!--
         <div class="form-group" [hidden]="!livre.id">
             <label for="id" jhiTranslate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="livre.id" readonly />
         </div>
+        -->
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.codeISBN" for="field_codeISBN">Code ISBN</label>
-                    <input type="text" class="form-control" name="codeISBN" id="field_codeISBN"
+                    <input type="text" class="form-control form-control-sm" name="codeISBN" id="field_codeISBN"
                            [(ngModel)]="livre.codeISBN" required maxlength="50"/>
                     <div [hidden]="!(editForm.controls.codeISBN?.dirty && editForm.controls.codeISBN?.invalid)">
                         <small class="form-text text-danger"
@@ -33,7 +35,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.auteur" for="field_auteur">Auteur</label>
-                    <input type="text" class="form-control" name="auteur" id="field_auteur"
+                    <input type="text" class="form-control form-control-sm" name="auteur" id="field_auteur"
                            [(ngModel)]="livre.auteur" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.auteur?.dirty && editForm.controls.auteur?.invalid)">
                         <small class="form-text text-danger"
@@ -46,7 +48,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.titre" for="field_titre">Titre</label>
-                    <input type="text" class="form-control" name="titre" id="field_titre"
+                    <input type="text" class="form-control form-control-sm" name="titre" id="field_titre"
                            [(ngModel)]="livre.titre" maxlength="100"/>
                     <div [hidden]="!(editForm.controls.titre?.dirty && editForm.controls.titre?.invalid)">
                         <small class="form-text text-danger"
@@ -61,7 +63,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.edition" for="field_edition">Edition</label>
-                    <input type="text" class="form-control" name="edition" id="field_edition"
+                    <input type="text" class="form-control form-control-sm" name="edition" id="field_edition"
                            [(ngModel)]="livre.edition" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.edition?.dirty && editForm.controls.edition?.invalid)">
                         <small class="form-text text-danger"
@@ -74,7 +76,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.etagere" for="field_etagere">Etagere</label>
-                    <input type="text" class="form-control" name="etagere" id="field_etagere"
+                    <input type="text" class="form-control form-control-sm" name="etagere" id="field_etagere"
                            [(ngModel)]="livre.etagere" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.etagere?.dirty && editForm.controls.etagere?.invalid)">
                         <small class="form-text text-danger"
@@ -87,7 +89,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.annee" for="field_annee">Annee</label>
-                    <input type="text" class="form-control" name="annee" id="field_annee"
+                    <input type="text" class="form-control form-control-sm" name="annee" id="field_annee"
                            [(ngModel)]="livre.annee" maxlength="4"/>
                     <div [hidden]="!(editForm.controls.annee?.dirty && editForm.controls.annee?.invalid)">
                         <small class="form-text text-danger"
@@ -102,7 +104,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.categorie" for="field_categorie">Categorie</label>
-                    <input type="text" class="form-control" name="categorie" id="field_categorie"
+                    <input type="text" class="form-control form-control-sm" name="categorie" id="field_categorie"
                            [(ngModel)]="livre.categorie" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.categorie?.dirty && editForm.controls.categorie?.invalid)">
                         <small class="form-text text-danger"
@@ -115,14 +117,14 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.resume" for="field_resume">Resume</label>
-                    <input type="text" class="form-control" name="resume" id="field_resume"
+                    <input type="text" class="form-control form-control-sm" name="resume" id="field_resume"
                            [(ngModel)]="livre.resume" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.quantite" for="field_quantite">Quantite</label>
-                    <input type="text" class="form-control" name="quantite" id="field_quantite"
+                    <input type="text" class="form-control form-control-sm" name="quantite" id="field_quantite"
                            [(ngModel)]="livre.quantite" maxlength="2"/>
                     <div [hidden]="!(editForm.controls.quantite?.dirty && editForm.controls.quantite?.invalid)">
                         <small class="form-text text-danger"
@@ -137,7 +139,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.disponible" for="field_disponible">Disponible</label>
-                    <input type="text" class="form-control" name="disponible" id="field_disponible"
+                    <input type="text" class="form-control form-control-sm" name="disponible" id="field_disponible"
                            [(ngModel)]="livre.disponible" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.disponible?.dirty && editForm.controls.disponible?.invalid)">
                         <small class="form-text text-danger"
@@ -150,14 +152,14 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.createdByPHPRunner" for="field_createdByPHPRunner">Created By PHP Runner</label>
-                    <input type="number" class="form-control" name="createdByPHPRunner" id="field_createdByPHPRunner"
+                    <input type="number" class="form-control form-control-sm" name="createdByPHPRunner" id="field_createdByPHPRunner"
                            [(ngModel)]="livre.createdByPHPRunner" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.page" for="field_page">Page</label>
-                    <input type="text" class="form-control" name="page" id="field_page"
+                    <input type="text" class="form-control form-control-sm" name="page" id="field_page"
                            [(ngModel)]="livre.page" maxlength="4"/>
                     <div [hidden]="!(editForm.controls.page?.dirty && editForm.controls.page?.invalid)">
                         <small class="form-text text-danger"
@@ -172,14 +174,14 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.consultation" for="field_consultation">Consultation</label>
-                    <input type="text" class="form-control" name="consultation" id="field_consultation"
+                    <input type="text" class="form-control form-control-sm" name="consultation" id="field_consultation"
                            [(ngModel)]="livre.consultation" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.origine" for="field_origine">Origine</label>
-                    <input type="text" class="form-control" name="origine" id="field_origine"
+                    <input type="text" class="form-control form-control-sm" name="origine" id="field_origine"
                            [(ngModel)]="livre.origine" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.origine?.dirty && editForm.controls.origine?.invalid)">
                         <small class="form-text text-danger"
@@ -192,7 +194,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.sousTitre" for="field_sousTitre">Sous Titre</label>
-                    <input type="text" class="form-control" name="sousTitre" id="field_sousTitre"
+                    <input type="text" class="form-control form-control-sm" name="sousTitre" id="field_sousTitre"
                            [(ngModel)]="livre.sousTitre" maxlength="100"/>
                     <div [hidden]="!(editForm.controls.sousTitre?.dirty && editForm.controls.sousTitre?.invalid)">
                         <small class="form-text text-danger"
@@ -207,7 +209,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.collection" for="field_collection">Collection</label>
-                    <input type="text" class="form-control" name="collection" id="field_collection"
+                    <input type="text" class="form-control form-control-sm" name="collection" id="field_collection"
                            [(ngModel)]="livre.collection" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.collection?.dirty && editForm.controls.collection?.invalid)">
                         <small class="form-text text-danger"
@@ -220,7 +222,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.impression" for="field_impression">Impression</label>
-                    <input type="text" class="form-control" name="impression" id="field_impression"
+                    <input type="text" class="form-control form-control-sm" name="impression" id="field_impression"
                            [(ngModel)]="livre.impression" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.impression?.dirty && editForm.controls.impression?.invalid)">
                         <small class="form-text text-danger"
@@ -233,7 +235,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.format" for="field_format">Format</label>
-                    <input type="text" class="form-control" name="format" id="field_format"
+                    <input type="text" class="form-control form-control-sm" name="format" id="field_format"
                            [(ngModel)]="livre.format" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.format?.dirty && editForm.controls.format?.invalid)">
                         <small class="form-text text-danger"
@@ -248,7 +250,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.index" for="field_index">Index</label>
-                    <input type="text" class="form-control" name="index" id="field_index"
+                    <input type="text" class="form-control form-control-sm" name="index" id="field_index"
                            [(ngModel)]="livre.index" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.index?.dirty && editForm.controls.index?.invalid)">
                         <small class="form-text text-danger"
@@ -261,7 +263,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.bibliographie" for="field_bibliographie">Bibliographie</label>
-                    <input type="text" class="form-control" name="bibliographie" id="field_bibliographie"
+                    <input type="text" class="form-control form-control-sm" name="bibliographie" id="field_bibliographie"
                            [(ngModel)]="livre.bibliographie" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.bibliographie?.dirty && editForm.controls.bibliographie?.invalid)">
                         <small class="form-text text-danger"
@@ -274,7 +276,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.lieuEdition" for="field_lieuEdition">Lieu Edition</label>
-                    <input type="text" class="form-control" name="lieuEdition" id="field_lieuEdition"
+                    <input type="text" class="form-control form-control-sm" name="lieuEdition" id="field_lieuEdition"
                            [(ngModel)]="livre.lieuEdition" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.lieuEdition?.dirty && editForm.controls.lieuEdition?.invalid)">
                         <small class="form-text text-danger"
@@ -289,7 +291,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.lieuImpression" for="field_lieuImpression">Lieu Impression</label>
-                    <input type="text" class="form-control" name="lieuImpression" id="field_lieuImpression"
+                    <input type="text" class="form-control form-control-sm" name="lieuImpression" id="field_lieuImpression"
                            [(ngModel)]="livre.lieuImpression" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.lieuImpression?.dirty && editForm.controls.lieuImpression?.invalid)">
                         <small class="form-text text-danger"
@@ -302,7 +304,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.illustration" for="field_illustration">Illustration</label>
-                    <input type="text" class="form-control" name="illustration" id="field_illustration"
+                    <input type="text" class="form-control form-control-sm" name="illustration" id="field_illustration"
                            [(ngModel)]="livre.illustration" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.illustration?.dirty && editForm.controls.illustration?.invalid)">
                         <small class="form-text text-danger"
@@ -315,7 +317,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.observation" for="field_observation">Observation</label>
-                    <input type="text" class="form-control" name="observation" id="field_observation"
+                    <input type="text" class="form-control form-control-sm" name="observation" id="field_observation"
                            [(ngModel)]="livre.observation" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.observation?.dirty && editForm.controls.observation?.invalid)">
                         <small class="form-text text-danger"
@@ -330,7 +332,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.prenom" for="field_prenom">Prenom</label>
-                    <input type="text" class="form-control" name="prenom" id="field_prenom"
+                    <input type="text" class="form-control form-control-sm" name="prenom" id="field_prenom"
                            [(ngModel)]="livre.prenom" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.prenom?.dirty && editForm.controls.prenom?.invalid)">
                         <small class="form-text text-danger"
@@ -343,7 +345,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.statistique" for="field_statistique">Statistique</label>
-                    <input type="text" class="form-control" name="statistique" id="field_statistique"
+                    <input type="text" class="form-control form-control-sm" name="statistique" id="field_statistique"
                            [(ngModel)]="livre.statistique" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.statistique?.dirty && editForm.controls.statistique?.invalid)">
                         <small class="form-text text-danger"
@@ -356,7 +358,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.glossaire" for="field_glossaire">Glossaire</label>
-                    <input type="text" class="form-control" name="glossaire" id="field_glossaire"
+                    <input type="text" class="form-control form-control-sm" name="glossaire" id="field_glossaire"
                            [(ngModel)]="livre.glossaire" maxlength="50"/>
                     <div [hidden]="!(editForm.controls.glossaire?.dirty && editForm.controls.glossaire?.invalid)">
                         <small class="form-text text-danger"
@@ -367,14 +369,13 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-sm btn-blue">
+            <span class="fa fa-download"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>
 </form>

@@ -1,7 +1,7 @@
 
 <div *ngIf="rapatriement">
     <h2><span jhiTranslate="ambassadeApp.rapatriement.detail.title">Rapatriement</span> {{rapatriement.id}}</h2>
-    <hr>
+    <div class="title-bullet"><span></span></div>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
         <div class="card light">
@@ -11,15 +11,15 @@
                         <label jhiTranslate="ambassadeApp.rapatriement.reference">Reference</label> : &nbsp;
                         <span>{{rapatriement.reference}}</span>
                     </div>
-                    <div class="row col-md-3">
+                    <div class="col-md-3">
                         <label jhiTranslate="ambassadeApp.rapatriement.numeroDossier">Numero Dossier</label> : &nbsp;
                         <span>{{rapatriement.numeroDossier}}</span>
                     </div>
-                    <div class="row col-md-3">
+                    <div class="col-md-3">
                         <label jhiTranslate="ambassadeApp.rapatriement.nom">Nom</label> : &nbsp;
                         <span>{{rapatriement.nom}}</span>
                     </div>
-                    <div class="row col-md-3">
+                    <div class="col-md-3">
                         <label jhiTranslate="ambassadeApp.rapatriement.prenom">Prenom</label> : &nbsp;
                         <span>{{rapatriement.prenom}}</span>
                     </div>
@@ -70,7 +70,7 @@
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-info">
+            class="btn btn-primary btn-sm">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
@@ -78,7 +78,7 @@
             [routerLink]="['/', { outlets: { popup: 'rapatriement/'+ rapatriement.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            class="btn btn-blue btn-sm">
+        <span class="fa fa-pencil-square-o"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>
