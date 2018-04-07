@@ -1,8 +1,10 @@
 package com.urservices.ambassade.service.impl;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.urservices.ambassade.domain.Montant;
 import com.urservices.ambassade.service.MonnaieService;
 import com.urservices.ambassade.domain.Monnaie;
+import com.urservices.ambassade.domain.QMonnaie;
 import com.urservices.ambassade.repository.MonnaieRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,10 +88,35 @@ public class MonnaieServiceImpl implements MonnaieService {
      */
     @Override
     public Page<Monnaie> searchAll(String type, String produit, Long montant, Pageable pageable) {
-        if (montant != null){
-            return monnaieRepository.searchAll("%"+ type+"%","%"+ produit+"%",montant,pageable);
-        }else {
-            return monnaieRepository.findByTypeAndProduit("%"+ type+"%","%"+ produit+"%",pageable);
+        
+        QMonnaie monnaie = QMonnaie.monnaie;
+        Boolean added = false;
+        BooleanExpression predicate = null;
+        
+        if(type!=null && !type.isEmpty()){
+            predicate = monnaie.type.likeIgnoreCase(type);
+        }
+        
+        if(produit!=null && !produit.isEmpty()){
+            if(added){
+                predicate = predicate.and(monnaie.produit.likeIgnoreCase(produit));
+            }else{
+                predicate = monnaie.produit.likeIgnoreCase(produit);
+            }
+        }
+        
+        if(montant!=null){
+            if(added){
+                predicate = predicate.and(monnaie.montant.eq(montant));
+            }else{
+                predicate = monnaie.montant.eq(montant);
+            }
+        }
+        
+        if(predicate !=null){
+            return monnaieRepository.findAll(predicate,pageable);
+        }else{
+            return monnaieRepository.findAll(pageable);
         }
     }
 }

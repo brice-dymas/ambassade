@@ -1,5 +1,7 @@
 package com.urservices.ambassade.service.impl;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.urservices.ambassade.domain.QVisa;
 import com.urservices.ambassade.service.VisaService;
 import com.urservices.ambassade.domain.Visa;
 import com.urservices.ambassade.repository.VisaRepository;
@@ -86,6 +88,11 @@ public class VisaServiceImpl implements VisaService {
      * @param numeroPasseport
      * @param cedula
      * @param numeroVisa
+     * @param dateEmissionDeb
+     * @param dateEmissionFin
+     * @param dateExpirationDeb
+     * @param dateExpirationFin
+     * @param validePour
      * @param nombreEntree
      * @param type
      * @param categorie
@@ -93,15 +100,119 @@ public class VisaServiceImpl implements VisaService {
      * @param adresse
      * @param remarques
      * @param pageable  the pagination information  @return the list of entities
+     * @return 
      */
     @Override
     public Page<Visa> searchAll(String nom, String prenom, String nationalite, String numeroPasseport, String cedula,
                                 Long numeroVisa, LocalDate dateEmissionDeb, LocalDate dateEmissionFin, LocalDate dateExpirationDeb,
                                 LocalDate dateExpirationFin,  Integer validePour, String nombreEntree, String type, String categorie,
                                 Integer taxes, String adresse, String remarques, Pageable pageable) {
-        return visaRepository.searchAll("%"+nom+"%","%"+prenom+"%","%"+nationalite+"%",
-            "%"+numeroPasseport+"%","%"+cedula+"%",numeroVisa,dateEmissionDeb,dateEmissionFin,
-            dateExpirationDeb, dateExpirationFin, validePour,"%"+nombreEntree+"%","%"+type+"%","%"+categorie+"%",taxes,
-            "%"+adresse+"%","%"+remarques+"%",pageable);
+        
+        
+        //Travailler numéro visa et retirer validepour et taxes
+        QVisa visa = QVisa.visa;
+        Boolean added = false;
+        BooleanExpression predicate = null;
+        
+        if(nom!=null && !nom.isEmpty()){
+            predicate = visa.nom.likeIgnoreCase(nom);
+        }
+        if(prenom!=null && !prenom.isEmpty()){
+            if(added){
+                predicate = predicate.and(visa.prenom.likeIgnoreCase(prenom));
+            }else{
+                predicate = visa.prenom.likeIgnoreCase(prenom);
+            }
+        }
+        if(nationalite!=null && !nationalite.isEmpty()){
+            if(added){
+                predicate = predicate.and(visa.nationalite.likeIgnoreCase(nationalite));
+            }else{
+                predicate = visa.nationalite.likeIgnoreCase(nationalite);
+            }
+        }
+        if(numeroPasseport!=null && !numeroPasseport.isEmpty()){
+            if(added){
+                predicate = predicate.and(visa.numeroPasseport.likeIgnoreCase(numeroPasseport));
+            }else{
+                predicate = visa.numeroPasseport.likeIgnoreCase(numeroPasseport);
+            }
+        }
+        if(cedula!=null && !cedula.isEmpty()){
+            if(added){
+                predicate = predicate.and(visa.cedula.likeIgnoreCase(cedula));
+            }else{
+                predicate = visa.cedula.likeIgnoreCase(cedula);
+            }
+        }
+        if(nombreEntree!=null && !nombreEntree.isEmpty()){
+            if(added){
+                predicate = predicate.and(visa.nombreEntree.likeIgnoreCase(nombreEntree));
+            }else{
+                predicate = visa.nombreEntree.likeIgnoreCase(nombreEntree);
+            }
+        }
+        if(type!=null && !type.isEmpty()){
+            if(added){
+                predicate = predicate.and(visa.type.likeIgnoreCase(type));
+            }else{
+                predicate = visa.type.likeIgnoreCase(type);
+            }
+        }
+        if(adresse!=null && !adresse.isEmpty()){
+            if(added){
+                predicate = predicate.and(visa.adresse.likeIgnoreCase(adresse));
+            }else{
+                predicate = visa.adresse.likeIgnoreCase(adresse);
+            }
+        }
+        if(categorie!=null && !categorie.isEmpty()){
+            if(added){
+                predicate = predicate.and(visa.categorie.likeIgnoreCase(categorie));
+            }else{
+                predicate = visa.categorie.likeIgnoreCase(categorie);
+            }
+        }
+        if(remarques!=null && !remarques.isEmpty()){
+            if(added){
+                predicate = predicate.and(visa.remarques.likeIgnoreCase(remarques));
+            }else{
+                predicate = visa.remarques.likeIgnoreCase(remarques);
+            }
+        }
+        if(dateEmissionDeb!=null){
+            if(added){
+                predicate = predicate.and(visa.dateEmission.goe(dateEmissionDeb));
+            }else{
+                predicate = visa.dateEmission.goe(dateEmissionDeb);
+            }
+        }
+        if(dateEmissionFin!=null){
+            if(added){
+                predicate = predicate.and(visa.dateEmission.loe(dateEmissionFin));
+            }else{
+                predicate = visa.dateEmission.loe(dateEmissionFin);
+            }
+        }
+        if(dateExpirationDeb!=null){
+            if(added){
+                predicate = predicate.and(visa.dateExpiration.goe(dateExpirationDeb));
+            }else{
+                predicate = visa.dateExpiration.goe(dateExpirationDeb);
+            }
+        }
+        if(dateExpirationFin!=null){
+            if(added){
+                predicate = predicate.and(visa.dateExpiration.loe(dateExpirationFin));
+            }else{
+                predicate = visa.dateExpiration.loe(dateExpirationFin);
+            }
+        }
+        
+        if(predicate !=null){
+            return visaRepository.findAll(predicate,pageable);
+        }else{
+            return visaRepository.findAll(pageable);
+        }
     }
 }

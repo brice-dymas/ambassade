@@ -3,10 +3,14 @@ import {Router} from '@angular/router';
 import { ExcelService } from '../../excel.services';
 import { TableExport } from 'tableexport';
 import * as jsPDF from 'jspdf';
+import * as xepOnline from 'css-to-pdf/js/xepOnline.jqPlugin.js';
 
 @Component({
     selector: 'jhi-print',
-    templateUrl: './print.component.html'
+    templateUrl: './print.component.html',
+    styleUrls: [
+        'paper.min.css'
+    ]
 })
 export class PrintComponent implements OnInit, AfterViewChecked {
 
@@ -49,7 +53,7 @@ export class PrintComponent implements OnInit, AfterViewChecked {
     }
 
     downloadPDF() {
-        const doc = new jsPDF();
+       /* const doc = new jsPDF();
         const specialElementHandlers = {
             '#editor': function(element, renderer) {
                 return true;
@@ -60,7 +64,8 @@ export class PrintComponent implements OnInit, AfterViewChecked {
         doc.fromHTML(content.innerHTML, 15, 15, {
             'width': 190,
         });
-        doc.save('download.pdf');
+        doc.save('download.pdf');*/
+        return xepOnline.Formatter.Format('content',  {pageWidth: '297mm', pageHeight: '210mm'});
     }
 
     buildData(objs) {

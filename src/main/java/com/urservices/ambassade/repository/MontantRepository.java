@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface MontantRepository extends JpaRepository<Montant, Long> {
+public interface MontantRepository extends JpaRepository<Montant, Long>, QueryDslPredicateExecutor<Montant> {
 
     @Query("SELECT M FROM Montant M WHERE M.monnaie LIKE :monnaie AND M.produit LIKE :produit ")
     Page<Montant> findByMonnaieAndProduit(@Param("monnaie") String monnaie, @Param("produit") String produit, Pageable pageable);

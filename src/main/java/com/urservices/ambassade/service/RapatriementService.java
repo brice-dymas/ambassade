@@ -45,6 +45,6 @@ public interface RapatriementService {
     void delete(Long id);
     Page<Rapatriement> searchAll(Integer reference, String numeroDossier, String nom, String prenom,
                                  LocalDate dateNaissanceDeb, LocalDate dateNaissanceFin, String documentID,
-                                 List<Sexe> sexe, String motif, LocalDate dateRapatriementDeb, LocalDate dateRapatriementFin,
+                                 Sexe sexe, String motif, LocalDate dateRapatriementDeb, LocalDate dateRapatriementFin,
                                  String frontiere, Pageable pageable);
 }

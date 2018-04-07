@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
 
 /**
@@ -17,7 +18,7 @@ import java.time.LocalDate;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface CaisseRepository extends JpaRepository<Caisse, Long> {
+public interface CaisseRepository extends JpaRepository<Caisse, Long>,  QueryDslPredicateExecutor<Caisse> {
     @Query("SELECT C FROM Caisse C WHERE C.reference >= :reference AND C.dateRetour BETWEEN :dateRetourDeb AND :dateRetourFin " +
         "AND C.dateDuJour BETWEEN :dateDuJourDeb AND :dateDuJourFin AND C.nom LIKE :nom AND C.prenom LIKE :prenom AND C.typeID LIKE :typeID " +
         "AND C.numeroID LIKE :numeroID AND C.serviceConcerne LIKE :serviceConcerne AND C.monnaie LIKE :monnaie AND C.montant >= :montant " +

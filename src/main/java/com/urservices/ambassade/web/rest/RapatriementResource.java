@@ -104,8 +104,7 @@ public class RapatriementResource {
         String nom = webRequest.getParameter("nom") !=null ? webRequest.getParameter("nom"):"";
         String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
         String documentID = webRequest.getParameter("documentID") !=null ? webRequest.getParameter("documentID"):"";
-        List<Sexe> sexe = webRequest.getParameter("sexe") !=null && !webRequest.getParameter("sexe").isEmpty()
-            ? Arrays.asList(Sexe.valueOf(webRequest.getParameter("sexe"))) : Arrays.asList(Sexe.values());
+        Sexe sexe = webRequest.getParameter("sexe") !=null && !webRequest.getParameter("sexe").isEmpty() ? Sexe.valueOf(webRequest.getParameter("sexe")) : null;
         String motif = webRequest.getParameter("motif") !=null ? webRequest.getParameter("motif"):"";
         String frontiere = webRequest.getParameter("frontiere") !=null ? webRequest.getParameter("frontiere"):"";
 
