@@ -6,14 +6,14 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.montant.monnaie" for="field_monnaie">Monnaie</label>
-                        <input type="text" class="form-control" name="monnaie" id="field_monnaie"
+                        <input type="text" class="form-control form-control-sm" name="monnaie" id="field_monnaie"
                                [(ngModel)]="formModel.monnaie" maxlength="50"/>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.montant.montant" for="field_montant">Montant</label>
-                        <input type="number" class="form-control" name="montant" id="field_montant" #montant="ngModel"
+                        <input type="number" class="form-control form-control-sm" name="montant" id="field_montant" #montant="ngModel"
                                [(ngModel)]="formModel.montant" min="0"/>
                         <div [hidden]="!(montant?.dirty && montant?.invalid)">
                             <small class="form-text text-danger"
@@ -26,7 +26,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.montant.produit" for="field_produit">Produit</label>
-                        <input type="text" class="form-control" name="produit" id="field_produit"
+                        <input type="text" class="form-control form-control-sm" name="produit" id="field_produit"
                                [(ngModel)]="formModel.produit" maxlength="40"/>
                     </div>
                 </div>
@@ -34,8 +34,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" [disabled]="searchForm.invalid" class="btn btn-primary">
-            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        <button type="submit" [disabled]="searchForm.invalid" class="btn btn-blue btn-sm">
+            <span class="fa fa-search"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>
 </form>

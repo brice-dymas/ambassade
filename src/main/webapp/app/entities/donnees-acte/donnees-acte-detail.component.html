@@ -1,10 +1,10 @@
 
 <div *ngIf="donneesActe">
     <h2><span jhiTranslate="ambassadeApp.donneesActe.detail.title">Donnees Acte</span> {{donneesActe.id}}</h2>
-    <hr>
+    <div class="title-bullet"><span></span></div>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <div class="card bg-light">
+        <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-3">
@@ -143,7 +143,7 @@
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-info">
+            class="btn btn-sm btn-info">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
@@ -151,7 +151,7 @@
             [routerLink]="['/', { outlets: { popup: 'donnees-acte/'+ donneesActe.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-primary pull-right">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            class="btn btn-sm btn-blue pull-right">
+        <span class="fa fa-pencil-square-o"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>
