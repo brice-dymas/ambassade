@@ -7,18 +7,8 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.reference" for="field_reference">Reference</label>
-                        <input type="number" class="form-control form-control-sm" name="reference" id="field_reference"
-                               [(ngModel)]="formModel.reference" required/>
-                        <div [hidden]="!(searchForm.controls.reference?.dirty && searchForm.controls.reference?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!searchForm.controls.reference?.errors?.required" jhiTranslate="entity.validation.required">
-                                This field is required.
-                            </small>
-                            <small class="form-text text-danger"
-                                   [hidden]="!searchForm.controls.reference?.errors?.number" jhiTranslate="entity.validation.number">
-                                This field should be a number.
-                            </small>
-                        </div>
+                        <input type="text" class="form-control form-control-sm" name="reference" id="field_reference"
+                               [(ngModel)]="formModel.reference"/>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -26,12 +16,6 @@
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.numeroDossier" for="field_numeroDossier">Numero Dossier</label>
                         <input type="text" class="form-control form-control-sm" name="numeroDossier" id="field_numeroDossier"
                                [(ngModel)]="formModel.numeroDossier" maxlength="50"/>
-                        <div [hidden]="!(searchForm.controls.numeroDossier?.dirty && searchForm.controls.numeroDossier?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!searchForm.controls.numeroDossier?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                                This field cannot be longer than 50 characters.
-                            </small>
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -39,12 +23,6 @@
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.nom" for="field_nom">Nom</label>
                         <input type="text" class="form-control form-control-sm" name="nom" id="field_nom"
                                [(ngModel)]="formModel.nom" maxlength="50"/>
-                        <div [hidden]="!(searchForm.controls.nom?.dirty && searchForm.controls.nom?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!searchForm.controls.nom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                                This field cannot be longer than 50 characters.
-                            </small>
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -52,12 +30,6 @@
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.prenom" for="field_prenom">Prenom</label>
                         <input type="text" class="form-control form-control-sm" name="prenom" id="field_prenom"
                                [(ngModel)]="formModel.prenom" maxlength="50"/>
-                        <div [hidden]="!(searchForm.controls.prenom?.dirty && searchForm.controls.prenom?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!searchForm.controls.prenom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                                This field cannot be longer than 50 characters.
-                            </small>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -67,6 +39,7 @@
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.sexe" for="field_sexe">Sexe</label>
                         <select class="form-control form-control-sm" name="sexe" [(ngModel)]="formModel.sexe" id="field_sexe" >
+                            <option value=""></option>
                             <option value="MASCULIN">{{'ambassadeApp.Sexe.MASCULIN' | translate}}</option>
                             <option value="FEMININ">{{'ambassadeApp.Sexe.FEMININ' | translate}}</option>
                         </select>
@@ -77,12 +50,6 @@
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.motif" for="field_motif">Motif</label>
                         <input type="text" class="form-control form-control-sm" name="motif" id="field_motif"
                                [(ngModel)]="formModel.motif" maxlength="50"/>
-                        <div [hidden]="!(searchForm.controls.motif?.dirty && searchForm.controls.motif?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!searchForm.controls.motif?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                                This field cannot be longer than 50 characters.
-                            </small>
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -101,10 +68,10 @@
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="entity.action.and" for="field_dateRapatriementFin">Date Rapatriement</label>
                         <div class="input-group">
-                            <input id="field_dateRapatriementFin" type="text" class="form-control form-control-sm" name="dateRapatriementFin" ngbDatepicker  #dateRapatriementDp="ngbDatepicker" [(ngModel)]="formModel.dateRapatriementFin"
+                            <input id="field_dateRapatriementFin" type="text" class="form-control form-control-sm" name="dateRapatriementFin" ngbDatepicker  #dateRapatriementFinDp="ngbDatepicker" [(ngModel)]="formModel.dateRapatriementFin"
                             />
                             <span class="input-group-append">
-                                <button type="button" class="btn btn-blue btn-sm" (click)="dateRapatriementDp.toggle()"><i class="fa fa-calendar"></i></button>
+                                <button type="button" class="btn btn-blue btn-sm" (click)="dateRapatriementFinDp.toggle()"><i class="fa fa-calendar"></i></button>
                             </span>
                         </div>
                     </div>
@@ -127,24 +94,11 @@
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="entity.action.and" for="field_dateNaissanceFin">Date Naissance</label>
                         <div class="input-group">
-                            <input id="field_dateNaissanceFin" type="text" class="form-control form-control-sm" name="dateNaissanceFin" ngbDatepicker  #dateNaissanceDp="ngbDatepicker" [(ngModel)]="formModel.dateNaissanceFin"
+                            <input id="field_dateNaissanceFin" type="text" class="form-control form-control-sm" name="dateNaissanceFin" ngbDatepicker  #dateNaissanceFinDp="ngbDatepicker" [(ngModel)]="formModel.dateNaissanceFin"
                             />
                             <span class="input-group-append">
-                                <button type="button" class="btn btn-blue btn-sm" (click)="dateNaissanceDp.toggle()"><i class="fa fa-calendar"></i></button>
+                                <button type="button" class="btn btn-blue btn-sm" (click)="dateNaissanceFinDp.toggle()"><i class="fa fa-calendar"></i></button>
                             </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.documentID" for="field_documentID">Document ID</label>
-                        <input type="text" class="form-control form-control-sm" name="documentID" id="field_documentID"
-                               [(ngModel)]="formModel.documentID" maxlength="50"/>
-                        <div [hidden]="!(searchForm.controls.documentID?.dirty && searchForm.controls.documentID?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!searchForm.controls.documentID?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                                This field cannot be longer than 50 characters.
-                            </small>
                         </div>
                     </div>
                 </div>

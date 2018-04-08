@@ -42,8 +42,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AmbassadeApp.class)
 public class CaisseResourceIntTest {
 
-    private static final Long DEFAULT_REFERENCE = 1L;
-    private static final Long UPDATED_REFERENCE = 2L;
+    private static final String DEFAULT_REFERENCE = "AAAAAAAAAA";
+    private static final String UPDATED_REFERENCE = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_DATE_DU_JOUR = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_DU_JOUR = LocalDate.now(ZoneId.systemDefault());
@@ -221,7 +221,7 @@ public class CaisseResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(caisse.getId().intValue())))
-            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.intValue())))
+            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.toString())))
             .andExpect(jsonPath("$.[*].dateDuJour").value(hasItem(DEFAULT_DATE_DU_JOUR.toString())))
             .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
             .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM.toString())))
@@ -235,7 +235,7 @@ public class CaisseResourceIntTest {
             .andExpect(jsonPath("$.[*].num").value(hasItem(DEFAULT_NUM)))
             .andExpect(jsonPath("$.[*].paiement").value(hasItem(DEFAULT_PAIEMENT.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getAllCaissesByDateDuJour() throws Exception {
@@ -247,7 +247,7 @@ public class CaisseResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(caisse.getId().intValue())))
-            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.intValue())))
+            .andExpect(jsonPath("$.[*].reference").value(hasItem(DEFAULT_REFERENCE.toString())))
             .andExpect(jsonPath("$.[*].dateDuJour").value(hasItem(DEFAULT_DATE_DU_JOUR.toString())))
             .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
             .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM.toString())))
@@ -274,7 +274,7 @@ public class CaisseResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(caisse.getId().intValue()))
-            .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE.intValue()))
+            .andExpect(jsonPath("$.reference").value(DEFAULT_REFERENCE.toString()))
             .andExpect(jsonPath("$.dateDuJour").value(DEFAULT_DATE_DU_JOUR.toString()))
             .andExpect(jsonPath("$.nom").value(DEFAULT_NOM.toString()))
             .andExpect(jsonPath("$.prenom").value(DEFAULT_PRENOM.toString()))

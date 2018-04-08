@@ -90,36 +90,36 @@ public class RapatriementServiceImpl implements RapatriementService {
      * @param prenom
      * @param dateNaissanceDeb
      * @param dateNaissanceFin
-     * @param documentID
      * @param sexe
      * @param motif
      * @param dateRapatriementDeb
      * @param dateRapatriementFin
      * @param frontiere
      * @param pageable
-     * @return 
+     * @return
      */
     @Override
-    public Page<Rapatriement> searchAll(Integer reference, String numeroDossier, String nom, String prenom,
-                                        LocalDate dateNaissanceDeb, LocalDate dateNaissanceFin, String documentID,
-                                        Sexe sexe, String motif, LocalDate dateRapatriementDeb, LocalDate dateRapatriementFin,
+    public Page<Rapatriement> searchAll(String reference, String numeroDossier, String nom, String prenom,
+                                        LocalDate dateNaissanceDeb, LocalDate dateNaissanceFin, Sexe sexe, String motif,
+                                        LocalDate dateRapatriementDeb, LocalDate dateRapatriementFin,
                                         String frontiere, Pageable pageable) {
-        
+
         //To DO
         //Mettre reference String
-        
+
         QRapatriement rapatriement = QRapatriement.rapatriement;
         Boolean added = false;
         BooleanExpression predicate = null;
-        
+
         if(nom!=null && !nom.isEmpty()){
-            predicate = rapatriement.nom.likeIgnoreCase(nom);
+            predicate = rapatriement.nom.likeIgnoreCase("%"+nom+"%");
+            added = true;
         }
         if(prenom!=null && !prenom.isEmpty()){
             if(added){
-                predicate = predicate.and(rapatriement.prenom.likeIgnoreCase(prenom));
+                predicate = predicate.and(rapatriement.prenom.likeIgnoreCase("%"+prenom+"%"));
             }else{
-                predicate = rapatriement.prenom.likeIgnoreCase(prenom);
+                predicate = rapatriement.prenom.likeIgnoreCase("%"+prenom+"%");
             }
         }
         if(sexe!=null){
@@ -131,30 +131,23 @@ public class RapatriementServiceImpl implements RapatriementService {
         }
         if(numeroDossier!=null && !numeroDossier.isEmpty()){
             if(added){
-                predicate = predicate.and(rapatriement.numeroDossier.likeIgnoreCase(numeroDossier));
+                predicate = predicate.and(rapatriement.numeroDossier.likeIgnoreCase("%"+numeroDossier+"%"));
             }else{
-                predicate = rapatriement.numeroDossier.likeIgnoreCase(numeroDossier);
-            }
-        }
-        if(documentID!=null && !documentID.isEmpty()){
-            if(added){
-                predicate = predicate.and(rapatriement.documentID.likeIgnoreCase(documentID));
-            }else{
-                predicate = rapatriement.documentID.likeIgnoreCase(documentID);
+                predicate = rapatriement.numeroDossier.likeIgnoreCase("%"+numeroDossier+"%");
             }
         }
         if(motif!=null && !motif.isEmpty()){
             if(added){
-                predicate = predicate.and(rapatriement.motif.likeIgnoreCase(motif));
+                predicate = predicate.and(rapatriement.motif.likeIgnoreCase("%"+motif+"%"));
             }else{
-                predicate = rapatriement.motif.likeIgnoreCase(motif);
+                predicate = rapatriement.motif.likeIgnoreCase("%"+motif+"%");
             }
         }
         if(frontiere!=null && !frontiere.isEmpty()){
             if(added){
-                predicate = predicate.and(rapatriement.frontiere.likeIgnoreCase(frontiere));
+                predicate = predicate.and(rapatriement.frontiere.likeIgnoreCase("%"+frontiere+"%"));
             }else{
-                predicate = rapatriement.frontiere.likeIgnoreCase(frontiere);
+                predicate = rapatriement.frontiere.likeIgnoreCase("%"+frontiere+"%");
             }
         }
         if(dateNaissanceDeb!=null){
@@ -185,7 +178,7 @@ public class RapatriementServiceImpl implements RapatriementService {
                 predicate = rapatriement.dateRapatriement.loe(dateRapatriementFin);
             }
         }
-        
+
         if(predicate !=null){
             return rapatriementRepository.findAll(predicate,pageable);
         }else{

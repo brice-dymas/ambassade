@@ -28,13 +28,13 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
             <th jhiSortBy="reference"><span jhiTranslate="ambassadeApp.rapatriement.reference">Reference</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="numeroDossier"><span jhiTranslate="ambassadeApp.rapatriement.numeroDossier">Numero Dossier</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="numeroDossier"><span jhiTranslate="ambassadeApp.rapatriement.numeroDossier">Numero Dossier</span> <span class="fa fa-sort"></span></th>-->
             <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.rapatriement.nom">Nom</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="prenom"><span jhiTranslate="ambassadeApp.rapatriement.prenom">Prenom</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="dateNaissance"><span jhiTranslate="ambassadeApp.rapatriement.dateNaissance">Date Naissance</span> <span class="fa fa-sort"></span></th>
             <!-- <th jhiSortBy="documentID"><span jhiTranslate="ambassadeApp.rapatriement.documentID">Document ID</span> <span class="fa fa-sort"></span></th> -->
             <th jhiSortBy="sexe"><span jhiTranslate="ambassadeApp.rapatriement.sexe">Sexe</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="motif"><span jhiTranslate="ambassadeApp.rapatriement.motif">Motif</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="motif"><span jhiTranslate="ambassadeApp.rapatriement.motif">Motif</span> <span class="fa fa-sort"></span></th>-->
             <th jhiSortBy="dateRapatriement"><span jhiTranslate="ambassadeApp.rapatriement.dateRapatriement">Date Rapatriement</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="frontiere"><span jhiTranslate="ambassadeApp.rapatriement.frontiere">Frontiere</span> <span class="fa fa-sort"></span></th>
             <!-- <th jhiSortBy="documentScanne"><span jhiTranslate="ambassadeApp.rapatriement.documentScanne">Document Scanne</span> <span class="fa fa-sort"></span></th>
@@ -46,13 +46,13 @@
             <tr *ngFor="let rapatriement of rapatriements ;trackBy: trackId">
                 <!-- <td><a [routerLink]="['../rapatriement', rapatriement.id ]">{{rapatriement.id}}</a></td> -->
                 <td>{{rapatriement.reference}}</td>
-                <td>{{rapatriement.numeroDossier}}</td>
+                <!--<td>{{ rapatriement.numeroDossier}}</td>-->
                 <td>{{rapatriement.nom}}</td>
                 <td>{{rapatriement.prenom}}</td>
                 <td>{{rapatriement.dateNaissance | date:'mediumDate'}}</td>
                 <!-- <td>{{rapatriement.documentID}}</td> -->
                 <td jhiTranslate="{{'ambassadeApp.Sexe.' + rapatriement.sexe}}">{{rapatriement.sexe}}</td>
-                <td>{{rapatriement.motif}}</td>
+                <!--<td>{{rapatriement.motif}}</td>-->
                 <td>{{rapatriement.dateRapatriement | date:'mediumDate'}}</td>
                 <td>{{rapatriement.frontiere}}</td>
                 <!--
@@ -69,7 +69,7 @@
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
+                        </button>&nbsp;
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'rapatriement/'+ rapatriement.id + '/edit'} }]"
                                 replaceUrl="true"
@@ -77,7 +77,7 @@
                                 class="btn btn-blue btn-sm">
                             <span class="fa fa-pencil-square-o"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
+                        </button>&nbsp;
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'rapatriement/'+ rapatriement.id + '/delete'} }]"
                                 replaceUrl="true"

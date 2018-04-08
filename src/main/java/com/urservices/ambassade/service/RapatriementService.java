@@ -43,8 +43,8 @@ public interface RapatriementService {
      * @param id the id of the entity
      */
     void delete(Long id);
-    Page<Rapatriement> searchAll(Integer reference, String numeroDossier, String nom, String prenom,
-                                 LocalDate dateNaissanceDeb, LocalDate dateNaissanceFin, String documentID,
-                                 Sexe sexe, String motif, LocalDate dateRapatriementDeb, LocalDate dateRapatriementFin,
+    Page<Rapatriement> searchAll(String reference, String numeroDossier, String nom, String prenom,
+                                 LocalDate dateNaissanceDeb, LocalDate dateNaissanceFin, Sexe sexe, String motif,
+                                 LocalDate dateRapatriementDeb, LocalDate dateRapatriementFin,
                                  String frontiere, Pageable pageable);
 }

@@ -3,7 +3,7 @@ import { BaseEntity } from './../../shared';
 export class Caisse implements BaseEntity {
     constructor(
         public id?: number,
-        public reference?: number,
+        public reference?: string,
         public dateDuJour?: any,
         public nom?: string,
         public prenom?: string,

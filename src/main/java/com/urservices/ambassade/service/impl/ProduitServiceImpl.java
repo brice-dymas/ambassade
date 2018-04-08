@@ -93,22 +93,22 @@ public class ProduitServiceImpl implements ProduitService {
         BooleanExpression predicate = null;
         boolean added = false;
         if (monnaie != null && !monnaie.isEmpty()) {
-            predicate = produit.monnaie.likeIgnoreCase(monnaie);
+            predicate = produit.monnaie.likeIgnoreCase("%"+monnaie+"%");
             added = true;
         }
-        if (nomProduit != null && !monnaie.isEmpty()) {
+        if (nomProduit != null && !nomProduit.isEmpty()) {
             if (added) {
-                predicate = predicate.and(produit.nomProduit.likeIgnoreCase(nomProduit));
+                predicate = predicate.and(produit.nomProduit.likeIgnoreCase("%"+nomProduit+"%"));
             } else {
-                predicate = produit.nomProduit.likeIgnoreCase(nomProduit);
+                predicate = produit.nomProduit.likeIgnoreCase("%"+nomProduit+"%");
                 added = true;
             }
         }
         if (montant != null) {
             if (added) {
-                predicate = predicate.and(produit.montant.eq(montant));
+                predicate = predicate.and(produit.montant.goe(montant));
             } else {
-                predicate = produit.montant.eq(montant);
+                predicate = produit.montant.goe(montant);
             }
         }
         if (predicate != null) {

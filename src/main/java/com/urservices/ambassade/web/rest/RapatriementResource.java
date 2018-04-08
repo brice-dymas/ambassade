@@ -99,33 +99,55 @@ public class RapatriementResource {
 
         log.debug("REST request to get a page of Rapatriements");
 
-        Integer reference = webRequest.getParameter("reference") !=null ? Integer.valueOf(webRequest.getParameter("reference")):-1;
-        String numeroDossier = webRequest.getParameter("numeroDossier") !=null ? webRequest.getParameter("numeroDossier"):"";
-        String nom = webRequest.getParameter("nom") !=null ? webRequest.getParameter("nom"):"";
-        String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
-        String documentID = webRequest.getParameter("documentID") !=null ? webRequest.getParameter("documentID"):"";
-        Sexe sexe = webRequest.getParameter("sexe") !=null && !webRequest.getParameter("sexe").isEmpty() ? Sexe.valueOf(webRequest.getParameter("sexe")) : null;
-        String motif = webRequest.getParameter("motif") !=null ? webRequest.getParameter("motif"):"";
-        String frontiere = webRequest.getParameter("frontiere") !=null ? webRequest.getParameter("frontiere"):"";
+        String reference = webRequest.getParameter("reference") !=null && !webRequest.getParameter("reference").isEmpty()
+            ? (webRequest.getParameter("reference")): null;
+        String numeroDossier = webRequest.getParameter("numeroDossier") !=null && !webRequest.getParameter("numeroDossier").isEmpty()
+            ? webRequest.getParameter("numeroDossier"): null;
+        String nom = webRequest.getParameter("nom") !=null && !webRequest.getParameter("nom").isEmpty()
+            ? webRequest.getParameter("nom"): null;
+        String prenom = webRequest.getParameter("prenom") !=null && !webRequest.getParameter("prenom").isEmpty()
+            ? webRequest.getParameter("prenom"): null;
+        String documentID = webRequest.getParameter("documentID") !=null && !webRequest.getParameter("documentID").isEmpty()
+            ? webRequest.getParameter("documentID"): null;
+        Sexe sexe = webRequest.getParameter("sexe") !=null && !webRequest.getParameter("sexe").isEmpty() ?
+            Sexe.valueOf(webRequest.getParameter("sexe")) : null;
+        String motif = webRequest.getParameter("motif") !=null && !webRequest.getParameter("motif").isEmpty()
+            ? webRequest.getParameter("motif"): null;
+        String frontiere = webRequest.getParameter("frontiere") !=null && !webRequest.getParameter("frontiere").isEmpty()
+            ? webRequest.getParameter("frontiere"): null;
 
         String dateNaissanceDebStr = webRequest.getParameter("dateNaissanceDeb") !=null &&
-            !webRequest.getParameter("dateNaissance").isEmpty()? webRequest.getParameter("dateNaissance"): "1970-01-01";
+            !webRequest.getParameter("dateNaissance").isEmpty()? webRequest.getParameter("dateNaissance"):  null;
         String dateNaissanceFinStr = webRequest.getParameter("dateNaissanceFin") !=null &&
             !webRequest.getParameter("dateNaissanceFin").isEmpty() ?
-            webRequest.getParameter("dateNaissanceFin"): LocalDate.now().toString();
+            webRequest.getParameter("dateNaissanceFin"):  null;
         String dateRapatriementDebStr = webRequest.getParameter("dateRapatriement") !=null &&
-            !webRequest.getParameter("dateRapatriement").isEmpty() ? webRequest.getParameter("dateRapatriement"): "1970-01-01";
+            !webRequest.getParameter("dateRapatriement").isEmpty() ? webRequest.getParameter("dateRapatriement"):  null;
         String dateRapatriementFinStr= webRequest.getParameter("dateRapatriementFin") !=null &&
             !webRequest.getParameter("dateRapatriementFin").isEmpty() ?
-            webRequest.getParameter("dateRapatriementFin") : LocalDate.now().toString();
+            webRequest.getParameter("dateRapatriementFin") :  null;
 
-        LocalDate dateNaissanceDeb = LocalDate.parse(dateNaissanceDebStr);
-        LocalDate dateNaissanceFin = LocalDate.parse(dateNaissanceFinStr);
-        LocalDate dateRapatriementDeb = LocalDate.parse(dateRapatriementDebStr);
-        LocalDate dateRapatriementFin = LocalDate.parse(dateRapatriementFinStr);
+        LocalDate dateNaissanceDeb = null;
+        LocalDate dateNaissanceFin = null;
+        LocalDate dateRapatriementDeb = null;
+        LocalDate dateRapatriementFin = null;
+
+        if (dateNaissanceDebStr != null){
+            dateNaissanceDeb = LocalDate.parse(dateNaissanceDebStr);
+        }
+        if (dateNaissanceFinStr != null){
+            dateNaissanceFin = LocalDate.parse(dateNaissanceFinStr);
+        }
+
+        if (dateRapatriementDebStr != null){
+            dateRapatriementDeb = LocalDate.parse(dateRapatriementDebStr);
+        }
+        if (dateRapatriementFinStr != null){
+            dateRapatriementFin = LocalDate.parse(dateRapatriementFinStr);
+        }
 
         Page<Rapatriement> page = rapatriementService.searchAll(reference,numeroDossier,nom,prenom,dateNaissanceDeb,
-            dateNaissanceFin, documentID,sexe,motif,dateRapatriementDeb, dateRapatriementFin, frontiere,pageable);
+            dateNaissanceFin, sexe,motif,dateRapatriementDeb, dateRapatriementFin, frontiere,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/rapatriements");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
