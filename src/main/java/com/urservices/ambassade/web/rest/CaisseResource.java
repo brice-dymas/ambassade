@@ -98,36 +98,61 @@ public class CaisseResource {
     public ResponseEntity<List<Caisse>> getAllCaisses(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Caisses");
 
-        Long reference =  webRequest.getParameter("reference") !=null && !webRequest.getParameter("reference").isEmpty() ?
-            Long.valueOf(webRequest.getParameter("reference")): 0;
+        String reference =  webRequest.getParameter("reference") !=null && !webRequest.getParameter("reference").isEmpty() ?
+            webRequest.getParameter("reference"): null;
         String dateDuJourDebStr = webRequest.getParameter("dateDuJour") !=null && !webRequest.getParameter("dateDuJour").isEmpty()
-            ? webRequest.getParameter("dateDuJour"):"1970-01-01";
+            ? webRequest.getParameter("dateDuJour"): null;
         String dateDuJourFinStr = webRequest.getParameter("dateDuJourFin") !=null && !webRequest.getParameter("dateDuJourFin").isEmpty()
-            ? webRequest.getParameter("dateDuJourFin"): LocalDate.now().toString();
-        String nom = webRequest.getParameter("nom") !=null ? webRequest.getParameter("nom"):"";
-        String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
-        String typeID = webRequest.getParameter("typeID") !=null ? webRequest.getParameter("typeID"):"";
-        String numeroID = webRequest.getParameter("numeroID") !=null ? webRequest.getParameter("numeroID"):"";
-        String serviceConcerne = webRequest.getParameter("serviceConcerne") !=null ? webRequest.getParameter("serviceConcerne"):"";
-        String monnaie = webRequest.getParameter("monnaie") !=null ? webRequest.getParameter("monnaie"):"";
+//            ? webRequest.getParameter("dateDuJourFin"): LocalDate.now().toString();
+            ? webRequest.getParameter("dateDuJourFin"): null;
+        String nom = webRequest.getParameter("nom") !=null && !webRequest.getParameter("nom").isEmpty()
+            ? webRequest.getParameter("nom"): null;
+        String prenom = webRequest.getParameter("prenom") !=null && !webRequest.getParameter("prenom").isEmpty()
+            ? webRequest.getParameter("prenom"): null;
+        String typeID = webRequest.getParameter("typeID") !=null && !webRequest.getParameter("typeID").isEmpty()
+            ? webRequest.getParameter("typeID"): null;
+        String numeroID = webRequest.getParameter("numeroID") !=null && !webRequest.getParameter("numeroID").isEmpty()
+            ? webRequest.getParameter("numeroID"): null;
+        String serviceConcerne = webRequest.getParameter("serviceConcerne") !=null && !webRequest.getParameter("serviceConcerne").isEmpty()
+            ? webRequest.getParameter("serviceConcerne"): null;
+        String monnaie = webRequest.getParameter("monnaie") !=null && !webRequest.getParameter("monnaie").isEmpty()
+            ? webRequest.getParameter("monnaie"): null;
         BigDecimal montant =  webRequest.getParameter("montant") !=null && !webRequest.getParameter("montant").isEmpty() ?
-            new BigDecimal(webRequest.getParameter("montant")):new BigDecimal(0.0);
+            new BigDecimal(webRequest.getParameter("montant")): null;
         String dateRetourDebStr = webRequest.getParameter("dateRetour") !=null && !webRequest.getParameter("dateRetour").isEmpty()
-            ? webRequest.getParameter("dateRetour"):"1970-01-01";
+            ? webRequest.getParameter("dateRetour"): null;
         String dateRetourFinStr = webRequest.getParameter("dateRetourFin") !=null && !webRequest.getParameter("dateRetourFin").isEmpty()
-            ? webRequest.getParameter("dateRetourFin"): LocalDate.now().toString();
-        String telephone = webRequest.getParameter("telephone") !=null ? webRequest.getParameter("telephone"):"";
+//            ? webRequest.getParameter("dateRetourFin"): LocalDate.now().toString();
+            ? webRequest.getParameter("dateRetourFin"): null;
+        String telephone = webRequest.getParameter("telephone") !=null && !webRequest.getParameter("telephone").isEmpty()
+            ? webRequest.getParameter("telephone"): null;
         Integer num =  webRequest.getParameter("num") !=null && !webRequest.getParameter("num").isEmpty() ?
-            Integer.valueOf(webRequest.getParameter("num")): 0;
-        String paiement = webRequest.getParameter("paiement") !=null ? webRequest.getParameter("paiement"):"";
+            Integer.valueOf(webRequest.getParameter("num")): null;
+        String paiement = webRequest.getParameter("paiement") !=null && !webRequest.getParameter("paiement").isEmpty()
+            ? webRequest.getParameter("paiement"): null;
 
-        LocalDate dateDuJourDeb = LocalDate.parse(dateDuJourDebStr);
-        LocalDate dateDuJourFin = LocalDate.parse(dateDuJourFinStr);
-        LocalDate dateRetourDeb = LocalDate.parse(dateRetourDebStr);
-        LocalDate dateRetourFin = LocalDate.parse(dateRetourFinStr);
+        LocalDate dateDuJourDeb = null;
+        LocalDate dateDuJourFin = null;
+        LocalDate dateRetourDeb = null;
+        LocalDate dateRetourFin = null;
 
-        Page<Caisse> page = caisseService.search(reference,dateDuJourDeb,dateDuJourFin,nom,prenom,typeID,numeroID,
-            serviceConcerne,monnaie,montant,dateRetourDeb,dateRetourFin,telephone,num,paiement,pageable);
+        if (dateDuJourDebStr != null){
+            dateDuJourDeb = LocalDate.parse(dateDuJourDebStr);
+        }
+
+        if (dateDuJourFinStr != null){
+            dateDuJourFin = LocalDate.parse(dateDuJourFinStr);
+        }
+        if (dateRetourDebStr != null){
+            dateRetourDeb = LocalDate.parse(dateRetourDebStr);
+        }
+
+        if (dateRetourFinStr != null){
+            dateRetourFin = LocalDate.parse(dateRetourFinStr);
+        }
+
+        Page<Caisse> page = caisseService.search(reference,dateDuJourDeb,dateDuJourFin,nom,prenom,
+            serviceConcerne,dateRetourDeb,dateRetourFin, telephone, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/caisses");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

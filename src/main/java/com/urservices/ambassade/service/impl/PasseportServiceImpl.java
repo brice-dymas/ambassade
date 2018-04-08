@@ -90,7 +90,7 @@ public class PasseportServiceImpl implements PasseportService {
                                      LocalDate dateExpirationFin, String documents, Pageable pageable) {
         QPasseport passeport = QPasseport.passeport;
         BooleanExpression predicate = null;
-        boolean added = true;
+        boolean added = false;
         if (nom != null) {
             predicate = passeport.nom.likeIgnoreCase("%" + nom + "%");
             added = true;

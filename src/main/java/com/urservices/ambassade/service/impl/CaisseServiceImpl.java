@@ -82,52 +82,71 @@ public class CaisseServiceImpl implements CaisseService {
     }
 
     @Override
-    public Page<Caisse> search(Long reference, LocalDate dateDuJourDeb, LocalDate dateDuJourFin, String nom, String prenom,
-                               String typeID, String numeroID, String serviceConcerne, String monnaie, BigDecimal montant,
-                               LocalDate dateRetourDeb, LocalDate dateRetourFin, String telephone, Integer num,
-                               String paiement, Pageable pageable) {
-        
-        
+    public Page<Caisse> search(String reference, LocalDate dateDuJourDeb, LocalDate dateDuJourFin, String nom,
+                               String prenom, String serviceConcerne, LocalDate dateRetourDeb, LocalDate dateRetourFin,
+                               String telephone, Pageable pageable) {
+
+
         //TO DO Reference doit être string
         //retirer typeID, numeroId, montant,num,monnaie,paiement
-        
+
         QCaisse caisse = QCaisse.caisse;
         Boolean added = false;
         BooleanExpression predicate = null;
-        
-        if(nom!=null && !nom.isEmpty()){
-            predicate = caisse.nom.likeIgnoreCase(nom);
+
+//        if(nom!=null && !nom.isEmpty()){
+        if(nom!=null){
+            predicate = caisse.nom.likeIgnoreCase("%"+nom+"%");
+            added = true;
         }
-        
-        if(prenom!=null && !prenom.isEmpty()){
+
+//        if(reference!=null && !reference.isEmpty()){
+        if(reference!=null){
             if(added){
-                predicate = predicate.and(caisse.prenom.likeIgnoreCase(prenom));
+                predicate = predicate.and(caisse.reference.likeIgnoreCase("%"+reference+"%"));
             }else{
-                predicate = caisse.prenom.likeIgnoreCase(prenom);
+                predicate = caisse.reference.likeIgnoreCase("%"+reference+"%");
+                added = true;
             }
         }
-        
-        if(serviceConcerne!=null && !serviceConcerne.isEmpty()){
+
+
+//        if(prenom!=null && !prenom.isEmpty()){
+        if(prenom!=null){
             if(added){
-                predicate = predicate.and(caisse.serviceConcerne.likeIgnoreCase(serviceConcerne));
+                predicate = predicate.and(caisse.prenom.likeIgnoreCase("%"+prenom+"%"));
             }else{
-                predicate = caisse.serviceConcerne.likeIgnoreCase(serviceConcerne);
+                predicate = caisse.prenom.likeIgnoreCase("%"+prenom+"%");
+                added = true;
             }
         }
-        
-        if(telephone!=null && !telephone.isEmpty()){
+
+//        if(serviceConcerne!=null && !serviceConcerne.isEmpty()){
+        if(serviceConcerne!=null){
             if(added){
-                predicate = predicate.and(caisse.telephone.likeIgnoreCase(telephone));
+                predicate = predicate.and(caisse.serviceConcerne.likeIgnoreCase("%"+serviceConcerne+"%"));
             }else{
-                predicate = caisse.telephone.likeIgnoreCase(telephone);
+                predicate = caisse.serviceConcerne.likeIgnoreCase("%"+serviceConcerne+"%");
+                added = true;
             }
         }
-        
+
+//        if(telephone!=null && !telephone.isEmpty()){
+        if(telephone!=null){
+            if(added){
+                predicate = predicate.and(caisse.telephone.likeIgnoreCase("%"+telephone+"%"));
+            }else{
+                predicate = caisse.telephone.likeIgnoreCase("%"+telephone+"%");
+                added = true;
+            }
+        }
+
         if(dateDuJourDeb!=null){
             if(added){
                 predicate = predicate.and(caisse.dateDuJour.goe(dateDuJourDeb));
             }else{
                 predicate = caisse.dateDuJour.goe(dateDuJourDeb);
+                added = true;
             }
         }
         if(dateDuJourFin!=null){
@@ -135,6 +154,7 @@ public class CaisseServiceImpl implements CaisseService {
                 predicate = predicate.and(caisse.dateDuJour.loe(dateDuJourFin));
             }else{
                 predicate = caisse.dateDuJour.loe(dateDuJourFin);
+                added = true;
             }
         }
         if(dateRetourDeb!=null){
@@ -142,6 +162,7 @@ public class CaisseServiceImpl implements CaisseService {
                 predicate = predicate.and(caisse.dateRetour.goe(dateRetourDeb));
             }else{
                 predicate = caisse.dateRetour.goe(dateRetourDeb);
+                added = true;
             }
         }
         if(dateRetourFin!=null){
@@ -151,10 +172,12 @@ public class CaisseServiceImpl implements CaisseService {
                 predicate = caisse.dateRetour.loe(dateRetourFin);
             }
         }
-        
+
         if(predicate !=null){
+            System.out.println("The predicate for Caisse contains parameters: "+predicate);
             return caisseRepository.findAll(predicate,pageable);
         }else{
+            System.out.println("The predicate for Caisse don't containt parameters: ");
             return caisseRepository.findAll(pageable);
         }
     }

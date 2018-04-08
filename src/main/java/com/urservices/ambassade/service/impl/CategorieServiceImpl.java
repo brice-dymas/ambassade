@@ -84,7 +84,7 @@ public class CategorieServiceImpl implements CategorieService {
         QCategorie categorie = QCategorie.categorie;
         BooleanExpression predicate;
         if(nomCategorie!=null && !nomCategorie.isEmpty()){
-            predicate = categorie.nomCategorie.like("%"+nomCategorie+"%");
+            predicate = categorie.nomCategorie.likeIgnoreCase("%"+nomCategorie+"%");
             return categorieRepository.findAll(predicate,pageable);
         }else{
             return categorieRepository.findAll(pageable);
