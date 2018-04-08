@@ -102,8 +102,6 @@ public class VisaServiceImpl implements VisaService {
                                 LocalDate dateExpirationFin,  Integer validePour, String nombreEntree, String type, String categorie,
                                 Integer taxes, String adresse, String remarques, String typeService, Pageable pageable) {
 
-
-        //Travailler numéro visa et retirer validepour et taxes
         QVisa visa = QVisa.visa;
         Boolean added = false;
         BooleanExpression predicate = null;
@@ -210,8 +208,6 @@ public class VisaServiceImpl implements VisaService {
                 predicate = visa.typeService.id.eq(Long.valueOf(typeService));
             }
         }
-
-
         if(predicate !=null){
             return visaRepository.findAll(predicate,pageable);
         }else{

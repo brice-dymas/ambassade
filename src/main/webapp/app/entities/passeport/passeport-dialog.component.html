@@ -105,6 +105,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
+<<<<<<< HEAD
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.neLe" for="field_neLe">Ne
                         Le</label>
                     <div class="input-group">
@@ -114,6 +115,14 @@
                         <span class="input-group-append">
                     <button type="button" class="btn btn-blue btn-sm" (click)="neLeDp.toggle()"><i
                         class="fa fa-calendar"></i></button>
+=======
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.neLe" for="field_neLe">Ne Le</label>
+                    <div class="input-group">
+                        <input id="field_neLe" type="text" class="form-control form-control-sm" name="neLe" ngbDatepicker  #neLeDp="ngbDatepicker" [(ngModel)]="passeport.neLe"
+                               required/>
+                        <span class="input-group-append">
+                    <button type="button" class="btn btn-blue btn-sm" (click)="neLeDp.toggle()"><i class="fa fa-calendar"></i></button>
+>>>>>>> 9b6b943... Correction des requetes dynamiques OK
                 </span>
                     </div>
                     <div [hidden]="!(editForm.controls.neLe?.dirty && editForm.controls.neLe?.invalid)">
@@ -125,6 +134,7 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
             <!--<div class="col-md-3">-->
             <!--<div class="form-group">-->
             <!--<label class="form-control-label" jhiTranslate="ambassadeApp.passeport.neLe" for="field_neLe">Ne Le</label>-->
@@ -143,6 +153,26 @@
             <!--</div>-->
             <!--</div>-->
             <div class="col-md-3">
+=======
+            <!--<div class="col-md-4">-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" jhiTranslate="ambassadeApp.passeport.neLe" for="field_neLe">Ne Le</label>-->
+                    <!--<input type="text" class="form-control form-control-sm" name="neLe" id="field_neLe"-->
+                           <!--[(ngModel)]="passeport.neLe" required maxlength="20"/>-->
+                    <!--<div [hidden]="!(editForm.controls.neLe?.dirty && editForm.controls.neLe?.invalid)">-->
+                        <!--<small class="form-text text-danger"-->
+                               <!--[hidden]="!editForm.controls.neLe?.errors?.required" jhiTranslate="entity.validation.required">-->
+                            <!--This field is required.-->
+                        <!--</small>-->
+                        <!--<small class="form-text text-danger"-->
+                               <!--[hidden]="!editForm.controls.neLe?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">-->
+                            <!--This field cannot be longer than 20 characters.-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="col-md-4">
+>>>>>>> 9b6b943... Correction des requetes dynamiques OK
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.lieuNaissance"
                            for="field_lieuNaissance">Lieu Naissance</label>

@@ -140,6 +140,7 @@ public class VisaResource {
         String dateExpirationFinStr = webRequest.getParameter("dateExpirationFin") !=null && !webRequest.getParameter("dateExpirationFin").isEmpty() ? webRequest.getParameter("dateExpirationFin"):LocalDate.now().toString();
         String typeService = webRequest.getParameter("typeService") !=null && !webRequest.getParameter("typeService").isEmpty() ? webRequest.getParameter("typeService"): null;
 
+
         LocalDate dateEmissionDeb= null;
         LocalDate dateEmissionFin= null;
         LocalDate dateExpirationDeb= null;
@@ -147,6 +148,7 @@ public class VisaResource {
 
         Page<Visa> page = visaService.searchAll(nom,prenom,nationalite,numeroPasseport,cedula,numeroVisa,dateEmissionDeb, dateEmissionFin,
             dateExpirationDeb, dateExpirationFin, validePour,nombreEntree,type,categorie,taxes,adresse,remarques, typeService, pageable);
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/visas");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
