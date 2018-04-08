@@ -7,6 +7,7 @@ import {
     PrintComponent,
     printRoute,
 } from './';
+import {PrintDetailPasseportComponent} from './print-detail-passeport.component';
 // import {printRoute} from "./print.route";
 
 const ENTITY_STATES = [
@@ -19,7 +20,8 @@ const ENTITY_STATES = [
         RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [
-        PrintComponent
+        PrintComponent,
+        PrintDetailPasseportComponent
     ],
     entryComponents: [
         PrintComponent,

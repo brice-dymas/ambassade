@@ -42,6 +42,7 @@ public interface VisaService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
     Page<Visa> searchAll(String nom, String prenom, String nationalite, String numeroPasseport, String cedula,
                          Long numeroVisa, LocalDate dateEmissionDeb, LocalDate dateEmissionFin, LocalDate dateExpirationDeb,
                          LocalDate dateExpirationFin, Integer validePour, String nombreEntree, String type, String categorie,

@@ -32,7 +32,7 @@ public class TypeServiceResource {
 
     private final Logger log = LoggerFactory.getLogger(TypeServiceResource.class);
 
-    private static final String ENTITY_NAME = "typeService";
+    private static final String ENTITY_NAME = "typeService.csv";
 
     private final TypeServiceService typeServiceService;
 
@@ -41,10 +41,10 @@ public class TypeServiceResource {
     }
 
     /**
-     * POST  /type-services : Create a new typeService.
+     * POST  /type-services : Create a new typeService.csv.
      *
-     * @param typeService the typeService to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new typeService, or with status 400 (Bad Request) if the typeService has already an ID
+     * @param typeService the typeService.csv to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new typeService.csv, or with status 400 (Bad Request) if the typeService.csv has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/type-services")
@@ -52,7 +52,7 @@ public class TypeServiceResource {
     public ResponseEntity<TypeService> createTypeService(@Valid @RequestBody TypeService typeService) throws URISyntaxException {
         log.debug("REST request to save TypeService : {}", typeService);
         if (typeService.getId() != null) {
-            throw new BadRequestAlertException("A new typeService cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new typeService.csv cannot already have an ID", ENTITY_NAME, "idexists");
         }
         TypeService result = typeServiceService.save(typeService);
         return ResponseEntity.created(new URI("/api/type-services/" + result.getId()))
@@ -61,12 +61,12 @@ public class TypeServiceResource {
     }
 
     /**
-     * PUT  /type-services : Updates an existing typeService.
+     * PUT  /type-services : Updates an existing typeService.csv.
      *
-     * @param typeService the typeService to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated typeService,
-     * or with status 400 (Bad Request) if the typeService is not valid,
-     * or with status 500 (Internal Server Error) if the typeService couldn't be updated
+     * @param typeService the typeService.csv to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated typeService.csv,
+     * or with status 400 (Bad Request) if the typeService.csv is not valid,
+     * or with status 500 (Internal Server Error) if the typeService.csv couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/type-services")
@@ -98,10 +98,10 @@ public class TypeServiceResource {
     }
 
     /**
-     * GET  /type-services/:id : get the "id" typeService.
+     * GET  /type-services/:id : get the "id" typeService.csv.
      *
-     * @param id the id of the typeService to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the typeService, or with status 404 (Not Found)
+     * @param id the id of the typeService.csv to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the typeService.csv, or with status 404 (Not Found)
      */
     @GetMapping("/type-services/{id}")
     @Timed
@@ -112,9 +112,9 @@ public class TypeServiceResource {
     }
 
     /**
-     * DELETE  /type-services/:id : delete the "id" typeService.
+     * DELETE  /type-services/:id : delete the "id" typeService.csv.
      *
-     * @param id the id of the typeService to delete
+     * @param id the id of the typeService.csv to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/type-services/{id}")

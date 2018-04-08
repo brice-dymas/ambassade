@@ -104,10 +104,10 @@
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="entity.action.and" for="field_dateEmissionFin">Date Emission</label>
                         <div class="input-group">
-                            <input id="field_dateEmissionFin" type="text" class="form-control form-control-sm" name="dateEmissionFin" ngbDatepicker  #dateEmissionDp="ngbDatepicker" [(ngModel)]="formModel.dateEmissionFin"
+                            <input id="field_dateEmissionFin" type="text" class="form-control form-control-sm" name="dateEmissionFin" ngbDatepicker  #dateEmissionFinDp="ngbDatepicker" [(ngModel)]="formModel.dateEmissionFin"
                             />
                             <span class="input-group-append">
-                        <button type="button" class="btn btn-sm btn-blue" (click)="dateEmissionDp.toggle()"><i class="fa fa-calendar"></i></button>
+                        <button type="button" class="btn btn-sm btn-blue" (click)="dateEmissionFinDp.toggle()"><i class="fa fa-calendar"></i></button>
                     </span>
                         </div>
                     </div>
@@ -130,10 +130,10 @@
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="entity.action.and" for="field_dateExpirationFin">Date Expiration</label>
                         <div class="input-group">
-                            <input id="field_dateExpirationFin" type="text" class="form-control form-control-sm" name="dateExpirationFin" ngbDatepicker  #dateExpirationDp="ngbDatepicker" [(ngModel)]="formModel.dateExpirationFin"
+                            <input id="field_dateExpirationFin" type="text" class="form-control form-control-sm" name="dateExpirationFin" ngbDatepicker  #dateExpirationFinDp="ngbDatepicker" [(ngModel)]="formModel.dateExpirationFin"
                             />
                             <span class="input-group-append">
-                        <button type="button" class="btn btn-sm btn-blue" (click)="dateExpirationDp.toggle()"><i class="fa fa-calendar"></i></button>
+                        <button type="button" class="btn btn-sm btn-blue" (click)="dateExpirationFinDp.toggle()"><i class="fa fa-calendar"></i></button>
                     </span>
                         </div>
                     </div>

@@ -108,7 +108,7 @@ public class DonneesActeServiceImpl implements DonneesActeService {
                                      String juridiction, String livre, String acte, Pageable pageable) {
         QDonneesActe donneesActe = QDonneesActe.donneesActe;
         BooleanExpression predicate = null;
-        boolean added = true;
+        boolean added = false;
         if (reference != null){
             predicate = donneesActe.reference.likeIgnoreCase("%"+reference+"%");
             added = true;

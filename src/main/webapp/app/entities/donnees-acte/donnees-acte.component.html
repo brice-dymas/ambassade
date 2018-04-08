@@ -28,11 +28,11 @@
             <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
             <th jhiSortBy="reference"><span jhiTranslate="ambassadeApp.donneesActe.reference">Reference</span> <span class="fa fa-sort"></span></th>
             <!-- <th jhiSortBy="dateDuJourChiffre"><span jhiTranslate="ambassadeApp.donneesActe.dateDuJourChiffre">Date Du Jour Chiffre</span> <span class="fa fa-sort"></span></th> -->
-            <th jhiSortBy="registreSpecialRD"><span jhiTranslate="ambassadeApp.donneesActe.registreSpecialRD">Registre Special RD</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="registreSpecialRD"><span jhiTranslate="ambassadeApp.donneesActe.registreSpecialRD">Registre Special RD</span> <span class="fa fa-sort"></span></th>-->
             <th jhiSortBy="nomEnfant"><span jhiTranslate="ambassadeApp.donneesActe.nomEnfant">Nom Enfant</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="registre"><span jhiTranslate="ambassadeApp.donneesActe.registre">Registre</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="annee"><span jhiTranslate="ambassadeApp.donneesActe.annee">Annee</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="numero"><span jhiTranslate="ambassadeApp.donneesActe.numero">Numero</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="numero"><span jhiTranslate="ambassadeApp.donneesActe.numero">Numero</span> <span class="fa fa-sort"></span></th>-->
             <th jhiSortBy="sexe"><span jhiTranslate="ambassadeApp.donneesActe.sexe">Sexe</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="dateNaissanceChiffre"><span jhiTranslate="ambassadeApp.donneesActe.dateNaissanceChiffre">Date Naissance Chiffre</span> <span class="fa fa-sort"></span></th>
             <!-- <th jhiSortBy="nomPere"><span jhiTranslate="ambassadeApp.donneesActe.nomPere">Nom Pere</span> <span class="fa fa-sort"></span></th>
@@ -52,7 +52,7 @@
             <th jhiSortBy="livre"><span jhiTranslate="ambassadeApp.donneesActe.livre">Livre</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="notes"><span jhiTranslate="ambassadeApp.donneesActe.notes">Notes</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="feuille"><span jhiTranslate="ambassadeApp.donneesActe.feuille">Feuille</span> <span class="fa fa-sort"></span></th> -->
-            <th jhiSortBy="acte"><span jhiTranslate="ambassadeApp.donneesActe.acte">Acte</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="acte"><span jhiTranslate="ambassadeApp.donneesActe.acte">Acte</span> <span class="fa fa-sort"></span></th>-->
             <th>Actions</th>
             </tr>
             </thead>
@@ -61,11 +61,11 @@
                 <!-- <td><a [routerLink]="['../donnees-acte', donneesActe.id ]">{{donneesActe.id}}</a></td> -->
                 <td>{{donneesActe.reference}}</td>
                 <!-- <td>{{donneesActe.dateDuJourChiffre | date:'mediumDate'}}</td> -->
-                <td>{{donneesActe.registreSpecialRD}}</td>
+                <!--<td>{{donneesActe.registreSpecialRD}}</td>-->
                 <td>{{donneesActe.nomEnfant}}</td>
                 <td>{{donneesActe.registre}}</td>
                 <td>{{donneesActe.annee}}</td>
-                <td>{{donneesActe.numero}}</td>
+                <!--<td>{{donneesActe.numero}}</td>-->
                 <td jhiTranslate="{{'ambassadeApp.Sexe.' + donneesActe.sexe}}">{{donneesActe.sexe}}</td>
                 <td>{{donneesActe.dateNaissanceChiffre | date:'mediumDate'}}</td>
                 <!-- <td>{{donneesActe.nomPere}}</td>
@@ -88,7 +88,7 @@
                 <td>{{donneesActe.livre}}</td>
                 <td>{{donneesActe.notes}}</td>
                 <td>{{donneesActe.feuille}}</td> -->
-                <td>{{donneesActe.acte}}</td>
+                <!--<td>{{donneesActe.acte}}</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
@@ -96,7 +96,7 @@
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
+                        </button>&nbsp;
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'donnees-acte/'+ donneesActe.id + '/edit'} }]"
                                 replaceUrl="true"
@@ -104,7 +104,7 @@
                                 class="btn btn-blue btn-sm">
                             <span class="fa fa-pencil-square-o"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
+                        </button>&nbsp;
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'donnees-acte/'+ donneesActe.id + '/delete'} }]"
                                 replaceUrl="true"

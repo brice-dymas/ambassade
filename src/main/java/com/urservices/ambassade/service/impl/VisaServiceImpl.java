@@ -86,19 +86,13 @@ public class VisaServiceImpl implements VisaService {
      * @param prenom
      * @param nationalite
      * @param numeroPasseport
-     * @param cedula
      * @param numeroVisa
      * @param dateEmissionDeb
      * @param dateEmissionFin
      * @param dateExpirationDeb
      * @param dateExpirationFin
-     * @param validePour
-     * @param nombreEntree
      * @param type
      * @param categorie
-     * @param taxes
-     * @param adresse
-     * @param remarques
      * @param pageable  the pagination information  @return the list of entities
      * @return
      */
@@ -115,71 +109,71 @@ public class VisaServiceImpl implements VisaService {
         BooleanExpression predicate = null;
 
         if(nom!=null && !nom.isEmpty()){
-            predicate = visa.nom.likeIgnoreCase(nom);
+            predicate = visa.nom.likeIgnoreCase("%"+nom+"%");
         }
         if(prenom!=null && !prenom.isEmpty()){
             if(added){
-                predicate = predicate.and(visa.prenom.likeIgnoreCase(prenom));
+                predicate = predicate.and(visa.prenom.likeIgnoreCase("%"+prenom+"%"));
             }else{
-                predicate = visa.prenom.likeIgnoreCase(prenom);
+                predicate = visa.prenom.likeIgnoreCase("%"+prenom+"%");
             }
         }
         if(nationalite!=null && !nationalite.isEmpty()){
             if(added){
-                predicate = predicate.and(visa.nationalite.likeIgnoreCase(nationalite));
+                predicate = predicate.and(visa.nationalite.likeIgnoreCase("%"+nationalite+"%"));
             }else{
-                predicate = visa.nationalite.likeIgnoreCase(nationalite);
+                predicate = visa.nationalite.likeIgnoreCase("%"+nationalite+"%");
             }
         }
         if(numeroPasseport!=null && !numeroPasseport.isEmpty()){
             if(added){
-                predicate = predicate.and(visa.numeroPasseport.likeIgnoreCase(numeroPasseport));
+                predicate = predicate.and(visa.numeroPasseport.likeIgnoreCase("%"+numeroPasseport+"%"));
             }else{
-                predicate = visa.numeroPasseport.likeIgnoreCase(numeroPasseport);
+                predicate = visa.numeroPasseport.likeIgnoreCase("%"+numeroPasseport+"%");
             }
         }
-        if(cedula!=null && !cedula.isEmpty()){
-            if(added){
-                predicate = predicate.and(visa.cedula.likeIgnoreCase(cedula));
-            }else{
-                predicate = visa.cedula.likeIgnoreCase(cedula);
-            }
-        }
-        if(nombreEntree!=null && !nombreEntree.isEmpty()){
-            if(added){
-                predicate = predicate.and(visa.nombreEntree.likeIgnoreCase(nombreEntree));
-            }else{
-                predicate = visa.nombreEntree.likeIgnoreCase(nombreEntree);
-            }
-        }
+//        if(cedula!=null && !cedula.isEmpty()){
+//            if(added){
+//                predicate = predicate.and(visa.cedula.likeIgnoreCase("%"+cedula));
+//            }else{
+//                predicate = visa.cedula.likeIgnoreCase("%"+cedula);
+//            }
+//        }
+//        if(nombreEntree!=null && !nombreEntree.isEmpty()){
+//            if(added){
+//                predicate = predicate.and(visa.nombreEntree.likeIgnoreCase("%"+nombreEntree));
+//            }else{
+//                predicate = visa.nombreEntree.likeIgnoreCase("%"+nombreEntree);
+//            }
+//        }
         if(type!=null && !type.isEmpty()){
             if(added){
-                predicate = predicate.and(visa.type.likeIgnoreCase(type));
+                predicate = predicate.and(visa.type.likeIgnoreCase("%"+type+"%"));
             }else{
-                predicate = visa.type.likeIgnoreCase(type);
+                predicate = visa.type.likeIgnoreCase("%"+type+"%");
             }
         }
         if(adresse!=null && !adresse.isEmpty()){
             if(added){
-                predicate = predicate.and(visa.adresse.likeIgnoreCase(adresse));
+                predicate = predicate.and(visa.adresse.likeIgnoreCase("%"+adresse+"%"));
             }else{
-                predicate = visa.adresse.likeIgnoreCase(adresse);
+                predicate = visa.adresse.likeIgnoreCase("%"+adresse+"%");
             }
         }
         if(categorie!=null && !categorie.isEmpty()){
             if(added){
-                predicate = predicate.and(visa.categorie.likeIgnoreCase(categorie));
+                predicate = predicate.and(visa.categorie.likeIgnoreCase("%"+categorie+"%"));
             }else{
-                predicate = visa.categorie.likeIgnoreCase(categorie);
+                predicate = visa.categorie.likeIgnoreCase("%"+categorie+"%");
             }
         }
-        if(remarques!=null && !remarques.isEmpty()){
-            if(added){
-                predicate = predicate.and(visa.remarques.likeIgnoreCase(remarques));
-            }else{
-                predicate = visa.remarques.likeIgnoreCase(remarques);
-            }
-        }
+//        if(remarques!=null && !remarques.isEmpty()){
+//            if(added){
+//                predicate = predicate.and(visa.remarques.likeIgnoreCase("%"+remarques));
+//            }else{
+//                predicate = visa.remarques.likeIgnoreCase("%"+remarques);
+//            }
+//        }
         if(dateEmissionDeb!=null){
             if(added){
                 predicate = predicate.and(visa.dateEmission.goe(dateEmissionDeb));
@@ -216,6 +210,7 @@ public class VisaServiceImpl implements VisaService {
                 predicate = visa.typeService.id.eq(Long.valueOf(typeService));
             }
         }
+
 
         if(predicate !=null){
             return visaRepository.findAll(predicate,pageable);

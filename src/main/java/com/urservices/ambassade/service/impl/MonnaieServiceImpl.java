@@ -88,31 +88,32 @@ public class MonnaieServiceImpl implements MonnaieService {
      */
     @Override
     public Page<Monnaie> searchAll(String type, String produit, Long montant, Pageable pageable) {
-        
+
         QMonnaie monnaie = QMonnaie.monnaie;
         Boolean added = false;
         BooleanExpression predicate = null;
-        
+
         if(type!=null && !type.isEmpty()){
-            predicate = monnaie.type.likeIgnoreCase(type);
+            predicate = monnaie.type.likeIgnoreCase("%"+type+"%");
         }
-        
+
         if(produit!=null && !produit.isEmpty()){
             if(added){
-                predicate = predicate.and(monnaie.produit.likeIgnoreCase(produit));
+                predicate = predicate.and(monnaie.produit.likeIgnoreCase("%"+produit+"%"));
             }else{
-                predicate = monnaie.produit.likeIgnoreCase(produit);
+                predicate = monnaie.produit.likeIgnoreCase("%"+produit+"%");
+                added = true;
             }
         }
-        
+
         if(montant!=null){
             if(added){
-                predicate = predicate.and(monnaie.montant.eq(montant));
+                predicate = predicate.and(monnaie.montant.goe(montant));
             }else{
-                predicate = monnaie.montant.eq(montant);
+                predicate = monnaie.montant.goe(montant);
             }
         }
-        
+
         if(predicate !=null){
             return monnaieRepository.findAll(predicate,pageable);
         }else{
