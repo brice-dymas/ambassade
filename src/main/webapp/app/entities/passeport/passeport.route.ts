@@ -37,6 +37,17 @@ export const passeportRoute: Routes = [
         },
         canActivate: [UserRouteAccessService]
     }, {
+        path: 'passeport/search',
+        component: PasseportComponent,
+        resolve: {
+            'pagingParams': PasseportResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.passeport.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
         path: 'passeport/:id',
         component: PasseportDetailComponent,
         data: {

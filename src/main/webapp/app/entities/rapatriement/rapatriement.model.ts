@@ -8,7 +8,7 @@ export const enum Sexe {
 export class Rapatriement implements BaseEntity {
     constructor(
         public id?: number,
-        public reference?: number,
+        public reference?: string,
         public numeroDossier?: string,
         public nom?: string,
         public prenom?: string,

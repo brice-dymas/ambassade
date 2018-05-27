@@ -48,8 +48,12 @@ public interface CaisseService {
      */
     void delete(Long id);
 
-    Page<Caisse> search(Long reference, LocalDate dateDuJourDeb, LocalDate dateDuJourFin,String nom, String prenom, String typeID,
-                        String numeroID, String serviceConcerne, String monnaie, BigDecimal montant,
-                        LocalDate dateRetourDeb,LocalDate dateRetourFin, String telephone, Integer num, String paiement,
-                        Pageable pageable);
+    /**
+     * Get all the caisses using params for QueryDsl.
+     *
+     * @return the list of entities
+     */
+    Page<Caisse> search(String reference, LocalDate dateDuJourDeb, LocalDate dateDuJourFin, String nom,
+                        String prenom, String serviceConcerne, LocalDate dateRetourDeb, LocalDate dateRetourFin,
+                        String telephone, Pageable pageable);
 }

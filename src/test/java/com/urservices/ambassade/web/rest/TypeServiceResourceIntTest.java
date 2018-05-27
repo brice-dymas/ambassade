@@ -161,7 +161,7 @@ public class TypeServiceResourceIntTest {
         // Initialize the database
         typeServiceRepository.saveAndFlush(typeService);
 
-        // Get the typeService
+        // Get the typeService.csv
         restTypeServiceMockMvc.perform(get("/api/type-services/{id}", typeService.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -174,7 +174,7 @@ public class TypeServiceResourceIntTest {
     @Test
     @Transactional
     public void getNonExistingTypeService() throws Exception {
-        // Get the typeService
+        // Get the typeService.csv
         restTypeServiceMockMvc.perform(get("/api/type-services/{id}", Long.MAX_VALUE))
             .andExpect(status().isNotFound());
     }
@@ -187,7 +187,7 @@ public class TypeServiceResourceIntTest {
 
         int databaseSizeBeforeUpdate = typeServiceRepository.findAll().size();
 
-        // Update the typeService
+        // Update the typeService.csv
         TypeService updatedTypeService = typeServiceRepository.findOne(typeService.getId());
         // Disconnect from session so that the updates on updatedTypeService are not directly saved in db
         em.detach(updatedTypeService);
@@ -236,7 +236,7 @@ public class TypeServiceResourceIntTest {
 
         int databaseSizeBeforeDelete = typeServiceRepository.findAll().size();
 
-        // Get the typeService
+        // Get the typeService.csv
         restTypeServiceMockMvc.perform(delete("/api/type-services/{id}", typeService.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());

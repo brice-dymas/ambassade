@@ -26,7 +26,7 @@ public class Caisse implements Serializable {
     private Long id;
 
     @Column(name = "reference")
-    private Long reference;
+    private String reference;
 
     @Column(name = "date_du_jour")
     private LocalDate dateDuJour;
@@ -82,16 +82,16 @@ public class Caisse implements Serializable {
         this.id = id;
     }
 
-    public Long getReference() {
+    public String getReference() {
         return reference;
     }
 
-    public Caisse reference(Long reference) {
+    public Caisse reference(String reference) {
         this.reference = reference;
         return this;
     }
 
-    public void setReference(Long reference) {
+    public void setReference(String reference) {
         this.reference = reference;
     }
 

@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 public interface TypeServiceService {
 
     /**
-     * Save a typeService.
+     * Save a typeService.csv.
      *
      * @param typeService the entity to save
      * @return the persisted entity
@@ -26,7 +26,7 @@ public interface TypeServiceService {
     Page<TypeService> findAll(Pageable pageable);
 
     /**
-     * Get the "id" typeService.
+     * Get the "id" typeService.csv.
      *
      * @param id the id of the entity
      * @return the entity
@@ -34,7 +34,7 @@ public interface TypeServiceService {
     TypeService findOne(Long id);
 
     /**
-     * Delete the "id" typeService.
+     * Delete the "id" typeService.csv.
      *
      * @param id the id of the entity
      */

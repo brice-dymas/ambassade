@@ -6,6 +6,7 @@ import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 
 import { Passeport } from './passeport.model';
 import { PasseportService } from './passeport.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-passeport-detail',
@@ -21,6 +22,7 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private dataUtils: JhiDataUtils,
         private passeportService: PasseportService,
+        private router: Router,
         private route: ActivatedRoute
     ) {
     }
@@ -59,5 +61,12 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
             'passeportListModification',
             (response) => this.load(this.passeport.id)
         );
+    }
+
+    printPage() {
+        this.router.navigateByData({
+            url: ['/print/detail-passeport'],
+            data: this.passeport
+        });
     }
 }

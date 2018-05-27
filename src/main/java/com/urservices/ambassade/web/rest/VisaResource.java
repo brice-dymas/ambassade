@@ -104,35 +104,46 @@ public class VisaResource {
     public ResponseEntity<List<Visa>> getAllVisas(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Visas");
 
-        String nom = webRequest.getParameter("nom") !=null ? webRequest.getParameter("nom"):"";
-        String prenom = webRequest.getParameter("prenom") !=null ? webRequest.getParameter("prenom"):"";
-        String nationalite = webRequest.getParameter("nationalite") !=null ? webRequest.getParameter("nationalite"):"";
-        String numeroPasseport = webRequest.getParameter("numeroPasseport") !=null ? webRequest.getParameter("numeroPasseport"):"";
-        String cedula = webRequest.getParameter("cedula") !=null ? webRequest.getParameter("cedula"):"";
-        Long numeroVisa =  (webRequest.getParameter("numeroVisa") != null && !webRequest.getParameter("numeroVisa").equals(""))
-            ? Long.valueOf(webRequest.getParameter("numeroVisa")) : -1;
-        Integer validePour =  (webRequest.getParameter("validePour") != null && !webRequest.getParameter("validePour").equals(""))
-            ? Integer.valueOf(webRequest.getParameter("validePour")) : -1;
-        String nombreEntree = webRequest.getParameter("nombreEntree") !=null ? webRequest.getParameter("nombreEntree"):"";
-        String type = webRequest.getParameter("type") !=null ? webRequest.getParameter("type"):"";
-        String categorie = webRequest.getParameter("categorie") !=null ? webRequest.getParameter("categorie"):"";
-        Integer taxes =  (webRequest.getParameter("taxes") != null && !webRequest.getParameter("taxes").equals(""))
-            ? Integer.valueOf(webRequest.getParameter("taxes")) : -1;
-        String adresse = webRequest.getParameter("adresse") !=null ? webRequest.getParameter("adresse"):"";
-        String remarques = webRequest.getParameter("remarques") !=null ? webRequest.getParameter("remarques"):"";
+        String nom = webRequest.getParameter("nom") !=null && !webRequest.getParameter("nom").isEmpty()
+            ? webRequest.getParameter("nom"): null;
+        String prenom = webRequest.getParameter("prenom") !=null && !webRequest.getParameter("prenom").isEmpty()
+            ? webRequest.getParameter("prenom"): null;
+        String nationalite = webRequest.getParameter("nationalite") !=null && !webRequest.getParameter("nationalite").isEmpty()
+            ? webRequest.getParameter("nationalite"): null;
+        String numeroPasseport = webRequest.getParameter("numeroPasseport") !=null && !webRequest.getParameter("numeroPasseport").isEmpty()
+            ? webRequest.getParameter("numeroPasseport"): null;
+        String cedula = webRequest.getParameter("cedula") !=null && !webRequest.getParameter("cedula").isEmpty()
+            ? webRequest.getParameter("cedula"): null;
+        Long numeroVisa =  (webRequest.getParameter("numeroVisa") != null && !webRequest.getParameter("numeroVisa").isEmpty())
+            ? Long.valueOf(webRequest.getParameter("numeroVisa")) : null;
+        Integer validePour =  (webRequest.getParameter("validePour") != null && !webRequest.getParameter("validePour").isEmpty())
+            ? Integer.valueOf(webRequest.getParameter("validePour")) : null;
+        String nombreEntree = webRequest.getParameter("nombreEntree") !=null && !webRequest.getParameter("nombreEntree").isEmpty()
+            ? webRequest.getParameter("nombreEntree"): null;
+        String type = webRequest.getParameter("type") !=null && !webRequest.getParameter("type").isEmpty()
+            ? webRequest.getParameter("type"): null;
+        String categorie = webRequest.getParameter("categorie") !=null && !webRequest.getParameter("categorie").isEmpty()
+            ? webRequest.getParameter("categorie"): null;
+        Integer taxes =  (webRequest.getParameter("taxes") != null && !webRequest.getParameter("taxes").isEmpty())
+            ? Integer.valueOf(webRequest.getParameter("taxes")) : null;
+        String adresse = webRequest.getParameter("adresse") !=null && !webRequest.getParameter("adresse").isEmpty()
+            ? webRequest.getParameter("adresse"): null;
+        String remarques = webRequest.getParameter("remarques") !=null && !webRequest.getParameter("remarques").isEmpty()
+            ? webRequest.getParameter("remarques"): null;
+
         String dateEmissionDebStr = webRequest.getParameter("dateEmission") !=null &&
-            !webRequest.getParameter("dateEmission").isEmpty() ? webRequest.getParameter("dateEmission"): "1970-01-01";
+            !webRequest.getParameter("dateEmission").isEmpty() ? webRequest.getParameter("dateEmission"): null;
         String dateEmissionFinStr = webRequest.getParameter("dateEmissionFin") !=null &&
-            !webRequest.getParameter("dateEmissionFin").isEmpty() ? webRequest.getParameter("dateEmissionFin"):LocalDate.now().toString();
+            !webRequest.getParameter("dateEmissionFin").isEmpty() ? webRequest.getParameter("dateEmissionFin"): null;
         String dateExpirationDebStr = webRequest.getParameter("dateExpiration") !=null &&
             !webRequest.getParameter("dateExpiration").isEmpty() ? webRequest.getParameter("dateExpiration"): "1970-01-01";
         String dateExpirationFinStr = webRequest.getParameter("dateExpirationFin") !=null && !webRequest.getParameter("dateExpirationFin").isEmpty() ? webRequest.getParameter("dateExpirationFin"):LocalDate.now().toString();
         String typeService = webRequest.getParameter("typeService") !=null && !webRequest.getParameter("typeService").isEmpty() ? webRequest.getParameter("typeService"): null;
 
-        LocalDate dateEmissionDeb= LocalDate.parse(dateEmissionDebStr);
-        LocalDate dateEmissionFin= LocalDate.parse(dateEmissionFinStr);
-        LocalDate dateExpirationDeb= LocalDate.parse(dateExpirationDebStr);
-        LocalDate dateExpirationFin= LocalDate.parse(dateExpirationFinStr);
+        LocalDate dateEmissionDeb= null;
+        LocalDate dateEmissionFin= null;
+        LocalDate dateExpirationDeb= null;
+        LocalDate dateExpirationFin=null;
 
         Page<Visa> page = visaService.searchAll(nom,prenom,nationalite,numeroPasseport,cedula,numeroVisa,dateEmissionDeb, dateEmissionFin,
             dateExpirationDeb, dateExpirationFin, validePour,nombreEntree,type,categorie,taxes,adresse,remarques, typeService, pageable);

@@ -1,5 +1,6 @@
 export * from './passeport.model';
 export * from './passeport-popup.service';
+export * from './passeport-search.component';
 export * from './passeport.service';
 export * from './passeport-dialog.component';
 export * from './passeport-delete-dialog.component';

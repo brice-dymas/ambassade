@@ -16,6 +16,7 @@ import {
     passeportPopupRoute,
     PasseportResolvePagingParams,
 } from './';
+import {PasseportSearchComponent} from './passeport-search.component';
 
 const ENTITY_STATES = [
     ...passeportRoute,
@@ -29,6 +30,7 @@ const ENTITY_STATES = [
     ],
     declarations: [
         PasseportComponent,
+        PasseportSearchComponent,
         PasseportDetailComponent,
         PasseportDialogComponent,
         PasseportDeleteDialogComponent,

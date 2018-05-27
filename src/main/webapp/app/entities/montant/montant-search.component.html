@@ -35,5 +35,12 @@
             </div>
         </div>
     </div>
-    <div class="modal-footer"></div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-sm btn-danger" (click)="search()">
+            <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-blue btn-sm">
+            <span class="fa fa-search"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
 </form>

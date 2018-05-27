@@ -28,7 +28,7 @@ public class Rapatriement implements Serializable {
 
     @NotNull
     @Column(name = "reference", nullable = false)
-    private Integer reference;
+    private String reference;
 
     @Size(max = 50)
     @Column(name = "numero_dossier", length = 50)
@@ -83,16 +83,16 @@ public class Rapatriement implements Serializable {
         this.id = id;
     }
 
-    public Integer getReference() {
+    public String getReference() {
         return reference;
     }
 
-    public Rapatriement reference(Integer reference) {
+    public Rapatriement reference(String reference) {
         this.reference = reference;
         return this;
     }
 
-    public void setReference(Integer reference) {
+    public void setReference(String reference) {
         this.reference = reference;
     }
 

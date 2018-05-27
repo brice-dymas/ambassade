@@ -83,27 +83,28 @@ public class MontantServiceImpl implements MontantService {
         QMontant montant1 = QMontant.montant1;
         Boolean added = false;
         BooleanExpression predicate = null;
-        
+
         if(monnaie!=null && !monnaie.isEmpty()){
             predicate = montant1.monnaie.likeIgnoreCase(monnaie);
         }
-        
+
         if(produit!=null && !produit.isEmpty()){
             if(added){
-                predicate = predicate.and(montant1.produit.likeIgnoreCase(produit));
+                predicate = predicate.and(montant1.produit.likeIgnoreCase("%"+produit+"%"));
             }else{
-                predicate = montant1.produit.likeIgnoreCase(produit);
+                predicate = montant1.produit.likeIgnoreCase("%"+produit+"%");
+                added = true;
             }
         }
-        
+
         if(montant!=null){
             if(added){
-                predicate = predicate.and(montant1.montant.eq(montant));
+                predicate = predicate.and(montant1.montant.goe(montant));
             }else{
-                predicate = montant1.montant.eq(montant);
+                predicate = montant1.montant.goe(montant);
             }
         }
-        
+
         if(predicate !=null){
             return montantRepository.findAll(predicate,pageable);
         }else{
