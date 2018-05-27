@@ -45,5 +45,5 @@ public interface VisaService {
     Page<Visa> searchAll(String nom, String prenom, String nationalite, String numeroPasseport, String cedula,
                          Long numeroVisa, LocalDate dateEmissionDeb, LocalDate dateEmissionFin, LocalDate dateExpirationDeb,
                          LocalDate dateExpirationFin, Integer validePour, String nombreEntree, String type, String categorie,
-                         Integer taxes, String adresse, String remarques, Pageable pageable);
+                         Integer taxes, String adresse, String remarques, String typeService, Pageable pageable);
 }

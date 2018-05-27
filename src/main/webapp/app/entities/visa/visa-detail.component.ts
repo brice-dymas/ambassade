@@ -37,6 +37,35 @@ export class VisaDetailComponent implements OnInit, OnDestroy {
                 this.visa = visaResponse.body;
             });
     }
+
+    payer() {
+        this.visaService.payer(this.visa.id)
+            .subscribe((visaResponse: HttpResponse<Visa>) => {
+                this.visa = visaResponse.body;
+            });
+    }
+
+    encours() {
+        this.visaService.enCours(this.visa.id)
+            .subscribe((visaResponse: HttpResponse<Visa>) => {
+                this.visa = visaResponse.body;
+            });
+    }
+
+    retirer() {
+        this.visaService.retirer(this.visa.id)
+            .subscribe((visaResponse: HttpResponse<Visa>) => {
+                this.visa = visaResponse.body;
+            });
+    }
+
+    pret() {
+        this.visaService.pret(this.visa.id)
+            .subscribe((visaResponse: HttpResponse<Visa>) => {
+                this.visa = visaResponse.body;
+            });
+    }
+
     previousState() {
         window.history.back();
     }

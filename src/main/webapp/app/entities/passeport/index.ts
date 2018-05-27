@@ -6,3 +6,4 @@ export * from './passeport-delete-dialog.component';
 export * from './passeport-detail.component';
 export * from './passeport.component';
 export * from './passeport.route';
+export * from './passeport-search.component';
