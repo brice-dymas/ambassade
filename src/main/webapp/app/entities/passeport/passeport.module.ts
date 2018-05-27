@@ -1,3 +1,4 @@
+import { PasseportSearchComponent } from './passeport-search.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -33,6 +34,7 @@ const ENTITY_STATES = [
         PasseportDeleteDialogComponent,
         PasseportPopupComponent,
         PasseportDeletePopupComponent,
+        PasseportSearchComponent
     ],
     entryComponents: [
         PasseportComponent,

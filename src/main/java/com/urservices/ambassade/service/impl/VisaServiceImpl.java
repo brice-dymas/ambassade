@@ -100,20 +100,20 @@ public class VisaServiceImpl implements VisaService {
      * @param adresse
      * @param remarques
      * @param pageable  the pagination information  @return the list of entities
-     * @return 
+     * @return
      */
     @Override
     public Page<Visa> searchAll(String nom, String prenom, String nationalite, String numeroPasseport, String cedula,
                                 Long numeroVisa, LocalDate dateEmissionDeb, LocalDate dateEmissionFin, LocalDate dateExpirationDeb,
                                 LocalDate dateExpirationFin,  Integer validePour, String nombreEntree, String type, String categorie,
-                                Integer taxes, String adresse, String remarques, Pageable pageable) {
-        
-        
+                                Integer taxes, String adresse, String remarques, String typeService, Pageable pageable) {
+
+
         //Travailler numéro visa et retirer validepour et taxes
         QVisa visa = QVisa.visa;
         Boolean added = false;
         BooleanExpression predicate = null;
-        
+
         if(nom!=null && !nom.isEmpty()){
             predicate = visa.nom.likeIgnoreCase(nom);
         }
@@ -208,7 +208,15 @@ public class VisaServiceImpl implements VisaService {
                 predicate = visa.dateExpiration.loe(dateExpirationFin);
             }
         }
-        
+
+        if(typeService!=null){
+            if(added){
+                predicate = predicate.and(visa.typeService.id.eq(Long.valueOf(typeService)));
+            }else{
+                predicate = visa.typeService.id.eq(Long.valueOf(typeService));
+            }
+        }
+
         if(predicate !=null){
             return visaRepository.findAll(predicate,pageable);
         }else{

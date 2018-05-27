@@ -35,6 +35,26 @@ export class VisaService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
+    payer(id: number): Observable<EntityResponseType> {
+        return this.http.get<Visa>(`${this.resourceUrl}/${id}/payer`, { observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    enCours(id: number): Observable<EntityResponseType> {
+        return this.http.get<Visa>(`${this.resourceUrl}/${id}/encours`, { observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    pret(id: number): Observable<EntityResponseType> {
+        return this.http.get<Visa>(`${this.resourceUrl}/${id}/pret`, { observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    retirer(id: number): Observable<EntityResponseType> {
+        return this.http.get<Visa>(`${this.resourceUrl}/${id}/retirer`, { observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
     search(visa: VisaDtoModel): Observable<HttpResponse<Visa[]>> {
         const copy = this.convertSearch(visa);
         const options = createRequestOption(copy);

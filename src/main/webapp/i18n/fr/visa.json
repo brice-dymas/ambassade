@@ -20,10 +20,12 @@
             "prenom": "Prenom",
             "nationalite": "Nationalite",
             "numeroPasseport": "Numero Passeport",
-            "cedula": "Cedula",
+            "cedula": "Identifiant",
             "numeroVisa": "Numero Visa",
             "dateEmission": "Date Emission",
             "dateExpiration": "Date Expiration",
+            "dateEmissionSearch": "Date Emission",
+            "dateExpirationSearch": "Date Expiration",
             "validePour": "Valide Pour",
             "nombreEntree": "Nombre Entree",
             "type": "Type",
@@ -31,7 +33,7 @@
             "taxes": "Taxes",
             "adresse": "Adresse",
             "remarques": "Remarques",
-            "state": "State",
+            "state": "État",
             "typeService": "Type Service"
         }
     }
