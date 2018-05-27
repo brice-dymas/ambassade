@@ -1,7 +1,7 @@
 <div class="mb-lg-5">
     <h5 class="text-uppercase">
         <span jhiTranslate="ambassadeApp.typeService.home.title">Type Services</span>
-        <button class="btn btn-primary btn-xs plat float-right jh-create-entity create-type-service" [routerLink]="['/', { outlets: { popup: ['type-service-new'] } }]">
+        <button class="btn btn-blue btn-xs plat float-right jh-create-entity create-type-service" [routerLink]="['/', { outlets: { popup: ['type-service-new'] } }]">
             <span class="fa fa-plus"></span>
             <span  jhiTranslate="ambassadeApp.typeService.home.createLabel">
             Create new Type Service
@@ -15,7 +15,7 @@
     <br/>
     <div *ngIf="typeServices">
         <table class="table table-striped dash-row table-sm">
-            <thead>
+            <thead class="theme-bg-blue text-white">
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                     <!--
                     <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
