@@ -1,7 +1,7 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
     <div class="modal-header theme-bg-blue text-white">
-        <h4 class="modal-title" id="myLivreLabel" jhiTranslate="ambassadeApp.livre.home.createOrEditLabel">Create or edit a Livre</h4>
+        <h5 class="text-uppercase modal-title" id="myLivreLabel" jhiTranslate="ambassadeApp.livre.home.createOrEditLabel">Create or edit a Livre</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
@@ -15,7 +15,7 @@
         </div>
         -->
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.codeISBN" for="field_codeISBN">Code ISBN</label>
                     <input type="text" class="form-control form-control-sm" name="codeISBN" id="field_codeISBN"
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.auteur" for="field_auteur">Auteur</label>
                     <input type="text" class="form-control form-control-sm" name="auteur" id="field_auteur"
@@ -45,7 +45,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.titre" for="field_titre">Titre</label>
                     <input type="text" class="form-control form-control-sm" name="titre" id="field_titre"
@@ -58,9 +60,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.edition" for="field_edition">Edition</label>
                     <input type="text" class="form-control form-control-sm" name="edition" id="field_edition"
@@ -73,7 +73,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.etagere" for="field_etagere">Etagere</label>
                     <input type="text" class="form-control form-control-sm" name="etagere" id="field_etagere"
@@ -86,7 +89,7 @@
                     </div>
                 </div>
             </div>
-<div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.annee" for="field_annee">Annee</label>
                     <input type="text" class="form-control form-control-sm" name="annee" id="field_annee"
@@ -100,8 +103,9 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.categorie" for="field_categorie">Categorie</label>
                     <input type="text" class="form-control form-control-sm" name="categorie" id="field_categorie"
@@ -114,14 +118,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.resume" for="field_resume">Resume</label>
                     <input type="text" class="form-control form-control-sm" name="resume" id="field_resume"
                            [(ngModel)]="livre.resume" />
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.quantite" for="field_quantite">Quantite</label>
                     <input type="text" class="form-control form-control-sm" name="quantite" id="field_quantite"
@@ -134,9 +141,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.disponible" for="field_disponible">Disponible</label>
                     <input type="text" class="form-control form-control-sm" name="disponible" id="field_disponible"
@@ -149,14 +154,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.createdByPHPRunner" for="field_createdByPHPRunner">Created By PHP Runner</label>
                     <input type="number" class="form-control form-control-sm" name="createdByPHPRunner" id="field_createdByPHPRunner"
                            [(ngModel)]="livre.createdByPHPRunner" />
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.page" for="field_page">Page</label>
                     <input type="text" class="form-control form-control-sm" name="page" id="field_page"
@@ -170,15 +178,16 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.consultation" for="field_consultation">Consultation</label>
                     <input type="text" class="form-control form-control-sm" name="consultation" id="field_consultation"
                            [(ngModel)]="livre.consultation" />
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.origine" for="field_origine">Origine</label>
                     <input type="text" class="form-control form-control-sm" name="origine" id="field_origine"
@@ -191,7 +200,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.sousTitre" for="field_sousTitre">Sous Titre</label>
                     <input type="text" class="form-control form-control-sm" name="sousTitre" id="field_sousTitre"
@@ -204,9 +216,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.collection" for="field_collection">Collection</label>
                     <input type="text" class="form-control form-control-sm" name="collection" id="field_collection"
@@ -219,7 +229,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.impression" for="field_impression">Impression</label>
                     <input type="text" class="form-control form-control-sm" name="impression" id="field_impression"
@@ -232,7 +245,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.format" for="field_format">Format</label>
                     <input type="text" class="form-control form-control-sm" name="format" id="field_format"
@@ -246,8 +259,9 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.index" for="field_index">Index</label>
                     <input type="text" class="form-control form-control-sm" name="index" id="field_index"
@@ -260,7 +274,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.bibliographie" for="field_bibliographie">Bibliographie</label>
                     <input type="text" class="form-control form-control-sm" name="bibliographie" id="field_bibliographie"
@@ -273,7 +287,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.lieuEdition" for="field_lieuEdition">Lieu Edition</label>
                     <input type="text" class="form-control form-control-sm" name="lieuEdition" id="field_lieuEdition"
@@ -286,9 +302,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.lieuImpression" for="field_lieuImpression">Lieu Impression</label>
                     <input type="text" class="form-control form-control-sm" name="lieuImpression" id="field_lieuImpression"
@@ -301,7 +315,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.illustration" for="field_illustration">Illustration</label>
                     <input type="text" class="form-control form-control-sm" name="illustration" id="field_illustration"
@@ -314,7 +331,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.observation" for="field_observation">Observation</label>
                     <input type="text" class="form-control form-control-sm" name="observation" id="field_observation"
@@ -328,8 +345,9 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.prenom" for="field_prenom">Prenom</label>
                     <input type="text" class="form-control form-control-sm" name="prenom" id="field_prenom"
@@ -342,7 +360,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.statistique" for="field_statistique">Statistique</label>
                     <input type="text" class="form-control form-control-sm" name="statistique" id="field_statistique"
@@ -355,7 +373,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.livre.glossaire" for="field_glossaire">Glossaire</label>
                     <input type="text" class="form-control form-control-sm" name="glossaire" id="field_glossaire"
@@ -371,10 +392,10 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-xs plat btn-secondary" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-sm btn-blue">
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-xs plat btn-blue">
             <span class="fa fa-download"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>

@@ -1,82 +1,82 @@
-<div>
-    <h2>
+<div class="mb-lg-5">
+    <h5>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 text-uppercase">
                 <span jhiTranslate="ambassadeApp.monnaie.home.title">Monnaies</span>
             </div>
             <div class="col-md-6">
-                <button class="btn btn-blue btn-sm float-right jh-create-entity create-monnaie" [routerLink]="['/', { outlets: { popup: ['monnaie-new'] } }]">
+                <button class="btn btn-blue btn-xs plat float-right jh-create-entity create-monnaie" [routerLink]="['/', { outlets: { popup: ['monnaie-new'] } }]">
                     <span class="fa fa-pencil-square-o"></span>
                     <span  jhiTranslate="ambassadeApp.monnaie.home.createLabel">Create new Monnaie</span>
                 </button>&nbsp;
                 <button *jhiHasAnyAuthority="['ROLE_MONNAIE_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
-                        class="btn btn-info">Imprimer</button>
+                        class="btn btn-info btn-xs plat">Imprimer</button>
             </div>
         </div>
         <div class="title-bullet"><span></span></div>
-    </h2>
+    </h5>
     <jhi-alert></jhi-alert>
     <br/>
     <div>
         <jhi-monnaie-search></jhi-monnaie-search>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="monnaies">
-        <table class="table table-striped table-bordered">
+    <div *ngIf="monnaies">
+        <table class="table table-striped dash-row table-sm">
             <thead class="theme-bg-blue text-white">
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
-            <th jhiSortBy="type"><span jhiTranslate="ambassadeApp.monnaie.type">Type</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="montant"><span jhiTranslate="ambassadeApp.monnaie.montant">Montant</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="produit"><span jhiTranslate="ambassadeApp.monnaie.produit">Produit</span> <span class="fa fa-sort"></span></th>
-            <th>Actions</th>
-            </tr>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
+                    <th jhiSortBy="type"><span jhiTranslate="ambassadeApp.monnaie.type">Type</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="montant"><span jhiTranslate="ambassadeApp.monnaie.montant">Montant</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="produit"><span jhiTranslate="ambassadeApp.monnaie.produit">Produit</span> <span class="fa fa-sort"></span></th>
+                    <th></th>
+                </tr>
             </thead>
-            <tbody class="table-sm">
-            <tr *ngFor="let monnaie of monnaies ;trackBy: trackId">
-                <!-- <td><a [routerLink]="['../monnaie', monnaie.id ]">{{monnaie.id}}</a></td> -->
-                <td>{{monnaie.type}}</td>
-                <td>{{monnaie.montant}}</td>
-                <td>{{monnaie.produit}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../monnaie', monnaie.id ]"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'monnaie/'+ monnaie.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-blue btn-sm">
-                            <span class="fa fa-pencil-square-o"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'monnaie/'+ monnaie.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-trash"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+            <tbody>
+                <tr *ngFor="let monnaie of monnaies ;trackBy: trackId">
+                    <!-- <td><a [routerLink]="['../monnaie', monnaie.id ]">{{monnaie.id}}</a></td> -->
+                    <td>{{monnaie.type}}</td>
+                    <td>{{monnaie.montant}}</td>
+                    <td>{{monnaie.produit}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    [routerLink]="['../monnaie', monnaie.id ]"
+                                    class="btn btn-primary btn-xs plat">
+                                <span class="fa fa-eye"></span>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'monnaie/'+ monnaie.id + '/edit'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-blue btn-xs plat">
+                                <span class="fa fa-pencil-square-o"></span>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'monnaie/'+ monnaie.id + '/delete'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-xs plat">
+                                <span class="fa fa-trash"></span>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
     <div *ngIf="monnaies && monnaies.length">
         <div class="row">
             <div class="col-md-6">
-                <div class="text-sm-left">
+                <div class="text-sm">
                     <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="pull-right">
+                <div class="pagination-sm pull-right">
                     <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
                 </div>
             </div>

@@ -33,15 +33,6 @@ Browser Upgrade Prompt
 /* ==========================================================================
 Generic styles
 ========================================================================== */
-.modal-content {
-    position: relative;
-    display: table; /* This is important */
-    overflow-y: auto;
-    overflow-x: auto;
-    width: 150%;
-    min-width: 300px;
-    margin-left: -200px!important;
-}
 
 /* Error highlight on input fields */
 .ng-valid[required], .ng-valid.required  {
@@ -267,11 +258,11 @@ Global theme color
 }
 
 .theme-red-text {
-color: #D60021!important;
+    color: #D60021!important;
 }
 
 .theme-border-red {
-border-color: #D60021!important;
+    border-color: #D60021!important;
 }
 
 .title-bullet {
@@ -293,6 +284,171 @@ border-color: #D60021!important;
 span {
     font-style:inherit;
     font-weight:inherit;
+}
+
+
+/* ==========================================================================
+ Theme button
+=============================================================================
+*/
+.btn-blue {
+    color:#fff;
+    background-color:#2f264c;
+    border-color:#2f264c;
+}
+
+.btn-blue.focus, .btn-blue:focus {
+    box-shadow:0 0 0 .2rem #2f264c;
+}
+
+.btn.btn-blue {
+    background-color:#2f264c!important;
+    border-color:#2f264c!important;
+}
+
+.btn-blue:hover {
+    color:#fff;
+    background-color:#2f264c;
+    border-color:#2f264c;
+}
+
+.btn-blue.focus, .btn-blue:focus {
+    box-shadow:0 0 0 0 #2f264c!important;
+}
+
+.btn-blue.focus, .btn-blue:focus {
+    box-shadow:0 0 0 .2rem #2f264c;
+}
+
+.btn-blue:hover {
+    color:#fff;
+    background-color:#2f264c;
+    border-color:#2f264c;
+}
+
+.modal-content {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 0px;
+    outline: 0;
+}
+
+.modal-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    border-top-left-radius: 0px!important;
+    border-top-right-radius: 0px!important;
+}
+
+.modal-footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.card {
+    border-radius: 0px;
+}
+
+.card-header {
+    padding: .25rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.card-header:first-child {
+    border-radius: 0;
+}
+
+.text-sm {
+    font-size: 14px!important;
+}
+
+table>tbody>tr>td {
+    font-size: 14px;
+}
+
+table>thead>tr>th {
+    font-size: 14px;
+}
+
+.table td, .table th {
+    padding: .4rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.table-responsive {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table.dash-row>thead>tr>th {
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: none;
+}
+
+table.dash-row>tbody>tr>td {
+    font-size: 12px;
+}
+
+table.dash-row {
+    border-bottom: 1px solid rgba(204, 202, 198, 0.55);
+    border-left: 1px solid rgba(204, 202, 198, 0.55);
+    border-right: 1px solid rgba(204, 202, 198, 0.55);
+}
+thead.theme-bg-blue>tr>th span {
+    font-weight: 100!important;
+}
+
+.card-body .progress {
+    margin-bottom: 15px;
+}
+
+.card-body .progress:last-child {
+    margin-bottom: 0px;
+}
+
+.btn-group-sm>.btn, .btn-xs {
+    padding: .15rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: 0px;
 }
 
 
