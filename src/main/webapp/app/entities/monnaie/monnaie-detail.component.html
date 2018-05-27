@@ -1,10 +1,10 @@
 
 <div *ngIf="monnaie">
-    <h2><span jhiTranslate="ambassadeApp.monnaie.detail.title">Monnaie</span> {{monnaie.id}}</h2>
+    <h5 class="text-uppercase"><span jhiTranslate="ambassadeApp.monnaie.detail.title">Monnaie</span> {{monnaie.id}}</h5>
     <div class="title-bullet"><span></span></div>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <div class="card bg-light">
+        <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
@@ -26,7 +26,7 @@
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-primary btn-sm">
+            class="btn btn-info btn-xs plat">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
@@ -34,7 +34,7 @@
             [routerLink]="['/', { outlets: { popup: 'monnaie/'+ monnaie.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-blue btn-sm pull-right">
+            class="btn btn-blue btn-xs plat pull-right">
         <span class="fa fa-pencil-square-o"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>
