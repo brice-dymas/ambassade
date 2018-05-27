@@ -1,6 +1,6 @@
 <form name="deleteForm" (ngSubmit)="confirmDelete(typeService.id)">
     <div class="modal-header">
-        <h4 class="modal-title" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
+        <h5 class="text-uppercase modal-title" jhiTranslate="entity.delete.title">Confirm delete operation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
@@ -9,11 +9,11 @@
         <p jhiTranslate="ambassadeApp.typeService.delete.question" translateValues="{id: '{{typeService.id}}'}">Are you sure you want to delete this Type Service?</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-secondary btn-xs plat" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" class="btn btn-danger">
-            <span class="fa fa-remove"></span>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
+        <button type="submit" class="btn btn-danger btn-xs plat">
+            <span class="fa fa-trash"></span>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
         </button>
     </div>
 </form>
