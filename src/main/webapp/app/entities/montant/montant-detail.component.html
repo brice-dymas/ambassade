@@ -1,21 +1,21 @@
 
 <div *ngIf="montant">
-    <h2><span jhiTranslate="ambassadeApp.montant.detail.title">Montant</span> {{montant.id}}</h2>
+    <h5 class="text-uppercase"><span jhiTranslate="ambassadeApp.montant.detail.title">Montant</span> {{montant.id}}</h5>
     <div class="title-bullet"><span></span></div>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-6 col-sm-4">
                         <label jhiTranslate="ambassadeApp.montant.monnaie">Monnaie</label> : &nbsp;
                         <span>{{montant.monnaie}}</span>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-6 col-sm-4">
                         <label jhiTranslate="ambassadeApp.montant.montant">Montant</label> : &nbsp;
                         <span>{{montant.montant}}</span>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-6 col-sm-4">
                         <label jhiTranslate="ambassadeApp.montant.produit">Produit</label> : &nbsp;
                         <span>{{montant.produit}}</span>
                     </div>
@@ -26,7 +26,7 @@
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-info btn-sm">
+            class="btn btn-info btn-xs plat">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
@@ -34,7 +34,7 @@
             [routerLink]="['/', { outlets: { popup: 'montant/'+ montant.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-blue btn-sm pull-right">
+            class="btn btn-blue btn-xs plat pull-right">
         <span class="fa fa-pencil-square-o"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>
