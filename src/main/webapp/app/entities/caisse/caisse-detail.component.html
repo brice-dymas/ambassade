@@ -1,79 +1,78 @@
-
 <div *ngIf="caisse">
-    <h2><span jhiTranslate="ambassadeApp.caisse.detail.title">Caisse</span> {{caisse.id}}</h2>
+    <h5 class="text-uppercase"><span jhiTranslate="ambassadeApp.caisse.detail.title">Caisse</span> {{caisse.id}}</h5>
     <div class="title-bullet"><span></span></div>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <div class="card bg-light">
+        <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.reference">Reference</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.reference">Reference</label></dt>
                         <span>{{caisse.reference}}</span>
                     </div>
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.dateDuJour">Date Du Jour</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.dateDuJour">Date Du Jour</label></dt>
                         <span>{{caisse.dateDuJour | date:'mediumDate'}}</span>
                     </div>
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.nom">Nom</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.nom">Nom</label></dt>
                         <span>{{caisse.nom}}</span>
                     </div>
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.prenom">Prenom</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.prenom">Prenom</label></dt>
                         <span>{{caisse.prenom}}</span>
                     </div>
                 </div>
 
                 <div class="row mt-4">
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.typeID">Type ID</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.typeID">Type ID</label></dt>
                         <span>{{caisse.typeID}}</span>
                     </div>
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.numeroID">Numero ID</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.numeroID">Numero ID</label></dt>
                         <span>{{caisse.numeroID}}</span>
                     </div>
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.serviceConcerne">Service Concerne</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.serviceConcerne">Service Concerne</label></dt>
                         <span>{{caisse.serviceConcerne}}</span>
                     </div>
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</label></dt>
                         <span>{{caisse.monnaie}}</span>
                     </div>
                 </div>
 
                 <div class="row mt-4">
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</label></dt>
                         <span>{{caisse.monnaie}}</span>
                     </div>
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.montant">Montant</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.montant">Montant</label></dt>
                         <span>{{caisse.montant}}</span>
                     </div>
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.dateRetour">Date Retour</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.dateRetour">Date Retour</label></dt>
                         <span>{{caisse.dateRetour | date:'mediumDate'}}</span>
                     </div>
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.telephone">Telephone</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.telephone">Telephone</label></dt>
                         <span>{{caisse.telephone}}</span>
                     </div>
                 </div>
 
                 <div class="row mt-4">
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.telephone">Telephone</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.telephone">Telephone</label></dt>
                         <span>{{caisse.telephone}}</span>
                     </div>
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.num">Num</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.num">Num</label></dt>
                         <span>{{caisse.num}}</span>
                     </div>
                     <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.caisse.paiement">Paiement</label> : &nbsp;
+                        <dt><label jhiTranslate="ambassadeApp.caisse.paiement">Paiement</label></dt>
                         <span>{{caisse.paiement}}</span>
                     </div>
                 </div>
@@ -83,7 +82,7 @@
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-primary btn-sm">
+            class="btn btn-info btn-xs plat">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
@@ -91,7 +90,7 @@
             [routerLink]="['/', { outlets: { popup: 'caisse/'+ caisse.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-blue pull-right btn-sm">
+            class="btn btn-blue pull-right btn-xs plat">
         <span class="fa fa-pencil-square-o"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>
