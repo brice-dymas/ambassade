@@ -32,6 +32,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.urservices.ambassade.domain.enumeration.State;
 /**
  * Test class for the VisaResource REST controller.
  *
@@ -85,6 +86,9 @@ public class VisaResourceIntTest {
 
     private static final String DEFAULT_REMARQUES = "AAAAAAAAAA";
     private static final String UPDATED_REMARQUES = "BBBBBBBBBB";
+
+    private static final State DEFAULT_STATE = State.NOUVEAU;
+    private static final State UPDATED_STATE = State.PAYE;
 
     @Autowired
     private VisaRepository visaRepository;
@@ -141,7 +145,8 @@ public class VisaResourceIntTest {
             .categorie(DEFAULT_CATEGORIE)
             .taxes(DEFAULT_TAXES)
             .adresse(DEFAULT_ADRESSE)
-            .remarques(DEFAULT_REMARQUES);
+            .remarques(DEFAULT_REMARQUES)
+            .state(DEFAULT_STATE);
         return visa;
     }
 
@@ -180,6 +185,7 @@ public class VisaResourceIntTest {
         assertThat(testVisa.getTaxes()).isEqualTo(DEFAULT_TAXES);
         assertThat(testVisa.getAdresse()).isEqualTo(DEFAULT_ADRESSE);
         assertThat(testVisa.getRemarques()).isEqualTo(DEFAULT_REMARQUES);
+        assertThat(testVisa.getState()).isEqualTo(DEFAULT_STATE);
     }
 
     @Test
@@ -244,35 +250,8 @@ public class VisaResourceIntTest {
             .andExpect(jsonPath("$.[*].categorie").value(hasItem(DEFAULT_CATEGORIE.toString())))
             .andExpect(jsonPath("$.[*].taxes").value(hasItem(DEFAULT_TAXES)))
             .andExpect(jsonPath("$.[*].adresse").value(hasItem(DEFAULT_ADRESSE.toString())))
-            .andExpect(jsonPath("$.[*].remarques").value(hasItem(DEFAULT_REMARQUES.toString())));
-    }
-
-    @Test
-    @Transactional
-    public void searchAllVisas() throws Exception {
-        // Initialize the database
-        visaRepository.saveAndFlush(visa);
-
-        // Get all the visaList
-        restVisaMockMvc.perform(get("/api/visas?nom=AAAAAAAAAA&prenom=AAAAAAAAAA"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(visa.getId().intValue())))
-            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
-            .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM.toString())))
-            .andExpect(jsonPath("$.[*].nationalite").value(hasItem(DEFAULT_NATIONALITE.toString())))
-            .andExpect(jsonPath("$.[*].numeroPasseport").value(hasItem(DEFAULT_NUMERO_PASSEPORT.toString())))
-            .andExpect(jsonPath("$.[*].cedula").value(hasItem(DEFAULT_CEDULA.toString())))
-            .andExpect(jsonPath("$.[*].numeroVisa").value(hasItem(DEFAULT_NUMERO_VISA.intValue())))
-            .andExpect(jsonPath("$.[*].dateEmission").value(hasItem(DEFAULT_DATE_EMISSION.toString())))
-            .andExpect(jsonPath("$.[*].dateExpiration").value(hasItem(DEFAULT_DATE_EXPIRATION.toString())))
-            .andExpect(jsonPath("$.[*].validePour").value(hasItem(DEFAULT_VALIDE_POUR)))
-            .andExpect(jsonPath("$.[*].nombreEntree").value(hasItem(DEFAULT_NOMBRE_ENTREE.toString())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].categorie").value(hasItem(DEFAULT_CATEGORIE.toString())))
-            .andExpect(jsonPath("$.[*].taxes").value(hasItem(DEFAULT_TAXES)))
-            .andExpect(jsonPath("$.[*].adresse").value(hasItem(DEFAULT_ADRESSE.toString())))
-            .andExpect(jsonPath("$.[*].remarques").value(hasItem(DEFAULT_REMARQUES.toString())));
+            .andExpect(jsonPath("$.[*].remarques").value(hasItem(DEFAULT_REMARQUES.toString())))
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())));
     }
 
     @Test
@@ -300,7 +279,8 @@ public class VisaResourceIntTest {
             .andExpect(jsonPath("$.categorie").value(DEFAULT_CATEGORIE.toString()))
             .andExpect(jsonPath("$.taxes").value(DEFAULT_TAXES))
             .andExpect(jsonPath("$.adresse").value(DEFAULT_ADRESSE.toString()))
-            .andExpect(jsonPath("$.remarques").value(DEFAULT_REMARQUES.toString()));
+            .andExpect(jsonPath("$.remarques").value(DEFAULT_REMARQUES.toString()))
+            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()));
     }
 
     @Test
@@ -338,7 +318,8 @@ public class VisaResourceIntTest {
             .categorie(UPDATED_CATEGORIE)
             .taxes(UPDATED_TAXES)
             .adresse(UPDATED_ADRESSE)
-            .remarques(UPDATED_REMARQUES);
+            .remarques(UPDATED_REMARQUES)
+            .state(UPDATED_STATE);
 
         restVisaMockMvc.perform(put("/api/visas")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -364,6 +345,7 @@ public class VisaResourceIntTest {
         assertThat(testVisa.getTaxes()).isEqualTo(UPDATED_TAXES);
         assertThat(testVisa.getAdresse()).isEqualTo(UPDATED_ADRESSE);
         assertThat(testVisa.getRemarques()).isEqualTo(UPDATED_REMARQUES);
+        assertThat(testVisa.getState()).isEqualTo(UPDATED_STATE);
     }
 
     @Test

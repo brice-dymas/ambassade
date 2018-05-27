@@ -7,7 +7,6 @@ import { PasseportComponent } from './passeport.component';
 import { PasseportDetailComponent } from './passeport-detail.component';
 import { PasseportPopupComponent } from './passeport-dialog.component';
 import { PasseportDeletePopupComponent } from './passeport-delete-dialog.component';
-import {PrintComponent} from '../print/print.component';
 
 @Injectable()
 export class PasseportResolvePagingParams implements Resolve<any> {
@@ -45,22 +44,6 @@ export const passeportRoute: Routes = [
             pageTitle: 'ambassadeApp.passeport.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }, {
-        path: 'passeport/search',
-        component: PasseportComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'ambassadeApp.passeport.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    }, {
-        path: 'print',
-        component: PrintComponent,
-        data: {
-            authorities: ['ROLE_PASSEPORT_MANAGER'],
-            pageTitle: 'ambassadeApp.passeport.home.title'
-        },
-        canActivate: [UserRouteAccessService]
     }
 ];
 
@@ -69,7 +52,7 @@ export const passeportPopupRoute: Routes = [
         path: 'passeport-new',
         component: PasseportPopupComponent,
         data: {
-            authorities: ['ROLE_PASSEPORT_MANAGER'],
+            authorities: ['ROLE_USER'],
             pageTitle: 'ambassadeApp.passeport.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -79,7 +62,7 @@ export const passeportPopupRoute: Routes = [
         path: 'passeport/:id/edit',
         component: PasseportPopupComponent,
         data: {
-            authorities: ['ROLE_PASSEPORT_MANAGER'],
+            authorities: ['ROLE_USER'],
             pageTitle: 'ambassadeApp.passeport.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -89,7 +72,7 @@ export const passeportPopupRoute: Routes = [
         path: 'passeport/:id/delete',
         component: PasseportDeletePopupComponent,
         data: {
-            authorities: ['ROLE_PASSEPORT_MANAGER'],
+            authorities: ['ROLE_USER'],
             pageTitle: 'ambassadeApp.passeport.home.title'
         },
         canActivate: [UserRouteAccessService],

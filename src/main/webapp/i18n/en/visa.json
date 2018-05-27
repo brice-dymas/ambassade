@@ -31,8 +31,8 @@
             "taxes": "Taxes",
             "adresse": "Adresse",
             "remarques": "Remarques",
-            "dateEmissionSearch": "Release date between ",
-            "dateExpirationSearch": "Expiration date between"
+            "state": "State",
+            "typeService": "Type Service"
         }
     }
 }

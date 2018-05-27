@@ -20,8 +20,11 @@ entity Passeport {
     sms String maxlength(15)
     sms2 String maxlength(60)
     documents String maxlength(50)
+    taille Integer
+    recu String
+    photo Blob
+    state State
 }
-
 entity DonneesActe {
 	reference String required minlength(1) minlength(10)
     dateDuJourChiffre LocalDate
@@ -51,7 +54,6 @@ entity DonneesActe {
     feuille String maxlength(50)
     acte String maxlength(50)
 }
-
 entity Livre {
 	codeISBN String maxlength(50) required
 	auteur String maxlength(50)
@@ -80,11 +82,9 @@ entity Livre {
     statistique String maxlength(50)
     glossaire String maxlength(50)
 }
-
 entity Categorie {
 	nomCategorie String maxlength(50)
 }
-
 entity Rapatriement {
 	reference Integer required
     numeroDossier String maxlength(50)
@@ -99,7 +99,6 @@ entity Rapatriement {
     documentScanne Blob
     createdByPHPRunner Integer
 }
-
 entity Caisse {
 	reference Long
     dateDuJour LocalDate
@@ -115,25 +114,30 @@ entity Caisse {
     num Integer required
     paiement String maxlength(50)
 }
-
 entity Monnaie {
 	type String maxlength(40)
 	montant Long
 	produit String maxlength(40)
 }
-
 entity Montant {
 	monnaie String maxlength(50)
 	montant Long min(0)
 	produit String maxlength(40)
 }
-
 entity Produit {
 	nomProduit String maxlength(50)
 	monnaie String maxlength(50)
 	montant Long min(0)
 }
+entity TypeService {
+	nom String maxlength(50)
+	montant Long min(0)
+    deleted Boolean
+}
+entity Paiement {
+	datePaiement LocalDate
 
+}
 entity Visa {
 	nom String maxlength(60)
 	prenom String maxlength(50)
@@ -150,16 +154,26 @@ entity Visa {
     taxes Integer
     adresse String maxlength(30)
     remarques String
+    state State
 }
 enum Sexe {
-    MASCULIN, FEMININ
+	MASCULIN, FEMININ
 }
 enum Statut {
-    CELIBATAIRE, MARIE, DIVORCE, SEPARE, VEUF
+	CELIBATAIRE, MARIE, DIVORCE, SEPARE, VEUF
 }
-
+enum State {
+	NOUVEAU, PAYE, ENCOURS, PRET, RETIRER
+}
 // Set pagination options
 paginate all with pagination
-
 // Set service options to all
 service all with serviceImpl
+relationship ManyToOne {
+Paiement{visa} to Visa
+  Paiement{passeport} to Passeport
+  Paiement{typeService} to TypeService
+  Passeport{typeService} to TypeService
+  Visa{typeService} to TypeService
+  Paiement{user} to User
+}

@@ -1,0 +1,12 @@
+{
+    "ambassadeApp": {
+        "State" : {
+            "null": "",
+            "NOUVEAU": "NOUVEAU",
+            "PAYE": "PAYE",
+            "ENCOURS": "ENCOURS",
+            "PRET": "PRET",
+            "RETIRER": "RETIRER"
+        }
+    }
+}

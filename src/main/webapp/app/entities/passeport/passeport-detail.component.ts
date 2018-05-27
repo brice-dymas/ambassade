@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 
 import { Passeport } from './passeport.model';
 import { PasseportService } from './passeport.service';
@@ -19,6 +19,7 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
 
     constructor(
         private eventManager: JhiEventManager,
+        private dataUtils: JhiDataUtils,
         private passeportService: PasseportService,
         private route: ActivatedRoute
     ) {
@@ -36,6 +37,13 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
             .subscribe((passeportResponse: HttpResponse<Passeport>) => {
                 this.passeport = passeportResponse.body;
             });
+    }
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
     }
     previousState() {
         window.history.back();

@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "typeService",
+            "otherEntityName": "typeService",
+            "otherEntityField": "id"
+        }
+    ],
     "fields": [
         {
             "fieldName": "numeroFormulaire",
@@ -145,6 +152,24 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "taille",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "recu",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "photo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "State",
+            "fieldValues": "NOUVEAU,PAYE,ENCOURS,PRET,RETIRER"
         }
     ],
     "changelogDate": "20180222221146",

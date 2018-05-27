@@ -13,6 +13,8 @@ import java.util.Objects;
 
 import com.urservices.ambassade.domain.enumeration.Statut;
 
+import com.urservices.ambassade.domain.enumeration.State;
+
 /**
  * A Passeport.
  */
@@ -109,6 +111,26 @@ public class Passeport implements Serializable {
     @Size(max = 50)
     @Column(name = "documents", length = 50)
     private String documents;
+
+    @Column(name = "taille")
+    private Integer taille;
+
+    @Column(name = "recu")
+    private String recu;
+
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+
+    @Column(name = "photo_content_type")
+    private String photoContentType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "state")
+    private State state;
+
+    @ManyToOne
+    private TypeService typeService;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -391,6 +413,84 @@ public class Passeport implements Serializable {
     public void setDocuments(String documents) {
         this.documents = documents;
     }
+
+    public Integer getTaille() {
+        return taille;
+    }
+
+    public Passeport taille(Integer taille) {
+        this.taille = taille;
+        return this;
+    }
+
+    public void setTaille(Integer taille) {
+        this.taille = taille;
+    }
+
+    public String getRecu() {
+        return recu;
+    }
+
+    public Passeport recu(String recu) {
+        this.recu = recu;
+        return this;
+    }
+
+    public void setRecu(String recu) {
+        this.recu = recu;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public Passeport photo(byte[] photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public Passeport photoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+        return this;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public Passeport state(State state) {
+        this.state = state;
+        return this;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public TypeService getTypeService() {
+        return typeService;
+    }
+
+    public Passeport typeService(TypeService typeService) {
+        this.typeService = typeService;
+        return this;
+    }
+
+    public void setTypeService(TypeService typeService) {
+        this.typeService = typeService;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -438,6 +538,11 @@ public class Passeport implements Serializable {
             ", sms='" + getSms() + "'" +
             ", sms2='" + getSms2() + "'" +
             ", documents='" + getDocuments() + "'" +
+            ", taille=" + getTaille() +
+            ", recu='" + getRecu() + "'" +
+            ", photo='" + getPhoto() + "'" +
+            ", photoContentType='" + getPhotoContentType() + "'" +
+            ", state='" + getState() + "'" +
             "}";
     }
 }

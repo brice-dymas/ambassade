@@ -2,12 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { Passeport } from './passeport.model';
 import { PasseportService } from './passeport.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
-import {PasseportModelDTO} from './passeport-dto.model';
 
 @Component({
     selector: 'jhi-passeport',
@@ -36,6 +35,7 @@ currentAccount: any;
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
+        private dataUtils: JhiDataUtils,
         private router: Router,
         private eventManager: JhiEventManager
     ) {
@@ -55,12 +55,6 @@ currentAccount: any;
             sort: this.sort()}).subscribe(
                 (res: HttpResponse<Passeport[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
-        );
-    }
-    searchPasseport(passeport: PasseportModelDTO) {
-        this.passeportService.search(passeport).subscribe(
-            (res: HttpResponse<Passeport[]>) => this.onSuccess(res.body, res.headers),
-            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
     loadPage(page: number) {
@@ -103,14 +97,16 @@ currentAccount: any;
     trackId(index: number, item: Passeport) {
         return item.id;
     }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
     registerChangeInPasseports() {
-        this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => {
-            if (typeof response.content === 'string') {
-                return this.loadAll();
-            }else {
-                return this.searchPasseport(response.content);
-            }
-        });
+        this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => this.loadAll());
     }
 
     sort() {

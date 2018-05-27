@@ -15,6 +15,11 @@
     <include file="config/liquibase/changelog/20180222221153_added_entity_Montant.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180222221154_added_entity_Produit.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180222221155_added_entity_Visa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180527135025_added_entity_TypeService.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180527135026_added_entity_Paiement.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20180222221146_added_entity_constraints_Passeport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180222221155_added_entity_constraints_Visa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180527135026_added_entity_constraints_Paiement.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

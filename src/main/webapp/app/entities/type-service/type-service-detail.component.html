@@ -1,0 +1,34 @@
+
+<div *ngIf="typeService">
+    <h2><span jhiTranslate="ambassadeApp.typeService.detail.title">Type Service</span> {{typeService.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="ambassadeApp.typeService.nom">Nom</span></dt>
+        <dd>
+            <span>{{typeService.nom}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.typeService.montant">Montant</span></dt>
+        <dd>
+            <span>{{typeService.montant}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.typeService.deleted">Deleted</span></dt>
+        <dd>
+            <span>{{typeService.deleted}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'type-service/'+ typeService.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

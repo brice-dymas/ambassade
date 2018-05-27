@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.urservices.ambassade.domain.enumeration.State;
+
 /**
  * A Visa.
  */
@@ -78,6 +80,13 @@ public class Visa implements Serializable {
 
     @Column(name = "remarques")
     private String remarques;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "state")
+    private State state;
+
+    @ManyToOne
+    private TypeService typeService;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -282,6 +291,32 @@ public class Visa implements Serializable {
     public void setRemarques(String remarques) {
         this.remarques = remarques;
     }
+
+    public State getState() {
+        return state;
+    }
+
+    public Visa state(State state) {
+        this.state = state;
+        return this;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public TypeService getTypeService() {
+        return typeService;
+    }
+
+    public Visa typeService(TypeService typeService) {
+        this.typeService = typeService;
+        return this;
+    }
+
+    public void setTypeService(TypeService typeService) {
+        this.typeService = typeService;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -323,6 +358,7 @@ public class Visa implements Serializable {
             ", taxes=" + getTaxes() +
             ", adresse='" + getAdresse() + "'" +
             ", remarques='" + getRemarques() + "'" +
+            ", state='" + getState() + "'" +
             "}";
     }
 }
