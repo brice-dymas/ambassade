@@ -33,15 +33,6 @@ Browser Upgrade Prompt
 /* ==========================================================================
 Generic styles
 ========================================================================== */
-.modal-content {
-    position: relative;
-    display: table; /* This is important */
-    overflow-y: auto;
-    overflow-x: auto;
-    width: 150%;
-    min-width: 300px;
-    margin-left: -200px!important;
-}
 
 /* Error highlight on input fields */
 .ng-valid[required], .ng-valid.required  {
@@ -267,11 +258,11 @@ Global theme color
 }
 
 .theme-red-text {
-color: #D60021!important;
+    color: #D60021!important;
 }
 
 .theme-border-red {
-border-color: #D60021!important;
+    border-color: #D60021!important;
 }
 
 .title-bullet {
@@ -365,8 +356,8 @@ span {
     justify-content: space-between;
     padding: 1rem;
     border-bottom: 1px solid #e9ecef;
-    border-top-left-radius: .3rem;
-    border-top-right-radius: .3rem;
+    border-top-left-radius: 0px!important;
+    border-top-right-radius: 0px!important;
 }
 
 .modal-footer {
@@ -457,7 +448,7 @@ thead.theme-bg-blue>tr>th span {
     padding: .15rem .5rem;
     font-size: .875rem;
     line-height: 1.5;
-    border-radius: .2rem;
+    border-radius: 0px;
 }
 
 

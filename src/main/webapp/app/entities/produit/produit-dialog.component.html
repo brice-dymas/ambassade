@@ -1,7 +1,7 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
     <div class="modal-header theme-bg-blue text-white">
-        <h4 class="modal-title" id="myProduitLabel" jhiTranslate="ambassadeApp.produit.home.createOrEditLabel">Create or edit a Produit</h4>
+        <h5 class="modal-title text-uppercase" id="myProduitLabel" jhiTranslate="ambassadeApp.produit.home.createOrEditLabel">Create or edit a Produit</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
@@ -15,7 +15,7 @@
         </div>
         -->
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.produit.nomProduit" for="field_nomProduit">Nom Produit</label>
                     <input type="text" class="form-control form-control-sm" name="nomProduit" id="field_nomProduit"
@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.produit.monnaie" for="field_monnaie">Monnaie</label>
                     <input type="text" class="form-control form-control-sm" name="monnaie" id="field_monnaie"
@@ -41,7 +41,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.produit.montant" for="field_montant">Montant</label>
                     <input type="number" class="form-control form-control-sm" name="montant" id="field_montant"
@@ -59,13 +62,12 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-blue btn-sm">
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-blue btn-xs">
             <span class="fa fa-download"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>
