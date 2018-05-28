@@ -3,18 +3,18 @@
     "ambassadeApp": {
         "typeService" : {
             "home": {
-                "title": "TypeServices",
-                "createLabel": "Créer un nouveau Type Service",
+                "title": "Services",
+                "createLabel": "Nouveau Service",
                 "createOrEditLabel": "Créer ou éditer un Type Service"
             },
-            "created": "Un nouveau Type Service a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Type Service avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Type Service avec l'identifiant {{ param }} a été supprimé",
+            "created": "Un nouveau Service a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Service avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Service avec l'identifiant {{ param }} a été supprimé",
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Type Service {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer le Service {{ id }} ?"
             },
             "detail": {
-                "title": "Type Service"
+                "title": "Service"
             },
             "nom": "Nom",
             "montant": "Montant",
