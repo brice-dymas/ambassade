@@ -1,7 +1,7 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
     <div class="modal-header theme-bg-blue text-white">
-        <h4 class="modal-title" id="myVisaLabel" jhiTranslate="ambassadeApp.visa.home.createOrEditLabel">Create or edit a Visa</h4>
+        <h5 class="text-uppercase modal-title" id="myVisaLabel" jhiTranslate="ambassadeApp.visa.home.createOrEditLabel">Create or edit a Visa</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true" (click)="clear()">&times;</button>
     </div>
     <div class="modal-body plat">
@@ -12,7 +12,19 @@
                    [(ngModel)]="visa.id" readonly />
         </div> -->
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.visa.nom" for="field_nom">Nom</label>
+                    <input type="text" class="form-control form-control-sm" name="nom" id="field_nom" [(ngModel)]="visa.nom" maxlength="60" />
+                    <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.nom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength"
+                               translateValues="{ max: 60 }">
+                            This field cannot be longer than 60 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.visa.numeroPasseport" for="field_numeroPasseport">Numero Passeport</label>
                     <input type="text" class="form-control form-control-sm" name="numeroPasseport" id="field_numeroPasseport" [(ngModel)]="visa.numeroPasseport"
@@ -25,47 +37,39 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.visa.nom" for="field_nom">Nom</label>
-                    <input type="text" class="form-control form-control-sm" name="nom" id="field_nom" [(ngModel)]="visa.nom" maxlength="60" />
-                    <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
-                        <small class="form-text text-danger" [hidden]="!editForm.controls.nom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength"
-                            translateValues="{ max: 60 }">
-                            This field cannot be longer than 60 characters.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.visa.prenom" for="field_prenom">Prenom</label>
                     <input type="text" class="form-control form-control-sm" name="prenom" id="field_prenom" [(ngModel)]="visa.prenom" maxlength="50"
                     />
                     <div [hidden]="!(editForm.controls.prenom?.dirty && editForm.controls.prenom?.invalid)">
                         <small class="form-text text-danger" [hidden]="!editForm.controls.prenom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength"
-                            translateValues="{ max: 50 }">
+                               translateValues="{ max: 50 }">
                             This field cannot be longer than 50 characters.
                         </small>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.visa.nationalite" for="field_nationalite">Nationalite</label>
                     <input type="text" class="form-control form-control-sm" name="nationalite" id="field_nationalite" [(ngModel)]="visa.nationalite"
-                        maxlength="50" />
+                           maxlength="50" />
                     <div [hidden]="!(editForm.controls.nationalite?.dirty && editForm.controls.nationalite?.invalid)">
                         <small class="form-text text-danger" [hidden]="!editForm.controls.nationalite?.errors?.maxlength" jhiTranslate="entity.validation.maxlength"
-                            translateValues="{ max: 50 }">
+                               translateValues="{ max: 50 }">
                             This field cannot be longer than 50 characters.
                         </small>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.visa.cedula" for="field_cedula">Cedula</label>
                     <input type="text" class="form-control form-control-sm" name="cedula" id="field_cedula" [(ngModel)]="visa.cedula" maxlength="30"
@@ -78,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.visa.numeroVisa" for="field_numeroVisa">Numero Visa</label>
                     <input type="number" class="form-control form-control-sm" name="numeroVisa" id="field_numeroVisa" [(ngModel)]="visa.numeroVisa"
@@ -93,12 +97,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.visa.dateEmission" for="field_dateEmission">Date Emission</label>
                     <div class="input-group">
                         <input id="field_dateEmission" type="text" class="form-control form-control-sm" name="dateEmission" ngbDatepicker #dateEmissionDp="ngbDatepicker"
-                            [(ngModel)]="visa.dateEmission" />
+                               [(ngModel)]="visa.dateEmission" />
                         <span class="input-group-append">
                             <button type="button" class="btn btn-sm btn-blue" (click)="dateEmissionDp.toggle()">
                                 <i class="fa fa-calendar"></i>
@@ -107,12 +114,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.visa.dateExpiration" for="field_dateExpiration">Date Expiration</label>
                     <div class="input-group">
                         <input id="field_dateExpiration" type="text" class="form-control form-control-sm" name="dateExpiration" ngbDatepicker #dateExpirationDp="ngbDatepicker"
-                            [(ngModel)]="visa.dateExpiration" />
+                               [(ngModel)]="visa.dateExpiration" />
                         <span class="input-group-append">
                             <button type="button" class="btn btn-sm btn-blue" (click)="dateExpirationDp.toggle()">
                                 <i class="fa fa-calendar"></i>
@@ -122,17 +129,18 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
-                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.typeService" for="field_typeService">Type Service</label>
-                        <select class="form-control form-control-sm" id="field_typeService" name="typeService" [(ngModel)]="visa.typeService" >
-                            <option [ngValue]="null"></option>
-                            <option [ngValue]="typeServiceOption.id === visa.typeService?.id ? visa.typeService : typeServiceOption" *ngFor="let typeServiceOption of typeservices; trackBy: trackTypeServiceById">{{typeServiceOption.nom}}</option>
-                        </select>
-                    </div>
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.typeService" for="field_typeService">Type Service</label>
+                    <select class="form-control form-control-sm" id="field_typeService" name="typeService" [(ngModel)]="visa.typeService" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="typeServiceOption.id === visa.typeService?.id ? visa.typeService : typeServiceOption" *ngFor="let typeServiceOption of typeservices; trackBy: trackTypeServiceById">{{typeServiceOption.nom}}</option>
+                    </select>
+                </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.visa.categorie" for="field_categorie">Categorie</label>
                     <input type="text" class="form-control form-control-sm" name="categorie" id="field_categorie" [(ngModel)]="visa.categorie"
@@ -145,29 +153,33 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.visa.validePour" for="field_validePour">Valide Pour</label>
                     <input type="number" class="form-control form-control-sm" name="validePour" id="field_validePour" [(ngModel)]="visa.validePour"
                     />
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.visa.nombreEntree" for="field_nombreEntree">Nombre Entree</label>
                     <input type="text" class="form-control form-control-sm" name="nombreEntree" id="field_nombreEntree" [(ngModel)]="visa.nombreEntree"
-                        maxlength="20" />
+                           maxlength="20" />
                     <div [hidden]="!(editForm.controls.nombreEntree?.dirty && editForm.controls.nombreEntree?.invalid)">
                         <small class="form-text text-danger" [hidden]="!editForm.controls.nombreEntree?.errors?.maxlength" jhiTranslate="entity.validation.maxlength"
-                            translateValues="{ max: 20 }">
+                               translateValues="{ max: 20 }">
                             This field cannot be longer than 20 characters.
                         </small>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.visa.adresse" for="field_adresse">Adresse</label>
                     <textarea cols="30" rows="5" class="form-control form-control-sm" name="adresse" id="field_adresse" [(ngModel)]="visa.adresse" ></textarea>
@@ -179,21 +191,20 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.visa.remarques" for="field_remarques">Remarques</label>
                     <textarea cols="30" rows="5" class="form-control form-control-sm" name="remarques" id="field_remarques" [(ngModel)]="visa.remarques"></textarea>
                 </div>
             </div>
         </div>
-
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-secondary btn-xs plat" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;
             <span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-blue btn-sm">
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-blue btn-xs plat">
             <span class="fa fa-download"></span>&nbsp;
             <span jhiTranslate="entity.action.save">Save</span>
         </button>

@@ -1,28 +1,23 @@
-<div>
-    <h2>
-        <div class="row">
-            <div class="col-md-6">
-                <span jhiTranslate="ambassadeApp.visa.home.title">Visas</span>
-            </div>
-            <div class="col-md-6">
-                <button class="btn btn-blue btn-sm float-right jh-create-entity create-visa" [routerLink]="['/', { outlets: { popup: ['visa-new'] } }]">
-                    <span class="fa fa-pencil-square-o"></span>
-                    <span  jhiTranslate="ambassadeApp.visa.home.createLabel">Create new Visa</span>
-                </button>&nbsp;
-                <button *jhiHasAnyAuthority="['ROLE_VISA_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
-                        class="btn btn-info">Imprimer</button>
-            </div>
-        </div>
-        <div class="title-bullet"><span></span></div>
-    </h2>
+<div class="mb-lg-5">
+    <h5 class="text-uppercase">
+        <span jhiTranslate="ambassadeApp.visa.home.title">Visas</span>
+        <button class="btn btn-blue btn-xs plat float-right jh-create-entity create-visa" [routerLink]="['/', { outlets: { popup: ['visa-new'] } }]">
+            <span class="fa fa-pencil-square-o"></span>
+            <span  jhiTranslate="ambassadeApp.visa.home.createLabel">Create new Visa</span>
+        </button>&nbsp;
+        <button *jhiHasAnyAuthority="['ROLE_VISA_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']" class="float-right mr-5 btn btn-info btn-xs plat">
+            <span class="fa fa-print"></span>
+            <span>Imprimer</span>
+        </button>
+        <div class="title-bullet title-bullet-table"><span></span></div>
+    </h5>
     <jhi-alert></jhi-alert>
-    <br>
     <div>
         <jhi-visa-search></jhi-visa-search>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="visas">
-        <table class="table table-striped table-bordered" style="font-size: 14px!important;font-weight: 100!important;">
+    <div *ngIf="visas">
+        <table class="table table-striped dash-row table-sm">
             <thead class="theme-bg-blue text-white">
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                     <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
@@ -43,66 +38,72 @@
                     <th jhiSortBy="taxes"><span jhiTranslate="ambassadeApp.visa.taxes">Taxes</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="adresse"><span jhiTranslate="ambassadeApp.visa.adresse">Adresse</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="remarques"><span jhiTranslate="ambassadeApp.visa.remarques">Remarques</span> <span class="fa fa-sort"></span></th> -->
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let visa of visas ;trackBy: trackId">
-                <!-- <td><a [routerLink]="['../visa', visa.id ]">{{visa.id}}</a></td> -->
-                <td>{{visa.nom}}</td>
-                <td>{{visa.prenom}}</td>
-                <td>{{visa.nationalite}}</td>
-                <td>{{visa.numeroPasseport}}</td>
-                <td>{{visa.cedula}}</td>
-                <td>{{visa.numeroVisa}}</td>
-                <td>{{visa.dateEmission | date:'mediumDate'}}</td>
-                <td>{{visa.dateExpiration | date:'mediumDate'}}</td>
-                <td>{{visa.validePour}}</td>
-                <td>{{visa.typeService.nom}}</td>
-                <td>{{visa.state}}</td>
-                <!-- <td>{{visa.nombreEntree}}</td>
-                <td>{{visa.type}}</td>
-                <td>{{visa.categorie}}</td>
-                <td>{{visa.taxes}}</td>
-                <td>{{visa.adresse}}</td>
-                <!-- <td>{{visa.remarques}}</td> -->
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../visa', visa.id ]"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'visa/'+ visa.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-blue btn-sm"
-                                *ngIf="visa.state=='NOUVEAU'">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'visa/'+ visa.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-trash"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                <tr *ngFor="let visa of visas ;trackBy: trackId">
+                    <!-- <td><a [routerLink]="['../visa', visa.id ]">{{visa.id}}</a></td> -->
+                    <td>{{visa.nom}}</td>
+                    <td>{{visa.prenom}}</td>
+                    <td>{{visa.nationalite}}</td>
+                    <td>{{visa.numeroPasseport}}</td>
+                    <td>{{visa.cedula}}</td>
+                    <td>{{visa.numeroVisa}}</td>
+                    <td>{{visa.dateEmission | date:'mediumDate'}}</td>
+                    <td>{{visa.dateExpiration | date:'mediumDate'}}</td>
+                    <td>{{visa.validePour}}</td>
+                    <td>{{visa.typeService.nom}}</td>
+                    <td>{{visa.state}}</td>
+                    <!-- <td>{{visa.nombreEntree}}</td>
+                    <td>{{visa.type}}</td>
+                    <td>{{visa.categorie}}</td>
+                    <td>{{visa.taxes}}</td>
+                    <td>{{visa.adresse}}</td>
+                    <!-- <td>{{visa.remarques}}</td> -->
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    [routerLink]="['../visa', visa.id ]"
+                                    class="btn btn-info btn-xs plat">
+                                <span class="fa fa-eye"></span>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'visa/'+ visa.id + '/edit'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-primary btn-xs plat"
+                                    *ngIf="visa.state=='NOUVEAU'">
+                                <span class="fa fa-pencil"></span>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'visa/'+ visa.id + '/delete'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-xs plat">
+                                <span class="fa fa-trash"></span>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
     <div *ngIf="visas && visas.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        <div class="row">
+            <div class="col-6">
+                <div class="text-sm">
+                    <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="pagination-sm pull-right">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div>
         </div>
     </div>
 </div>
