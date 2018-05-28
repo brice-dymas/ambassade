@@ -1,0 +1,61 @@
+<div class="no-print" style='text-align: center'>
+    <h3>PAGE D'IMPRESSION DE DONNEES</h3>
+    <button (click)="downloadPDF()" type="submit" [routerLink]="['../print']" class="btn btn-info">Export to PDF
+    </button>&nbsp;
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+</div>
+<br/>
+
+<div *ngIf="passeports" class="paper container sheet padding-25mm">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <h4 style="font-weight: 900!important;" class="card-title h2"
+                jhiTranslate="ambassadeApp.passeport.home.title"></h4>
+        </div>
+    </div>
+    <div class="row" id="content">
+        <div class="col-12 col A4 landscape">
+            <br/>&nbsp;
+            <table class="table table-striped table-bordered">
+                <thead class="theme-bg-blue text-white">
+                <tr>
+                    <th><span jhiTranslate="ambassadeApp.passeport.numeroFormulaire">Nom</span></th>
+                    <th><span jhiTranslate="ambassadeApp.passeport.nom">Nom</span></th>
+                    <th><span jhiTranslate="ambassadeApp.passeport.prenom">Prenom</span></th>
+                    <th><span jhiTranslate="ambassadeApp.passeport.etatCivil">etatCivil</span></th>
+                    <th><span jhiTranslate="ambassadeApp.passeport.numeroPasseport">Numero Passeport</span></th>
+                    <th><span jhiTranslate="ambassadeApp.passeport.delivreLe">Delivre Le</span></th>
+                    <th><span jhiTranslate="ambassadeApp.passeport.dateExpiration">Date Expiration</span></th>
+                    <th><span jhiTranslate="ambassadeApp.passeport.state">statut</span></th>
+                    <th><span jhiTranslate="ambassadeApp.passeport.typeService">typeService</span></th>
+
+                </tr>
+                </thead>
+                <tbody class="table-sm">
+                <tr *ngFor="let passeport of passeports; trackBy: trackId">
+                    <td>{{passeport.numeroFormulaire}}</td>
+                    <td>{{passeport.nom}}</td>
+                    <td>{{passeport.prenom}}</td>
+                    <td jhiTranslate="{{'ambassadeApp.Statut.' + passeport.etatCivil}}">{{passeport.etatCivil}}</td>
+                    <td>{{passeport.numeroPasseport}}</td>
+                    <td>{{passeport.delivreLe | date:'mediumDate'}}</td>
+                    <td>{{passeport.dateExpiration | date:'mediumDate'}}</td>
+                    <td jhiTranslate="{{'ambassadeApp.State.' + passeport.state}}">{{passeport.state}}</td>
+                    <td>{{passeport.typeService?.nom}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<button type="button"
+        (click)="previousState()"
+        class="btn btn-info btn-xs plat no-print mb-lg-5">
+    <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+</button>

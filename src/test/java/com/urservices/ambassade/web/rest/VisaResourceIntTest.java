@@ -4,6 +4,7 @@ import com.urservices.ambassade.AmbassadeApp;
 
 import com.urservices.ambassade.domain.Visa;
 import com.urservices.ambassade.repository.VisaRepository;
+import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.VisaService;
 import com.urservices.ambassade.web.rest.errors.ExceptionTranslator;
 
@@ -94,6 +95,9 @@ public class VisaResourceIntTest {
     private VisaRepository visaRepository;
 
     @Autowired
+    private PaiementService paiementService;
+
+    @Autowired
     private VisaService visaService;
 
     @Autowired
@@ -115,7 +119,7 @@ public class VisaResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final VisaResource visaResource = new VisaResource(visaService);
+        final VisaResource visaResource = new VisaResource(visaService, paiementService);
         this.restVisaMockMvc = MockMvcBuilders.standaloneSetup(visaResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

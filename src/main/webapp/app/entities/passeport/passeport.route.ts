@@ -48,6 +48,38 @@ export const passeportRoute: Routes = [
         },
         canActivate: [UserRouteAccessService]
     }, {
+        path: 'passeport/:id/payer',
+        component: PasseportDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.passeport.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'passeport/:id/encours',
+        component: PasseportDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.passeport.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'passeport/:id/pret',
+        component: PasseportDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.passeport.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'passeport/:id/retirer',
+        component: PasseportDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.passeport.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
         path: 'passeport/:id',
         component: PasseportDetailComponent,
         data: {

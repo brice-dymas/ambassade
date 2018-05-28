@@ -161,9 +161,9 @@ public class PasseportServiceImpl implements PasseportService {
         }
         if (montant != null) {
             if (added) {
-                predicate = predicate.and(passeport.montant.goe(montant));
+                predicate = predicate.and(passeport.montant.eq(montant));
             } else {
-                predicate = passeport.montant.goe(montant);
+                predicate = passeport.montant.eq(montant);
                 added = true;
             }
         }
@@ -172,13 +172,13 @@ public class PasseportServiceImpl implements PasseportService {
                 if (neLeFin != null) {
                     predicate = predicate.and(passeport.neLe.between(neLeDeb, neLeFin));
                 } else {
-                    predicate = predicate.and(passeport.neLe.goe(neLeDeb));
+                    predicate = predicate.and(passeport.neLe.eq(neLeDeb));
                 }
             } else {
                 if (neLeFin != null) {
                     predicate = passeport.neLe.between(neLeDeb, neLeFin);
                 } else {
-                    predicate = passeport.neLe.goe(neLeDeb);
+                    predicate = passeport.neLe.eq(neLeDeb);
                 }
                 added = true;
             }
@@ -204,15 +204,22 @@ public class PasseportServiceImpl implements PasseportService {
                 if (delivreLeFin != null) {
                     predicate = predicate.and(passeport.delivreLe.between(delivreLeDeb, delivreLeFin));
                 } else {
-                    predicate = predicate.and(passeport.delivreLe.goe(delivreLeDeb));
+                    predicate = predicate.and(passeport.delivreLe.eq(delivreLeDeb));
                 }
             } else {
                 if (delivreLeFin != null) {
                     predicate = passeport.delivreLe.between(delivreLeDeb, delivreLeFin);
                 } else {
-                    predicate = passeport.delivreLe.goe(delivreLeDeb);
+                    predicate = passeport.delivreLe.eq(delivreLeDeb);
                 }
                 added = true;
+            }
+        }
+        if (delivreLeFin != null && delivreLeDeb==null) {
+            if (added) {
+                predicate = predicate.and(passeport.delivreLe.loe(delivreLeFin));
+            } else {
+                predicate = passeport.delivreLe.loe(delivreLeFin);
             }
         }
         if (dateEmissionDeb != null) {
@@ -223,7 +230,7 @@ public class PasseportServiceImpl implements PasseportService {
                     predicate = predicate.and(passeport.dateEmission.goe(dateEmissionDeb));
                 }
             } else {
-                if (soumisLeFin != null) {
+                if (dateEmissionFin != null) {
                     predicate = passeport.dateEmission.between(dateEmissionDeb, dateEmissionFin);
                 } else {
                     predicate = passeport.dateEmission.goe(dateEmissionDeb);
@@ -236,20 +243,29 @@ public class PasseportServiceImpl implements PasseportService {
                 if (dateExpirationFin != null) {
                     predicate = predicate.and(passeport.dateExpiration.between(dateExpirationDeb, dateExpirationFin));
                 } else {
-                    predicate = predicate.and(passeport.dateExpiration.goe(dateExpirationDeb));
+                    predicate = predicate.and(passeport.dateExpiration.eq(dateExpirationDeb));
                 }
             } else {
-                if (soumisLeFin != null) {
+                if (dateExpirationFin != null) {
                     predicate = passeport.dateExpiration.between(dateExpirationDeb, dateExpirationFin);
                 } else {
-                    predicate = passeport.dateExpiration.goe(dateExpirationDeb);
+                    predicate = passeport.dateExpiration.eq(dateExpirationDeb);
                 }
                 added = true;
             }
         }
+        if (dateExpirationFin != null && dateExpirationDeb==null) {
+            if (added) {
+                predicate = predicate.and(passeport.dateExpiration.loe(dateExpirationFin));
+            } else {
+                predicate = passeport.dateExpiration.loe(dateExpirationFin);
+            }
+        }
         if (predicate != null) {
+            System.out.println("Predicate for search = "+ predicate);
             return passeportRepository.findAll(predicate, pageable);
         } else {
+            System.out.println("Predicate for search is NULL ");
             return passeportRepository.findAll(pageable);
         }
     }

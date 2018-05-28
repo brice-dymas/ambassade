@@ -62,6 +62,13 @@ currentAccount: any;
             this.transition();
         }
     }
+
+    printPage() {
+        this.router.navigateByData({
+            url: ['/print/paiement'],
+            data: this.paiements
+        });
+    }
     transition() {
         this.router.navigate(['/paiement'], {queryParams:
             {

@@ -34,6 +34,32 @@ export class PasseportService {
             .map((res: EntityResponseType) => this.convertResponse(res));
     }
 
+    search(passeport: Passeport): Observable<HttpResponse<Passeport[]>> {
+        const options = createRequestOption(passeport);
+        return this.http.get<Passeport[]>(this.resourceUrl, { params: options,  observe: 'response'})
+            .map((res: HttpResponse<Passeport[]>) => this.convertArrayResponse(res));
+    }
+
+    payer(id: number): Observable<EntityResponseType> {
+        return this.http.get<Passeport>(`${this.resourceUrl}/${id}/payer`, { observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    enCours(id: number): Observable<EntityResponseType> {
+        return this.http.get<Passeport>(`${this.resourceUrl}/${id}/encours`, { observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    pret(id: number): Observable<EntityResponseType> {
+        return this.http.get<Passeport>(`${this.resourceUrl}/${id}/pret`, { observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    retirer(id: number): Observable<EntityResponseType> {
+        return this.http.get<Passeport>(`${this.resourceUrl}/${id}/retirer`, { observe: 'response'})
+            .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
     query(req?: any): Observable<HttpResponse<Passeport[]>> {
         const options = createRequestOption(req);
         return this.http.get<Passeport[]>(this.resourceUrl, { params: options, observe: 'response' })

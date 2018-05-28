@@ -306,7 +306,7 @@
             </div>
             <div class="mt-3 mb-3 pull-right">
                 <!--<div class="modal-footer">-->
-                <button type="reset" class="btn btn-sm btn-danger">
+                <button (click)="resetSearch()" class="btn btn-sm btn-danger">
                     <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>&nbsp;
                 <button type="submit" (click)="search()" class="btn btn-sm btn-blue">

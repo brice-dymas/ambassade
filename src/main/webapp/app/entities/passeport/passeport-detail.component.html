@@ -120,7 +120,7 @@
         <dt><span jhiTranslate="ambassadeApp.passeport.typeService">Type Service</span></dt>
         <dd>
             <div *ngIf="passeport.typeService">
-                <a [routerLink]="['/type-service', passeport.typeService?.id]">{{passeport.typeService?.id}}</a>
+                <a [routerLink]="['/type-service', passeport.typeService?.id]">{{passeport.typeService?.nom}}</a>
             </div>
         </dd>
     </dl>
@@ -129,6 +129,28 @@
             (click)="previousState()"
             class="btn btn-info">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" *ngIf="passeport.state=='NOUVEAU'" [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/edit'} }]"
+            replaceUrl="true" queryParamsHandling="merge" class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;
+        <span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+    <button type="button" *ngIf="passeport.state=='NOUVEAU'" class="btn btn-primary" (click)="payer()">
+        <span class="fa fa-money"></span>&nbsp;
+        <span jhiTranslate="entity.action.payer"> Payer</span>
+    </button>
+    <button type="button" *ngIf="passeport.state=='PAYE'" class="btn btn-primary" (click)="encours()">
+        <span class="fa fa-money"></span>&nbsp;
+        <span jhiTranslate="entity.action.encours"> En Cours</span>
+    </button>
+    <button type="button" *ngIf="passeport.state=='ENCOURS'" (click)="pret()" class="btn btn-primary">
+        <span class="fa fa-money"></span>&nbsp;
+        <span jhiTranslate="entity.action.pret"> Prêt</span>
+    </button>
+    <button type="button" *ngIf="passeport.state=='PRET'" (click)="retirer()" class="btn btn-primary">
+        <span class="fa fa-money"></span>&nbsp;
+        <span jhiTranslate="entity.action.retirer"> Retirer</span>
     </button>
 
     <button type="button"

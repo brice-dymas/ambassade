@@ -40,6 +40,34 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
                 this.passeport = passeportResponse.body;
             });
     }
+
+    payer() {
+        this.passeportService.payer(this.passeport.id)
+            .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                this.passeport = passeportResponse.body;
+            });
+    }
+
+    encours() {
+        this.passeportService.enCours(this.passeport.id)
+            .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                this.passeport = passeportResponse.body;
+            });
+    }
+
+    retirer() {
+        this.passeportService.retirer(this.passeport.id)
+            .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                this.passeport = passeportResponse.body;
+            });
+    }
+
+    pret() {
+        this.passeportService.pret(this.passeport.id)
+            .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                this.passeport = passeportResponse.body;
+            });
+    }
     byteSize(field) {
         return this.dataUtils.byteSize(field);
     }

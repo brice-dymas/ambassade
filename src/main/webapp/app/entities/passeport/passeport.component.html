@@ -8,6 +8,10 @@
             <button class="btn btn-sm btn-blue float-right jh-create-entity create-passeport" [routerLink]="['/', { outlets: { popup: ['passeport-new'] } }]">
                 <span class="fa fa-plus"></span>
                 <span  jhiTranslate="ambassadeApp.passeport.home.createLabel">Create new Passeport</span>
+            </button>&nbsp;
+            <button (click)="printPage()" class="btn btn-info btn-sm float-right plat">
+                <span class="fa fa-print"></span>&nbsp;
+                <span>Imprimer</span>
             </button>
         </div>
     </div>
@@ -37,13 +41,14 @@
                 <th jhiSortBy="nif"><span jhiTranslate="ambassadeApp.passeport.nif">Nif</span> <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="paysEmetteur"><span jhiTranslate="ambassadeApp.passeport.paysEmetteur">Pays Emetteur</span> <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="soumisLe"><span jhiTranslate="ambassadeApp.passeport.soumisLe">Soumis Le</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="delivreLe"><span jhiTranslate="ambassadeApp.passeport.delivreLe">Delivre Le</span> <span class="fa fa-sort"></span></th>
                 <!-- <th jhiSortBy="montant"><span jhiTranslate="ambassadeApp.passeport.montant">Montant</span> <span class="fa fa-sort"></span></th>
                 <th jhiSortBy="remarques"><span jhiTranslate="ambassadeApp.passeport.remarques">Remarques</span> <span class="fa fa-sort"></span></th> -->
-                <th jhiSortBy="dateEmission"><span jhiTranslate="ambassadeApp.passeport.dateEmission">Date Emission</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="delivreLe"><span jhiTranslate="ambassadeApp.passeport.delivreLe">Delivre Le</span> <span class="fa fa-sort"></span></th>
+                <!--<th jhiSortBy="dateEmission"><span jhiTranslate="ambassadeApp.passeport.dateEmission">Date Emission</span> <span class="fa fa-sort"></span></th>-->
                 <th jhiSortBy="dateExpiration"><span jhiTranslate="ambassadeApp.passeport.dateExpiration">Date Expiration</span> <span class="fa fa-sort"></span></th>
                 <!-- <th jhiSortBy="remarquesR"><span jhiTranslate="ambassadeApp.passeport.remarquesR">Remarques R</span> <span class="fa fa-sort"></span></th> -->
-                <th jhiSortBy="sms"><span jhiTranslate="ambassadeApp.passeport.sms">Sms</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="state"><span jhiTranslate="ambassadeApp.passeport.state">statut</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="typeService"><span jhiTranslate="ambassadeApp.passeport.typeService">typeService</span> <span class="fa fa-sort"></span></th>
                 <!-- <th jhiSortBy="sms2"><span jhiTranslate="ambassadeApp.passeport.sms2">Sms 2</span> <span class="fa fa-sort"></span></th> -->
                 <!-- <th jhiSortBy="documents"><span jhiTranslate="ambassadeApp.passeport.documents">Documents</span> <span class="fa fa-sort"></span></th> -->
                 <th>Actions</th>
@@ -64,13 +69,14 @@
                 <td>{{passeport.nif}}</td>
                 <td>{{passeport.paysEmetteur}}</td>
                 <td>{{passeport.soumisLe | date:'mediumDate'}}</td>
-                <td>{{passeport.delivreLe | date:'mediumDate'}}</td>
                 <!-- <td>{{passeport.montant}}</td>
                 <td>{{passeport.remarques}}</td> -->
-                <td>{{passeport.dateEmission | date:'mediumDate'}}</td>
+                <td>{{passeport.delivreLe | date:'mediumDate'}}</td>
+                <!--<td>{{passeport.dateEmission | date:'mediumDate'}}</td>-->
                 <td>{{passeport.dateExpiration | date:'mediumDate'}}</td>
                 <!-- <td>{{passeport.remarquesR}}</td> -->
-                <td>{{passeport.sms}}</td>
+                <td jhiTranslate="{{'ambassadeApp.State.' + passeport.state}}">{{passeport.state}}</td>
+                <td>{{passeport.typeService?.nom}}</td>
                 <!-- <td>{{passeport.sms2}}</td> -->
                 <!-- <td>{{passeport.documents}}</td> -->
                 <td class="text-right">
@@ -80,7 +86,7 @@
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
+                        </button>&nbsp;
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/edit'} }]"
                                 replaceUrl="true"
@@ -88,7 +94,7 @@
                                 class="btn btn-blue btn-sm">
                             <span class="fa fa-pencil-square-o"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
+                        </button>&nbsp;
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/delete'} }]"
                                 replaceUrl="true"

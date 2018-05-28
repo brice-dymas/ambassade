@@ -8,6 +8,8 @@ import {
     printRoute,
 } from './';
 import {PrintDetailPasseportComponent} from './print-detail-passeport.component';
+import {PrintPasseportComponent} from './print-passeport.component';
+import {PrintPaiementComponent} from './print-paiement.component';
 // import {printRoute} from "./print.route";
 
 const ENTITY_STATES = [
@@ -21,6 +23,8 @@ const ENTITY_STATES = [
     ],
     declarations: [
         PrintComponent,
+        PrintPasseportComponent,
+        PrintPaiementComponent,
         PrintDetailPasseportComponent
     ],
     entryComponents: [

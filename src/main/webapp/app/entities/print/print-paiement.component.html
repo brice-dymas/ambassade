@@ -1,0 +1,56 @@
+<div class="no-print" style='text-align: center'>
+    <h3>PAGE D'IMPRESSION DE DONNEES</h3>
+    <button (click)="downloadPDF()" type="submit" [routerLink]="['../print']" class="btn btn-info">Export to PDF
+    </button>&nbsp;
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+</div>
+<br/>
+
+<div *ngIf="paiements" class="paper container sheet padding-25mm">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <h4 style="font-weight: 900!important;" class="card-title h2"
+                jhiTranslate="ambassadeApp.paiement.home.title"></h4>
+        </div>
+    </div>
+    <div class="row" id="content">
+        <div class="col-12 col A4 landscape">
+            <br/>&nbsp;
+            <table class="table table-striped table-bordered">
+                <thead class="theme-bg-blue text-white">
+                <tr>
+                    <th><span jhiTranslate="ambassadeApp.paiement.datePaiement">datePaiement</span></th>
+                    <th><span jhiTranslate="ambassadeApp.paiement.visa">visa</span></th>
+                    <th><span jhiTranslate="ambassadeApp.paiement.passeport">passeport</span></th>
+                    <th><span jhiTranslate="ambassadeApp.paiement.typeService">typeService</span></th>
+                    <th><span jhiTranslate="ambassadeApp.paiement.user">user</span></th>
+                </tr>
+                </thead>
+                <tbody class="table-sm">
+                <tr *ngFor="let paiement of paiements; trackBy: trackId">
+                    <td>{{paiement.datePaiement | date:'mediumDate'}}</td>
+                    <td *ngIf="paiement.visa">{{paiement.visa.nom}} {{paiement.visa.prenom}} <b>{{paiement.visa.state}} </b></td>
+                    <td *ngIf="!paiement.visa"></td>
+                    <td *ngIf="paiement.passeport">{{paiement.passeport.nom}} {{paiement.passeport.prenom}} <b>{{paiement.passeport.state}}</b></td>
+                    <td *ngIf="!paiement.passeport"></td>
+                    <td *ngIf="paiement.typeService">{{paiement.typeService.nom}} {{paiement.typeService.montant | number}}</td>
+                    <td *ngIf="!paiement.typeService"></td>
+                    <td *ngIf="paiement.user">{{paiement.user.lastName}} {{paiement.user.firstName}}</td>
+                    <td *ngIf="!paiement.user"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<button type="button"
+        (click)="previousState()"
+        class="btn btn-info btn-xs plat no-print mb-lg-5">
+    <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+</button>

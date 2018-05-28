@@ -73,7 +73,12 @@ currentAccount: any;
         });
         this.loadAll();
     }
-
+    searchPasseport(passeport: Passeport) {
+        this.passeportService.search(passeport).subscribe(
+            (res: HttpResponse<Passeport[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     clear() {
         this.page = 0;
         this.router.navigate(['/passeport', {
@@ -106,7 +111,15 @@ currentAccount: any;
         return this.dataUtils.openFile(contentType, field);
     }
     registerChangeInPasseports() {
-        this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => this.loadAll());
+        // this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => {
+            console.log(response);
+            if (typeof response.content === 'string') {
+                return this.loadAll();
+            }else {
+                return this.searchPasseport(response.content);
+            }
+        });
     }
 
     sort() {
@@ -115,6 +128,13 @@ currentAccount: any;
             result.push('id');
         }
         return result;
+    }
+
+    printPage() {
+        this.router.navigateByData({
+            url: ['/print/passeport'],
+            data: this.passeports
+        });
     }
 
     private onSuccess(data, headers) {

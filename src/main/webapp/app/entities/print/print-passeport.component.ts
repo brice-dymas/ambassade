@@ -4,20 +4,15 @@ import * as xepOnline from 'css-to-pdf/js/xepOnline.jqPlugin.js';
 import {Passeport, PasseportService} from '../passeport';
 
 @Component({
-    selector: 'jhi-print-detail-passeport',
-    templateUrl: './print-detail-passeport.component.html',
+    selector: 'jhi-print-passeport',
+    templateUrl: './print-passeport.component.html',
     styleUrls: [
         'paper.min.css'
-        // ,
-        // 'paper.css',
-        // 'gutenberg.css',
-        // 'modern.css'
-        // 'modern.min.css'
     ]
 })
-export class PrintDetailPasseportComponent implements OnInit {
+export class PrintPasseportComponent implements OnInit {
 
-    passeport: Passeport;
+    passeports: Passeport[];
 
     routeData: any;
     dataContent: any;
@@ -28,7 +23,8 @@ export class PrintDetailPasseportComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.passeport = this.router.getNavigatedData();
+        this.passeports = this.router.getNavigatedData();
+        console.log('passeports = ', this.passeports);
     }
 
     trackId(index: number, item: any) {

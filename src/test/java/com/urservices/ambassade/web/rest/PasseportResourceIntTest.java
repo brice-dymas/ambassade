@@ -2,8 +2,10 @@ package com.urservices.ambassade.web.rest;
 
 import com.urservices.ambassade.AmbassadeApp;
 
+import com.urservices.ambassade.domain.Paiement;
 import com.urservices.ambassade.domain.Passeport;
 import com.urservices.ambassade.repository.PasseportRepository;
+import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.PasseportService;
 import com.urservices.ambassade.web.rest.errors.ExceptionTranslator;
 
@@ -127,6 +129,8 @@ public class PasseportResourceIntTest {
 
     @Autowired
     private PasseportService passeportService;
+    @Autowired
+    private PaiementService paiementService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -147,7 +151,7 @@ public class PasseportResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PasseportResource passeportResource = new PasseportResource(passeportService);
+        final PasseportResource passeportResource = new PasseportResource(passeportService, paiementService);
         this.restPasseportMockMvc = MockMvcBuilders.standaloneSetup(passeportResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
