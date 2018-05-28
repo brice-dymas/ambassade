@@ -15,10 +15,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,9 +91,20 @@ public class PaiementResource {
      */
     @GetMapping("/paiements")
     @Timed
-    public ResponseEntity<List<Paiement>> getAllPaiements(Pageable pageable) {
+    public ResponseEntity<List<Paiement>> getAllPaiements(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Paiements");
-        Page<Paiement> page = paiementService.findAll(pageable);
+
+        String datePaiementStr = webRequest.getParameter("datePaiement") !=null && !webRequest.getParameter("datePaiement").isEmpty()
+            ? webRequest.getParameter("datePaiement"): null;
+        Long visa = webRequest.getParameter("visa") !=null && !webRequest.getParameter("visa").isEmpty()
+            ? Long.valueOf(webRequest.getParameter("visa")): null;
+        Long passeport = webRequest.getParameter("passeport") !=null && !webRequest.getParameter("passeport").isEmpty()
+            ? Long.valueOf(webRequest.getParameter("passeport")): null;
+        Long typeService = webRequest.getParameter("typeService") !=null && !webRequest.getParameter("typeService").isEmpty()
+            ? Long.valueOf(webRequest.getParameter("typeService")): null;
+        LocalDate datePaiement = datePaiementStr != null ? LocalDate.parse(datePaiementStr) : null;
+
+        Page<Paiement> page = paiementService.findAll(datePaiement,visa,passeport,typeService,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/paiements");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

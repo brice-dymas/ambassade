@@ -16,6 +16,7 @@ import {
     paiementPopupRoute,
     PaiementResolvePagingParams,
 } from './';
+import {PaiementSearchComponent} from './paiement-search.component';
 
 const ENTITY_STATES = [
     ...paiementRoute,
@@ -35,6 +36,7 @@ const ENTITY_STATES = [
         PaiementDeleteDialogComponent,
         PaiementPopupComponent,
         PaiementDeletePopupComponent,
+        PaiementSearchComponent,
     ],
     entryComponents: [
         PaiementComponent,

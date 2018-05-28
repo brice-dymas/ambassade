@@ -12,7 +12,9 @@
             <span>Imprimer</span>
     </h2>
     <jhi-alert></jhi-alert>
-    <div class="row">
+    <br/>
+    <div>
+        <jhi-paiement-search></jhi-paiement-search>
     </div>
     <br/>
     <div class="table-responsive" *ngIf="paiements">
@@ -34,17 +36,17 @@
                 <td>{{paiement.datePaiement | date:'mediumDate'}}</td>
                 <td>
                     <div *ngIf="paiement.visa">
-                        <a [routerLink]="['../visa', paiement.visa?.id ]" >{{paiement.visa?.id}}</a>
+                        <a [routerLink]="['../visa', paiement.visa?.id ]" >{{paiement.visa?.nom}} {{paiement.visa?.prenom}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="paiement.passeport">
-                        <a [routerLink]="['../passeport', paiement.passeport?.id ]" >{{paiement.passeport?.id}}</a>
+                        <a [routerLink]="['../passeport', paiement.passeport?.id ]" >{{paiement.passeport?.nom}} {{paiement.passeport?.prenom}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="paiement.typeService">
-                        <a [routerLink]="['../type-service', paiement.typeService?.id ]" >{{paiement.typeService?.id}}</a>
+                        <a [routerLink]="['../type-service', paiement.typeService?.id ]" >{{paiement.typeService?.nom}}</a>
                     </div>
                 </td>
                 <td>

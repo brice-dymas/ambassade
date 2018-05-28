@@ -4,6 +4,8 @@ import com.urservices.ambassade.domain.Paiement;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
+
 /**
  * Service Interface for managing Paiement.
  */
@@ -24,6 +26,14 @@ public interface PaiementService {
      * @return the list of entities
      */
     Page<Paiement> findAll(Pageable pageable);
+
+    /**
+     * Get all the paiements using params.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    Page<Paiement> findAll(LocalDate datePaiement, Long visa, Long passeport, Long typeService, Pageable pageable);
 
     /**
      * Get the "id" paiement.

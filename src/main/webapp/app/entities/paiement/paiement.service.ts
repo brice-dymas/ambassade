@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Paiement } from './paiement.model';
 import { createRequestOption } from '../../shared';
+import {PaiementSearchModel} from './paiement-search.model';
 
 export type EntityResponseType = HttpResponse<Paiement>;
 
@@ -32,6 +33,13 @@ export class PaiementService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<Paiement>(`${this.resourceUrl}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    search(paiement: PaiementSearchModel): Observable<HttpResponse<Paiement[]>> {
+        const copy = this.convertSearch(paiement);
+        const options = createRequestOption(copy);
+        return this.http.get<Paiement[]>(this.resourceUrl, { params: options,  observe: 'response'})
+            .map((res: HttpResponse<Paiement[]>) => this.convertArrayResponse(res));
     }
 
     query(req?: any): Observable<HttpResponse<Paiement[]>> {
@@ -73,6 +81,16 @@ export class PaiementService {
      */
     private convert(paiement: Paiement): Paiement {
         const copy: Paiement = Object.assign({}, paiement);
+        copy.datePaiement = this.dateUtils
+            .convertLocalDateToServer(paiement.datePaiement);
+        return copy;
+    }
+
+    /**
+     * Convert a Paiement to a JSON which can be sent to the server.
+     */
+    private convertSearch(paiement: PaiementSearchModel): PaiementSearchModel {
+        const copy: PaiementSearchModel = Object.assign({}, paiement);
         copy.datePaiement = this.dateUtils
             .convertLocalDateToServer(paiement.datePaiement);
         return copy;

@@ -37,6 +37,17 @@ export const paiementRoute: Routes = [
         },
         canActivate: [UserRouteAccessService]
     }, {
+        path: 'paiement/search',
+        component: PaiementComponent,
+        resolve: {
+            'pagingParams': PaiementResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.paiement.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
         path: 'paiement/:id',
         component: PaiementDetailComponent,
         data: {

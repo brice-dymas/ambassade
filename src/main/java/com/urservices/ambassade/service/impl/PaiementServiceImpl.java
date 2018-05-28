@@ -1,5 +1,7 @@
 package com.urservices.ambassade.service.impl;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.urservices.ambassade.domain.QPaiement;
 import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.domain.Paiement;
 import com.urservices.ambassade.repository.PaiementRepository;
@@ -9,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 
 /**
@@ -49,6 +53,50 @@ public class PaiementServiceImpl implements PaiementService {
     public Page<Paiement> findAll(Pageable pageable) {
         log.debug("Request to get all Paiements");
         return paiementRepository.findAll(pageable);
+    }
+
+    /**
+     * Get all the paiements using params.
+     *
+     * @param datePaiement
+     * @param visa
+     * @param passeport
+     * @param typeService
+     * @param pageable     the pagination information  @return the list of entities
+     */
+    @Override
+    public Page<Paiement> findAll(LocalDate datePaiement, Long visa, Long passeport, Long typeService, Pageable pageable) {
+        QPaiement paiement = QPaiement.paiement;
+        BooleanExpression predicate = null;
+        boolean added = false;
+        if (datePaiement != null){
+            predicate = paiement.datePaiement.eq(datePaiement);
+            added= true;
+        }
+        if (visa != null) {
+            if (added) {
+                predicate = predicate.and(paiement.visa.id.eq(visa));
+            } else {
+                predicate = paiement.visa.id.eq(visa);
+                added = true;
+            }
+        }
+        if (passeport != null) {
+            if (added) {
+                predicate = predicate.and(paiement.passeport.id.eq(passeport));
+            } else {
+                predicate = paiement.passeport.id.eq(passeport);
+                added = true;
+            }
+        }
+        if (typeService != null) {
+            if (added) {
+                predicate = predicate.and(paiement.typeService.id.eq(typeService));
+            } else {
+                predicate = paiement.typeService.id.eq(typeService);
+            }
+        }
+        return predicate != null? paiementRepository.findAll(predicate,pageable): paiementRepository.findAll(pageable);
     }
 
     /**
