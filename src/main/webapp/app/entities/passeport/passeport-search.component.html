@@ -157,39 +157,10 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-<<<<<<< HEAD
                         <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.paysEmetteur"
                                for="field_paysEmetteur">Pays Emetteur</label>
                         <input type="text" class="form-control" name="paysEmetteur" id="field_paysEmetteur"
                                [(ngModel)]="formModel.paysEmetteur" maxlength="25"/>
-=======
-                        <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateEmissionSearch"
-                               for="field_dateEmission">Date Emission</label>
-                        <div class="input-group">
-                            <input id="field_dateEmission" type="text" class="form-control" name="dateEmission"
-                                   ngbDatepicker #dateEmissionDp="ngbDatepicker" [(ngModel)]="formModel.dateEmission"
-                            />
-                            <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" (click)="dateEmissionDp.toggle()"><i
-                                        class="fa fa-calendar"></i></button>
-                                </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="form-control-label" jhiTranslate="global.messages.and"
-                               for="field_dateEmissionFin">Date Emission</label>
-                        <div class="input-group">
-                            <input id="field_dateEmissionFin" type="text" class="form-control" name="dateEmissionFin"
-                                   ngbDatepicker #dateEmissionFinDp="ngbDatepicker" [(ngModel)]="formModel.dateEmissionFin"
-                            />
-                            <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary" (click)="dateEmissionFinDp.toggle()"><i
-                                        class="fa fa-calendar"></i></button>
-                                </span>
-                        </div>
->>>>>>> 9b6b943... Correction des requetes dynamiques OK
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -335,11 +306,7 @@
             </div>
             <div class="mt-3 mb-3 pull-right">
                 <!--<div class="modal-footer">-->
-<<<<<<< HEAD
                 <button (click)="resetSearch()" class="btn btn-sm btn-danger">
-=======
-                <button type="reset" class="btn btn-sm btn-danger">
->>>>>>> 9b6b943... Correction des requetes dynamiques OK
                     <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>&nbsp;
                 <button type="submit" (click)="search()" class="btn btn-sm btn-blue">
