@@ -1,124 +1,119 @@
+<div class="mb-lg-5">
+    <h5 class="text-uppercase">
+        <span jhiTranslate="ambassadeApp.passeport.home.title">Passeports</span>
+        <button class="btn btn-xs plat btn-blue float-right jh-create-entity create-passeport" [routerLink]="['/', { outlets: { popup: ['passeport-new'] } }]">
+            <span class="fa fa-pencil-square-o"></span>
+            <span  jhiTranslate="ambassadeApp.passeport.home.createLabel">Create new Passeport</span>
+        </button>&nbsp;
+        <button (click)="printPage()" class="btn btn-info btn-xs plat float-right mr-5 plat">
+            <span class="fa fa-print"></span>&nbsp;
+            <span>Imprimer</span>
+        </button>
+    </h5>
+    <div class="title-bullet title-bullet-table"><span></span></div>
 
-<h2>
-    <div class="row">
-        <div class="col-md-6">
-            <span jhiTranslate="ambassadeApp.passeport.home.title">Passeports</span>
-        </div>
-        <div class="col-md-6">
-            <button class="btn btn-sm btn-blue float-right jh-create-entity create-passeport" [routerLink]="['/', { outlets: { popup: ['passeport-new'] } }]">
-                <span class="fa fa-plus"></span>
-                <span  jhiTranslate="ambassadeApp.passeport.home.createLabel">Create new Passeport</span>
-            </button>&nbsp;
-            <button (click)="printPage()" class="btn btn-info btn-sm float-right plat">
-                <span class="fa fa-print"></span>&nbsp;
-                <span>Imprimer</span>
-            </button>
-        </div>
+    <jhi-alert></jhi-alert>
+    <br>
+    <div>
+        <jhi-passeport-search></jhi-passeport-search>
     </div>
-    <div class="title-bullet"><span></span></div>
-</h2>
-
-<jhi-alert></jhi-alert>
-<br>
-<div>
-    <jhi-passeport-search></jhi-passeport-search>
-</div>
-<br/>
-    <div class="table-responsive" *ngIf="passeports">
-        <table class="table table-striped table-bordered">
-            <thead class="theme-bg-blue text-white">
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
-                <th jhiSortBy="numeroFormulaire"><span jhiTranslate="ambassadeApp.passeport.numeroFormulaire">Numero Formulaire</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.passeport.nom">Nom</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="prenom"><span jhiTranslate="ambassadeApp.passeport.prenom">Prenom</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="numeroPasseport"><span jhiTranslate="ambassadeApp.passeport.numeroPasseport">Numero Passeport</span> <span class="fa fa-sort"></span></th>
-                <!--<th jhiSortBy="neLe"><span jhiTranslate="ambassadeApp.passeport.neLe">Ne Le</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="lieuNaissance"><span jhiTranslate="ambassadeApp.passeport.lieuNaissance">Lieu Naissance</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="etatCivil"><span jhiTranslate="ambassadeApp.passeport.etatCivil">Etat Civil</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="adresse"><span jhiTranslate="ambassadeApp.passeport.adresse">Adresse</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="telephone"><span jhiTranslate="ambassadeApp.passeport.telephone">Telephone</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="nif"><span jhiTranslate="ambassadeApp.passeport.nif">Nif</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="paysEmetteur"><span jhiTranslate="ambassadeApp.passeport.paysEmetteur">Pays Emetteur</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="soumisLe"><span jhiTranslate="ambassadeApp.passeport.soumisLe">Soumis Le</span> <span class="fa fa-sort"></span></th>
-                <!-- <th jhiSortBy="montant"><span jhiTranslate="ambassadeApp.passeport.montant">Montant</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="remarques"><span jhiTranslate="ambassadeApp.passeport.remarques">Remarques</span> <span class="fa fa-sort"></span></th> -->
-                <th jhiSortBy="delivreLe"><span jhiTranslate="ambassadeApp.passeport.delivreLe">Delivre Le</span> <span class="fa fa-sort"></span></th>
-                <!--<th jhiSortBy="dateEmission"><span jhiTranslate="ambassadeApp.passeport.dateEmission">Date Emission</span> <span class="fa fa-sort"></span></th>-->
-                <th jhiSortBy="dateExpiration"><span jhiTranslate="ambassadeApp.passeport.dateExpiration">Date Expiration</span> <span class="fa fa-sort"></span></th>
-                <!-- <th jhiSortBy="remarquesR"><span jhiTranslate="ambassadeApp.passeport.remarquesR">Remarques R</span> <span class="fa fa-sort"></span></th> -->
-                <th jhiSortBy="state"><span jhiTranslate="ambassadeApp.passeport.state">statut</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="typeService"><span jhiTranslate="ambassadeApp.passeport.typeService">typeService</span> <span class="fa fa-sort"></span></th>
-                <!-- <th jhiSortBy="sms2"><span jhiTranslate="ambassadeApp.passeport.sms2">Sms 2</span> <span class="fa fa-sort"></span></th> -->
-                <!-- <th jhiSortBy="documents"><span jhiTranslate="ambassadeApp.passeport.documents">Documents</span> <span class="fa fa-sort"></span></th> -->
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody class="table-sm">
-            <tr *ngFor="let passeport of passeports ;trackBy: trackId">
-                <!-- <td><a [routerLink]="['../passeport', passeport.id ]">{{passeport.id}}</a></td> -->
-                <td>{{passeport.numeroFormulaire}}</td>
-                <td>{{passeport.nom}}</td>
-                <td>{{passeport.prenom}}</td>
-                <td>{{passeport.numeroPasseport}}</td>
-                <!--<td>{{passeport.neLe}}</td>
-                <td>{{passeport.lieuNaissance}}</td>
-                <td jhiTranslate="{{'ambassadeApp.Statut.' + passeport.etatCivil}}">{{passeport.etatCivil}}</td>
-                <td>{{passeport.adresse}}</td>
-                <td>{{passeport.telephone}}</td>
-                <td>{{passeport.nif}}</td>
-                <td>{{passeport.paysEmetteur}}</td>
-                <td>{{passeport.soumisLe | date:'mediumDate'}}</td>
-                <!-- <td>{{passeport.montant}}</td>
-                <td>{{passeport.remarques}}</td> -->
-                <td>{{passeport.delivreLe | date:'mediumDate'}}</td>
-                <!--<td>{{passeport.dateEmission | date:'mediumDate'}}</td>-->
-                <td>{{passeport.dateExpiration | date:'mediumDate'}}</td>
-                <!-- <td>{{passeport.remarquesR}}</td> -->
-                <td jhiTranslate="{{'ambassadeApp.State.' + passeport.state}}">{{passeport.state}}</td>
-                <td>{{passeport.typeService?.nom}}</td>
-                <!-- <td>{{passeport.sms2}}</td> -->
-                <!-- <td>{{passeport.documents}}</td> -->
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../passeport', passeport.id ]"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>&nbsp;
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-blue btn-sm">
-                            <span class="fa fa-pencil-square-o"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>&nbsp;
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-trash"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+    <br/>
+        <div *ngIf="passeports">
+            <table class="table table-striped dash-row table-sm">
+                <thead class="theme-bg-blue text-white">
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                        <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
+                        <th jhiSortBy="numeroFormulaire"><span jhiTranslate="ambassadeApp.passeport.numeroFormulaire">Numero Formulaire</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.passeport.nom">Nom</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="prenom"><span jhiTranslate="ambassadeApp.passeport.prenom">Prenom</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="numeroPasseport"><span jhiTranslate="ambassadeApp.passeport.numeroPasseport">Numero Passeport</span> <span class="fa fa-sort"></span></th>
+                        <!--<th jhiSortBy="neLe"><span jhiTranslate="ambassadeApp.passeport.neLe">Ne Le</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="lieuNaissance"><span jhiTranslate="ambassadeApp.passeport.lieuNaissance">Lieu Naissance</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="etatCivil"><span jhiTranslate="ambassadeApp.passeport.etatCivil">Etat Civil</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="adresse"><span jhiTranslate="ambassadeApp.passeport.adresse">Adresse</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="telephone"><span jhiTranslate="ambassadeApp.passeport.telephone">Telephone</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="nif"><span jhiTranslate="ambassadeApp.passeport.nif">Nif</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="paysEmetteur"><span jhiTranslate="ambassadeApp.passeport.paysEmetteur">Pays Emetteur</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="soumisLe"><span jhiTranslate="ambassadeApp.passeport.soumisLe">Soumis Le</span> <span class="fa fa-sort"></span></th>
+                        <!-- <th jhiSortBy="montant"><span jhiTranslate="ambassadeApp.passeport.montant">Montant</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="remarques"><span jhiTranslate="ambassadeApp.passeport.remarques">Remarques</span> <span class="fa fa-sort"></span></th> -->
+                        <th jhiSortBy="delivreLe"><span jhiTranslate="ambassadeApp.passeport.delivreLe">Delivre Le</span> <span class="fa fa-sort"></span></th>
+                        <!--<th jhiSortBy="dateEmission"><span jhiTranslate="ambassadeApp.passeport.dateEmission">Date Emission</span> <span class="fa fa-sort"></span></th>-->
+                        <th jhiSortBy="dateExpiration"><span jhiTranslate="ambassadeApp.passeport.dateExpiration">Date Expiration</span> <span class="fa fa-sort"></span></th>
+                        <!-- <th jhiSortBy="remarquesR"><span jhiTranslate="ambassadeApp.passeport.remarquesR">Remarques R</span> <span class="fa fa-sort"></span></th> -->
+                        <th jhiSortBy="state"><span jhiTranslate="ambassadeApp.passeport.state">statut</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="typeService"><span jhiTranslate="ambassadeApp.passeport.typeService">typeService</span> <span class="fa fa-sort"></span></th>
+                        <!-- <th jhiSortBy="sms2"><span jhiTranslate="ambassadeApp.passeport.sms2">Sms 2</span> <span class="fa fa-sort"></span></th> -->
+                        <!-- <th jhiSortBy="documents"><span jhiTranslate="ambassadeApp.passeport.documents">Documents</span> <span class="fa fa-sort"></span></th> -->
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let passeport of passeports ;trackBy: trackId">
+                        <!-- <td><a [routerLink]="['../passeport', passeport.id ]">{{passeport.id}}</a></td> -->
+                        <td>{{passeport.numeroFormulaire}}</td>
+                        <td>{{passeport.nom}}</td>
+                        <td>{{passeport.prenom}}</td>
+                        <td>{{passeport.numeroPasseport}}</td>
+                        <!--<td>{{passeport.neLe}}</td>
+                        <td>{{passeport.lieuNaissance}}</td>
+                        <td jhiTranslate="{{'ambassadeApp.Statut.' + passeport.etatCivil}}">{{passeport.etatCivil}}</td>
+                        <td>{{passeport.adresse}}</td>
+                        <td>{{passeport.telephone}}</td>
+                        <td>{{passeport.nif}}</td>
+                        <td>{{passeport.paysEmetteur}}</td>
+                        <td>{{passeport.soumisLe | date:'mediumDate'}}</td>
+                        <!-- <td>{{passeport.montant}}</td>
+                        <td>{{passeport.remarques}}</td> -->
+                        <td>{{passeport.delivreLe | date:'mediumDate'}}</td>
+                        <!--<td>{{passeport.dateEmission | date:'mediumDate'}}</td>-->
+                        <td>{{passeport.dateExpiration | date:'mediumDate'}}</td>
+                        <!-- <td>{{passeport.remarquesR}}</td> -->
+                        <td jhiTranslate="{{'ambassadeApp.State.' + passeport.state}}">{{passeport.state}}</td>
+                        <td>{{passeport.typeService?.nom}}</td>
+                        <!-- <td>{{passeport.sms2}}</td> -->
+                        <!-- <td>{{passeport.documents}}</td> -->
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="submit"
+                                        [routerLink]="['../passeport', passeport.id ]"
+                                        class="btn btn-info btn-xs plat">
+                                    <span class="fa fa-eye"></span>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                </button>&nbsp;
+                                <button type="submit"
+                                        [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/edit'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-primary btn-xs plat">
+                                    <span class="fa fa-pencil"></span>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>&nbsp;
+                                <button type="submit"
+                                        [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/delete'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-danger btn-xs plat">
+                                    <span class="fa fa-trash"></span>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="passeports && passeports.length">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-sm">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
                     </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div *ngIf="passeports && passeports.length">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="text-sm-left">
-                    <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="pull-right">
-                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                <div class="col-md-6">
+                    <div class="pagination-sm pull-right">
+                        <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                    </div>
                 </div>
             </div>
         </div>
