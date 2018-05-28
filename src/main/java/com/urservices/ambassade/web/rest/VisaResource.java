@@ -136,9 +136,9 @@ public class VisaResource {
         String dateEmissionFinStr = webRequest.getParameter("dateEmissionFin") !=null &&
             !webRequest.getParameter("dateEmissionFin").isEmpty() ? webRequest.getParameter("dateEmissionFin"): null;
         String dateExpirationDebStr = webRequest.getParameter("dateExpiration") !=null &&
-            !webRequest.getParameter("dateExpiration").isEmpty() ? webRequest.getParameter("dateExpiration"): "1970-01-01";
-        String dateExpirationFinStr = webRequest.getParameter("dateExpirationFin") !=null && !webRequest.getParameter("dateExpirationFin").isEmpty() ? webRequest.getParameter("dateExpirationFin"):LocalDate.now().toString();
-        String typeService = webRequest.getParameter("typeService") !=null && !webRequest.getParameter("typeService").isEmpty() ? webRequest.getParameter("typeService"): null;
+            !webRequest.getParameter("dateExpiration").isEmpty() ? webRequest.getParameter("dateExpiration"): null;
+        String dateExpirationFinStr = webRequest.getParameter("dateExpirationFin") !=null &&
+            !webRequest.getParameter("dateExpirationFin").isEmpty() ? webRequest.getParameter("dateExpirationFin"): null;
 
 
         LocalDate dateEmissionDeb= null;
@@ -146,9 +146,22 @@ public class VisaResource {
         LocalDate dateExpirationDeb= null;
         LocalDate dateExpirationFin=null;
 
-        Page<Visa> page = visaService.searchAll(nom,prenom,nationalite,numeroPasseport,cedula,numeroVisa,dateEmissionDeb, dateEmissionFin,
-            dateExpirationDeb, dateExpirationFin, validePour,nombreEntree,type,categorie,taxes,adresse,remarques, typeService, pageable);
+        if (dateEmissionDebStr != null){
+            dateEmissionDeb = LocalDate.parse(dateEmissionDebStr);
+        }
+        if (dateEmissionFinStr != null){
+            dateEmissionFin = LocalDate.parse(dateEmissionFinStr);
+        }
 
+        if (dateExpirationDebStr != null){
+            dateExpirationDeb = LocalDate.parse(dateExpirationDebStr);
+        }
+        if (dateExpirationFinStr != null){
+            dateExpirationFin = LocalDate.parse(dateExpirationFinStr);
+        }
+
+        Page<Visa> page = visaService.searchAll(nom,prenom,nationalite,numeroPasseport,numeroVisa,dateEmissionDeb, dateEmissionFin,
+            dateExpirationDeb, dateExpirationFin, type,categorie,adresse,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/visas");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

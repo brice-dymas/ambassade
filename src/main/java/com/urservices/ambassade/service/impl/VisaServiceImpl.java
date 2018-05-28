@@ -97,11 +97,11 @@ public class VisaServiceImpl implements VisaService {
      * @return
      */
     @Override
-    public Page<Visa> searchAll(String nom, String prenom, String nationalite, String numeroPasseport, String cedula,
-                                Long numeroVisa, LocalDate dateEmissionDeb, LocalDate dateEmissionFin, LocalDate dateExpirationDeb,
-                                LocalDate dateExpirationFin,  Integer validePour, String nombreEntree, String type, String categorie,
-                                Integer taxes, String adresse, String remarques, String typeService, Pageable pageable) {
+    public Page<Visa> searchAll(String nom, String prenom, String nationalite, String numeroPasseport,Long numeroVisa,
+                                LocalDate dateEmissionDeb, LocalDate dateEmissionFin, LocalDate dateExpirationDeb,
+                                LocalDate dateExpirationFin,String type, String categorie,String adresse, Pageable pageable) {
 
+        //Travailler numéro visa et retirer validepour et taxes
         QVisa visa = QVisa.visa;
         Boolean added = false;
         BooleanExpression predicate = null;
@@ -198,14 +198,6 @@ public class VisaServiceImpl implements VisaService {
                 predicate = predicate.and(visa.dateExpiration.loe(dateExpirationFin));
             }else{
                 predicate = visa.dateExpiration.loe(dateExpirationFin);
-            }
-        }
-
-        if(typeService!=null){
-            if(added){
-                predicate = predicate.and(visa.typeService.id.eq(Long.valueOf(typeService)));
-            }else{
-                predicate = visa.typeService.id.eq(Long.valueOf(typeService));
             }
         }
         if(predicate !=null){
