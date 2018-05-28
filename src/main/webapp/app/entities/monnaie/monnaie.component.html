@@ -1,22 +1,18 @@
 <div class="mb-lg-5">
-    <h5>
-        <div class="row">
-            <div class="col-md-6 text-uppercase">
-                <span jhiTranslate="ambassadeApp.monnaie.home.title">Monnaies</span>
-            </div>
-            <div class="col-md-6">
-                <button class="btn btn-blue btn-xs plat float-right jh-create-entity create-monnaie" [routerLink]="['/', { outlets: { popup: ['monnaie-new'] } }]">
-                    <span class="fa fa-pencil-square-o"></span>
-                    <span  jhiTranslate="ambassadeApp.monnaie.home.createLabel">Create new Monnaie</span>
-                </button>&nbsp;
-                <button *jhiHasAnyAuthority="['ROLE_MONNAIE_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
-                        class="btn btn-info btn-xs plat">Imprimer</button>
-            </div>
-        </div>
-        <div class="title-bullet"><span></span></div>
+    <h5 class="text-uppercase">
+        <span jhiTranslate="ambassadeApp.monnaie.home.title">Monnaies</span>
+        <button class="btn btn-blue btn-xs plat float-right jh-create-entity create-monnaie" [routerLink]="['/', { outlets: { popup: ['monnaie-new'] } }]">
+            <span class="fa fa-pencil-square-o"></span>
+            <span  jhiTranslate="ambassadeApp.monnaie.home.createLabel">Create new Monnaie</span>
+        </button>&nbsp;
+        <button *jhiHasAnyAuthority="['ROLE_MONNAIE_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
+                class="btn btn-info btn-xs plat float-right mr-5">
+            <span class="fa fa-print"></span>
+            <span>Imprimer</span>
+        </button>
+        <div class="title-bullet title-bullet-table"><span></span></div>
     </h5>
     <jhi-alert></jhi-alert>
-    <br/>
     <div>
         <jhi-monnaie-search></jhi-monnaie-search>
     </div>
@@ -42,7 +38,7 @@
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     [routerLink]="['../monnaie', monnaie.id ]"
-                                    class="btn btn-primary btn-xs plat">
+                                    class="btn btn-info btn-xs plat">
                                 <span class="fa fa-eye"></span>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
@@ -50,8 +46,8 @@
                                     [routerLink]="['/', { outlets: { popup: 'monnaie/'+ monnaie.id + '/edit'} }]"
                                     replaceUrl="true"
                                     queryParamsHandling="merge"
-                                    class="btn btn-blue btn-xs plat">
-                                <span class="fa fa-pencil-square-o"></span>
+                                    class="btn btn-primary btn-xs plat">
+                                <span class="fa fa-pencil"></span>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
                             <button type="submit"

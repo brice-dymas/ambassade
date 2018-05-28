@@ -2,7 +2,7 @@
     <h5 class="text-uppercase">
         <span jhiTranslate="ambassadeApp.typeService.home.title">Type Services</span>
         <button class="btn btn-blue btn-xs plat float-right jh-create-entity create-type-service" [routerLink]="['/', { outlets: { popup: ['type-service-new'] } }]">
-            <span class="fa fa-plus"></span>
+            <span class="fa fa-pencil-square-o"></span>
             <span  jhiTranslate="ambassadeApp.typeService.home.createLabel">
             Create new Type Service
             </span>
@@ -10,9 +10,6 @@
     </h5>
     <div class="title-bullet title-bullet-table"><span></span></div>
     <jhi-alert></jhi-alert>
-    <div class="row">
-    </div>
-    <br/>
     <div *ngIf="typeServices">
         <table class="table table-striped dash-row table-sm">
             <thead class="theme-bg-blue text-white">
@@ -55,7 +52,7 @@
                                     replaceUrl="true"
                                     queryParamsHandling="merge"
                                     class="btn btn-danger btn-xs plat">
-                                <span class="fa fa-remove"></span>
+                                <span class="fa fa-trash"></span>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                             </button>
                         </div>

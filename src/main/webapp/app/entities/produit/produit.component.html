@@ -1,27 +1,23 @@
 <div class="mb-lg-5">
-    <h5>
-        <div class="row">
-            <div class="col-md-6">
-                <span class="text-uppercase" jhiTranslate="ambassadeApp.produit.home.title">Produits</span>
-            </div>
-            <div class="col-md-6">
-                <button class="btn btn-blue btn-xs float-right jh-create-entity create-produit" [routerLink]="['/', { outlets: { popup: ['produit-new'] } }]">
-                    <span class="fa fa-pencil-square-o"></span>
-                    <span  jhiTranslate="ambassadeApp.produit.home.createLabel">Create new Produit</span>
-                </button>&nbsp;
-                <button *jhiHasAnyAuthority="['ROLE_PRODUIT_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
-                        class="btn btn-info btn-xs">Imprimer</button>
-            </div>
-        </div>
-        <div class="title-bullet"><span></span></div>
+    <h5 class="text-uppercase">
+        <span class="text-uppercase" jhiTranslate="ambassadeApp.produit.home.title">Produits</span>
+        <button class="btn btn-blue btn-xs float-right jh-create-entity create-produit" [routerLink]="['/', { outlets: { popup: ['produit-new'] } }]">
+            <span class="fa fa-pencil-square-o"></span>
+            <span  jhiTranslate="ambassadeApp.produit.home.createLabel">Create new Produit</span>
+        </button>&nbsp;
+        <button *jhiHasAnyAuthority="['ROLE_PRODUIT_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
+                class="btn btn-info float-right mr-5 btn-xs">
+            <span class="fa fa-print"></span>
+            <span>Imprimer</span>
+        </button>
     </h5>
+    <div class="title-bullet"><span></span></div>
     <jhi-alert></jhi-alert>
-    <br/>
     <div>
         <jhi-produit-search></jhi-produit-search>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="produits">
+    <div *ngIf="produits">
         <table class="table table-striped dash-row table-sm">
             <thead class="theme-bg-blue text-white">
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
@@ -50,7 +46,7 @@
                                     [routerLink]="['/', { outlets: { popup: 'produit/'+ produit.id + '/edit'} }]"
                                     replaceUrl="true"
                                     queryParamsHandling="merge"
-                                    class="btn btn-blue btn-xs plat">
+                                    class="btn btn-primary btn-xs plat">
                                 <span class="fa fa-pencil"></span>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>

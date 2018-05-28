@@ -1,136 +1,135 @@
-
-<div *ngIf="donneesActe">
-    <h2><span jhiTranslate="ambassadeApp.donneesActe.detail.title">Donnees Acte</span> {{donneesActe.id}}</h2>
-    <div class="title-bullet"><span></span></div>
+<div class="mb-lg-5" *ngIf="donneesActe">
+    <h5 class="text-uppercase"><span jhiTranslate="ambassadeApp.donneesActe.detail.title">Donnees Acte</span> {{donneesActe.id}}</h5>
+    <div class="title-bullet title-bullet-table"><span></span></div>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.reference">Reference</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.reference">Reference</label></dt>
                         <span>{{donneesActe.reference}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.dateDuJourChiffre">Date Du Jour Chiffre</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.dateDuJourChiffre">Date Du Jour Chiffre</label></dt>
                         <span>{{donneesActe.dateDuJourChiffre | date:'mediumDate'}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.registreSpecialRD">Registre Special RD</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.registreSpecialRD">Registre Special RD</label></dt>
                         <span>{{donneesActe.registreSpecialRD}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.nomEnfant">Nom Enfant</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.nomEnfant">Nom Enfant</label></dt>
                         <span>{{donneesActe.nomEnfant}}</span>
                     </div>
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.registre">Registre</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.registre">Registre</label></dt>
                         <span>{{donneesActe.registre}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.annee">Annee</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.annee">Annee</label></dt>
                         <span>{{donneesActe.annee | date:'mediumDate'}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.numero">Numero</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.numero">Numero</label></dt>
                         <span>{{donneesActe.numero}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.dateNaissanceChiffre">Date Naissance Chiffre</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.dateNaissanceChiffre">Date Naissance Chiffre</label></dt>
                         <span>{{donneesActe.dateNaissanceChiffre | date:'mediumDate'}}</span>
                     </div>
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.nomPere">Nom Pere</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.nomPere">Nom Pere</label></dt>
                         <span>{{donneesActe.nomPere}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.prenomPere">Prenom Pere</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.prenomPere">Prenom Pere</label></dt>
                         <span>{{donneesActe.prenomPere}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.nomMere">Nom Mere</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.nomMere">Nom Mere</label></dt>
                         <span>{{donneesActe.nomMere}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.prenomMere">Prenom Mere</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.prenomMere">Prenom Mere</label></dt>
                         <span>{{donneesActe.prenomMere}}</span>
                     </div>
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.sexe">Sexe</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.sexe">Sexe</label></dt>
                         <span jhiTranslate="{{'ambassadeApp.Sexe.' + donneesActe.sexe}}">{{donneesActe.sexe}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.statut">Statut</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.statut">Statut</label></dt>
                         <span jhiTranslate="{{'ambassadeApp.Statut.' + donneesActe.statut}}">{{donneesActe.statut}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.villeNaissance">Ville Naissance</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.villeNaissance">Ville Naissance</label></dt>
                         <span>{{donneesActe.villeNaissance}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.adressePere">Adresse Pere</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.adressePere">Adresse Pere</label></dt>
                         <span>{{donneesActe.adressePere}}</span>
                     </div>
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.adresseMere">Adresse Mere</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.adresseMere">Adresse Mere</label></dt>
                         <span>{{donneesActe.adresseMere}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.temoins1">Temoins 1</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.temoins1">Temoins 1</label></dt>
                         <span>{{donneesActe.temoins1}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.temoins2">Temoins 2</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.temoins2">Temoins 2</label></dt>
                         <span>{{donneesActe.temoins2}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.idPere">Id Pere</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.idPere">Id Pere</label></dt>
                         <span>{{donneesActe.idPere}}</span>
                     </div>
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.idMere">Id Mere</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.idMere">Id Mere</label></dt>
                         <span>{{donneesActe.idMere}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.notes">Notes</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.notes">Notes</label></dt>
                         <span>{{donneesActe.notes}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.juridiction">Juridiction</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.juridiction">Juridiction</label></dt>
                         <span>{{donneesActe.juridiction}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.livre">Livre</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.livre">Livre</label></dt>
                         <span>{{donneesActe.livre}}</span>
                     </div>
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.feuille">Feuille</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.feuille">Feuille</label></dt>
                         <span>{{donneesActe.feuille}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <label jhiTranslate="ambassadeApp.donneesActe.acte">Acte</label> : &nbsp;
+                    <div class="col-12 col-sm-3">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.acte">Acte</label></dt>
                         <span>{{donneesActe.acte}}</span>
                     </div>
-                    <div class="col-md-6">
-                        <label jhiTranslate="ambassadeApp.donneesActe.photo">Photo</label> : &nbsp;
+                    <div class="col-12 col-sm-6">
+                        <dt><label jhiTranslate="ambassadeApp.donneesActe.photo">Photo</label></dt>
                         <span *ngIf="donneesActe.photo">
                             <a (click)="openFile(donneesActe.photoContentType, donneesActe.photo)" jhiTranslate="entity.action.open">open</a>
                             {{donneesActe.photoContentType}}, {{byteSize(donneesActe.photo)}}
@@ -143,7 +142,7 @@
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-sm btn-info">
+            class="btn btn-xs btn-info">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
@@ -151,7 +150,7 @@
             [routerLink]="['/', { outlets: { popup: 'donnees-acte/'+ donneesActe.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-sm btn-blue pull-right">
+            class="btn btn-xs btn-primary pull-right">
         <span class="fa fa-pencil-square-o"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

@@ -1,7 +1,7 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
     <div class="modal-header theme-bg-blue text-white">
-        <h4 class="modal-title" id="myDonneesActeLabel" jhiTranslate="ambassadeApp.donneesActe.home.createOrEditLabel">Create or edit a Donnees Acte</h4>
+        <h5 class="text-uppercase modal-title" id="myDonneesActeLabel" jhiTranslate="ambassadeApp.donneesActe.home.createOrEditLabel">Create or edit a Donnees Acte</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
@@ -15,7 +15,7 @@
         </div>
         -->
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.reference" for="field_reference">Reference</label>
                     <input type="text" class="form-control form-control-sm" name="reference" id="field_reference"
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.dateDuJourChiffre" for="field_dateDuJourChiffre">Date Du Jour Chiffre</label>
                     <div class="input-group">
@@ -44,7 +44,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.registreSpecialRD" for="field_registreSpecialRD">Registre Special RD</label>
                     <input type="text" class="form-control form-control-sm" name="registreSpecialRD" id="field_registreSpecialRD"
@@ -57,9 +60,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.nomEnfant" for="field_nomEnfant">Nom Enfant</label>
                     <input type="text" class="form-control form-control-sm" name="nomEnfant" id="field_nomEnfant"
@@ -72,7 +73,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.registre" for="field_registre">Registre</label>
                     <input type="text" class="form-control form-control-sm" name="registre" id="field_registre"
@@ -85,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.annee" for="field_annee">Annee</label>
                     <input type="number" class="form-control form-control-sm" name="annee" id="field_annee"
@@ -103,8 +107,9 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.numero" for="field_numero">Numero</label>
                     <input type="text" class="form-control form-control-sm" name="numero" id="field_numero"
@@ -117,7 +122,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.dateNaissanceChiffre" for="field_dateNaissanceChiffre">Date Naissance Chiffre</label>
                     <div class="input-group">
@@ -129,7 +134,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.nomPere" for="field_nomPere">Nom Pere</label>
                     <input type="text" class="form-control form-control-sm" name="nomPere" id="field_nomPere"
@@ -142,9 +150,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.prenomPere" for="field_prenomPere">Prenom Pere</label>
                     <input type="text" class="form-control form-control-sm" name="prenomPere" id="field_prenomPere"
@@ -157,7 +163,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.nomMere" for="field_nomMere">Nom Mere</label>
                     <input type="text" class="form-control form-control-sm" name="nomMere" id="field_nomMere"
@@ -170,7 +179,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.prenomMere" for="field_prenomMere">Prenom Mere</label>
                     <input type="text" class="form-control form-control-sm" name="prenomMere" id="field_prenomMere"
@@ -184,8 +193,9 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.sexe" for="field_sexe">Sexe</label>
                     <select class="form-control form-control-sm" name="sexe" [(ngModel)]="donneesActe.sexe" id="field_sexe"  required>
@@ -200,7 +210,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.statut" for="field_statut">Statut</label>
                     <select class="form-control form-control-sm" name="statut" [(ngModel)]="donneesActe.statut" id="field_statut"  required>
@@ -218,7 +228,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.villeNaissance" for="field_villeNaissance">Ville Naissance</label>
                     <input type="text" class="form-control form-control-sm" name="villeNaissance" id="field_villeNaissance"
@@ -231,9 +244,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.adressePere" for="field_adressePere">Adresse Pere</label>
                     <input type="text" class="form-control form-control-sm" name="adressePere" id="field_adressePere"
@@ -246,7 +257,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.adresseMere" for="field_adresseMere">Adresse Mere</label>
                     <input type="text" class="form-control form-control-sm" name="adresseMere" id="field_adresseMere"
@@ -259,7 +273,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.temoins1" for="field_temoins1">Temoins 1</label>
                     <input type="text" class="form-control form-control-sm" name="temoins1" id="field_temoins1"
@@ -273,8 +287,9 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.temoins2" for="field_temoins2">Temoins 2</label>
                     <input type="text" class="form-control form-control-sm" name="temoins2" id="field_temoins2"
@@ -287,7 +302,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.idPere" for="field_idPere">Id Pere</label>
                     <input type="text" class="form-control form-control-sm" name="idPere" id="field_idPere"
@@ -300,7 +315,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.idMere" for="field_idMere">Id Mere</label>
                     <input type="text" class="form-control form-control-sm" name="idMere" id="field_idMere"
@@ -313,9 +331,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.photo" for="field_photo">Photo</label>
                     <div>
@@ -335,7 +351,10 @@
                            [(ngModel)]="donneesActe.photoContentType" />
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.juridiction" for="field_juridiction">Juridiction</label>
                     <input type="text" class="form-control form-control-sm" name="juridiction" id="field_juridiction"
@@ -348,7 +367,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.livre" for="field_livre">Livre</label>
                     <input type="text" class="form-control form-control-sm" name="livre" id="field_livre"
@@ -362,8 +381,9 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.notes" for="field_notes">Notes</label>
                     <input type="text" class="form-control form-control-sm" name="notes" id="field_notes"
@@ -376,7 +396,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.feuille" for="field_feuille">Feuille</label>
                     <input type="text" class="form-control form-control-sm" name="feuille" id="field_feuille"
@@ -389,7 +409,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.donneesActe.acte" for="field_acte">Acte</label>
                     <input type="text" class="form-control form-control-sm" name="acte" id="field_acte"
@@ -403,13 +426,12 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-xs plat btn-secondary" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-sm btn-blue">
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-xs plat btn-blue">
             <span class="fa fa-download"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>
