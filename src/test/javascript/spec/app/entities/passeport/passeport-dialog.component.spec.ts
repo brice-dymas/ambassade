@@ -9,6 +9,7 @@ import { AmbassadeTestModule } from '../../../test.module';
 import { PasseportDialogComponent } from '../../../../../../main/webapp/app/entities/passeport/passeport-dialog.component';
 import { PasseportService } from '../../../../../../main/webapp/app/entities/passeport/passeport.service';
 import { Passeport } from '../../../../../../main/webapp/app/entities/passeport/passeport.model';
+import { TypeServiceService } from '../../../../../../main/webapp/app/entities/type-service';
 
 describe('Component Tests', () => {
 
@@ -24,6 +25,7 @@ describe('Component Tests', () => {
                 imports: [AmbassadeTestModule],
                 declarations: [PasseportDialogComponent],
                 providers: [
+                    TypeServiceService,
                     PasseportService
                 ]
             })

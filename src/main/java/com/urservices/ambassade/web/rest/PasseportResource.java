@@ -1,8 +1,11 @@
 package com.urservices.ambassade.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.urservices.ambassade.domain.Paiement;
 import com.urservices.ambassade.domain.Passeport;
+import com.urservices.ambassade.domain.enumeration.State;
 import com.urservices.ambassade.domain.enumeration.Statut;
+import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.PasseportService;
 import com.urservices.ambassade.web.rest.errors.BadRequestAlertException;
 import com.urservices.ambassade.web.rest.util.HeaderUtil;
@@ -24,8 +27,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,8 +43,11 @@ public class PasseportResource {
 
     private final PasseportService passeportService;
 
-    public PasseportResource(PasseportService passeportService) {
+    private final PaiementService paiementService;
+
+    public PasseportResource(PasseportService passeportService, PaiementService paiementService) {
         this.passeportService = passeportService;
+        this.paiementService = paiementService;
     }
 
     /**
@@ -96,10 +100,13 @@ public class PasseportResource {
      */
     @GetMapping("/passeports")
     @Timed
-    public ResponseEntity<List<Passeport>> getAllPasseports(WebRequest webRequest,Pageable pageable) {
-        log.debug("REST request to get a page of Passeports");
+    public ResponseEntity<List<Passeport>> getAllPasseports(WebRequest webRequest,  Pageable pageable) {
+
+
         String nom = webRequest.getParameter("nom") !=null && !webRequest.getParameter("nom").isEmpty()
             ? webRequest.getParameter("nom"): null;
+        String recu = webRequest.getParameter("recu") !=null && !webRequest.getParameter("recu").isEmpty()
+            ? webRequest.getParameter("recu"): null;
         String prenom = webRequest.getParameter("prenom") !=null && !webRequest.getParameter("nom").isEmpty()
             ? webRequest.getParameter("prenom"): null;
         String numeroPasseport = webRequest.getParameter("numeroPasseport") !=null && !webRequest.getParameter("numeroPasseport").isEmpty()
@@ -143,48 +150,17 @@ public class PasseportResource {
         String dateExpirationFinStr= webRequest.getParameter("dateExpirationFin") !=null && !webRequest.getParameter("dateExpirationFin").isEmpty()
             ? webRequest.getParameter("dateExpirationFin"): null;
 
-        LocalDate neLeDeb = null;
-        LocalDate soumisLeDeb = null;
-        LocalDate delivreLeDeb = null;
-        LocalDate dateEmissionDeb = null;
-        LocalDate dateExpirationDeb = null;
+        LocalDate neLeDeb = neLeDebStr != null ? LocalDate.parse(neLeDebStr) : null;
+        LocalDate soumisLeDeb = soumisLeDebStr != null ? LocalDate.parse(soumisLeDebStr) : null;
+        LocalDate delivreLeDeb = delivreLeDebStr != null ? LocalDate.parse(delivreLeDebStr) : null;
+        LocalDate dateEmissionDeb = dateEmissionDebStr != null ? LocalDate.parse(dateEmissionDebStr) : null;
+        LocalDate dateExpirationDeb = dateExpirationDebStr != null ?  LocalDate.parse(dateExpirationDebStr) : null;
 
-        LocalDate neLeFin = null;
-        LocalDate soumisLeFin = null;
-        LocalDate delivreLeFin = null;
-        LocalDate dateEmissionFin = null;
-        LocalDate dateExpirationFin = null;
-
-        if (neLeDebStr != null){
-            neLeDeb = LocalDate.parse(neLeDebStr);
-        }
-        if (soumisLeDebStr != null){
-            soumisLeDeb = LocalDate.parse(soumisLeDebStr);
-        }
-        if (delivreLeDebStr != null){
-            delivreLeDeb = LocalDate.parse(delivreLeDebStr);
-        }
-        if (dateEmissionDebStr != null){
-            dateEmissionDeb = LocalDate.parse(dateEmissionDebStr);
-        }
-        if (dateExpirationDebStr != null){
-            dateExpirationDeb = LocalDate.parse(dateExpirationDebStr);
-        }
-        if (soumisLeFinStr != null){
-            soumisLeFin = LocalDate.parse(soumisLeFinStr);
-        }
-        if (delivreLeFinStr != null){
-            delivreLeFin = LocalDate.parse(delivreLeFinStr);
-        }
-        if (dateEmissionFinStr != null){
-            dateEmissionFin = LocalDate.parse(dateEmissionFinStr);
-        }
-        if (neLeFinStr != null){
-            neLeFin = LocalDate.parse(neLeFinStr);
-        }
-        if (dateExpirationFinStr != null){
-            dateExpirationFin = LocalDate.parse(dateExpirationFinStr);
-        }
+        LocalDate neLeFin = neLeFinStr != null ? LocalDate.parse(neLeFinStr) : null;
+        LocalDate soumisLeFin = soumisLeFinStr != null ? LocalDate.parse(soumisLeFinStr) : null;
+        LocalDate delivreLeFin = delivreLeFinStr != null ? LocalDate.parse(delivreLeFinStr) : null;
+        LocalDate dateEmissionFin = dateEmissionFinStr != null ? LocalDate.parse(dateEmissionFinStr) : null;
+        LocalDate dateExpirationFin = dateExpirationFinStr != null ?  LocalDate.parse(dateExpirationFinStr) : null;
 
         String remarquesR = webRequest.getParameter("remarquesR") !=null && !webRequest.getParameter("remarquesR").isEmpty()
             ? webRequest.getParameter("remarquesR"): null;
@@ -195,7 +171,7 @@ public class PasseportResource {
         String documents = webRequest.getParameter("documents") !=null && !webRequest.getParameter("documents").isEmpty()
             ? webRequest.getParameter("documents"): null;
 
-        Page<Passeport> page = passeportService.searchAll(nom,prenom,numeroPasseport,neLeDeb, neLeFin,lieuNaissance,etatCivil,
+        Page<Passeport> page = passeportService.searchAll(recu, nom,prenom,numeroPasseport,neLeDeb, neLeFin,lieuNaissance,etatCivil,
             adresse,paysEmetteur,soumisLeDeb, soumisLeFin, delivreLeDeb, delivreLeFin, montant,
             dateEmissionDeb, dateEmissionFin, dateExpirationDeb, dateExpirationFin, documents,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/passeports");
@@ -213,6 +189,75 @@ public class PasseportResource {
     public ResponseEntity<Passeport> getPasseport(@PathVariable Long id) {
         log.debug("REST request to get Passeport : {}", id);
         Passeport passeport = passeportService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(passeport));
+    }
+
+    /**
+     * GET  /passeports/:id/pret : the "id" passeport to put ready
+     *
+     * @param id the id of the passeport to put ready
+     * @return the ResponseEntity with status 200 (OK) and with body the passeport, or with status 404 (Not Found)
+     */
+    @GetMapping("/passeports/{id}/pret")
+    @Timed
+    public ResponseEntity<Passeport> getPasseportPret(@PathVariable Long id) {
+        log.debug("REST request to get Passeport : {}", id);
+        Passeport passeport = passeportService.findOne(id);
+        passeport.setState(State.PRET);
+        passeport = passeportService.save(passeport);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(passeport));
+    }
+
+    /**
+     * GET  /passeports/:id/retirer : the "id" passeport to set remove
+     *
+     * @param id the id of the passeport to set  remove
+     * @return the ResponseEntity with status 200 (OK) and with body the passeport, or with status 404 (Not Found)
+     */
+    @GetMapping("/passeports/{id}/retirer")
+    @Timed
+    public ResponseEntity<Passeport> setPasseportRetirer(@PathVariable Long id) {
+        log.debug("REST request to get Passeport : {}", id);
+        Passeport passeport = passeportService.findOne(id);
+        passeport.setState(State.RETIRER);
+        passeport = passeportService.save(passeport);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(passeport));
+    }
+
+    /**
+     * GET  /passeports/:id/payer : the "id" passeport to pay
+     *
+     * @param id the id of the passeport to pay
+     * @return the ResponseEntity with status 200 (OK) and with body the passeport, or with status 404 (Not Found)
+     */
+    @GetMapping("/passeports/{id}/payer")
+    @Timed
+    public ResponseEntity<Passeport> getPasseportPayer(@PathVariable Long id) {
+        log.debug("REST request to get Passeport : {}", id);
+        Passeport passeport = passeportService.findOne(id);
+        Paiement paiement = new Paiement();
+        paiement.setDatePaiement(LocalDate.now());
+        paiement.setPasseport(passeport);
+        paiement.setTypeService(passeport.getTypeService());
+        paiementService.save(paiement);
+        passeport.setState(State.PAYE);
+        passeport = passeportService.save(passeport);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(passeport));
+    }
+
+    /**
+     * GET  /passeports/:id/encours : the "id" passeport to put in progress.
+     *
+     * @param id the id of the passeport to put in progress
+     * @return the ResponseEntity with status 200 (OK) and with body the passeport, or with status 404 (Not Found)
+     */
+    @GetMapping("/passeports/{id}/encours")
+    @Timed
+    public ResponseEntity<Passeport> getPasseportReady(@PathVariable Long id) {
+        log.debug("REST request to get Passeport Ready : {}", id);
+        Passeport passeport = passeportService.findOne(id);
+        passeport.setState(State.ENCOURS);
+        passeport = passeportService.save(passeport);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(passeport));
     }
 

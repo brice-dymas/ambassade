@@ -20,6 +20,7 @@ export class VisaDtoModel implements BaseEntity {
         public taxes?: number,
         public adresse?: string,
         public remarques?: string,
+        public typeService?: number,
     ) {
     }
 }

@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "typeService",
+            "otherEntityName": "typeService",
+            "otherEntityField": "id"
+        }
+    ],
     "fields": [
         {
             "fieldName": "nom",
@@ -100,6 +107,11 @@
         {
             "fieldName": "remarques",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "State",
+            "fieldValues": "NOUVEAU,PAYE,ENCOURS,PRET,RETIRER"
         }
     ],
     "changelogDate": "20180222221155",

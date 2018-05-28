@@ -1,5 +1,13 @@
 import { BaseEntity } from './../../shared';
 
+export const enum State {
+    'NOUVEAU',
+    'PAYE',
+    'ENCOURS',
+    'PRET',
+    'RETIRER'
+}
+
 export class Visa implements BaseEntity {
     constructor(
         public id?: number,
@@ -18,6 +26,8 @@ export class Visa implements BaseEntity {
         public taxes?: number,
         public adresse?: string,
         public remarques?: string,
+        public state?: State,
+        public typeService?: BaseEntity,
     ) {
     }
 }

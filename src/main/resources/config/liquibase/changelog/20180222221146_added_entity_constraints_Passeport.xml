@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Passeport.
+    -->
+    <changeSet id="20180222221146-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="type_service_id"
+                                 baseTableName="passeport"
+                                 constraintName="fk_passeport_type_service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_service"/>
+
+    </changeSet>
+</databaseChangeLog>

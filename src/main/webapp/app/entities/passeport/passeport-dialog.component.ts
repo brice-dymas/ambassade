@@ -4,11 +4,12 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { Passeport } from './passeport.model';
 import { PasseportPopupService } from './passeport-popup.service';
 import { PasseportService } from './passeport.service';
+import { TypeService, TypeServiceService } from '../type-service';
 
 @Component({
     selector: 'jhi-passeport-dialog',
@@ -18,6 +19,8 @@ export class PasseportDialogComponent implements OnInit {
 
     passeport: Passeport;
     isSaving: boolean;
+
+    typeservices: TypeService[];
     neLeDp: any;
     soumisLeDp: any;
     delivreLeDp: any;
@@ -26,13 +29,30 @@ export class PasseportDialogComponent implements OnInit {
 
     constructor(
         public activeModal: NgbActiveModal,
+        private dataUtils: JhiDataUtils,
+        private jhiAlertService: JhiAlertService,
         private passeportService: PasseportService,
+        private typeServiceService: TypeServiceService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.typeServiceService.query()
+            .subscribe((res: HttpResponse<TypeService[]>) => { this.typeservices = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
     }
 
     clear() {
@@ -63,6 +83,14 @@ export class PasseportDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(error: any) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackTypeServiceById(index: number, item: TypeService) {
+        return item.id;
     }
 }
 

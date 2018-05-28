@@ -106,9 +106,37 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="taille" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="recu" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="photo" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="photo_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="state" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="type_service_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/passeport.csv"
+                  separator=";"
+                  tableName="passeport">
+        </loadData>
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

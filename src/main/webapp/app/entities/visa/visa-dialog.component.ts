@@ -4,11 +4,12 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { Visa } from './visa.model';
 import { VisaPopupService } from './visa-popup.service';
 import { VisaService } from './visa.service';
+import { TypeService, TypeServiceService } from '../type-service';
 
 @Component({
     selector: 'jhi-visa-dialog',
@@ -20,16 +21,21 @@ export class VisaDialogComponent implements OnInit {
     isSaving: boolean;
     dateEmissionDp: any;
     dateExpirationDp: any;
+    typeservices: TypeService[];
 
     constructor(
         public activeModal: NgbActiveModal,
         private visaService: VisaService,
+        private jhiAlertService: JhiAlertService,
+        private typeServiceService: TypeServiceService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.typeServiceService.query()
+            .subscribe((res: HttpResponse<TypeService[]>) => { this.typeservices = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -38,6 +44,7 @@ export class VisaDialogComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        console.log(this.visa);
         if (this.visa.id !== undefined) {
             this.subscribeToSaveResponse(
                 this.visaService.update(this.visa));
@@ -60,6 +67,14 @@ export class VisaDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(error: any) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackTypeServiceById(index: number, item: TypeService) {
+        return item.id;
     }
 }
 

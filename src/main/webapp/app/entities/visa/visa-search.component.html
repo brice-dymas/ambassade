@@ -162,17 +162,13 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="form-control-label" jhiTranslate="ambassadeApp.visa.type" for="field_type">Type</label>
-                        <input type="text" class="form-control form-control-sm" name="type" id="field_type"
-                               [(ngModel)]="formModel.type" maxlength="20"/>
-                        <div [hidden]="!(searchForm.controls.type?.dirty && searchForm.controls.type?.invalid)">
-                            <small class="form-text text-danger"
-                                   [hidden]="!searchForm.controls.type?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
-                                This field cannot be longer than 20 characters.
-                            </small>
-                        </div>
-                    </div>
+                        <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.typeService" for="field_typeService">Type Service</label>
+                                <select class="form-control form-control-sm" id="field_typeService" name="typeService" [(ngModel)]="formModel.typeService" >
+                                    <option [ngValue]="null"></option>
+                                    <option [ngValue]="typeServiceOption.id === formModel.typeService  ? formModel.typeService : typeServiceOption" *ngFor="let typeServiceOption of typeservices; trackBy: trackTypeServiceById">{{typeServiceOption.nom}}</option>
+                                </select>
+                            </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">

@@ -1,0 +1,46 @@
+
+<div *ngIf="typeService">
+    <h5 class="text-uppercase"><span jhiTranslate="ambassadeApp.typeService.detail.title">Type Service</span> {{typeService.id}}</h5>
+    <div class="title-bullet title-bullet-table"><span></span></div>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6 col-sm-4">
+                        <dt><span jhiTranslate="ambassadeApp.typeService.nom">Nom</span></dt>
+                        <dd>
+                            <span>{{typeService.nom}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-4">
+                        <dt><span jhiTranslate="ambassadeApp.typeService.montant">Montant</span></dt>
+                        <dd>
+                            <span>{{typeService.montant}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-4">
+                        <dt><span jhiTranslate="ambassadeApp.typeService.deleted">Deleted</span></dt>
+                        <dd>
+                            <span>{{typeService.deleted}}</span>
+                        </dd>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info btn-xs plat">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'type-service/'+ typeService.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary btn-xs plat">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

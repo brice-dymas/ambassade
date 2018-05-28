@@ -8,6 +8,14 @@ export const enum Statut {
     'VEUF'
 }
 
+export const enum State {
+    'NOUVEAU',
+    'PAYE',
+    'ENCOURS',
+    'PRET',
+    'RETIRER'
+}
+
 export class Passeport implements BaseEntity {
     constructor(
         public id?: number,
@@ -32,7 +40,12 @@ export class Passeport implements BaseEntity {
         public sms?: string,
         public sms2?: string,
         public documents?: string,
+        public taille?: number,
+        public recu?: string,
+        public photoContentType?: string,
+        public photo?: any,
+        public state?: State,
+        public typeService?: BaseEntity,
     ) {
     }
-
 }

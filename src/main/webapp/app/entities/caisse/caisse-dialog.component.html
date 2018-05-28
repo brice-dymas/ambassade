@@ -1,7 +1,7 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
     <div class="modal-header theme-bg-blue text-white">
-        <h4 class="modal-title" id="myCaisseLabel" jhiTranslate="ambassadeApp.caisse.home.createOrEditLabel">Create or edit a Caisse</h4>
+        <h5 class="modal-title text-uppercase" id="myCaisseLabel" jhiTranslate="ambassadeApp.caisse.home.createOrEditLabel">Create or edit a Caisse</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
@@ -15,14 +15,14 @@
         </div>
         -->
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.reference" for="field_reference">Reference</label>
                     <input type="text" class="form-control form-control-sm" name="reference" id="field_reference"
                            [(ngModel)]="caisse.reference" />
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.dateDuJour" for="field_dateDuJour">Date Du Jour</label>
                     <div class="input-group">
@@ -34,7 +34,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.nom" for="field_nom">Nom</label>
                     <input type="text" class="form-control form-control-sm" name="nom" id="field_nom"
@@ -47,9 +50,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.prenom" for="field_prenom">Prenom</label>
                     <input type="text" class="form-control form-control-sm" name="prenom" id="field_prenom"
@@ -62,7 +63,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.typeID" for="field_typeID">Type ID</label>
                     <input type="text" class="form-control form-control-sm" name="typeID" id="field_typeID"
@@ -75,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.numeroID" for="field_numeroID">Numero ID</label>
                     <input type="text" class="form-control form-control-sm" name="numeroID" id="field_numeroID"
@@ -89,8 +93,9 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.serviceConcerne" for="field_serviceConcerne">Service Concerne</label>
                     <input type="text" class="form-control form-control-sm" name="serviceConcerne" id="field_serviceConcerne"
@@ -103,7 +108,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.monnaie" for="field_monnaie">Monnaie</label>
                     <input type="text" class="form-control form-control-sm" name="monnaie" id="field_monnaie"
@@ -116,16 +121,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.montant" for="field_montant">Montant</label>
                     <input type="number" class="form-control form-control-sm" name="montant" id="field_montant"
                            [(ngModel)]="caisse.montant" />
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.dateRetour" for="field_dateRetour">Date Retour</label>
                     <div class="input-group">
@@ -137,7 +143,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.telephone" for="field_telephone">Telephone</label>
                     <input type="text" class="form-control form-control-sm" name="telephone" id="field_telephone"
@@ -150,7 +159,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.num" for="field_num">Num</label>
                     <input type="number" class="form-control form-control-sm" name="num" id="field_num"
@@ -168,8 +177,9 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.caisse.paiement" for="field_paiement">Paiement</label>
                     <input type="text" class="form-control form-control-sm" name="paiement" id="field_paiement"
@@ -186,10 +196,10 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-secondary btn-xs plat" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-blue btn-sm">
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-blue btn-xs plat">
             <span class="fa fa-download"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>

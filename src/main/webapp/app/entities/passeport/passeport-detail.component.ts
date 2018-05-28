@@ -2,10 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 
 import { Passeport } from './passeport.model';
 import { PasseportService } from './passeport.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-passeport-detail',
@@ -19,7 +20,9 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
 
     constructor(
         private eventManager: JhiEventManager,
+        private dataUtils: JhiDataUtils,
         private passeportService: PasseportService,
+        private router: Router,
         private route: ActivatedRoute
     ) {
     }
@@ -37,6 +40,41 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
                 this.passeport = passeportResponse.body;
             });
     }
+
+    payer() {
+        this.passeportService.payer(this.passeport.id)
+            .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                this.passeport = passeportResponse.body;
+            });
+    }
+
+    encours() {
+        this.passeportService.enCours(this.passeport.id)
+            .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                this.passeport = passeportResponse.body;
+            });
+    }
+
+    retirer() {
+        this.passeportService.retirer(this.passeport.id)
+            .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                this.passeport = passeportResponse.body;
+            });
+    }
+
+    pret() {
+        this.passeportService.pret(this.passeport.id)
+            .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                this.passeport = passeportResponse.body;
+            });
+    }
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
     previousState() {
         window.history.back();
     }
@@ -51,5 +89,12 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
             'passeportListModification',
             (response) => this.load(this.passeport.id)
         );
+    }
+
+    printPage() {
+        this.router.navigateByData({
+            url: ['/print/detail-passeport'],
+            data: this.passeport
+        });
     }
 }

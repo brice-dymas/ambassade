@@ -9,6 +9,7 @@ import { AmbassadeTestModule } from '../../../test.module';
 import { VisaDialogComponent } from '../../../../../../main/webapp/app/entities/visa/visa-dialog.component';
 import { VisaService } from '../../../../../../main/webapp/app/entities/visa/visa.service';
 import { Visa } from '../../../../../../main/webapp/app/entities/visa/visa.model';
+import { TypeServiceService } from '../../../../../../main/webapp/app/entities/type-service';
 
 describe('Component Tests', () => {
 
@@ -24,6 +25,7 @@ describe('Component Tests', () => {
                 imports: [AmbassadeTestModule],
                 declarations: [VisaDialogComponent],
                 providers: [
+                    TypeServiceService,
                     VisaService
                 ]
             })

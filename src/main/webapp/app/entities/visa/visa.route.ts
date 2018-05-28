@@ -45,6 +45,42 @@ export const visaRoute: Routes = [
             pageTitle: 'ambassadeApp.visa.home.title'
         },
         canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'visa/:id/payer',
+        component: VisaDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.visa.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'visa/:id/encours',
+        component: VisaDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.visa.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'visa/:id/pret',
+        component: VisaDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.visa.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'visa/:id/retirer',
+        component: VisaDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.visa.home.title'
+        },
+        canActivate: [UserRouteAccessService]
     }, {
         path: 'visa/search',
         component: VisaComponent,

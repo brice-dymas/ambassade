@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * Service Interface for managing Passeport.
@@ -45,10 +44,10 @@ public interface PasseportService {
      */
     void delete(Long id);
 
-    Page<Passeport> searchAll(String nom, String prenom, String numeroPasseport, LocalDate neLeDeb, LocalDate neLeFin,
-                              String lieuNaissance, Statut etatCivil, String adresse, String paysEmetteur,
-                              LocalDate soumisLeDeb, LocalDate soumisLeFin, LocalDate delivreLeDeb,
-                              LocalDate delivreLeFin, BigDecimal montant,LocalDate dateEmissionDeb,
-                              LocalDate dateEmissionFin, LocalDate dateExpirationDeb, LocalDate dateExpirationFin,
-                              String documents, Pageable pageable);
+    public Page<Passeport> searchAll(String recu, String nom, String prenom, String numeroPasseport, LocalDate neLeDeb, LocalDate neLeFin,
+                                     String lieuNaissance, Statut etatCivil, String adresse,
+                                     String paysEmetteur, LocalDate soumisLeDeb, LocalDate soumisLeFin,
+                                     LocalDate delivreLeDeb, LocalDate delivreLeFin, BigDecimal montant,
+                                     LocalDate dateEmissionDeb, LocalDate dateEmissionFin, LocalDate dateExpirationDeb,
+                                     LocalDate dateExpirationFin, String documents, Pageable pageable);
 }

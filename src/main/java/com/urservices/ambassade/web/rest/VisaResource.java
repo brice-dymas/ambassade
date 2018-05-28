@@ -1,7 +1,11 @@
 package com.urservices.ambassade.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.urservices.ambassade.domain.Paiement;
+import com.urservices.ambassade.domain.TypeService;
 import com.urservices.ambassade.domain.Visa;
+import com.urservices.ambassade.domain.enumeration.State;
+import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.VisaService;
 import com.urservices.ambassade.web.rest.errors.BadRequestAlertException;
 import com.urservices.ambassade.web.rest.util.HeaderUtil;
@@ -39,8 +43,11 @@ public class VisaResource {
 
     private final VisaService visaService;
 
-    public VisaResource(VisaService visaService) {
+    private final PaiementService paiementService;
+
+    public VisaResource(VisaService visaService, PaiementService paiementService) {
         this.visaService = visaService;
+        this.paiementService = paiementService;
     }
 
     /**
@@ -57,6 +64,7 @@ public class VisaResource {
         if (visa.getId() != null) {
             throw new BadRequestAlertException("A new visa cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        visa.setState(State.NOUVEAU);
         Visa result = visaService.save(visa);
         return ResponseEntity.created(new URI("/api/visas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -168,6 +176,75 @@ public class VisaResource {
     public ResponseEntity<Visa> getVisa(@PathVariable Long id) {
         log.debug("REST request to get Visa : {}", id);
         Visa visa = visaService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(visa));
+    }
+
+    /**
+     * GET  /visas/:id/pret : the "id" visa to put ready
+     *
+     * @param id the id of the visa to put ready
+     * @return the ResponseEntity with status 200 (OK) and with body the visa, or with status 404 (Not Found)
+     */
+    @GetMapping("/visas/{id}/pret")
+    @Timed
+    public ResponseEntity<Visa> getVisaPret(@PathVariable Long id) {
+        log.debug("REST request to get Visa : {}", id);
+        Visa visa = visaService.findOne(id);
+        visa.setState(State.PRET);
+        visa = visaService.save(visa);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(visa));
+    }
+
+    /**
+     * GET  /visas/:id/retirer : the "id" visa to set remove
+     *
+     * @param id the id of the visa to set  remove
+     * @return the ResponseEntity with status 200 (OK) and with body the visa, or with status 404 (Not Found)
+     */
+    @GetMapping("/visas/{id}/retirer")
+    @Timed
+    public ResponseEntity<Visa> setVisaRetirer(@PathVariable Long id) {
+        log.debug("REST request to get Visa : {}", id);
+        Visa visa = visaService.findOne(id);
+        visa.setState(State.RETIRER);
+        visa = visaService.save(visa);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(visa));
+    }
+
+    /**
+     * GET  /visas/:id/payer : the "id" visa to pay
+     *
+     * @param id the id of the visa to pay
+     * @return the ResponseEntity with status 200 (OK) and with body the visa, or with status 404 (Not Found)
+     */
+    @GetMapping("/visas/{id}/payer")
+    @Timed
+    public ResponseEntity<Visa> getVisaPayer(@PathVariable Long id) {
+        log.debug("REST request to get Visa : {}", id);
+        Visa visa = visaService.findOne(id);
+        Paiement paiement = new Paiement();
+        paiement.setDatePaiement(LocalDate.now());
+        paiement.setVisa(visa);
+        paiement.setTypeService(visa.getTypeService());
+        paiementService.save(paiement);
+        visa.setState(State.PAYE);
+        visa = visaService.save(visa);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(visa));
+    }
+
+    /**
+     * GET  /visas/:id/encours : the "id" visa to put in progress.
+     *
+     * @param id the id of the visa to put in progress
+     * @return the ResponseEntity with status 200 (OK) and with body the visa, or with status 404 (Not Found)
+     */
+    @GetMapping("/visas/{id}/encours")
+    @Timed
+    public ResponseEntity<Visa> getVisaReady(@PathVariable Long id) {
+        log.debug("REST request to get Visa Ready : {}", id);
+        Visa visa = visaService.findOne(id);
+        visa.setState(State.ENCOURS);
+        visa = visaService.save(visa);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(visa));
     }
 

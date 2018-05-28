@@ -37,6 +37,7 @@ export class PasseportModelDTO implements BaseEntity {
         public sms?: string,
         public sms2?: string,
         public documents?: string,
+        public recu?: string,
     ) {
     }
 }

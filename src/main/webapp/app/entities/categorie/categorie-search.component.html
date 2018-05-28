@@ -1,6 +1,6 @@
 <form name="searchForm" role="form" novalidate (ngSubmit)="search()" #searchForm="ngForm">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-12 col-sm-6">
             <div class="form-group">
                 <label class="form-control-label" jhiTranslate="ambassadeApp.categorie.nomCategorie"
                        for="field_nomCategorie">Nom Categorie</label>
@@ -8,13 +8,16 @@
                        [(ngModel)]="formModel.nomCategorie" maxlength="50"/>
             </div>
         </div>
+        <div class="col-12 col-sm-6 align-self-end">
+            <div class="form-group pull-right">
+                <button type="reset" class="btn btn-xs plat btn-danger" (click)="search()">
+                    <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" class="btn btn-xs plat btn-primary">
+                    <span class="fa fa-search"></span>&nbsp;<span jhiTranslate="entity.action.search">search</span>
+                </button>
+            </div>
+        </div>
     </div>
-    <div class="modal-footer">
-        <button type="reset" class="btn btn-sm btn-danger" (click)="search()">
-            <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" class="btn btn-sm btn-primary">
-            <span class="fa fa-search"></span>&nbsp;<span jhiTranslate="entity.action.search">search</span>
-        </button>
-    </div>
+    <div class="modal-footer"></div>
 </form>

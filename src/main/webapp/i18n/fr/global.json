@@ -17,6 +17,9 @@
                 "montant": "Montant",
                 "produit": "Produit",
                 "visa": "Visa",
+                "typeService": "Type Service",
+                "service": "Service",
+                "paiement": "Paiement",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -105,6 +108,10 @@
             "back": "Retour",
             "cancel": "Annuler",
             "edit": "Editer",
+            "payer": "Payer",
+            "encours": "En cours",
+            "retirer": "Retirer",
+            "pret": "Prêt",
             "delete": "Supprimer",
             "open": "Ouvrir",
             "save": "Sauvegarder",

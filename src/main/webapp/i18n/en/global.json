@@ -17,6 +17,9 @@
                 "montant": "Montant",
                 "produit": "Produit",
                 "visa": "Visa",
+                "typeService": "Type Service",
+                "service": "Service",
+                "paiement": "Paiement",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

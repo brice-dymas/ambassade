@@ -1,7 +1,7 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
     <div class="modal-header theme-bg-blue text-white">
-        <h4 class="modal-title" id="myRapatriementLabel" jhiTranslate="ambassadeApp.rapatriement.home.createOrEditLabel">Create or edit a Rapatriement</h4>
+        <h5 class="text-uppercase modal-title" id="myRapatriementLabel" jhiTranslate="ambassadeApp.rapatriement.home.createOrEditLabel">Create or edit a Rapatriement</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
@@ -15,7 +15,20 @@
         </div>
         -->
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.nom" for="field_nom">Nom</label>
+                    <input type="text" class="form-control form-control-sm" name="nom" id="field_nom"
+                           [(ngModel)]="rapatriement.nom" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.nom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.reference" for="field_reference">Reference</label>
                     <input type="text" class="form-control form-control-sm" name="reference" id="field_reference"
@@ -32,35 +45,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.numeroDossier" for="field_numeroDossier">Numero Dossier</label>
-                    <input type="text" class="form-control form-control-sm" name="numeroDossier" id="field_numeroDossier"
-                           [(ngModel)]="rapatriement.numeroDossier" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.numeroDossier?.dirty && editForm.controls.numeroDossier?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.numeroDossier?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                            This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.nom" for="field_nom">Nom</label>
-                    <input type="text" class="form-control form-control-sm" name="nom" id="field_nom"
-                           [(ngModel)]="rapatriement.nom" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                            This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.prenom" for="field_prenom">Prenom</label>
                     <input type="text" class="form-control form-control-sm" name="prenom" id="field_prenom"
@@ -73,7 +60,23 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.numeroDossier" for="field_numeroDossier">Numero Dossier</label>
+                    <input type="text" class="form-control form-control-sm" name="numeroDossier" id="field_numeroDossier"
+                           [(ngModel)]="rapatriement.numeroDossier" maxlength="50"/>
+                    <div [hidden]="!(editForm.controls.numeroDossier?.dirty && editForm.controls.numeroDossier?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.numeroDossier?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                            This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.dateNaissance" for="field_dateNaissance">Date Naissance</label>
                     <div class="input-group">
@@ -85,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.documentID" for="field_documentID">Document ID</label>
                     <input type="text" class="form-control form-control-sm" name="documentID" id="field_documentID"
@@ -99,8 +102,9 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.sexe" for="field_sexe">Sexe</label>
                     <select class="form-control form-control-sm" name="sexe" [(ngModel)]="rapatriement.sexe" id="field_sexe" >
@@ -109,7 +113,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.motif" for="field_motif">Motif</label>
                     <input type="text" class="form-control form-control-sm" name="motif" id="field_motif"
@@ -122,7 +126,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.dateRapatriement" for="field_dateRapatriement">Date Rapatriement</label>
                     <div class="input-group">
@@ -134,9 +141,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.frontiere" for="field_frontiere">Frontiere</label>
                     <input type="text" class="form-control form-control-sm" name="frontiere" id="field_frontiere"
@@ -149,14 +154,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.createdByPHPRunner" for="field_createdByPHPRunner">Created By PHP Runner</label>
                     <input type="number" class="form-control form-control-sm" name="createdByPHPRunner" id="field_createdByPHPRunner"
                            [(ngModel)]="rapatriement.createdByPHPRunner" />
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.documentScanne" for="field_documentScanne">Document Scanne</label>
                     <div>
@@ -164,7 +172,7 @@
                             <a class="pull-left" (click)="openFile(rapatriement.documentScanneContentType, rapatriement.documentScanne)" jhiTranslate="entity.action.open">open</a><br>
                             <span class="pull-left">{{rapatriement.documentScanneContentType}}, {{byteSize(rapatriement.documentScanne)}}</span>
                             <button type="button" (click)="rapatriement.documentScanne=null;rapatriement.documentScanneContentType=null;"
-                                    class="btn btn-secondary btn-xs pull-right">
+                                    class="btn btn-secondary btn-sm pull-right">
                                 <span class="fa fa-times"></span>
                             </button>
                         </div>
@@ -177,13 +185,12 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-secondary btn-xs plat" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-blue btn-sm">
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-blue btn-xs plat">
             <span class="fa fa-download"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>

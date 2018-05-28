@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { Visa } from './visa.model';
+import { Visa, State } from './visa.model';
 import { VisaService } from './visa.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
 import {VisaDtoModel} from './visa-dto.model';

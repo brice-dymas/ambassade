@@ -37,11 +37,15 @@
             "sms": "Sms",
             "sms2": "Sms 2",
             "documents": "Documents",
+            "taille": "Taille",
+            "recu": "Numero Recu",
+            "photo": "Photo",
+            "state": "State",
+            "typeService": "Type Service",
             "soumisLeSearch": "Date Soumission comprise entre Le",
+            "dateExpirationSearch": "Date Expiration comprise entre Le",
             "neLeSearch": "Date Naissance comprise entre",
-            "delivreLeSearch": "Date Delivrance comprise entre Le",
-            "dateEmissionSearch": "Date Emission comprise entre Le",
-            "dateExpirationSearch": "Date Expiration comprise entre Le"
+            "delivreLeSearch": "Date Delivrance comprise entre Le"
         }
     }
 }

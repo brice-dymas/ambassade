@@ -1,0 +1,48 @@
+
+<div *ngIf="paiement">
+    <h2><span jhiTranslate="ambassadeApp.paiement.detail.title">Paiement</span> {{paiement.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="ambassadeApp.paiement.datePaiement">Date Paiement</span></dt>
+        <dd>
+            <span>{{paiement.datePaiement | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.visa">Visa</span></dt>
+        <dd>
+            <div *ngIf="paiement.visa">
+                <a [routerLink]="['/visa', paiement.visa?.id]">{{paiement.visa?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.passeport">Passeport</span></dt>
+        <dd>
+            <div *ngIf="paiement.passeport">
+                <a [routerLink]="['/passeport', paiement.passeport?.id]">{{paiement.passeport?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.typeService">Type Service</span></dt>
+        <dd>
+            <div *ngIf="paiement.typeService">
+                <a [routerLink]="['/type-service', paiement.typeService?.id]">{{paiement.typeService?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.user">User</span></dt>
+        <dd>
+            {{paiement.user?.id}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'paiement/'+ paiement.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

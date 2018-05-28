@@ -2,8 +2,10 @@ package com.urservices.ambassade.web.rest;
 
 import com.urservices.ambassade.AmbassadeApp;
 
+import com.urservices.ambassade.domain.Paiement;
 import com.urservices.ambassade.domain.Passeport;
 import com.urservices.ambassade.repository.PasseportRepository;
+import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.PasseportService;
 import com.urservices.ambassade.web.rest.errors.ExceptionTranslator;
 
@@ -20,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -34,6 +37,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.urservices.ambassade.domain.enumeration.Statut;
+import com.urservices.ambassade.domain.enumeration.State;
 /**
  * Test class for the PasseportResource REST controller.
  *
@@ -106,11 +110,27 @@ public class PasseportResourceIntTest {
     private static final String DEFAULT_DOCUMENTS = "AAAAAAAAAA";
     private static final String UPDATED_DOCUMENTS = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_TAILLE = 1;
+    private static final Integer UPDATED_TAILLE = 2;
+
+    private static final String DEFAULT_RECU = "AAAAAAAAAA";
+    private static final String UPDATED_RECU = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_PHOTO = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_PHOTO = TestUtil.createByteArray(2, "1");
+    private static final String DEFAULT_PHOTO_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_PHOTO_CONTENT_TYPE = "image/png";
+
+    private static final State DEFAULT_STATE = State.NOUVEAU;
+    private static final State UPDATED_STATE = State.PAYE;
+
     @Autowired
     private PasseportRepository passeportRepository;
 
     @Autowired
     private PasseportService passeportService;
+    @Autowired
+    private PaiementService paiementService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -131,7 +151,7 @@ public class PasseportResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PasseportResource passeportResource = new PasseportResource(passeportService);
+        final PasseportResource passeportResource = new PasseportResource(passeportService, paiementService);
         this.restPasseportMockMvc = MockMvcBuilders.standaloneSetup(passeportResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -167,7 +187,12 @@ public class PasseportResourceIntTest {
             .remarquesR(DEFAULT_REMARQUES_R)
             .sms(DEFAULT_SMS)
             .sms2(DEFAULT_SMS_2)
-            .documents(DEFAULT_DOCUMENTS);
+            .documents(DEFAULT_DOCUMENTS)
+            .taille(DEFAULT_TAILLE)
+            .recu(DEFAULT_RECU)
+            .photo(DEFAULT_PHOTO)
+            .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE)
+            .state(DEFAULT_STATE);
         return passeport;
     }
 
@@ -212,6 +237,11 @@ public class PasseportResourceIntTest {
         assertThat(testPasseport.getSms()).isEqualTo(DEFAULT_SMS);
         assertThat(testPasseport.getSms2()).isEqualTo(DEFAULT_SMS_2);
         assertThat(testPasseport.getDocuments()).isEqualTo(DEFAULT_DOCUMENTS);
+        assertThat(testPasseport.getTaille()).isEqualTo(DEFAULT_TAILLE);
+        assertThat(testPasseport.getRecu()).isEqualTo(DEFAULT_RECU);
+        assertThat(testPasseport.getPhoto()).isEqualTo(DEFAULT_PHOTO);
+        assertThat(testPasseport.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
+        assertThat(testPasseport.getState()).isEqualTo(DEFAULT_STATE);
     }
 
     @Test
@@ -390,7 +420,12 @@ public class PasseportResourceIntTest {
             .andExpect(jsonPath("$.[*].remarquesR").value(hasItem(DEFAULT_REMARQUES_R.toString())))
             .andExpect(jsonPath("$.[*].sms").value(hasItem(DEFAULT_SMS.toString())))
             .andExpect(jsonPath("$.[*].sms2").value(hasItem(DEFAULT_SMS_2.toString())))
-            .andExpect(jsonPath("$.[*].documents").value(hasItem(DEFAULT_DOCUMENTS.toString())));
+            .andExpect(jsonPath("$.[*].documents").value(hasItem(DEFAULT_DOCUMENTS.toString())))
+            .andExpect(jsonPath("$.[*].taille").value(hasItem(DEFAULT_TAILLE)))
+            .andExpect(jsonPath("$.[*].recu").value(hasItem(DEFAULT_RECU.toString())))
+            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))))
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())));
     }
 
     @Test
@@ -424,7 +459,12 @@ public class PasseportResourceIntTest {
             .andExpect(jsonPath("$.remarquesR").value(DEFAULT_REMARQUES_R.toString()))
             .andExpect(jsonPath("$.sms").value(DEFAULT_SMS.toString()))
             .andExpect(jsonPath("$.sms2").value(DEFAULT_SMS_2.toString()))
-            .andExpect(jsonPath("$.documents").value(DEFAULT_DOCUMENTS.toString()));
+            .andExpect(jsonPath("$.documents").value(DEFAULT_DOCUMENTS.toString()))
+            .andExpect(jsonPath("$.taille").value(DEFAULT_TAILLE))
+            .andExpect(jsonPath("$.recu").value(DEFAULT_RECU.toString()))
+            .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
+            .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)))
+            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()));
     }
 
     @Test
@@ -468,7 +508,12 @@ public class PasseportResourceIntTest {
             .remarquesR(UPDATED_REMARQUES_R)
             .sms(UPDATED_SMS)
             .sms2(UPDATED_SMS_2)
-            .documents(UPDATED_DOCUMENTS);
+            .documents(UPDATED_DOCUMENTS)
+            .taille(UPDATED_TAILLE)
+            .recu(UPDATED_RECU)
+            .photo(UPDATED_PHOTO)
+            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE)
+            .state(UPDATED_STATE);
 
         restPasseportMockMvc.perform(put("/api/passeports")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -500,6 +545,11 @@ public class PasseportResourceIntTest {
         assertThat(testPasseport.getSms()).isEqualTo(UPDATED_SMS);
         assertThat(testPasseport.getSms2()).isEqualTo(UPDATED_SMS_2);
         assertThat(testPasseport.getDocuments()).isEqualTo(UPDATED_DOCUMENTS);
+        assertThat(testPasseport.getTaille()).isEqualTo(UPDATED_TAILLE);
+        assertThat(testPasseport.getRecu()).isEqualTo(UPDATED_RECU);
+        assertThat(testPasseport.getPhoto()).isEqualTo(UPDATED_PHOTO);
+        assertThat(testPasseport.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
+        assertThat(testPasseport.getState()).isEqualTo(UPDATED_STATE);
     }
 
     @Test
