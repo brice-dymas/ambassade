@@ -1,31 +1,29 @@
 <form name="searchForm" role="form" novalidate (ngSubmit)="search()" #searchForm="ngForm">
-
     <div class="card">
-        <!--<jhi-alert-error></jhi-alert-error>-->
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-12 col-sm-3">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.reference" for="field_reference">Reference</label>
                         <input type="text" class="form-control form-control-sm" name="reference" id="field_reference"
                                [(ngModel)]="formModel.reference"/>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-12 col-sm-3">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.numeroDossier" for="field_numeroDossier">Numero Dossier</label>
                         <input type="text" class="form-control form-control-sm" name="numeroDossier" id="field_numeroDossier"
                                [(ngModel)]="formModel.numeroDossier" maxlength="50"/>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-12 col-sm-3">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.nom" for="field_nom">Nom</label>
                         <input type="text" class="form-control form-control-sm" name="nom" id="field_nom"
                                [(ngModel)]="formModel.nom" maxlength="50"/>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-12 col-sm-3">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.prenom" for="field_prenom">Prenom</label>
                         <input type="text" class="form-control form-control-sm" name="prenom" id="field_prenom"
@@ -33,11 +31,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-12 col-sm-3">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.sexe" for="field_sexe">Sexe</label>
                         <select class="form-control form-control-sm" name="sexe" [(ngModel)]="formModel.sexe" id="field_sexe" >
@@ -47,26 +43,26 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-12 col-sm-3">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.motif" for="field_motif">Motif</label>
                         <input type="text" class="form-control form-control-sm" name="motif" id="field_motif"
                                [(ngModel)]="formModel.motif" maxlength="50"/>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-3">
-            <div class="form-group">
-                <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.dateRapatriementSearch" for="field_dateRapatriement">Date Rapatriement</label>
-                <div class="input-group">
-                    <input id="field_dateRapatriement" type="text" class="form-control form-control-sm" name="dateRapatriement" ngbDatepicker  #dateRapatriementDp="ngbDatepicker" [(ngModel)]="formModel.dateRapatriement"
-                    />
-                    <span class="input-group-append">
-                        <button type="button" class="btn btn-blue btn-sm" (click)="dateRapatriementDp.toggle()"><i class="fa fa-calendar"></i></button>
-                    </span>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.dateRapatriementSearch" for="field_dateRapatriement">Date Rapatriement</label>
+                        <div class="input-group">
+                            <input id="field_dateRapatriement" type="text" class="form-control form-control-sm" name="dateRapatriement" ngbDatepicker  #dateRapatriementDp="ngbDatepicker" [(ngModel)]="formModel.dateRapatriement"
+                            />
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-blue btn-sm" (click)="dateRapatriementDp.toggle()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-12 col-sm-3">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="entity.action.and" for="field_dateRapatriementFin">Date Rapatriement</label>
                         <div class="input-group">
@@ -79,20 +75,21 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-sm-3">
-            <div class="form-group">
-                <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.dateNaissanceSearch" for="field_dateNaissance">Date Naissance</label>
-                <div class="input-group">
-                    <input id="field_dateNaissance" type="text" class="form-control form-control-sm" name="dateNaissance" ngbDatepicker  #dateNaissanceDp="ngbDatepicker" [(ngModel)]="formModel.dateNaissance"
-                    />
-                    <span class="input-group-append">
-                        <button type="button" class="btn btn-blue btn-sm" (click)="dateNaissanceDp.toggle()"><i class="fa fa-calendar"></i></button>
-                    </span>
+
+            <div class="row">
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.dateNaissanceSearch" for="field_dateNaissance">Date Naissance</label>
+                        <div class="input-group">
+                            <input id="field_dateNaissance" type="text" class="form-control form-control-sm" name="dateNaissance" ngbDatepicker  #dateNaissanceDp="ngbDatepicker" [(ngModel)]="formModel.dateNaissance"
+                            />
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-blue btn-sm" (click)="dateNaissanceDp.toggle()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-12 col-sm-3">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="entity.action.and" for="field_dateNaissanceFin">Date Naissance</label>
                         <div class="input-group">
@@ -104,7 +101,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-12 col-sm-3">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.rapatriement.frontiere" for="field_frontiere">Frontiere</label>
                         <input type="text" class="form-control form-control-sm" name="frontiere" id="field_frontiere"
@@ -117,16 +114,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12 col-sm-3 align-self-end">
+                    <div class="form-group pull-right">
+                        <button type="reset" class="btn btn-xs plat btn-danger" data-dismiss="modal" (click)="search()">
+                            <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-xs plat">
+                            <span class="fa fa-search"></span>&nbsp;<span jhiTranslate="entity.action.search">Save</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="modal-footer">
-        <button type="reset" class="btn btn-xs plat btn-danger" data-dismiss="modal" (click)="search()">
-            <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" class="btn btn-blue btn-xs plat">
-            <span class="fa fa-search"></span>&nbsp;<span jhiTranslate="entity.action.search">Save</span>
-        </button>
     </div>
 </form>

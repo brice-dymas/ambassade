@@ -1,22 +1,15 @@
 <div class="mb-lg-5">
     <h5 class="text-uppercase">
-        <div class="row">
-            <div class="col-md-6">
-                <span jhiTranslate="ambassadeApp.livre.home.title">Livres</span>
-            </div>
-            <div class="col-md-6">
-                <button class="btn btn-blue btn-xs plat float-right jh-create-entity create-livre" [routerLink]="['/', { outlets: { popup: ['livre-new'] } }]">
-                    <span class="fa fa-pencil-square-o"></span>
-                    <span  jhiTranslate="ambassadeApp.livre.home.createLabel">Create new Livre</span>
-                </button>&nbsp;
-                <button *jhiHasAnyAuthority="['ROLE_LIVRE_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
-                        class="btn btn-info btn-xs plat">Imprimer</button>
-            </div>
-        </div>
-        <div class="title-bullet"><span></span></div>
+        <span jhiTranslate="ambassadeApp.livre.home.title">Livres</span>
+        <button class="btn btn-blue btn-xs plat float-right jh-create-entity create-livre" [routerLink]="['/', { outlets: { popup: ['livre-new'] } }]">
+            <span class="fa fa-pencil-square-o"></span>
+            <span  jhiTranslate="ambassadeApp.livre.home.createLabel">Create new Livre</span>
+        </button>&nbsp;
+        <button *jhiHasAnyAuthority="['ROLE_LIVRE_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
+                class="btn btn-info btn-xs plat float-right mr-5">Imprimer</button>
     </h5>
+    <div class="title-bullet"><span></span></div>
     <jhi-alert></jhi-alert>
-    <br/>
     <div>
         <jhi-livre-search></jhi-livre-search>
     </div>

@@ -1,25 +1,22 @@
 <div class="mb-lg-5">
-    <h5>
-        <div class="row">
-            <div class="col-md-6 text-uppercase">
-                <span jhiTranslate="ambassadeApp.montant.home.title">Montants</span>
-            </div>
-            <div class="col-md-6">
-                <button class="btn btn-blue btn-xs float-right jh-create-entity create-montant" [routerLink]="['/', { outlets: { popup: ['montant-new'] } }]">
-                    <span class="fa fa-pencil-square-o"></span>
-                    <span  jhiTranslate="ambassadeApp.montant.home.createLabel">Create new Montant</span>
-                </button>&nbsp;
-                <button *jhiHasAnyAuthority="['ROLE_MONTANT_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
-                        class="btn btn-info btn-xs plat">Imprimer</button>
-            </div>
-        </div>
+    <h5 class="text-uppercase">
+        <span jhiTranslate="ambassadeApp.montant.home.title">Montants</span>
+        <button class="btn btn-blue btn-xs float-right jh-create-entity create-montant" [routerLink]="['/', { outlets: { popup: ['montant-new'] } }]">
+            <span class="fa fa-pencil-square-o"></span>
+            <span  jhiTranslate="ambassadeApp.montant.home.createLabel">Create new Montant</span>
+        </button>&nbsp;
+        <button *jhiHasAnyAuthority="['ROLE_MONTANT_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
+                class="btn btn-info btn-xs plat float-right mr-5">
+            <span class="fa fa-print"></span>
+            <span>Imprimer</span>
+        </button>
     </h5>
     <div class="title-bullet"><span></span></div>
     <jhi-alert></jhi-alert>
-    <br/>
     <div>
         <jhi-montant-search></jhi-montant-search>
     </div>
+    <br>
     <div *ngIf="montants">
         <table class="table table-striped dash-row table-sm">
             <thead class="theme-bg-blue text-white">
@@ -41,7 +38,7 @@
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     [routerLink]="['../montant', montant.id ]"
-                                    class="btn btn-primary btn-xs plat">
+                                    class="btn btn-info btn-xs plat">
                                 <span class="fa fa-eye"></span>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
@@ -49,7 +46,7 @@
                                     [routerLink]="['/', { outlets: { popup: 'montant/'+ montant.id + '/edit'} }]"
                                     replaceUrl="true"
                                     queryParamsHandling="merge"
-                                    class="btn btn-blue btn-xs plat">
+                                    class="btn btn-primary btn-xs plat">
                                 <span class="fa fa-pencil"></span>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
