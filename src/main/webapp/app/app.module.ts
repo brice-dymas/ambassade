@@ -28,6 +28,7 @@ import {
     ErrorComponent
 } from './layouts';
 import 'angular2-navigate-with-data';
+import {JasperoConfirmationsModule} from '@jaspero/ng-confirmations';
 
 @NgModule({
     imports: [
@@ -39,6 +40,7 @@ import 'angular2-navigate-with-data';
         AmbassadeAdminModule,
         AmbassadeAccountModule,
         AmbassadeEntityModule,
+        JasperoConfirmationsModule.forRoot(),
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [

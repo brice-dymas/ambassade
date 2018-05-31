@@ -15,6 +15,7 @@
     "@angular/platform-browser": "5.2.0",
     "@angular/platform-browser-dynamic": "5.2.0",
     "@angular/router": "5.2.0",
+    "@jaspero/ng-confirmations": "^0.4.7",
     "@ng-bootstrap/ng-bootstrap": "1.0.0-beta.9",
     "angular2-navigate-with-data": "^1.1.11",
     "bootstrap": "4.0.0",

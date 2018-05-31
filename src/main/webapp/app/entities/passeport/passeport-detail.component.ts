@@ -7,6 +7,7 @@ import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 import { Passeport } from './passeport.model';
 import { PasseportService } from './passeport.service';
 import { Router } from '@angular/router';
+import {ConfirmationService, ConfirmSettings, ResolveEmit} from '@jaspero/ng-confirmations';
 
 @Component({
     selector: 'jhi-passeport-detail',
@@ -23,7 +24,8 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
         private dataUtils: JhiDataUtils,
         private passeportService: PasseportService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private _confirmation: ConfirmationService
     ) {
     }
 
@@ -96,5 +98,23 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
             url: ['/print/detail-passeport'],
             data: this.passeport
         });
+    }
+
+    create() {
+        // const val = this.form.getRawValue();
+        // const options = Object.assign({}, val);
+        //
+        // delete options.message;
+        // delete options.title;
+        // const options: ConfirmSettings = null;
+        // options.confirmText = 'Oui je veux';
+        // options.declineText = 'Non je veux pas';
+        // options.showCloseButton(true);
+
+        this.open('Verification de securite', 'Voulez-vous vraiment Effectuer cette tache ?');
+    }
+
+    open(title: string, message: string) {
+        this._confirmation.create(title, message).subscribe((ans: ResolveEmit) => console.log('VOILAAAAAAAAAAAAAAAAAAAA ' + ans));
     }
 }
