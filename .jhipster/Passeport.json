@@ -141,6 +141,19 @@
             "fieldName": "state",
             "fieldType": "State",
             "fieldValues": "NOUVEAU,PAYE,ENCOURS,PRET,RETIRER"
+        },
+        {
+            "fieldName": "cin",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sexe",
+            "fieldType": "Sexe",
+            "fieldValues": "FEMININ, MASCULIN"
         }
     ],
     "changelogDate": "20180222221146",

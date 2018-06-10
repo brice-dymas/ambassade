@@ -35,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.urservices.ambassade.domain.enumeration.Statut;
 import com.urservices.ambassade.domain.enumeration.State;
+import com.urservices.ambassade.domain.enumeration.Sexe;
 /**
  * Test class for the PasseportResource REST controller.
  *
@@ -109,6 +110,15 @@ public class PasseportResourceIntTest {
     private static final State DEFAULT_STATE = State.NOUVEAU;
     private static final State UPDATED_STATE = State.PAYE;
 
+    private static final String DEFAULT_CIN = "AAAAAAAAAA";
+    private static final String UPDATED_CIN = "BBBBBBBBBB";
+
+    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE = "BBBBBBBBBB";
+
+    private static final Sexe DEFAULT_SEXE = Sexe.FEMININ;
+    private static final Sexe UPDATED_SEXE = Sexe.MASCULIN;
+
     @Autowired
     private PasseportRepository passeportRepository;
 
@@ -171,7 +181,10 @@ public class PasseportResourceIntTest {
             .recu(DEFAULT_RECU)
             .photo(DEFAULT_PHOTO)
             .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE)
-            .state(DEFAULT_STATE);
+            .state(DEFAULT_STATE)
+            .cin(DEFAULT_CIN)
+            .type(DEFAULT_TYPE)
+            .sexe(DEFAULT_SEXE);
         return passeport;
     }
 
@@ -217,6 +230,9 @@ public class PasseportResourceIntTest {
         assertThat(testPasseport.getPhoto()).isEqualTo(DEFAULT_PHOTO);
         assertThat(testPasseport.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
         assertThat(testPasseport.getState()).isEqualTo(DEFAULT_STATE);
+        assertThat(testPasseport.getCin()).isEqualTo(DEFAULT_CIN);
+        assertThat(testPasseport.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testPasseport.getSexe()).isEqualTo(DEFAULT_SEXE);
     }
 
     @Test
@@ -378,7 +394,10 @@ public class PasseportResourceIntTest {
             .andExpect(jsonPath("$.[*].recu").value(hasItem(DEFAULT_RECU.toString())))
             .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))))
-            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())));
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
+            .andExpect(jsonPath("$.[*].cin").value(hasItem(DEFAULT_CIN.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE.toString())));
     }
 
     @Test
@@ -413,7 +432,10 @@ public class PasseportResourceIntTest {
             .andExpect(jsonPath("$.recu").value(DEFAULT_RECU.toString()))
             .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
             .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)))
-            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()));
+            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
+            .andExpect(jsonPath("$.cin").value(DEFAULT_CIN.toString()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
+            .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE.toString()));
     }
 
     @Test
@@ -458,7 +480,10 @@ public class PasseportResourceIntTest {
             .recu(UPDATED_RECU)
             .photo(UPDATED_PHOTO)
             .photoContentType(UPDATED_PHOTO_CONTENT_TYPE)
-            .state(UPDATED_STATE);
+            .state(UPDATED_STATE)
+            .cin(UPDATED_CIN)
+            .type(UPDATED_TYPE)
+            .sexe(UPDATED_SEXE);
 
         restPasseportMockMvc.perform(put("/api/passeports")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -491,6 +516,9 @@ public class PasseportResourceIntTest {
         assertThat(testPasseport.getPhoto()).isEqualTo(UPDATED_PHOTO);
         assertThat(testPasseport.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
         assertThat(testPasseport.getState()).isEqualTo(UPDATED_STATE);
+        assertThat(testPasseport.getCin()).isEqualTo(UPDATED_CIN);
+        assertThat(testPasseport.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testPasseport.getSexe()).isEqualTo(UPDATED_SEXE);
     }
 
     @Test

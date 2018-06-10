@@ -14,6 +14,8 @@ import com.urservices.ambassade.domain.enumeration.Statut;
 
 import com.urservices.ambassade.domain.enumeration.State;
 
+import com.urservices.ambassade.domain.enumeration.Sexe;
+
 /**
  * A Passeport.
  */
@@ -111,6 +113,16 @@ public class Passeport implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private State state;
+
+    @Column(name = "cin")
+    private String cin;
+
+    @Column(name = "jhi_type")
+    private String type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sexe")
+    private Sexe sexe;
 
     @ManyToOne
     private TypeService typeService;
@@ -410,6 +422,45 @@ public class Passeport implements Serializable {
         this.state = state;
     }
 
+    public String getCin() {
+        return cin;
+    }
+
+    public Passeport cin(String cin) {
+        this.cin = cin;
+        return this;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Passeport type(String type) {
+        this.type = type;
+        return this;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Sexe getSexe() {
+        return sexe;
+    }
+
+    public Passeport sexe(Sexe sexe) {
+        this.sexe = sexe;
+        return this;
+    }
+
+    public void setSexe(Sexe sexe) {
+        this.sexe = sexe;
+    }
+
     public TypeService getTypeService() {
         return typeService;
     }
@@ -470,6 +521,9 @@ public class Passeport implements Serializable {
             ", photo='" + getPhoto() + "'" +
             ", photoContentType='" + getPhotoContentType() + "'" +
             ", state='" + getState() + "'" +
+            ", cin='" + getCin() + "'" +
+            ", type='" + getType() + "'" +
+            ", sexe='" + getSexe() + "'" +
             "}";
     }
 }

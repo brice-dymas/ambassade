@@ -109,6 +109,18 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="cin" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="jhi_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sexe" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="type_service_id" type="bigint">
                 <constraints nullable="true" />
             </column>

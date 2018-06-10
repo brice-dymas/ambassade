@@ -16,6 +16,11 @@ export const enum State {
     'RETIRER'
 }
 
+export const enum Sexe {
+    'FEMININ',
+    ' MASCULIN'
+}
+
 export class Passeport implements BaseEntity {
     constructor(
         public id?: number,
@@ -41,6 +46,9 @@ export class Passeport implements BaseEntity {
         public photoContentType?: string,
         public photo?: any,
         public state?: State,
+        public cin?: string,
+        public type?: string,
+        public sexe?: Sexe,
         public typeService?: BaseEntity,
     ) {
     }
