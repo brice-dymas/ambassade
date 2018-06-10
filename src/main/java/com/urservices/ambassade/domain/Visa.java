@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import com.urservices.ambassade.domain.enumeration.State;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * A Visa.
@@ -18,6 +19,7 @@ import com.urservices.ambassade.domain.enumeration.State;
 @Entity
 @Table(name = "visa")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@EntityListeners({AuditingEntityListener.class})
 public class Visa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -80,6 +82,37 @@ public class Visa implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private State state;
+
+    @Column(name = "profession")
+    private String profession;
+
+    @Column(name = "nombre_de_jour")
+    private Integer nombreDeJour;
+
+    @Lob
+    @Column(name = "photo_demandeur_visa")
+    private byte[] photoDemandeurVisa;
+
+    @Column(name = "photo_demandeur_visa_content_type")
+    private String photoDemandeurVisaContentType;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "adresse_de_sejour")
+    private String adresseDeSejour;
+
+    @Column(name = "nom_employeur")
+    private String nomEmployeur;
+
+    @Column(name = "adresse_employeur")
+    private String adresseEmployeur;
+
+    @Column(name = "telephone_employeur")
+    private String telephoneEmployeur;
+
+    @Column(name = "email_employeur")
+    private String emailEmployeur;
 
     @ManyToOne
     private TypeService typeService;
@@ -288,6 +321,136 @@ public class Visa implements Serializable {
         this.state = state;
     }
 
+    public String getProfession() {
+        return profession;
+    }
+
+    public Visa profession(String profession) {
+        this.profession = profession;
+        return this;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public Integer getNombreDeJour() {
+        return nombreDeJour;
+    }
+
+    public Visa nombreDeJour(Integer nombreDeJour) {
+        this.nombreDeJour = nombreDeJour;
+        return this;
+    }
+
+    public void setNombreDeJour(Integer nombreDeJour) {
+        this.nombreDeJour = nombreDeJour;
+    }
+
+    public byte[] getPhotoDemandeurVisa() {
+        return photoDemandeurVisa;
+    }
+
+    public Visa photoDemandeurVisa(byte[] photoDemandeurVisa) {
+        this.photoDemandeurVisa = photoDemandeurVisa;
+        return this;
+    }
+
+    public void setPhotoDemandeurVisa(byte[] photoDemandeurVisa) {
+        this.photoDemandeurVisa = photoDemandeurVisa;
+    }
+
+    public String getPhotoDemandeurVisaContentType() {
+        return photoDemandeurVisaContentType;
+    }
+
+    public Visa photoDemandeurVisaContentType(String photoDemandeurVisaContentType) {
+        this.photoDemandeurVisaContentType = photoDemandeurVisaContentType;
+        return this;
+    }
+
+    public void setPhotoDemandeurVisaContentType(String photoDemandeurVisaContentType) {
+        this.photoDemandeurVisaContentType = photoDemandeurVisaContentType;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Visa email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAdresseDeSejour() {
+        return adresseDeSejour;
+    }
+
+    public Visa adresseDeSejour(String adresseDeSejour) {
+        this.adresseDeSejour = adresseDeSejour;
+        return this;
+    }
+
+    public void setAdresseDeSejour(String adresseDeSejour) {
+        this.adresseDeSejour = adresseDeSejour;
+    }
+
+    public String getNomEmployeur() {
+        return nomEmployeur;
+    }
+
+    public Visa nomEmployeur(String nomEmployeur) {
+        this.nomEmployeur = nomEmployeur;
+        return this;
+    }
+
+    public void setNomEmployeur(String nomEmployeur) {
+        this.nomEmployeur = nomEmployeur;
+    }
+
+    public String getAdresseEmployeur() {
+        return adresseEmployeur;
+    }
+
+    public Visa adresseEmployeur(String adresseEmployeur) {
+        this.adresseEmployeur = adresseEmployeur;
+        return this;
+    }
+
+    public void setAdresseEmployeur(String adresseEmployeur) {
+        this.adresseEmployeur = adresseEmployeur;
+    }
+
+    public String getTelephoneEmployeur() {
+        return telephoneEmployeur;
+    }
+
+    public Visa telephoneEmployeur(String telephoneEmployeur) {
+        this.telephoneEmployeur = telephoneEmployeur;
+        return this;
+    }
+
+    public void setTelephoneEmployeur(String telephoneEmployeur) {
+        this.telephoneEmployeur = telephoneEmployeur;
+    }
+
+    public String getEmailEmployeur() {
+        return emailEmployeur;
+    }
+
+    public Visa emailEmployeur(String emailEmployeur) {
+        this.emailEmployeur = emailEmployeur;
+        return this;
+    }
+
+    public void setEmailEmployeur(String emailEmployeur) {
+        this.emailEmployeur = emailEmployeur;
+    }
+
     public TypeService getTypeService() {
         return typeService;
     }
@@ -341,6 +504,27 @@ public class Visa implements Serializable {
             ", adresse='" + getAdresse() + "'" +
             ", remarques='" + getRemarques() + "'" +
             ", state='" + getState() + "'" +
+            ", profession='" + getProfession() + "'" +
+            ", nombreDeJour=" + getNombreDeJour() +
+            ", photoDemandeurVisa='" + getPhotoDemandeurVisa() + "'" +
+            ", photoDemandeurVisaContentType='" + getPhotoDemandeurVisaContentType() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", adresseDeSejour='" + getAdresseDeSejour() + "'" +
+            ", nomEmployeur='" + getNomEmployeur() + "'" +
+            ", adresseEmployeur='" + getAdresseEmployeur() + "'" +
+            ", telephoneEmployeur='" + getTelephoneEmployeur() + "'" +
+            ", emailEmployeur='" + getEmailEmployeur() + "'" +
             "}";
+    }
+
+    @PostPersist
+    public void generateNumeroVisa() {
+        LocalDate localDate = LocalDate.now();
+        String numeroVisa = "";
+        numeroVisa += localDate.getYear();
+        numeroVisa += localDate.getMonthValue() < 10 ? "0" + localDate.getMonthValue() : localDate.getMonthValue();
+        numeroVisa += localDate.getDayOfMonth() < 10 ? "0" + localDate.getDayOfMonth() : localDate.getDayOfMonth();
+        numeroVisa += this.getId() < 10 ? "0" + this.getId() : this.getId();
+        this.setNumeroVisa(Long.parseLong(numeroVisa));
     }
 }

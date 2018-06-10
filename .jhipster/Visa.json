@@ -105,6 +105,43 @@
             "fieldName": "state",
             "fieldType": "State",
             "fieldValues": "NOUVEAU,PAYE,ENCOURS,PRET,RETIRER"
+        },
+        {
+            "fieldName": "profession",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nombreDeJour",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "photoDemandeurVisa",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "adresseDeSejour",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nomEmployeur",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "adresseEmployeur",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telephoneEmployeur",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "emailEmployeur",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20180222221155",

@@ -26,6 +26,16 @@ export class Visa implements BaseEntity {
         public adresse?: string,
         public remarques?: string,
         public state?: State,
+        public profession?: string,
+        public nombreDeJour?: number,
+        public photoDemandeurVisaContentType?: string,
+        public photoDemandeurVisa?: any,
+        public email?: string,
+        public adresseDeSejour?: string,
+        public nomEmployeur?: string,
+        public adresseEmployeur?: string,
+        public telephoneEmployeur?: string,
+        public emailEmployeur?: string,
         public typeService?: BaseEntity,
     ) {
     }

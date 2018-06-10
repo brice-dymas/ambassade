@@ -31,6 +31,15 @@
             "adresse": "Adresse",
             "remarques": "Remarques",
             "state": "State",
+            "profession": "Profession",
+            "nombreDeJour": "Nombre De Jour",
+            "photoDemandeurVisa": "Photo Demandeur Visa",
+            "email": "Email",
+            "adresseDeSejour": "Adresse De Sejour",
+            "nomEmployeur": "Nom Employeur",
+            "adresseEmployeur": "Adresse Employeur",
+            "telephoneEmployeur": "Telephone Employeur",
+            "emailEmployeur": "Email Employeur",
             "typeService": "Type Service"
         }
     }
