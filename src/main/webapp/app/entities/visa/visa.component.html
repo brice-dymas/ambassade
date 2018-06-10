@@ -29,21 +29,13 @@
                     <th jhiSortBy="numeroVisa"><span jhiTranslate="ambassadeApp.visa.numeroVisa">Numero Visa</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="dateEmission"><span jhiTranslate="ambassadeApp.visa.dateEmission">Date Emission</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="dateExpiration"><span jhiTranslate="ambassadeApp.visa.dateExpiration">Date Expiration</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="validePour"><span jhiTranslate="ambassadeApp.visa.validePour">Valide Pour</span> <span class="fa fa-sort"></span></th>
                     <th><span jhiTranslate="ambassadeApp.passeport.typeService">TypeService</span> <span class="fa fa-sort"></span></th>
                     <th><span jhiTranslate="ambassadeApp.visa.state">État</span> <span class="fa fa-sort"></span></th>
-                    <!-- <th jhiSortBy="nombreEntree"><span jhiTranslate="ambassadeApp.visa.nombreEntree">Nombre Entree</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="type"><span jhiTranslate="ambassadeApp.visa.type">Type</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="categorie"><span jhiTranslate="ambassadeApp.visa.categorie">Categorie</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="taxes"><span jhiTranslate="ambassadeApp.visa.taxes">Taxes</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="adresse"><span jhiTranslate="ambassadeApp.visa.adresse">Adresse</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="remarques"><span jhiTranslate="ambassadeApp.visa.remarques">Remarques</span> <span class="fa fa-sort"></span></th> -->
-                    <th></th>
+                   <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let visa of visas ;trackBy: trackId">
-                    <!-- <td><a [routerLink]="['../visa', visa.id ]">{{visa.id}}</a></td> -->
                     <td>{{visa.nom}}</td>
                     <td>{{visa.prenom}}</td>
                     <td>{{visa.nationalite}}</td>
@@ -52,15 +44,8 @@
                     <td>{{visa.numeroVisa}}</td>
                     <td>{{visa.dateEmission | date:'mediumDate'}}</td>
                     <td>{{visa.dateExpiration | date:'mediumDate'}}</td>
-                    <td>{{visa.validePour}}</td>
                     <td>{{visa.typeService.nom}}</td>
                     <td>{{visa.state}}</td>
-                    <!-- <td>{{visa.nombreEntree}}</td>
-                    <td>{{visa.type}}</td>
-                    <td>{{visa.categorie}}</td>
-                    <td>{{visa.taxes}}</td>
-                    <td>{{visa.adresse}}</td>
-                    <!-- <td>{{visa.remarques}}</td> -->
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

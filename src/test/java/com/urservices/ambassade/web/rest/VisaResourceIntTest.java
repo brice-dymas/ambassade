@@ -3,6 +3,7 @@ package com.urservices.ambassade.web.rest;
 import com.urservices.ambassade.AmbassadeApp;
 
 import com.urservices.ambassade.domain.Visa;
+import com.urservices.ambassade.repository.PaiementRepository;
 import com.urservices.ambassade.repository.VisaRepository;
 import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.VisaService;
@@ -67,9 +68,6 @@ public class VisaResourceIntTest {
     private static final LocalDate DEFAULT_DATE_EXPIRATION = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_EXPIRATION = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Integer DEFAULT_VALIDE_POUR = 1;
-    private static final Integer UPDATED_VALIDE_POUR = 2;
-
     private static final String DEFAULT_NOMBRE_ENTREE = "AAAAAAAAAA";
     private static final String UPDATED_NOMBRE_ENTREE = "BBBBBBBBBB";
 
@@ -95,10 +93,13 @@ public class VisaResourceIntTest {
     private VisaRepository visaRepository;
 
     @Autowired
-    private PaiementService paiementService;
+    private PaiementRepository paiementRepository;
 
     @Autowired
     private VisaService visaService;
+
+    @Autowired
+    private PaiementService paiementService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -143,7 +144,6 @@ public class VisaResourceIntTest {
             .numeroVisa(DEFAULT_NUMERO_VISA)
             .dateEmission(DEFAULT_DATE_EMISSION)
             .dateExpiration(DEFAULT_DATE_EXPIRATION)
-            .validePour(DEFAULT_VALIDE_POUR)
             .nombreEntree(DEFAULT_NOMBRE_ENTREE)
             .type(DEFAULT_TYPE)
             .categorie(DEFAULT_CATEGORIE)
@@ -182,7 +182,6 @@ public class VisaResourceIntTest {
         assertThat(testVisa.getNumeroVisa()).isEqualTo(DEFAULT_NUMERO_VISA);
         assertThat(testVisa.getDateEmission()).isEqualTo(DEFAULT_DATE_EMISSION);
         assertThat(testVisa.getDateExpiration()).isEqualTo(DEFAULT_DATE_EXPIRATION);
-        assertThat(testVisa.getValidePour()).isEqualTo(DEFAULT_VALIDE_POUR);
         assertThat(testVisa.getNombreEntree()).isEqualTo(DEFAULT_NOMBRE_ENTREE);
         assertThat(testVisa.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testVisa.getCategorie()).isEqualTo(DEFAULT_CATEGORIE);
@@ -213,24 +212,6 @@ public class VisaResourceIntTest {
 
     @Test
     @Transactional
-    public void checkNumeroVisaIsRequired() throws Exception {
-        int databaseSizeBeforeTest = visaRepository.findAll().size();
-        // set the field null
-        visa.setNumeroVisa(null);
-
-        // Create the Visa, which fails.
-
-        restVisaMockMvc.perform(post("/api/visas")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(visa)))
-            .andExpect(status().isBadRequest());
-
-        List<Visa> visaList = visaRepository.findAll();
-        assertThat(visaList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllVisas() throws Exception {
         // Initialize the database
         visaRepository.saveAndFlush(visa);
@@ -248,7 +229,6 @@ public class VisaResourceIntTest {
             .andExpect(jsonPath("$.[*].numeroVisa").value(hasItem(DEFAULT_NUMERO_VISA.intValue())))
             .andExpect(jsonPath("$.[*].dateEmission").value(hasItem(DEFAULT_DATE_EMISSION.toString())))
             .andExpect(jsonPath("$.[*].dateExpiration").value(hasItem(DEFAULT_DATE_EXPIRATION.toString())))
-            .andExpect(jsonPath("$.[*].validePour").value(hasItem(DEFAULT_VALIDE_POUR)))
             .andExpect(jsonPath("$.[*].nombreEntree").value(hasItem(DEFAULT_NOMBRE_ENTREE.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].categorie").value(hasItem(DEFAULT_CATEGORIE.toString())))
@@ -277,7 +257,6 @@ public class VisaResourceIntTest {
             .andExpect(jsonPath("$.numeroVisa").value(DEFAULT_NUMERO_VISA.intValue()))
             .andExpect(jsonPath("$.dateEmission").value(DEFAULT_DATE_EMISSION.toString()))
             .andExpect(jsonPath("$.dateExpiration").value(DEFAULT_DATE_EXPIRATION.toString()))
-            .andExpect(jsonPath("$.validePour").value(DEFAULT_VALIDE_POUR))
             .andExpect(jsonPath("$.nombreEntree").value(DEFAULT_NOMBRE_ENTREE.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.categorie").value(DEFAULT_CATEGORIE.toString()))
@@ -316,7 +295,6 @@ public class VisaResourceIntTest {
             .numeroVisa(UPDATED_NUMERO_VISA)
             .dateEmission(UPDATED_DATE_EMISSION)
             .dateExpiration(UPDATED_DATE_EXPIRATION)
-            .validePour(UPDATED_VALIDE_POUR)
             .nombreEntree(UPDATED_NOMBRE_ENTREE)
             .type(UPDATED_TYPE)
             .categorie(UPDATED_CATEGORIE)
@@ -342,7 +320,6 @@ public class VisaResourceIntTest {
         assertThat(testVisa.getNumeroVisa()).isEqualTo(UPDATED_NUMERO_VISA);
         assertThat(testVisa.getDateEmission()).isEqualTo(UPDATED_DATE_EMISSION);
         assertThat(testVisa.getDateExpiration()).isEqualTo(UPDATED_DATE_EXPIRATION);
-        assertThat(testVisa.getValidePour()).isEqualTo(UPDATED_VALIDE_POUR);
         assertThat(testVisa.getNombreEntree()).isEqualTo(UPDATED_NOMBRE_ENTREE);
         assertThat(testVisa.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testVisa.getCategorie()).isEqualTo(UPDATED_CATEGORIE);

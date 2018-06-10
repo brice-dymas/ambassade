@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import com.urservices.ambassade.domain.enumeration.State;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * A Visa.
@@ -19,7 +18,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "visa")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@EntityListeners({AuditingEntityListener.class})
 public class Visa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,8 +46,7 @@ public class Visa implements Serializable {
     @Column(name = "cedula", length = 30)
     private String cedula;
 
-//    @NotNull
-    @Column(name = "numero_visa", nullable = false)
+    @Column(name = "numero_visa")
     private Long numeroVisa;
 
     @Column(name = "date_emission")
@@ -57,9 +54,6 @@ public class Visa implements Serializable {
 
     @Column(name = "date_expiration")
     private LocalDate dateExpiration;
-
-    @Column(name = "valide_pour")
-    private Integer validePour;
 
     @Size(max = 20)
     @Column(name = "nombre_entree", length = 20)
@@ -203,19 +197,6 @@ public class Visa implements Serializable {
         this.dateExpiration = dateExpiration;
     }
 
-    public Integer getValidePour() {
-        return validePour;
-    }
-
-    public Visa validePour(Integer validePour) {
-        this.validePour = validePour;
-        return this;
-    }
-
-    public void setValidePour(Integer validePour) {
-        this.validePour = validePour;
-    }
-
     public String getNombreEntree() {
         return nombreEntree;
     }
@@ -353,7 +334,6 @@ public class Visa implements Serializable {
             ", numeroVisa=" + getNumeroVisa() +
             ", dateEmission='" + getDateEmission() + "'" +
             ", dateExpiration='" + getDateExpiration() + "'" +
-            ", validePour=" + getValidePour() +
             ", nombreEntree='" + getNombreEntree() + "'" +
             ", type='" + getType() + "'" +
             ", categorie='" + getCategorie() + "'" +
@@ -362,17 +342,5 @@ public class Visa implements Serializable {
             ", remarques='" + getRemarques() + "'" +
             ", state='" + getState() + "'" +
             "}";
-    }
-
-
-    @PostPersist
-    public void generateNumeroVisa() {
-        LocalDate localDate = LocalDate.now();
-        String numeroVisa = "";
-        numeroVisa += localDate.getYear();
-        numeroVisa += localDate.getMonthValue() <10 ? "0"+localDate.getMonthValue() : localDate.getMonthValue();
-        numeroVisa += localDate.getDayOfMonth() <10 ? "0"+localDate.getDayOfMonth() : localDate.getDayOfMonth();
-        numeroVisa += this.getId() <10 ? "0"+this.getId() : this.getId();
-        this.setNumeroVisa(Long.parseLong(numeroVisa));
     }
 }

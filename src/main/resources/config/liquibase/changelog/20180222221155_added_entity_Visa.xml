@@ -54,10 +54,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="valide_pour" type="integer">
-                <constraints nullable="true" />
-            </column>
-
             <column name="nombre_entree" type="varchar(20)">
                 <constraints nullable="true" />
             </column>
@@ -92,7 +88,7 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

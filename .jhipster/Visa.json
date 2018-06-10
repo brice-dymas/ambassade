@@ -52,10 +52,6 @@
         {
             "fieldName": "numeroVisa",
             "fieldType": "Long"
-//        ,
-//            "fieldValidateRules": [
-//                "required"
-//            ]
         },
         {
             "fieldName": "dateEmission",
@@ -64,10 +60,6 @@
         {
             "fieldName": "dateExpiration",
             "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "validePour",
-            "fieldType": "Integer"
         },
         {
             "fieldName": "nombreEntree",
@@ -116,9 +108,9 @@
         }
     ],
     "changelogDate": "20180222221155",
-    "entityTableName": "visa",
     "dto": "no",
-    "pagination": "pagination",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "visa",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
 }
