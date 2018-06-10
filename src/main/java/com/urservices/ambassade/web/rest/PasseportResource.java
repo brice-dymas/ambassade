@@ -107,7 +107,7 @@ public class PasseportResource {
             ? webRequest.getParameter("nom"): null;
         String recu = webRequest.getParameter("recu") !=null && !webRequest.getParameter("recu").isEmpty()
             ? webRequest.getParameter("recu"): null;
-        String prenom = webRequest.getParameter("prenom") !=null && !webRequest.getParameter("nom").isEmpty()
+        String prenom = webRequest.getParameter("prenom") !=null && !webRequest.getParameter("prenom").isEmpty()
             ? webRequest.getParameter("prenom"): null;
         String numeroPasseport = webRequest.getParameter("numeroPasseport") !=null && !webRequest.getParameter("numeroPasseport").isEmpty()
             ? webRequest.getParameter("numeroPasseport"): null;
@@ -162,12 +162,6 @@ public class PasseportResource {
         LocalDate dateEmissionFin = dateEmissionFinStr != null ? LocalDate.parse(dateEmissionFinStr) : null;
         LocalDate dateExpirationFin = dateExpirationFinStr != null ?  LocalDate.parse(dateExpirationFinStr) : null;
 
-        String remarquesR = webRequest.getParameter("remarquesR") !=null && !webRequest.getParameter("remarquesR").isEmpty()
-            ? webRequest.getParameter("remarquesR"): null;
-        String sms = webRequest.getParameter("sms") !=null && !webRequest.getParameter("sms").isEmpty()
-            ? webRequest.getParameter("sms"): null;
-        String sms2 = webRequest.getParameter("sms2") !=null && !webRequest.getParameter("sms2").isEmpty()
-            ? webRequest.getParameter("sms2"): null;
         String documents = webRequest.getParameter("documents") !=null && !webRequest.getParameter("documents").isEmpty()
             ? webRequest.getParameter("documents"): null;
 
