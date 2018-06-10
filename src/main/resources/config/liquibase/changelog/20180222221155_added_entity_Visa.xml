@@ -43,7 +43,7 @@
             </column>
 
             <column name="numero_visa" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <column name="date_emission" type="date">
@@ -51,10 +51,6 @@
             </column>
 
             <column name="date_expiration" type="date">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="valide_pour" type="integer">
                 <constraints nullable="true" />
             </column>
 
@@ -83,6 +79,45 @@
             </column>
 
             <column name="state" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="profession" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="nombre_de_jour" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="photo_demandeur_visa" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="photo_demandeur_visa_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="email" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="adresse_de_sejour" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="nom_employeur" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="adresse_employeur" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="telephone_employeur" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="email_employeur" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

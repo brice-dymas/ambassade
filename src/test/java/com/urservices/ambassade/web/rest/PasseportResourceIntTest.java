@@ -2,10 +2,8 @@ package com.urservices.ambassade.web.rest;
 
 import com.urservices.ambassade.AmbassadeApp;
 
-import com.urservices.ambassade.domain.Paiement;
 import com.urservices.ambassade.domain.Passeport;
 import com.urservices.ambassade.repository.PasseportRepository;
-import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.PasseportService;
 import com.urservices.ambassade.web.rest.errors.ExceptionTranslator;
 
@@ -25,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -38,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.urservices.ambassade.domain.enumeration.Statut;
 import com.urservices.ambassade.domain.enumeration.State;
+import com.urservices.ambassade.domain.enumeration.Sexe;
 /**
  * Test class for the PasseportResource REST controller.
  *
@@ -86,9 +84,6 @@ public class PasseportResourceIntTest {
     private static final LocalDate DEFAULT_DELIVRE_LE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DELIVRE_LE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final BigDecimal DEFAULT_MONTANT = new BigDecimal(0);
-    private static final BigDecimal UPDATED_MONTANT = new BigDecimal(1);
-
     private static final String DEFAULT_REMARQUES = "AAAAAAAAAA";
     private static final String UPDATED_REMARQUES = "BBBBBBBBBB";
 
@@ -98,17 +93,8 @@ public class PasseportResourceIntTest {
     private static final LocalDate DEFAULT_DATE_EXPIRATION = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_EXPIRATION = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_REMARQUES_R = "AAAAAAAAAA";
-    private static final String UPDATED_REMARQUES_R = "BBBBBBBBBB";
-
     private static final String DEFAULT_SMS = "AAAAAAAAAA";
     private static final String UPDATED_SMS = "BBBBBBBBBB";
-
-    private static final String DEFAULT_SMS_2 = "AAAAAAAAAA";
-    private static final String UPDATED_SMS_2 = "BBBBBBBBBB";
-
-    private static final String DEFAULT_DOCUMENTS = "AAAAAAAAAA";
-    private static final String UPDATED_DOCUMENTS = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_TAILLE = 1;
     private static final Integer UPDATED_TAILLE = 2;
@@ -124,13 +110,20 @@ public class PasseportResourceIntTest {
     private static final State DEFAULT_STATE = State.NOUVEAU;
     private static final State UPDATED_STATE = State.PAYE;
 
+    private static final String DEFAULT_CIN = "AAAAAAAAAA";
+    private static final String UPDATED_CIN = "BBBBBBBBBB";
+
+    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE = "BBBBBBBBBB";
+
+    private static final Sexe DEFAULT_SEXE = Sexe.FEMININ;
+    private static final Sexe UPDATED_SEXE = Sexe.MASCULIN;
+
     @Autowired
     private PasseportRepository passeportRepository;
 
     @Autowired
     private PasseportService passeportService;
-    @Autowired
-    private PaiementService paiementService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -151,7 +144,7 @@ public class PasseportResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PasseportResource passeportResource = new PasseportResource(passeportService, paiementService);
+        final PasseportResource passeportResource = new PasseportResource(passeportService);
         this.restPasseportMockMvc = MockMvcBuilders.standaloneSetup(passeportResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -180,19 +173,18 @@ public class PasseportResourceIntTest {
             .paysEmetteur(DEFAULT_PAYS_EMETTEUR)
             .soumisLe(DEFAULT_SOUMIS_LE)
             .delivreLe(DEFAULT_DELIVRE_LE)
-            .montant(DEFAULT_MONTANT)
             .remarques(DEFAULT_REMARQUES)
             .dateEmission(DEFAULT_DATE_EMISSION)
             .dateExpiration(DEFAULT_DATE_EXPIRATION)
-            .remarquesR(DEFAULT_REMARQUES_R)
             .sms(DEFAULT_SMS)
-            .sms2(DEFAULT_SMS_2)
-            .documents(DEFAULT_DOCUMENTS)
             .taille(DEFAULT_TAILLE)
             .recu(DEFAULT_RECU)
             .photo(DEFAULT_PHOTO)
             .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE)
-            .state(DEFAULT_STATE);
+            .state(DEFAULT_STATE)
+            .cin(DEFAULT_CIN)
+            .type(DEFAULT_TYPE)
+            .sexe(DEFAULT_SEXE);
         return passeport;
     }
 
@@ -229,19 +221,18 @@ public class PasseportResourceIntTest {
         assertThat(testPasseport.getPaysEmetteur()).isEqualTo(DEFAULT_PAYS_EMETTEUR);
         assertThat(testPasseport.getSoumisLe()).isEqualTo(DEFAULT_SOUMIS_LE);
         assertThat(testPasseport.getDelivreLe()).isEqualTo(DEFAULT_DELIVRE_LE);
-        assertThat(testPasseport.getMontant()).isEqualTo(DEFAULT_MONTANT);
         assertThat(testPasseport.getRemarques()).isEqualTo(DEFAULT_REMARQUES);
         assertThat(testPasseport.getDateEmission()).isEqualTo(DEFAULT_DATE_EMISSION);
         assertThat(testPasseport.getDateExpiration()).isEqualTo(DEFAULT_DATE_EXPIRATION);
-        assertThat(testPasseport.getRemarquesR()).isEqualTo(DEFAULT_REMARQUES_R);
         assertThat(testPasseport.getSms()).isEqualTo(DEFAULT_SMS);
-        assertThat(testPasseport.getSms2()).isEqualTo(DEFAULT_SMS_2);
-        assertThat(testPasseport.getDocuments()).isEqualTo(DEFAULT_DOCUMENTS);
         assertThat(testPasseport.getTaille()).isEqualTo(DEFAULT_TAILLE);
         assertThat(testPasseport.getRecu()).isEqualTo(DEFAULT_RECU);
         assertThat(testPasseport.getPhoto()).isEqualTo(DEFAULT_PHOTO);
         assertThat(testPasseport.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
         assertThat(testPasseport.getState()).isEqualTo(DEFAULT_STATE);
+        assertThat(testPasseport.getCin()).isEqualTo(DEFAULT_CIN);
+        assertThat(testPasseport.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testPasseport.getSexe()).isEqualTo(DEFAULT_SEXE);
     }
 
     @Test
@@ -373,24 +364,6 @@ public class PasseportResourceIntTest {
 
     @Test
     @Transactional
-    public void checkMontantIsRequired() throws Exception {
-        int databaseSizeBeforeTest = passeportRepository.findAll().size();
-        // set the field null
-        passeport.setMontant(null);
-
-        // Create the Passeport, which fails.
-
-        restPasseportMockMvc.perform(post("/api/passeports")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(passeport)))
-            .andExpect(status().isBadRequest());
-
-        List<Passeport> passeportList = passeportRepository.findAll();
-        assertThat(passeportList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllPasseports() throws Exception {
         // Initialize the database
         passeportRepository.saveAndFlush(passeport);
@@ -413,19 +386,18 @@ public class PasseportResourceIntTest {
             .andExpect(jsonPath("$.[*].paysEmetteur").value(hasItem(DEFAULT_PAYS_EMETTEUR.toString())))
             .andExpect(jsonPath("$.[*].soumisLe").value(hasItem(DEFAULT_SOUMIS_LE.toString())))
             .andExpect(jsonPath("$.[*].delivreLe").value(hasItem(DEFAULT_DELIVRE_LE.toString())))
-            .andExpect(jsonPath("$.[*].montant").value(hasItem(DEFAULT_MONTANT.intValue())))
             .andExpect(jsonPath("$.[*].remarques").value(hasItem(DEFAULT_REMARQUES.toString())))
             .andExpect(jsonPath("$.[*].dateEmission").value(hasItem(DEFAULT_DATE_EMISSION.toString())))
             .andExpect(jsonPath("$.[*].dateExpiration").value(hasItem(DEFAULT_DATE_EXPIRATION.toString())))
-            .andExpect(jsonPath("$.[*].remarquesR").value(hasItem(DEFAULT_REMARQUES_R.toString())))
             .andExpect(jsonPath("$.[*].sms").value(hasItem(DEFAULT_SMS.toString())))
-            .andExpect(jsonPath("$.[*].sms2").value(hasItem(DEFAULT_SMS_2.toString())))
-            .andExpect(jsonPath("$.[*].documents").value(hasItem(DEFAULT_DOCUMENTS.toString())))
             .andExpect(jsonPath("$.[*].taille").value(hasItem(DEFAULT_TAILLE)))
             .andExpect(jsonPath("$.[*].recu").value(hasItem(DEFAULT_RECU.toString())))
             .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))))
-            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())));
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
+            .andExpect(jsonPath("$.[*].cin").value(hasItem(DEFAULT_CIN.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE.toString())));
     }
 
     @Test
@@ -452,19 +424,18 @@ public class PasseportResourceIntTest {
             .andExpect(jsonPath("$.paysEmetteur").value(DEFAULT_PAYS_EMETTEUR.toString()))
             .andExpect(jsonPath("$.soumisLe").value(DEFAULT_SOUMIS_LE.toString()))
             .andExpect(jsonPath("$.delivreLe").value(DEFAULT_DELIVRE_LE.toString()))
-            .andExpect(jsonPath("$.montant").value(DEFAULT_MONTANT.intValue()))
             .andExpect(jsonPath("$.remarques").value(DEFAULT_REMARQUES.toString()))
             .andExpect(jsonPath("$.dateEmission").value(DEFAULT_DATE_EMISSION.toString()))
             .andExpect(jsonPath("$.dateExpiration").value(DEFAULT_DATE_EXPIRATION.toString()))
-            .andExpect(jsonPath("$.remarquesR").value(DEFAULT_REMARQUES_R.toString()))
             .andExpect(jsonPath("$.sms").value(DEFAULT_SMS.toString()))
-            .andExpect(jsonPath("$.sms2").value(DEFAULT_SMS_2.toString()))
-            .andExpect(jsonPath("$.documents").value(DEFAULT_DOCUMENTS.toString()))
             .andExpect(jsonPath("$.taille").value(DEFAULT_TAILLE))
             .andExpect(jsonPath("$.recu").value(DEFAULT_RECU.toString()))
             .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
             .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)))
-            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()));
+            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
+            .andExpect(jsonPath("$.cin").value(DEFAULT_CIN.toString()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
+            .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE.toString()));
     }
 
     @Test
@@ -501,19 +472,18 @@ public class PasseportResourceIntTest {
             .paysEmetteur(UPDATED_PAYS_EMETTEUR)
             .soumisLe(UPDATED_SOUMIS_LE)
             .delivreLe(UPDATED_DELIVRE_LE)
-            .montant(UPDATED_MONTANT)
             .remarques(UPDATED_REMARQUES)
             .dateEmission(UPDATED_DATE_EMISSION)
             .dateExpiration(UPDATED_DATE_EXPIRATION)
-            .remarquesR(UPDATED_REMARQUES_R)
             .sms(UPDATED_SMS)
-            .sms2(UPDATED_SMS_2)
-            .documents(UPDATED_DOCUMENTS)
             .taille(UPDATED_TAILLE)
             .recu(UPDATED_RECU)
             .photo(UPDATED_PHOTO)
             .photoContentType(UPDATED_PHOTO_CONTENT_TYPE)
-            .state(UPDATED_STATE);
+            .state(UPDATED_STATE)
+            .cin(UPDATED_CIN)
+            .type(UPDATED_TYPE)
+            .sexe(UPDATED_SEXE);
 
         restPasseportMockMvc.perform(put("/api/passeports")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -537,19 +507,18 @@ public class PasseportResourceIntTest {
         assertThat(testPasseport.getPaysEmetteur()).isEqualTo(UPDATED_PAYS_EMETTEUR);
         assertThat(testPasseport.getSoumisLe()).isEqualTo(UPDATED_SOUMIS_LE);
         assertThat(testPasseport.getDelivreLe()).isEqualTo(UPDATED_DELIVRE_LE);
-        assertThat(testPasseport.getMontant()).isEqualTo(UPDATED_MONTANT);
         assertThat(testPasseport.getRemarques()).isEqualTo(UPDATED_REMARQUES);
         assertThat(testPasseport.getDateEmission()).isEqualTo(UPDATED_DATE_EMISSION);
         assertThat(testPasseport.getDateExpiration()).isEqualTo(UPDATED_DATE_EXPIRATION);
-        assertThat(testPasseport.getRemarquesR()).isEqualTo(UPDATED_REMARQUES_R);
         assertThat(testPasseport.getSms()).isEqualTo(UPDATED_SMS);
-        assertThat(testPasseport.getSms2()).isEqualTo(UPDATED_SMS_2);
-        assertThat(testPasseport.getDocuments()).isEqualTo(UPDATED_DOCUMENTS);
         assertThat(testPasseport.getTaille()).isEqualTo(UPDATED_TAILLE);
         assertThat(testPasseport.getRecu()).isEqualTo(UPDATED_RECU);
         assertThat(testPasseport.getPhoto()).isEqualTo(UPDATED_PHOTO);
         assertThat(testPasseport.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
         assertThat(testPasseport.getState()).isEqualTo(UPDATED_STATE);
+        assertThat(testPasseport.getCin()).isEqualTo(UPDATED_CIN);
+        assertThat(testPasseport.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testPasseport.getSexe()).isEqualTo(UPDATED_SEXE);
     }
 
     @Test

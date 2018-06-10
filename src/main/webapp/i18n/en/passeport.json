@@ -29,23 +29,18 @@
             "paysEmetteur": "Pays Emetteur",
             "soumisLe": "Soumis Le",
             "delivreLe": "Delivre Le",
-            "montant": "Montant",
             "remarques": "Remarques",
             "dateEmission": "Date Emission",
             "dateExpiration": "Date Expiration",
-            "remarquesR": "Remarques R",
             "sms": "Sms",
-            "sms2": "Sms 2",
-            "documents": "Documents",
             "taille": "Taille",
-            "recu": "Recu Number",
+            "recu": "Recu",
             "photo": "Photo",
             "state": "State",
-            "typeService": "Type Service",
-            "soumisLeSearch": "Date Soumission comprise entre Le",
-            "dateExpirationSearch": "Date Expiration comprise entre Le",
-            "neLeSearch": "Date Naissance comprise entre",
-            "delivreLeSearch": "Date Delivrance comprise entre Le"
+            "cin": "Cin",
+            "type": "Type",
+            "sexe": "Sexe",
+            "typeService": "Type Service"
         }
     }
 }

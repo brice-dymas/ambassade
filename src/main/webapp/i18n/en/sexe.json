@@ -2,8 +2,8 @@
     "ambassadeApp": {
         "Sexe" : {
             "null": "",
-            "MASCULIN": "MASCULIN",
-            "FEMININ": "FEMININ"
+            "FEMININ": "FEMININ",
+            "MASCULIN": "MASCULIN"
         }
     }
 }

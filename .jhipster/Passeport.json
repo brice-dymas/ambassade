@@ -105,15 +105,6 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "montant",
-            "fieldType": "BigDecimal",
-            "fieldValidateRules": [
-                "min",
-                "required"
-            ],
-            "fieldValidateRulesMin": 0
-        },
-        {
             "fieldName": "remarques",
             "fieldType": "String"
         },
@@ -126,32 +117,12 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "remarquesR",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "sms",
             "fieldType": "String",
             "fieldValidateRules": [
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 15
-        },
-        {
-            "fieldName": "sms2",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 60
-        },
-        {
-            "fieldName": "documents",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 50
         },
         {
             "fieldName": "taille",
@@ -170,12 +141,25 @@
             "fieldName": "state",
             "fieldType": "State",
             "fieldValues": "NOUVEAU,PAYE,ENCOURS,PRET,RETIRER"
+        },
+        {
+            "fieldName": "cin",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sexe",
+            "fieldType": "Sexe",
+            "fieldValues": "FEMININ, MASCULIN"
         }
     ],
     "changelogDate": "20180222221146",
-    "entityTableName": "passeport",
     "dto": "no",
-    "pagination": "pagination",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "passeport",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
 }

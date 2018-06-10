@@ -74,10 +74,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="montant" type="decimal(10,2)">
-                <constraints nullable="false" />
-            </column>
-
             <column name="remarques" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -90,19 +86,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="remarques_r" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="sms" type="varchar(15)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="sms_2" type="varchar(60)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="documents" type="varchar(50)">
                 <constraints nullable="true" />
             </column>
 
@@ -125,18 +109,25 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="cin" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="jhi_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sexe" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="type_service_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <loadData encoding="UTF-8"
-                  file="config/liquibase/passeport.csv"
-                  separator=";"
-                  tableName="passeport">
-        </loadData>
-
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

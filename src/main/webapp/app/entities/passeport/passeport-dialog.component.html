@@ -1,451 +1,288 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
-    <div class="modal-header theme-bg-blue text-white">
-        <h5 class="text-uppercase modal-title" id="myPasseportLabel" jhiTranslate="ambassadeApp.passeport.home.createOrEditLabel">
-            Create or edit a Passeport</h5>
-        <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true"
-                (click)="clear()">&times;
-        </button>
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPasseportLabel" jhiTranslate="ambassadeApp.passeport.home.createOrEditLabel">Create or edit a Passeport</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-
-        <!--
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group" [hidden]="!passeport.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="passeport.id" readonly/>
-                </div>
+        <div class="form-group" [hidden]="!passeport.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="passeport.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.numeroFormulaire" for="field_numeroFormulaire">Numero Formulaire</label>
+            <input type="number" class="form-control" name="numeroFormulaire" id="field_numeroFormulaire"
+                [(ngModel)]="passeport.numeroFormulaire" required min="0"/>
+            <div [hidden]="!(editForm.controls.numeroFormulaire?.dirty && editForm.controls.numeroFormulaire?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.numeroFormulaire?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.numeroFormulaire?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 0 }">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.numeroFormulaire?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
             </div>
         </div>
-        -->
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.nom"
-                           for="field_nom">Nom</label>
-                    <input type="text" class="form-control form-control-sm" name="nom" id="field_nom"
-                           [(ngModel)]="passeport.nom" required maxlength="30"/>
-                    <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nom?.errors?.required"
-                               jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nom?.errors?.maxlength"
-                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 30 }">
-                            This field cannot be longer than 30 characters.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.numeroFormulaire"
-                           for="field_numeroFormulaire">Numero Formulaire</label>
-                    <input type="number" class="form-control form-control-sm" name="numeroFormulaire" id="field_numeroFormulaire"
-                           [(ngModel)]="passeport.numeroFormulaire" required min="0"/>
-                    <div
-                        [hidden]="!(editForm.controls.numeroFormulaire?.dirty && editForm.controls.numeroFormulaire?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.numeroFormulaire?.errors?.required"
-                               jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.numeroFormulaire?.errors?.min"
-                               jhiTranslate="entity.validation.min" translateValues="{ min: 0 }">
-                            This field should be at least 0.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.numeroFormulaire?.errors?.number"
-                               jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.nom" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="passeport.nom" required maxlength="30"/>
+            <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nom?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 30 }">
+                   This field cannot be longer than 30 characters.
+                </small>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.prenom" for="field_prenom">Prenom</label>
-                    <input type="text" class="form-control form-control-sm" name="prenom" id="field_prenom"
-                           [(ngModel)]="passeport.prenom" required maxlength="40"/>
-                    <div [hidden]="!(editForm.controls.prenom?.dirty && editForm.controls.prenom?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.prenom?.errors?.required"
-                               jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.prenom?.errors?.maxlength"
-                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 40 }">
-                            This field cannot be longer than 40 characters.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.numeroPasseport"
-                           for="field_numeroPasseport">Numero Passeport</label>
-                    <input type="text" class="form-control form-control-sm" name="numeroPasseport" id="field_numeroPasseport"
-                           [(ngModel)]="passeport.numeroPasseport" maxlength="15"/>
-                    <div
-                        [hidden]="!(editForm.controls.numeroPasseport?.dirty && editForm.controls.numeroPasseport?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.numeroPasseport?.errors?.maxlength"
-                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 15 }">
-                            This field cannot be longer than 15 characters.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.prenom" for="field_prenom">Prenom</label>
+            <input type="text" class="form-control" name="prenom" id="field_prenom"
+                [(ngModel)]="passeport.prenom" required maxlength="40"/>
+            <div [hidden]="!(editForm.controls.prenom?.dirty && editForm.controls.prenom?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.prenom?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.prenom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 40 }">
+                   This field cannot be longer than 40 characters.
+                </small>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.neLe" for="field_neLe">Ne
-                        Le</label>
-                    <div class="input-group">
-                        <input id="field_neLe" type="text" class="form-control form-control-sm" name="neLe"
-                               ngbDatepicker #neLeDp="ngbDatepicker" [(ngModel)]="passeport.neLe"
-                               required/>
-                        <span class="input-group-append">
-                    <button type="button" class="btn btn-blue btn-sm" (click)="neLeDp.toggle()"><i
-                        class="fa fa-calendar"></i></button>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.numeroPasseport" for="field_numeroPasseport">Numero Passeport</label>
+            <input type="text" class="form-control" name="numeroPasseport" id="field_numeroPasseport"
+                [(ngModel)]="passeport.numeroPasseport" maxlength="15"/>
+            <div [hidden]="!(editForm.controls.numeroPasseport?.dirty && editForm.controls.numeroPasseport?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.numeroPasseport?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 15 }">
+                   This field cannot be longer than 15 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.neLe" for="field_neLe">Ne Le</label>
+            <div class="input-group">
+                <input id="field_neLe" type="text" class="form-control" name="neLe" ngbDatepicker  #neLeDp="ngbDatepicker" [(ngModel)]="passeport.neLe"
+                required/>
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="neLeDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.neLe?.dirty && editForm.controls.neLe?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.neLe?.errors?.required"
-                               jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                    </div>
-                </div>
             </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.adresse"
-                           for="field_adresse">Adresse</label>
-                    <input type="text" class="form-control form-control-sm" name="adresse" id="field_adresse"
-                           [(ngModel)]="passeport.adresse"/>
-                </div>
+            <div [hidden]="!(editForm.controls.neLe?.dirty && editForm.controls.neLe?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.neLe?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.lieuNaissance"
-                           for="field_lieuNaissance">Lieu Naissance</label>
-                    <input type="text" class="form-control form-control-sm" name="lieuNaissance"
-                           id="field_lieuNaissance"
-                           [(ngModel)]="passeport.lieuNaissance" required maxlength="30"/>
-                    <div
-                        [hidden]="!(editForm.controls.lieuNaissance?.dirty && editForm.controls.lieuNaissance?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.lieuNaissance?.errors?.required"
-                               jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.lieuNaissance?.errors?.maxlength"
-                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 30 }">
-                            This field cannot be longer than 30 characters.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.etatCivil"
-                           for="field_etatCivil">Etat
-                        Civil</label>
-                    <select class="form-control form-control-sm" name="etatCivil" [(ngModel)]="passeport.etatCivil"
-                            id="field_etatCivil">
-                        <option value="CELIBATAIRE">{{'ambassadeApp.Statut.CELIBATAIRE' | translate}}</option>
-                        <option value="MARIE">{{'ambassadeApp.Statut.MARIE' | translate}}</option>
-                        <option value="DIVORCE">{{'ambassadeApp.Statut.DIVORCE' | translate}}</option>
-                        <option value="SEPARE">{{'ambassadeApp.Statut.SEPARE' | translate}}</option>
-                        <option value="VEUF">{{'ambassadeApp.Statut.VEUF' | translate}}</option>
-                    </select>
-                </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.lieuNaissance" for="field_lieuNaissance">Lieu Naissance</label>
+            <input type="text" class="form-control" name="lieuNaissance" id="field_lieuNaissance"
+                [(ngModel)]="passeport.lieuNaissance" required maxlength="30"/>
+            <div [hidden]="!(editForm.controls.lieuNaissance?.dirty && editForm.controls.lieuNaissance?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lieuNaissance?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lieuNaissance?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 30 }">
+                   This field cannot be longer than 30 characters.
+                </small>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.telephone"
-                           for="field_telephone">Telephone</label>
-                    <input type="text" class="form-control form-control-sm" name="telephone" id="field_telephone"
-                           [(ngModel)]="passeport.telephone" maxlength="15"/>
-                    <div [hidden]="!(editForm.controls.telephone?.dirty && editForm.controls.telephone?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.telephone?.errors?.maxlength"
-                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 15 }">
-                            This field cannot be longer than 15 characters.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.typeService"
-                           for="field_typeService">Type
-                        Service</label>
-                    <select class="form-control form-control-sm" id="field_typeService" name="typeService"
-                            [(ngModel)]="passeport.typeService">
-                        <option [ngValue]="null"></option>
-                        <option
-                            [ngValue]="typeServiceOption.id === passeport.typeService?.id ? passeport.typeService : typeServiceOption"
-                            *ngFor="let typeServiceOption of typeservices; trackBy: trackTypeServiceById">
-                            {{typeServiceOption.nom}} {{typeServiceOption.montant}}
-                        </option>
-                    </select>
-                </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.etatCivil" for="field_etatCivil">Etat Civil</label>
+            <select class="form-control" name="etatCivil" [(ngModel)]="passeport.etatCivil" id="field_etatCivil" >
+                <option value="CELIBATAIRE">{{'ambassadeApp.Statut.CELIBATAIRE' | translate}}</option>
+                <option value="MARIE">{{'ambassadeApp.Statut.MARIE' | translate}}</option>
+                <option value="DIVORCE">{{'ambassadeApp.Statut.DIVORCE' | translate}}</option>
+                <option value="SEPARE">{{'ambassadeApp.Statut.SEPARE' | translate}}</option>
+                <option value="VEUF">{{'ambassadeApp.Statut.VEUF' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.adresse" for="field_adresse">Adresse</label>
+            <input type="text" class="form-control" name="adresse" id="field_adresse"
+                [(ngModel)]="passeport.adresse" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.telephone" for="field_telephone">Telephone</label>
+            <input type="text" class="form-control" name="telephone" id="field_telephone"
+                [(ngModel)]="passeport.telephone" maxlength="15"/>
+            <div [hidden]="!(editForm.controls.telephone?.dirty && editForm.controls.telephone?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.telephone?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 15 }">
+                   This field cannot be longer than 15 characters.
+                </small>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.paysEmetteur"
-                           for="field_paysEmetteur">Pays Emetteur</label>
-                    <input type="text" class="form-control form-control-sm" name="paysEmetteur" id="field_paysEmetteur"
-                           [(ngModel)]="passeport.paysEmetteur" maxlength="25"/>
-                    <div [hidden]="!(editForm.controls.paysEmetteur?.dirty && editForm.controls.paysEmetteur?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.paysEmetteur?.errors?.maxlength"
-                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 25 }">
-                            This field cannot be longer than 25 characters.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.nif"
-                           for="field_nif">Nif</label>
-                    <input type="text" class="form-control form-control-sm" name="nif" id="field_nif"
-                           [(ngModel)]="passeport.nif" maxlength="20"/>
-                    <div [hidden]="!(editForm.controls.nif?.dirty && editForm.controls.nif?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nif?.errors?.maxlength"
-                               jhiTranslate="entity.validation.maxlength"
-                               translateValues="{ max: 20 }">
-                            This field cannot be longer than 20 characters.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.nif" for="field_nif">Nif</label>
+            <input type="text" class="form-control" name="nif" id="field_nif"
+                [(ngModel)]="passeport.nif" maxlength="20"/>
+            <div [hidden]="!(editForm.controls.nif?.dirty && editForm.controls.nif?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nif?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
+                   This field cannot be longer than 20 characters.
+                </small>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.soumisLe"
-                           for="field_soumisLe">Soumis
-                        Le</label>
-                    <div class="input-group">
-                        <input id="field_soumisLe" type="text" class="form-control form-control-sm" name="soumisLe" ngbDatepicker
-                               #soumisLeDp="ngbDatepicker" [(ngModel)]="passeport.soumisLe"
-                               required/>
-                        <span class="input-group-append">
-                    <button type="button" class="btn btn-blue btn-sm" (click)="soumisLeDp.toggle()"><i
-                        class="fa fa-calendar"></i></button>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.paysEmetteur" for="field_paysEmetteur">Pays Emetteur</label>
+            <input type="text" class="form-control" name="paysEmetteur" id="field_paysEmetteur"
+                [(ngModel)]="passeport.paysEmetteur" maxlength="25"/>
+            <div [hidden]="!(editForm.controls.paysEmetteur?.dirty && editForm.controls.paysEmetteur?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.paysEmetteur?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 25 }">
+                   This field cannot be longer than 25 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.soumisLe" for="field_soumisLe">Soumis Le</label>
+            <div class="input-group">
+                <input id="field_soumisLe" type="text" class="form-control" name="soumisLe" ngbDatepicker  #soumisLeDp="ngbDatepicker" [(ngModel)]="passeport.soumisLe"
+                required/>
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="soumisLeDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.soumisLe?.dirty && editForm.controls.soumisLe?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.soumisLe?.errors?.required"
-                               jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                    </div>
-                </div>
             </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.delivreLe"
-                           for="field_delivreLe">Delivre
-                        Le</label>
-                    <div class="input-group">
-                        <input id="field_delivreLe" type="text" class="form-control form-control-sm" name="delivreLe" ngbDatepicker
-                               #delivreLeDp="ngbDatepicker" [(ngModel)]="passeport.delivreLe"
-                        />
-                        <span class="input-group-append">
-                    <button type="button" class="btn btn-blue btn-sm" (click)="delivreLeDp.toggle()"><i
-                        class="fa fa-calendar"></i></button>
+            <div [hidden]="!(editForm.controls.soumisLe?.dirty && editForm.controls.soumisLe?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.soumisLe?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.delivreLe" for="field_delivreLe">Delivre Le</label>
+            <div class="input-group">
+                <input id="field_delivreLe" type="text" class="form-control" name="delivreLe" ngbDatepicker  #delivreLeDp="ngbDatepicker" [(ngModel)]="passeport.delivreLe"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="delivreLeDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
-                    </div>
-                </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateEmission"
-                           for="field_dateEmission">Date Emission</label>
-                    <div class="input-group">
-                        <input id="field_dateEmission" type="text" class="form-control form-control-sm" name="dateEmission"
-                               ngbDatepicker
-                               #dateEmissionDp="ngbDatepicker" [(ngModel)]="passeport.dateEmission"
-                        />
-                        <span class="input-group-append">
-                    <button type="button" class="btn btn-blue btn-sm" (click)="dateEmissionDp.toggle()"><i
-                        class="fa fa-calendar"></i></button>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.remarques" for="field_remarques">Remarques</label>
+            <input type="text" class="form-control" name="remarques" id="field_remarques"
+                [(ngModel)]="passeport.remarques" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateEmission" for="field_dateEmission">Date Emission</label>
+            <div class="input-group">
+                <input id="field_dateEmission" type="text" class="form-control" name="dateEmission" ngbDatepicker  #dateEmissionDp="ngbDatepicker" [(ngModel)]="passeport.dateEmission"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateEmissionDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
-                    </div>
-                </div>
             </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateExpiration"
-                           for="field_dateExpiration">Date Expiration</label>
-                    <div class="input-group">
-                        <input id="field_dateExpiration" type="text" class="form-control form-control-sm" name="dateExpiration"
-                               ngbDatepicker
-                               #dateExpirationDp="ngbDatepicker" [(ngModel)]="passeport.dateExpiration"
-                        />
-                        <span class="input-group-append">
-                    <button type="button" class="btn btn-blue btn-sm" (click)="dateExpirationDp.toggle()"><i
-                        class="fa fa-calendar"></i></button>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.dateExpiration" for="field_dateExpiration">Date Expiration</label>
+            <div class="input-group">
+                <input id="field_dateExpiration" type="text" class="form-control" name="dateExpiration" ngbDatepicker  #dateExpirationDp="ngbDatepicker" [(ngModel)]="passeport.dateExpiration"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateExpirationDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
-                    </div>
-                </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.montant"
-                           for="field_montant">Montant</label>
-                    <input type="number" class="form-control form-control-sm" name="montant" id="field_montant"
-                           [(ngModel)]="passeport.montant" required min="0"/>
-                    <div [hidden]="!(editForm.controls.montant?.dirty && editForm.controls.montant?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.montant?.errors?.required"
-                               jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.montant?.errors?.min" jhiTranslate="entity.validation.min"
-                               translateValues="{ min: 0 }">
-                            This field should be at least 0.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.montant?.errors?.number"
-                               jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.remarques"
-                           for="field_remarques">Remarques</label>
-                    <textarea class="form-control form-control-sm" name="remarques" id="field_remarques" cols="40" rows="6"
-                              [(ngModel)]="passeport.remarques"></textarea>
-                    <!--<input type="text" class="form-control" name="remarques" id="field_remarques"-->
-                           <!--[(ngModel)]="passeport.remarques"/>-->
-                </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.sms" for="field_sms">Sms</label>
+            <input type="text" class="form-control" name="sms" id="field_sms"
+                [(ngModel)]="passeport.sms" maxlength="15"/>
+            <div [hidden]="!(editForm.controls.sms?.dirty && editForm.controls.sms?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.sms?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 15 }">
+                   This field cannot be longer than 15 characters.
+                </small>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.documents"
-                           for="field_documents">Documents</label>
-                    <input type="text" class="form-control form-control-sm" name="documents" id="field_documents"
-                           [(ngModel)]="passeport.documents" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.documents?.dirty && editForm.controls.documents?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.documents?.errors?.maxlength"
-                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                            This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.taille" for="field_taille">Taille</label>
+            <input type="number" class="form-control" name="taille" id="field_taille"
+                [(ngModel)]="passeport.taille" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.recu" for="field_recu">Recu</label>
+            <input type="text" class="form-control" name="recu" id="field_recu"
+                [(ngModel)]="passeport.recu" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.photo" for="field_photo">Photo</label>
+            <div>
+                <div *ngIf="passeport.photo" class="form-text text-danger clearfix">
+                    <a class="pull-left" (click)="openFile(passeport.photoContentType, passeport.photo)" jhiTranslate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{passeport.photoContentType}}, {{byteSize(passeport.photo)}}</span>
+                    <button type="button" (click)="passeport.photo=null;passeport.photoContentType=null;"
+                            class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
                 </div>
+                <input type="file" id="file_photo" (change)="setFileData($event, passeport, 'photo', false)" jhiTranslate="entity.action.addblob"/>
             </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.taille"
-                           for="field_taille">Taille</label>
-                    <input type="number" class="form-control form-control-sm" name="taille" id="field_taille"
-                           [(ngModel)]="passeport.taille"/>
-                </div>
-            </div>
+            <input type="hidden" class="form-control" name="photo" id="field_photo"
+                [(ngModel)]="passeport.photo" />
+            <input type="hidden" class="form-control" name="photoContentType" id="field_photoContentType"
+                [(ngModel)]="passeport.photoContentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.state" for="field_state">State</label>
+            <select class="form-control" name="state" [(ngModel)]="passeport.state" id="field_state" >
+                <option value="NOUVEAU">{{'ambassadeApp.State.NOUVEAU' | translate}}</option>
+                <option value="PAYE">{{'ambassadeApp.State.PAYE' | translate}}</option>
+                <option value="ENCOURS">{{'ambassadeApp.State.ENCOURS' | translate}}</option>
+                <option value="PRET">{{'ambassadeApp.State.PRET' | translate}}</option>
+                <option value="RETIRER">{{'ambassadeApp.State.RETIRER' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.cin" for="field_cin">Cin</label>
+            <input type="text" class="form-control" name="cin" id="field_cin"
+                [(ngModel)]="passeport.cin" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.type" for="field_type">Type</label>
+            <input type="text" class="form-control" name="type" id="field_type"
+                [(ngModel)]="passeport.type" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.sexe" for="field_sexe">Sexe</label>
+            <select class="form-control" name="sexe" [(ngModel)]="passeport.sexe" id="field_sexe" >
+                <option value="FEMININ">{{'ambassadeApp.Sexe.FEMININ' | translate}}</option>
+                <option value="MASCULIN">{{'ambassadeApp.Sexe.MASCULIN' | translate}}</option>
+            </select>
         </div>
 
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.recu"
-                           for="field_recu">Recu</label>
-                    <input type="text" class="form-control form-control-sm" name="recu" id="field_recu"
-                           [(ngModel)]="passeport.recu"/>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.state"
-                           for="field_state">State</label>
-                    <select class="form-control form-control-sm" name="state" [(ngModel)]="passeport.state" id="field_state">
-                        <option value="NOUVEAU">{{'ambassadeApp.State.NOUVEAU' | translate}}</option>
-                        <option value="PAYE">{{'ambassadeApp.State.PAYE' | translate}}</option>
-                        <option value="ENCOURS">{{'ambassadeApp.State.ENCOURS' | translate}}</option>
-                        <option value="PRET">{{'ambassadeApp.State.PRET' | translate}}</option>
-                        <option value="RETIRER">{{'ambassadeApp.State.RETIRER' | translate}}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.photo"
-                           for="field_photo">Photo</label>
-                    <div>
-                        <div *ngIf="passeport.photo" class="form-text text-danger clearfix">
-                            <a class="pull-left" (click)="openFile(passeport.photoContentType, passeport.photo)"
-                               jhiTranslate="entity.action.open">open</a><br>
-                            <span class="pull-left">{{passeport.photoContentType}}, {{byteSize(passeport.photo)}}</span>
-                            <button type="button" (click)="passeport.photo=null;passeport.photoContentType=null;"
-                                    class="btn btn-secondary btn-xs pull-right">
-                                <span class="fa fa-times"></span>
-                            </button>
-                        </div>
-                        <input type="file" id="file_photo" class="form-control form-control-sm" (change)="setFileData($event, passeport, 'photo', false)"
-                               jhiTranslate="entity.action.addblob"/>
-                    </div>
-                    <input type="hidden" class="form-control form-control-sm" name="photo" id="field_photo"
-                           [(ngModel)]="passeport.photo"/>
-                    <input type="hidden" class="form-control" name="photoContentType" id="field_photoContentType"
-                           [(ngModel)]="passeport.photoContentType"/>
-                </div>
-            </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.typeService" for="field_typeService">Type Service</label>
+            <select class="form-control" id="field_typeService" name="typeService" [(ngModel)]="passeport.typeService" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="typeServiceOption.id === passeport.typeService?.id ? passeport.typeService : typeServiceOption" *ngFor="let typeServiceOption of typeservices; trackBy: trackTypeServiceById">{{typeServiceOption.id}}</option>
+            </select>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-xs plat" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-blue btn-xs plat">
-            <span class="fa fa-download"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>
 </form>

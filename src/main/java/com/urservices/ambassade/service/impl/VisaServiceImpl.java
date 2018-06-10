@@ -39,6 +39,17 @@ public class VisaServiceImpl implements VisaService {
     @Override
     public Visa save(Visa visa) {
         log.debug("Request to save Visa : {}", visa);
+//        LocalDate localDate = LocalDate.now();
+//        String numeroVisa = "";
+//        numeroVisa += localDate.getYear();
+//        numeroVisa += localDate.getMonthValue();
+//        numeroVisa += localDate.getDayOfMonth();
+//        Visa visaSaved = visaRepository.save(visa);
+//        numeroVisa += visaSaved.getId();
+//        System.out.println("VisaBuilded = " + numeroVisa);
+//        visaSaved.setNumeroVisa(Long.parseLong(numeroVisa));
+//        System.out.println("Visa Setted = " + visaSaved.getNumeroVisa());
+//        return visaRepository.save(visaSaved);
         return visaRepository.save(visa);
     }
 

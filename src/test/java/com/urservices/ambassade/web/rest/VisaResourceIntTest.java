@@ -4,7 +4,6 @@ import com.urservices.ambassade.AmbassadeApp;
 
 import com.urservices.ambassade.domain.Visa;
 import com.urservices.ambassade.repository.VisaRepository;
-import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.VisaService;
 import com.urservices.ambassade.web.rest.errors.ExceptionTranslator;
 
@@ -21,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -67,9 +67,6 @@ public class VisaResourceIntTest {
     private static final LocalDate DEFAULT_DATE_EXPIRATION = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_EXPIRATION = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Integer DEFAULT_VALIDE_POUR = 1;
-    private static final Integer UPDATED_VALIDE_POUR = 2;
-
     private static final String DEFAULT_NOMBRE_ENTREE = "AAAAAAAAAA";
     private static final String UPDATED_NOMBRE_ENTREE = "BBBBBBBBBB";
 
@@ -91,11 +88,37 @@ public class VisaResourceIntTest {
     private static final State DEFAULT_STATE = State.NOUVEAU;
     private static final State UPDATED_STATE = State.PAYE;
 
-    @Autowired
-    private VisaRepository visaRepository;
+    private static final String DEFAULT_PROFESSION = "AAAAAAAAAA";
+    private static final String UPDATED_PROFESSION = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_NOMBRE_DE_JOUR = 1;
+    private static final Integer UPDATED_NOMBRE_DE_JOUR = 2;
+
+    private static final byte[] DEFAULT_PHOTO_DEMANDEUR_VISA = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_PHOTO_DEMANDEUR_VISA = TestUtil.createByteArray(2, "1");
+    private static final String DEFAULT_PHOTO_DEMANDEUR_VISA_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_PHOTO_DEMANDEUR_VISA_CONTENT_TYPE = "image/png";
+
+    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
+    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ADRESSE_DE_SEJOUR = "AAAAAAAAAA";
+    private static final String UPDATED_ADRESSE_DE_SEJOUR = "BBBBBBBBBB";
+
+    private static final String DEFAULT_NOM_EMPLOYEUR = "AAAAAAAAAA";
+    private static final String UPDATED_NOM_EMPLOYEUR = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ADRESSE_EMPLOYEUR = "AAAAAAAAAA";
+    private static final String UPDATED_ADRESSE_EMPLOYEUR = "BBBBBBBBBB";
+
+    private static final String DEFAULT_TELEPHONE_EMPLOYEUR = "AAAAAAAAAA";
+    private static final String UPDATED_TELEPHONE_EMPLOYEUR = "BBBBBBBBBB";
+
+    private static final String DEFAULT_EMAIL_EMPLOYEUR = "AAAAAAAAAA";
+    private static final String UPDATED_EMAIL_EMPLOYEUR = "BBBBBBBBBB";
 
     @Autowired
-    private PaiementService paiementService;
+    private VisaRepository visaRepository;
 
     @Autowired
     private VisaService visaService;
@@ -119,7 +142,7 @@ public class VisaResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final VisaResource visaResource = new VisaResource(visaService, paiementService);
+        final VisaResource visaResource = new VisaResource(visaService);
         this.restVisaMockMvc = MockMvcBuilders.standaloneSetup(visaResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -143,14 +166,23 @@ public class VisaResourceIntTest {
             .numeroVisa(DEFAULT_NUMERO_VISA)
             .dateEmission(DEFAULT_DATE_EMISSION)
             .dateExpiration(DEFAULT_DATE_EXPIRATION)
-            .validePour(DEFAULT_VALIDE_POUR)
             .nombreEntree(DEFAULT_NOMBRE_ENTREE)
             .type(DEFAULT_TYPE)
             .categorie(DEFAULT_CATEGORIE)
             .taxes(DEFAULT_TAXES)
             .adresse(DEFAULT_ADRESSE)
             .remarques(DEFAULT_REMARQUES)
-            .state(DEFAULT_STATE);
+            .state(DEFAULT_STATE)
+            .profession(DEFAULT_PROFESSION)
+            .nombreDeJour(DEFAULT_NOMBRE_DE_JOUR)
+            .photoDemandeurVisa(DEFAULT_PHOTO_DEMANDEUR_VISA)
+            .photoDemandeurVisaContentType(DEFAULT_PHOTO_DEMANDEUR_VISA_CONTENT_TYPE)
+            .email(DEFAULT_EMAIL)
+            .adresseDeSejour(DEFAULT_ADRESSE_DE_SEJOUR)
+            .nomEmployeur(DEFAULT_NOM_EMPLOYEUR)
+            .adresseEmployeur(DEFAULT_ADRESSE_EMPLOYEUR)
+            .telephoneEmployeur(DEFAULT_TELEPHONE_EMPLOYEUR)
+            .emailEmployeur(DEFAULT_EMAIL_EMPLOYEUR);
         return visa;
     }
 
@@ -182,7 +214,6 @@ public class VisaResourceIntTest {
         assertThat(testVisa.getNumeroVisa()).isEqualTo(DEFAULT_NUMERO_VISA);
         assertThat(testVisa.getDateEmission()).isEqualTo(DEFAULT_DATE_EMISSION);
         assertThat(testVisa.getDateExpiration()).isEqualTo(DEFAULT_DATE_EXPIRATION);
-        assertThat(testVisa.getValidePour()).isEqualTo(DEFAULT_VALIDE_POUR);
         assertThat(testVisa.getNombreEntree()).isEqualTo(DEFAULT_NOMBRE_ENTREE);
         assertThat(testVisa.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testVisa.getCategorie()).isEqualTo(DEFAULT_CATEGORIE);
@@ -190,6 +221,16 @@ public class VisaResourceIntTest {
         assertThat(testVisa.getAdresse()).isEqualTo(DEFAULT_ADRESSE);
         assertThat(testVisa.getRemarques()).isEqualTo(DEFAULT_REMARQUES);
         assertThat(testVisa.getState()).isEqualTo(DEFAULT_STATE);
+        assertThat(testVisa.getProfession()).isEqualTo(DEFAULT_PROFESSION);
+        assertThat(testVisa.getNombreDeJour()).isEqualTo(DEFAULT_NOMBRE_DE_JOUR);
+        assertThat(testVisa.getPhotoDemandeurVisa()).isEqualTo(DEFAULT_PHOTO_DEMANDEUR_VISA);
+        assertThat(testVisa.getPhotoDemandeurVisaContentType()).isEqualTo(DEFAULT_PHOTO_DEMANDEUR_VISA_CONTENT_TYPE);
+        assertThat(testVisa.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testVisa.getAdresseDeSejour()).isEqualTo(DEFAULT_ADRESSE_DE_SEJOUR);
+        assertThat(testVisa.getNomEmployeur()).isEqualTo(DEFAULT_NOM_EMPLOYEUR);
+        assertThat(testVisa.getAdresseEmployeur()).isEqualTo(DEFAULT_ADRESSE_EMPLOYEUR);
+        assertThat(testVisa.getTelephoneEmployeur()).isEqualTo(DEFAULT_TELEPHONE_EMPLOYEUR);
+        assertThat(testVisa.getEmailEmployeur()).isEqualTo(DEFAULT_EMAIL_EMPLOYEUR);
     }
 
     @Test
@@ -213,24 +254,6 @@ public class VisaResourceIntTest {
 
     @Test
     @Transactional
-    public void checkNumeroVisaIsRequired() throws Exception {
-        int databaseSizeBeforeTest = visaRepository.findAll().size();
-        // set the field null
-        visa.setNumeroVisa(null);
-
-        // Create the Visa, which fails.
-
-        restVisaMockMvc.perform(post("/api/visas")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(visa)))
-            .andExpect(status().isBadRequest());
-
-        List<Visa> visaList = visaRepository.findAll();
-        assertThat(visaList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllVisas() throws Exception {
         // Initialize the database
         visaRepository.saveAndFlush(visa);
@@ -248,14 +271,23 @@ public class VisaResourceIntTest {
             .andExpect(jsonPath("$.[*].numeroVisa").value(hasItem(DEFAULT_NUMERO_VISA.intValue())))
             .andExpect(jsonPath("$.[*].dateEmission").value(hasItem(DEFAULT_DATE_EMISSION.toString())))
             .andExpect(jsonPath("$.[*].dateExpiration").value(hasItem(DEFAULT_DATE_EXPIRATION.toString())))
-            .andExpect(jsonPath("$.[*].validePour").value(hasItem(DEFAULT_VALIDE_POUR)))
             .andExpect(jsonPath("$.[*].nombreEntree").value(hasItem(DEFAULT_NOMBRE_ENTREE.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].categorie").value(hasItem(DEFAULT_CATEGORIE.toString())))
             .andExpect(jsonPath("$.[*].taxes").value(hasItem(DEFAULT_TAXES)))
             .andExpect(jsonPath("$.[*].adresse").value(hasItem(DEFAULT_ADRESSE.toString())))
             .andExpect(jsonPath("$.[*].remarques").value(hasItem(DEFAULT_REMARQUES.toString())))
-            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())));
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
+            .andExpect(jsonPath("$.[*].profession").value(hasItem(DEFAULT_PROFESSION.toString())))
+            .andExpect(jsonPath("$.[*].nombreDeJour").value(hasItem(DEFAULT_NOMBRE_DE_JOUR)))
+            .andExpect(jsonPath("$.[*].photoDemandeurVisaContentType").value(hasItem(DEFAULT_PHOTO_DEMANDEUR_VISA_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].photoDemandeurVisa").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO_DEMANDEUR_VISA))))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
+            .andExpect(jsonPath("$.[*].adresseDeSejour").value(hasItem(DEFAULT_ADRESSE_DE_SEJOUR.toString())))
+            .andExpect(jsonPath("$.[*].nomEmployeur").value(hasItem(DEFAULT_NOM_EMPLOYEUR.toString())))
+            .andExpect(jsonPath("$.[*].adresseEmployeur").value(hasItem(DEFAULT_ADRESSE_EMPLOYEUR.toString())))
+            .andExpect(jsonPath("$.[*].telephoneEmployeur").value(hasItem(DEFAULT_TELEPHONE_EMPLOYEUR.toString())))
+            .andExpect(jsonPath("$.[*].emailEmployeur").value(hasItem(DEFAULT_EMAIL_EMPLOYEUR.toString())));
     }
 
     @Test
@@ -277,14 +309,23 @@ public class VisaResourceIntTest {
             .andExpect(jsonPath("$.numeroVisa").value(DEFAULT_NUMERO_VISA.intValue()))
             .andExpect(jsonPath("$.dateEmission").value(DEFAULT_DATE_EMISSION.toString()))
             .andExpect(jsonPath("$.dateExpiration").value(DEFAULT_DATE_EXPIRATION.toString()))
-            .andExpect(jsonPath("$.validePour").value(DEFAULT_VALIDE_POUR))
             .andExpect(jsonPath("$.nombreEntree").value(DEFAULT_NOMBRE_ENTREE.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.categorie").value(DEFAULT_CATEGORIE.toString()))
             .andExpect(jsonPath("$.taxes").value(DEFAULT_TAXES))
             .andExpect(jsonPath("$.adresse").value(DEFAULT_ADRESSE.toString()))
             .andExpect(jsonPath("$.remarques").value(DEFAULT_REMARQUES.toString()))
-            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()));
+            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
+            .andExpect(jsonPath("$.profession").value(DEFAULT_PROFESSION.toString()))
+            .andExpect(jsonPath("$.nombreDeJour").value(DEFAULT_NOMBRE_DE_JOUR))
+            .andExpect(jsonPath("$.photoDemandeurVisaContentType").value(DEFAULT_PHOTO_DEMANDEUR_VISA_CONTENT_TYPE))
+            .andExpect(jsonPath("$.photoDemandeurVisa").value(Base64Utils.encodeToString(DEFAULT_PHOTO_DEMANDEUR_VISA)))
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
+            .andExpect(jsonPath("$.adresseDeSejour").value(DEFAULT_ADRESSE_DE_SEJOUR.toString()))
+            .andExpect(jsonPath("$.nomEmployeur").value(DEFAULT_NOM_EMPLOYEUR.toString()))
+            .andExpect(jsonPath("$.adresseEmployeur").value(DEFAULT_ADRESSE_EMPLOYEUR.toString()))
+            .andExpect(jsonPath("$.telephoneEmployeur").value(DEFAULT_TELEPHONE_EMPLOYEUR.toString()))
+            .andExpect(jsonPath("$.emailEmployeur").value(DEFAULT_EMAIL_EMPLOYEUR.toString()));
     }
 
     @Test
@@ -316,14 +357,23 @@ public class VisaResourceIntTest {
             .numeroVisa(UPDATED_NUMERO_VISA)
             .dateEmission(UPDATED_DATE_EMISSION)
             .dateExpiration(UPDATED_DATE_EXPIRATION)
-            .validePour(UPDATED_VALIDE_POUR)
             .nombreEntree(UPDATED_NOMBRE_ENTREE)
             .type(UPDATED_TYPE)
             .categorie(UPDATED_CATEGORIE)
             .taxes(UPDATED_TAXES)
             .adresse(UPDATED_ADRESSE)
             .remarques(UPDATED_REMARQUES)
-            .state(UPDATED_STATE);
+            .state(UPDATED_STATE)
+            .profession(UPDATED_PROFESSION)
+            .nombreDeJour(UPDATED_NOMBRE_DE_JOUR)
+            .photoDemandeurVisa(UPDATED_PHOTO_DEMANDEUR_VISA)
+            .photoDemandeurVisaContentType(UPDATED_PHOTO_DEMANDEUR_VISA_CONTENT_TYPE)
+            .email(UPDATED_EMAIL)
+            .adresseDeSejour(UPDATED_ADRESSE_DE_SEJOUR)
+            .nomEmployeur(UPDATED_NOM_EMPLOYEUR)
+            .adresseEmployeur(UPDATED_ADRESSE_EMPLOYEUR)
+            .telephoneEmployeur(UPDATED_TELEPHONE_EMPLOYEUR)
+            .emailEmployeur(UPDATED_EMAIL_EMPLOYEUR);
 
         restVisaMockMvc.perform(put("/api/visas")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -342,7 +392,6 @@ public class VisaResourceIntTest {
         assertThat(testVisa.getNumeroVisa()).isEqualTo(UPDATED_NUMERO_VISA);
         assertThat(testVisa.getDateEmission()).isEqualTo(UPDATED_DATE_EMISSION);
         assertThat(testVisa.getDateExpiration()).isEqualTo(UPDATED_DATE_EXPIRATION);
-        assertThat(testVisa.getValidePour()).isEqualTo(UPDATED_VALIDE_POUR);
         assertThat(testVisa.getNombreEntree()).isEqualTo(UPDATED_NOMBRE_ENTREE);
         assertThat(testVisa.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testVisa.getCategorie()).isEqualTo(UPDATED_CATEGORIE);
@@ -350,6 +399,16 @@ public class VisaResourceIntTest {
         assertThat(testVisa.getAdresse()).isEqualTo(UPDATED_ADRESSE);
         assertThat(testVisa.getRemarques()).isEqualTo(UPDATED_REMARQUES);
         assertThat(testVisa.getState()).isEqualTo(UPDATED_STATE);
+        assertThat(testVisa.getProfession()).isEqualTo(UPDATED_PROFESSION);
+        assertThat(testVisa.getNombreDeJour()).isEqualTo(UPDATED_NOMBRE_DE_JOUR);
+        assertThat(testVisa.getPhotoDemandeurVisa()).isEqualTo(UPDATED_PHOTO_DEMANDEUR_VISA);
+        assertThat(testVisa.getPhotoDemandeurVisaContentType()).isEqualTo(UPDATED_PHOTO_DEMANDEUR_VISA_CONTENT_TYPE);
+        assertThat(testVisa.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testVisa.getAdresseDeSejour()).isEqualTo(UPDATED_ADRESSE_DE_SEJOUR);
+        assertThat(testVisa.getNomEmployeur()).isEqualTo(UPDATED_NOM_EMPLOYEUR);
+        assertThat(testVisa.getAdresseEmployeur()).isEqualTo(UPDATED_ADRESSE_EMPLOYEUR);
+        assertThat(testVisa.getTelephoneEmployeur()).isEqualTo(UPDATED_TELEPHONE_EMPLOYEUR);
+        assertThat(testVisa.getEmailEmployeur()).isEqualTo(UPDATED_EMAIL_EMPLOYEUR);
     }
 
     @Test
