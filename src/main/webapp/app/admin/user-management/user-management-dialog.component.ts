@@ -6,6 +6,7 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { UserModalService } from './user-modal.service';
 import { JhiLanguageHelper, User, UserService } from '../../shared';
+import {EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE} from '../../shared/constants/error.constants';
 
 @Component({
     selector: 'jhi-user-mgmt-dialog',
@@ -17,6 +18,12 @@ export class UserMgmtDialogComponent implements OnInit {
     languages: any[];
     authorities: any[];
     isSaving: Boolean;
+    confirmPassword: string;
+    doNotMatch: string;
+    error: string;
+    errorEmailExists: string;
+    errorUserExists: string;
+    success: boolean;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -27,6 +34,7 @@ export class UserMgmtDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
+        this.success = false;
         this.authorities = [];
         this.userService.authorities().subscribe((authorities) => {
             this.authorities = authorities;
@@ -42,16 +50,37 @@ export class UserMgmtDialogComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        if (this.user.id !== null) {
-            this.userService.update(this.user).subscribe((response) => this.onSaveSuccess(response), () => this.onSaveError());
+        if (this.user.password !== this.confirmPassword) {
+            this.doNotMatch = 'ERROR';
         } else {
-            this.userService.create(this.user).subscribe((response) => this.onSaveSuccess(response), () => this.onSaveError());
+            this.doNotMatch = null;
+            this.error = null;
+            this.errorUserExists = null;
+            this.errorEmailExists = null;
+            if (this.user.id !== null) {
+                this.userService.update(this.user).subscribe((response) => this.onSaveSuccess(response), (response) => this.processError(response));
+            } else {
+                this.userService.create(this.user).subscribe((response) => this.onSaveSuccess(response), (response) => this.processError(response));
+            }
+        }
+    }
+
+    private processError(response) {
+        this.success = null;
+        this.isSaving = false;
+        if (response.status === 400 && response.json().type === LOGIN_ALREADY_USED_TYPE) {
+            this.errorUserExists = 'ERROR';
+        } else if (response.status === 400 && response.json().type === EMAIL_ALREADY_USED_TYPE) {
+            this.errorEmailExists = 'ERROR';
+        } else {
+            this.error = 'ERROR';
         }
     }
 
     private onSaveSuccess(result) {
         this.eventManager.broadcast({ name: 'userListModification', content: 'OK' });
         this.isSaving = false;
+        this.success = true;
         this.activeModal.dismiss(result.body);
     }
 
