@@ -329,31 +329,6 @@
         <div class="row">
             <div class="col-12 col-sm-6">
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.montant"
-                           for="field_montant">Montant</label>
-                    <input type="number" class="form-control form-control-sm" name="montant" id="field_montant"
-                           [(ngModel)]="passeport.montant" required min="0"/>
-                    <div [hidden]="!(editForm.controls.montant?.dirty && editForm.controls.montant?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.montant?.errors?.required"
-                               jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.montant?.errors?.min" jhiTranslate="entity.validation.min"
-                               translateValues="{ min: 0 }">
-                            This field should be at least 0.
-                        </small>
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.montant?.errors?.number"
-                               jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.remarques"
                            for="field_remarques">Remarques</label>
                     <textarea class="form-control form-control-sm" name="remarques" id="field_remarques" cols="40" rows="6"
@@ -365,21 +340,6 @@
         </div>
 
         <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.documents"
-                           for="field_documents">Documents</label>
-                    <input type="text" class="form-control form-control-sm" name="documents" id="field_documents"
-                           [(ngModel)]="passeport.documents" maxlength="50"/>
-                    <div [hidden]="!(editForm.controls.documents?.dirty && editForm.controls.documents?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.documents?.errors?.maxlength"
-                               jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                            This field cannot be longer than 50 characters.
-                        </small>
-                    </div>
-                </div>
-            </div>
             <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.taille"

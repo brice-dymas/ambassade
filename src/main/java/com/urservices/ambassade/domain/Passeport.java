@@ -7,7 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -83,11 +82,6 @@ public class Passeport implements Serializable {
     @Column(name = "delivre_le")
     private LocalDate delivreLe;
 
-    @NotNull
-    @DecimalMin(value = "0")
-    @Column(name = "montant", precision=10, scale=2, nullable = false)
-    private BigDecimal montant;
-
     @Column(name = "remarques")
     private String remarques;
 
@@ -97,20 +91,9 @@ public class Passeport implements Serializable {
     @Column(name = "date_expiration")
     private LocalDate dateExpiration;
 
-    @Column(name = "remarques_r")
-    private String remarquesR;
-
     @Size(max = 15)
     @Column(name = "sms", length = 15)
     private String sms;
-
-    @Size(max = 60)
-    @Column(name = "sms_2", length = 60)
-    private String sms2;
-
-    @Size(max = 50)
-    @Column(name = "documents", length = 50)
-    private String documents;
 
     @Column(name = "taille")
     private Integer taille;
@@ -310,19 +293,6 @@ public class Passeport implements Serializable {
         this.delivreLe = delivreLe;
     }
 
-    public BigDecimal getMontant() {
-        return montant;
-    }
-
-    public Passeport montant(BigDecimal montant) {
-        this.montant = montant;
-        return this;
-    }
-
-    public void setMontant(BigDecimal montant) {
-        this.montant = montant;
-    }
-
     public String getRemarques() {
         return remarques;
     }
@@ -362,19 +332,6 @@ public class Passeport implements Serializable {
         this.dateExpiration = dateExpiration;
     }
 
-    public String getRemarquesR() {
-        return remarquesR;
-    }
-
-    public Passeport remarquesR(String remarquesR) {
-        this.remarquesR = remarquesR;
-        return this;
-    }
-
-    public void setRemarquesR(String remarquesR) {
-        this.remarquesR = remarquesR;
-    }
-
     public String getSms() {
         return sms;
     }
@@ -386,32 +343,6 @@ public class Passeport implements Serializable {
 
     public void setSms(String sms) {
         this.sms = sms;
-    }
-
-    public String getSms2() {
-        return sms2;
-    }
-
-    public Passeport sms2(String sms2) {
-        this.sms2 = sms2;
-        return this;
-    }
-
-    public void setSms2(String sms2) {
-        this.sms2 = sms2;
-    }
-
-    public String getDocuments() {
-        return documents;
-    }
-
-    public Passeport documents(String documents) {
-        this.documents = documents;
-        return this;
-    }
-
-    public void setDocuments(String documents) {
-        this.documents = documents;
     }
 
     public Integer getTaille() {
@@ -530,14 +461,10 @@ public class Passeport implements Serializable {
             ", paysEmetteur='" + getPaysEmetteur() + "'" +
             ", soumisLe='" + getSoumisLe() + "'" +
             ", delivreLe='" + getDelivreLe() + "'" +
-            ", montant=" + getMontant() +
             ", remarques='" + getRemarques() + "'" +
             ", dateEmission='" + getDateEmission() + "'" +
             ", dateExpiration='" + getDateExpiration() + "'" +
-            ", remarquesR='" + getRemarquesR() + "'" +
             ", sms='" + getSms() + "'" +
-            ", sms2='" + getSms2() + "'" +
-            ", documents='" + getDocuments() + "'" +
             ", taille=" + getTaille() +
             ", recu='" + getRecu() + "'" +
             ", photo='" + getPhoto() + "'" +
