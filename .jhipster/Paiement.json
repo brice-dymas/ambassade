@@ -30,12 +30,16 @@
         {
             "fieldName": "datePaiement",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "numeroPaiement",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20180527135026",
-    "entityTableName": "paiement",
     "dto": "no",
-    "pagination": "pagination",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "paiement",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
 }

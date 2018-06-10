@@ -26,6 +26,9 @@ public class Paiement implements Serializable {
     @Column(name = "date_paiement")
     private LocalDate datePaiement;
 
+    @Column(name = "numero_paiement")
+    private String numeroPaiement;
+
     @ManyToOne
     private Visa visa;
 
@@ -58,6 +61,19 @@ public class Paiement implements Serializable {
 
     public void setDatePaiement(LocalDate datePaiement) {
         this.datePaiement = datePaiement;
+    }
+
+    public String getNumeroPaiement() {
+        return numeroPaiement;
+    }
+
+    public Paiement numeroPaiement(String numeroPaiement) {
+        this.numeroPaiement = numeroPaiement;
+        return this;
+    }
+
+    public void setNumeroPaiement(String numeroPaiement) {
+        this.numeroPaiement = numeroPaiement;
     }
 
     public Visa getVisa() {
@@ -138,6 +154,7 @@ public class Paiement implements Serializable {
         return "Paiement{" +
             "id=" + getId() +
             ", datePaiement='" + getDatePaiement() + "'" +
+            ", numeroPaiement='" + getNumeroPaiement() + "'" +
             "}";
     }
 }

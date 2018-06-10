@@ -26,6 +26,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="numero_paiement" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="visa_id" type="bigint">
                 <constraints nullable="true" />
             </column>
