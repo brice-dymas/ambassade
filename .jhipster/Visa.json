@@ -51,10 +51,11 @@
         },
         {
             "fieldName": "numeroVisa",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Long"
+//        ,
+//            "fieldValidateRules": [
+//                "required"
+//            ]
         },
         {
             "fieldName": "dateEmission",

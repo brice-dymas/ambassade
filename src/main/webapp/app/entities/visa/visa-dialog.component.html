@@ -82,21 +82,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.visa.numeroVisa" for="field_numeroVisa">Numero Visa</label>
-                    <input type="number" class="form-control form-control-sm" name="numeroVisa" id="field_numeroVisa" [(ngModel)]="visa.numeroVisa"
-                        required/>
-                    <div [hidden]="!(editForm.controls.numeroVisa?.dirty && editForm.controls.numeroVisa?.invalid)">
-                        <small class="form-text text-danger" [hidden]="!editForm.controls.numeroVisa?.errors?.required" jhiTranslate="entity.validation.required">
-                            This field is required.
-                        </small>
-                        <small class="form-text text-danger" [hidden]="!editForm.controls.numeroVisa?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-            </div>
+            <!--<div class="col-12 col-sm-6">-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" jhiTranslate="ambassadeApp.visa.numeroVisa" for="field_numeroVisa">Numero Visa</label>-->
+                    <!--<input type="number" class="form-control form-control-sm" name="numeroVisa" id="field_numeroVisa" [(ngModel)]="visa.numeroVisa"-->
+                        <!--/>-->
+                    <!--<div [hidden]="!(editForm.controls.numeroVisa?.dirty && editForm.controls.numeroVisa?.invalid)">-->
+                        <!--<small class="form-text text-danger" [hidden]="!editForm.controls.numeroVisa?.errors?.required" jhiTranslate="entity.validation.required">-->
+                            <!--This field is required.-->
+                        <!--</small>-->
+                        <!--<small class="form-text text-danger" [hidden]="!editForm.controls.numeroVisa?.errors?.number" jhiTranslate="entity.validation.number">-->
+                            <!--This field should be a number.-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
 
         <div class="row">

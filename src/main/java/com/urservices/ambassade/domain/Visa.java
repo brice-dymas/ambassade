@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import com.urservices.ambassade.domain.enumeration.State;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * A Visa.
@@ -18,6 +19,7 @@ import com.urservices.ambassade.domain.enumeration.State;
 @Entity
 @Table(name = "visa")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@EntityListeners({AuditingEntityListener.class})
 public class Visa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,7 +48,7 @@ public class Visa implements Serializable {
     @Column(name = "cedula", length = 30)
     private String cedula;
 
-    @NotNull
+//    @NotNull
     @Column(name = "numero_visa", nullable = false)
     private Long numeroVisa;
 
@@ -360,5 +362,17 @@ public class Visa implements Serializable {
             ", remarques='" + getRemarques() + "'" +
             ", state='" + getState() + "'" +
             "}";
+    }
+
+
+    @PostPersist
+    public void generateNumeroVisa() {
+        LocalDate localDate = LocalDate.now();
+        String numeroVisa = "";
+        numeroVisa += localDate.getYear();
+        numeroVisa += localDate.getMonthValue() <10 ? "0"+localDate.getMonthValue() : localDate.getMonthValue();
+        numeroVisa += localDate.getDayOfMonth() <10 ? "0"+localDate.getDayOfMonth() : localDate.getDayOfMonth();
+        numeroVisa += this.getId() <10 ? "0"+this.getId() : this.getId();
+        this.setNumeroVisa(Long.parseLong(numeroVisa));
     }
 }
