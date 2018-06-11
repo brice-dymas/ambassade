@@ -11,7 +11,6 @@ export const enum Statuts {
 export class PasseportModelDTO implements BaseEntity {
     constructor(
         public id?: number,
-        public numeroFormulaire?: number,
         public nom?: string,
         public prenom?: string,
         public numeroPasseport?: string,

@@ -15,6 +15,7 @@ import com.urservices.ambassade.domain.enumeration.Statut;
 import com.urservices.ambassade.domain.enumeration.State;
 
 import com.urservices.ambassade.domain.enumeration.Sexe;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * A Passeport.
@@ -22,6 +23,7 @@ import com.urservices.ambassade.domain.enumeration.Sexe;
 @Entity
 @Table(name = "passeport")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@EntityListeners({AuditingEntityListener.class})
 public class Passeport implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,11 +31,6 @@ public class Passeport implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
-    @Min(value = 0L)
-    @Column(name = "numero_formulaire", nullable = false)
-    private Long numeroFormulaire;
 
     @NotNull
     @Size(max = 30)
@@ -134,19 +131,6 @@ public class Passeport implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getNumeroFormulaire() {
-        return numeroFormulaire;
-    }
-
-    public Passeport numeroFormulaire(Long numeroFormulaire) {
-        this.numeroFormulaire = numeroFormulaire;
-        return this;
-    }
-
-    public void setNumeroFormulaire(Long numeroFormulaire) {
-        this.numeroFormulaire = numeroFormulaire;
     }
 
     public String getNom() {
@@ -499,7 +483,6 @@ public class Passeport implements Serializable {
     public String toString() {
         return "Passeport{" +
             "id=" + getId() +
-            ", numeroFormulaire=" + getNumeroFormulaire() +
             ", nom='" + getNom() + "'" +
             ", prenom='" + getPrenom() + "'" +
             ", numeroPasseport='" + getNumeroPasseport() + "'" +
@@ -525,5 +508,16 @@ public class Passeport implements Serializable {
             ", type='" + getType() + "'" +
             ", sexe='" + getSexe() + "'" +
             "}";
+    }
+
+    @PostPersist
+    public void generateNumeroRecu() {
+        LocalDate localDate = LocalDate.now();
+        String numeroRecu = "";
+        numeroRecu += localDate.getYear();
+        numeroRecu += localDate.getMonthValue() < 10 ? "0" + localDate.getMonthValue() : localDate.getMonthValue();
+        numeroRecu += localDate.getDayOfMonth() < 10 ? "0" + localDate.getDayOfMonth() : localDate.getDayOfMonth();
+        numeroRecu += this.getId() < 10 ? "0" + this.getId() : this.getId();
+        this.setRecu(numeroRecu);
     }
 }

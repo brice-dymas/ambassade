@@ -24,7 +24,6 @@ export const enum Sexe {
 export class Passeport implements BaseEntity {
     constructor(
         public id?: number,
-        public numeroFormulaire?: number,
         public nom?: string,
         public prenom?: string,
         public numeroPasseport?: string,

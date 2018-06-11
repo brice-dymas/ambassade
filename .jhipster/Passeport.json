@@ -10,15 +10,6 @@
     ],
     "fields": [
         {
-            "fieldName": "numeroFormulaire",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required",
-                "min"
-            ],
-            "fieldValidateRulesMin": 0
-        },
-        {
             "fieldName": "nom",
             "fieldType": "String",
             "fieldValidateRules": [
