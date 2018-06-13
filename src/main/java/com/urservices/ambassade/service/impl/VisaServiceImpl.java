@@ -155,25 +155,11 @@ public class VisaServiceImpl implements VisaService {
 //                predicate = visa.nombreEntree.likeIgnoreCase("%"+nombreEntree);
 //            }
 //        }
-        if(type!=null && !type.isEmpty()){
-            if(added){
-                predicate = predicate.and(visa.type.likeIgnoreCase("%"+type+"%"));
-            }else{
-                predicate = visa.type.likeIgnoreCase("%"+type+"%");
-            }
-        }
         if(adresse!=null && !adresse.isEmpty()){
             if(added){
                 predicate = predicate.and(visa.adresse.likeIgnoreCase("%"+adresse+"%"));
             }else{
                 predicate = visa.adresse.likeIgnoreCase("%"+adresse+"%");
-            }
-        }
-        if(categorie!=null && !categorie.isEmpty()){
-            if(added){
-                predicate = predicate.and(visa.categorie.likeIgnoreCase("%"+categorie+"%"));
-            }else{
-                predicate = visa.categorie.likeIgnoreCase("%"+categorie+"%");
             }
         }
 //        if(remarques!=null && !remarques.isEmpty()){

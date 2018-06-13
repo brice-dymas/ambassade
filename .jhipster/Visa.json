@@ -6,6 +6,21 @@
             "relationshipName": "typeService",
             "otherEntityName": "typeService",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "typeEntree",
+            "otherEntityName": "typeEntree",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "categorie",
+            "otherEntityName": "categorie",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -68,22 +83,6 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 20
-        },
-        {
-            "fieldName": "type",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 20
-        },
-        {
-            "fieldName": "categorie",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 25
         },
         {
             "fieldName": "taxes",

@@ -14,5 +14,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="type_service"/>
 
+        <addForeignKeyConstraint baseColumnNames="type_entree_id"
+                                 baseTableName="visa"
+                                 constraintName="fk_visa_type_entree_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_entree"/>
+
+        <addForeignKeyConstraint baseColumnNames="categorie_id"
+                                 baseTableName="visa"
+                                 constraintName="fk_visa_categorie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="categorie"/>
+
     </changeSet>
 </databaseChangeLog>

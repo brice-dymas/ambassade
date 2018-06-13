@@ -40,14 +40,6 @@
         <dd>
             <span>{{visa.nombreEntree}}</span>
         </dd>
-        <dt><span jhiTranslate="ambassadeApp.visa.type">Type</span></dt>
-        <dd>
-            <span>{{visa.type}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.visa.categorie">Categorie</span></dt>
-        <dd>
-            <span>{{visa.categorie}}</span>
-        </dd>
         <dt><span jhiTranslate="ambassadeApp.visa.taxes">Taxes</span></dt>
         <dd>
             <span>{{visa.taxes}}</span>
@@ -109,6 +101,18 @@
         <dd>
             <div *ngIf="visa.typeService">
                 <a [routerLink]="['/type-service', visa.typeService?.id]">{{visa.typeService?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.visa.typeEntree">Type Entree</span></dt>
+        <dd>
+            <div *ngIf="visa.typeEntree">
+                <a [routerLink]="['/type-entree', visa.typeEntree?.id]">{{visa.typeEntree?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.visa.categorie">Categorie</span></dt>
+        <dd>
+            <div *ngIf="visa.categorie">
+                <a [routerLink]="['/categorie', visa.categorie?.id]">{{visa.categorie?.id}}</a>
             </div>
         </dd>
     </dl>

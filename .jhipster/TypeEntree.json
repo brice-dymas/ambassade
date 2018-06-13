@@ -1,0 +1,19 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "libelle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180613125636",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "type_entree",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

@@ -15,6 +15,7 @@ import {AmbassadePrintModule} from './print/print.module';
 import { AmbassadeTypeServiceModule } from './type-service/type-service.module';
 import { AmbassadePaiementModule } from './paiement/paiement.module';
 import { AmbassadeUniteOrganisationelleModule } from './unite-organisationelle/unite-organisationelle.module';
+import { AmbassadeTypeEntreeModule } from './type-entree/type-entree.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -33,6 +34,7 @@ import { AmbassadeUniteOrganisationelleModule } from './unite-organisationelle/u
         AmbassadeTypeServiceModule,
         AmbassadePaiementModule,
         AmbassadeUniteOrganisationelleModule,
+        AmbassadeTypeEntreeModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

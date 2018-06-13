@@ -58,14 +58,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="jhi_type" type="varchar(20)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="categorie" type="varchar(25)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="taxes" type="integer">
                 <constraints nullable="true" />
             </column>
@@ -122,6 +114,14 @@
             </column>
 
             <column name="type_service_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="type_entree_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="categorie_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

@@ -20,8 +20,6 @@ export class Visa implements BaseEntity {
         public dateEmission?: any,
         public dateExpiration?: any,
         public nombreEntree?: string,
-        public type?: string,
-        public categorie?: string,
         public taxes?: number,
         public adresse?: string,
         public remarques?: string,
@@ -37,6 +35,8 @@ export class Visa implements BaseEntity {
         public telephoneEmployeur?: string,
         public emailEmployeur?: string,
         public typeService?: BaseEntity,
+        public typeEntree?: BaseEntity,
+        public categorie?: BaseEntity,
     ) {
     }
 }

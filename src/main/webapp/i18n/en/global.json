@@ -21,6 +21,7 @@
                 "service": "Service",
                 "paiement": "Paiement",
                 "uniteOrganisationelle": "Unite Organisationelle",
+                "typeEntree": "Type Entree",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

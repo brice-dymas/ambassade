@@ -10,6 +10,8 @@ import { Visa } from './visa.model';
 import { VisaPopupService } from './visa-popup.service';
 import { VisaService } from './visa.service';
 import { TypeService, TypeServiceService } from '../type-service';
+import { TypeEntree, TypeEntreeService } from '../type-entree';
+import { Categorie, CategorieService } from '../categorie';
 
 @Component({
     selector: 'jhi-visa-dialog',
@@ -21,6 +23,10 @@ export class VisaDialogComponent implements OnInit {
     isSaving: boolean;
 
     typeservices: TypeService[];
+
+    typeentrees: TypeEntree[];
+
+    categories: Categorie[];
     dateEmissionDp: any;
     dateExpirationDp: any;
 
@@ -30,6 +36,8 @@ export class VisaDialogComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private visaService: VisaService,
         private typeServiceService: TypeServiceService,
+        private typeEntreeService: TypeEntreeService,
+        private categorieService: CategorieService,
         private elementRef: ElementRef,
         private eventManager: JhiEventManager
     ) {
@@ -39,6 +47,10 @@ export class VisaDialogComponent implements OnInit {
         this.isSaving = false;
         this.typeServiceService.query()
             .subscribe((res: HttpResponse<TypeService[]>) => { this.typeservices = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.typeEntreeService.query()
+            .subscribe((res: HttpResponse<TypeEntree[]>) => { this.typeentrees = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.categorieService.query()
+            .subscribe((res: HttpResponse<Categorie[]>) => { this.categories = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -92,6 +104,14 @@ export class VisaDialogComponent implements OnInit {
     }
 
     trackTypeServiceById(index: number, item: TypeService) {
+        return item.id;
+    }
+
+    trackTypeEntreeById(index: number, item: TypeEntree) {
+        return item.id;
+    }
+
+    trackCategorieById(index: number, item: Categorie) {
         return item.id;
     }
 }

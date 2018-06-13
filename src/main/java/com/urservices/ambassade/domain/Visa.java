@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import com.urservices.ambassade.domain.enumeration.State;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * A Visa.
@@ -19,7 +18,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "visa")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@EntityListeners({AuditingEntityListener.class})
 public class Visa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,14 +58,6 @@ public class Visa implements Serializable {
     @Size(max = 20)
     @Column(name = "nombre_entree", length = 20)
     private String nombreEntree;
-
-    @Size(max = 20)
-    @Column(name = "jhi_type", length = 20)
-    private String type;
-
-    @Size(max = 25)
-    @Column(name = "categorie", length = 25)
-    private String categorie;
 
     @Column(name = "taxes")
     private Integer taxes;
@@ -116,6 +106,13 @@ public class Visa implements Serializable {
 
     @ManyToOne
     private TypeService typeService;
+
+    @ManyToOne(optional = false)
+    @NotNull
+    private TypeEntree typeEntree;
+
+    @ManyToOne
+    private Categorie categorie;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -241,32 +238,6 @@ public class Visa implements Serializable {
 
     public void setNombreEntree(String nombreEntree) {
         this.nombreEntree = nombreEntree;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public Visa type(String type) {
-        this.type = type;
-        return this;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getCategorie() {
-        return categorie;
-    }
-
-    public Visa categorie(String categorie) {
-        this.categorie = categorie;
-        return this;
-    }
-
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
     }
 
     public Integer getTaxes() {
@@ -463,6 +434,32 @@ public class Visa implements Serializable {
     public void setTypeService(TypeService typeService) {
         this.typeService = typeService;
     }
+
+    public TypeEntree getTypeEntree() {
+        return typeEntree;
+    }
+
+    public Visa typeEntree(TypeEntree typeEntree) {
+        this.typeEntree = typeEntree;
+        return this;
+    }
+
+    public void setTypeEntree(TypeEntree typeEntree) {
+        this.typeEntree = typeEntree;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public Visa categorie(Categorie categorie) {
+        this.categorie = categorie;
+        return this;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -498,8 +495,6 @@ public class Visa implements Serializable {
             ", dateEmission='" + getDateEmission() + "'" +
             ", dateExpiration='" + getDateExpiration() + "'" +
             ", nombreEntree='" + getNombreEntree() + "'" +
-            ", type='" + getType() + "'" +
-            ", categorie='" + getCategorie() + "'" +
             ", taxes=" + getTaxes() +
             ", adresse='" + getAdresse() + "'" +
             ", remarques='" + getRemarques() + "'" +
@@ -515,16 +510,5 @@ public class Visa implements Serializable {
             ", telephoneEmployeur='" + getTelephoneEmployeur() + "'" +
             ", emailEmployeur='" + getEmailEmployeur() + "'" +
             "}";
-    }
-
-    @PostPersist
-    public void generateNumeroVisa() {
-        LocalDate localDate = LocalDate.now();
-        String numeroVisa = "";
-        numeroVisa += localDate.getYear();
-        numeroVisa += localDate.getMonthValue() < 10 ? "0" + localDate.getMonthValue() : localDate.getMonthValue();
-        numeroVisa += localDate.getDayOfMonth() < 10 ? "0" + localDate.getDayOfMonth() : localDate.getDayOfMonth();
-        numeroVisa += this.getId() < 10 ? "0" + this.getId() : this.getId();
-        this.setNumeroVisa(Long.parseLong(numeroVisa));
     }
 }

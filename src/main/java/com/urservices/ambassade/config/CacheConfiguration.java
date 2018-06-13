@@ -55,6 +55,7 @@ public class CacheConfiguration {
             cm.createCache(com.urservices.ambassade.domain.TypeService.class.getName(), jcacheConfiguration);
             cm.createCache(com.urservices.ambassade.domain.Paiement.class.getName(), jcacheConfiguration);
             cm.createCache(com.urservices.ambassade.domain.UniteOrganisationelle.class.getName(), jcacheConfiguration);
+            cm.createCache(com.urservices.ambassade.domain.TypeEntree.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
