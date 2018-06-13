@@ -22,5 +22,6 @@
     <include file="config/liquibase/changelog/20180222221146_added_entity_constraints_Passeport.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180222221155_added_entity_constraints_Visa.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180527135026_added_entity_constraints_Paiement.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180527135025_added_entity_constraints_TypeService.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

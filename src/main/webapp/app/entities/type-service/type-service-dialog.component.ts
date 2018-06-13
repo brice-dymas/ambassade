@@ -4,11 +4,12 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { TypeService } from './type-service.model';
 import { TypeServicePopupService } from './type-service-popup.service';
 import { TypeServiceService } from './type-service.service';
+import { UniteOrganisationelle, UniteOrganisationelleService } from '../unite-organisationelle';
 
 @Component({
     selector: 'jhi-type-service-dialog',
@@ -19,15 +20,21 @@ export class TypeServiceDialogComponent implements OnInit {
     typeService: TypeService;
     isSaving: boolean;
 
+    uniteorganisationelles: UniteOrganisationelle[];
+
     constructor(
         public activeModal: NgbActiveModal,
+        private jhiAlertService: JhiAlertService,
         private typeServiceService: TypeServiceService,
+        private uniteOrganisationelleService: UniteOrganisationelleService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.uniteOrganisationelleService.query()
+            .subscribe((res: HttpResponse<UniteOrganisationelle[]>) => { this.uniteorganisationelles = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -58,6 +65,14 @@ export class TypeServiceDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(error: any) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackUniteOrganisationelleById(index: number, item: UniteOrganisationelle) {
+        return item.id;
     }
 }
 

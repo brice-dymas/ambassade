@@ -6,6 +6,7 @@ export class TypeService implements BaseEntity {
         public nom?: string,
         public montant?: number,
         public deleted?: boolean,
+        public uniteOrganisationelle?: BaseEntity,
     ) {
         this.deleted = false;
     }
