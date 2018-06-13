@@ -96,6 +96,10 @@ public class PaiementResource {
 
         String datePaiementStr = webRequest.getParameter("datePaiement") !=null && !webRequest.getParameter("datePaiement").isEmpty()
             ? webRequest.getParameter("datePaiement"): null;
+        String datePaiementFinStr = webRequest.getParameter("datePaiementFin") !=null && !webRequest.getParameter("datePaiementFin").isEmpty()
+            ? webRequest.getParameter("datePaiementFin"): null;
+        String numeroPaiement = webRequest.getParameter("numeroPaiement") !=null && !webRequest.getParameter("numeroPaiement").isEmpty()
+            ? webRequest.getParameter("numeroPaiement"): null;
         Long visa = webRequest.getParameter("visa") !=null && !webRequest.getParameter("visa").isEmpty()
             ? Long.valueOf(webRequest.getParameter("visa")): null;
         Long passeport = webRequest.getParameter("passeport") !=null && !webRequest.getParameter("passeport").isEmpty()
@@ -103,8 +107,9 @@ public class PaiementResource {
         Long typeService = webRequest.getParameter("typeService") !=null && !webRequest.getParameter("typeService").isEmpty()
             ? Long.valueOf(webRequest.getParameter("typeService")): null;
         LocalDate datePaiement = datePaiementStr != null ? LocalDate.parse(datePaiementStr) : null;
+        LocalDate datePaiementFin = datePaiementStr != null ? LocalDate.parse(datePaiementStr) : null;
 
-        Page<Paiement> page = paiementService.findAll(datePaiement,visa,passeport,typeService,pageable);
+        Page<Paiement> page = paiementService.findAll(numeroPaiement, datePaiement,datePaiementFin,visa,passeport,typeService,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/paiements");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

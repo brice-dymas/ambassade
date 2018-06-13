@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 
 import { Visa } from './visa.model';
 import { VisaService } from './visa.service';
@@ -19,6 +19,7 @@ export class VisaDetailComponent implements OnInit, OnDestroy {
 
     constructor(
         private eventManager: JhiEventManager,
+        private dataUtils: JhiDataUtils,
         private visaService: VisaService,
         private route: ActivatedRoute
     ) {
@@ -37,35 +38,13 @@ export class VisaDetailComponent implements OnInit, OnDestroy {
                 this.visa = visaResponse.body;
             });
     }
-
-    payer() {
-        this.visaService.payer(this.visa.id)
-            .subscribe((visaResponse: HttpResponse<Visa>) => {
-                this.visa = visaResponse.body;
-            });
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
     }
 
-    encours() {
-        this.visaService.enCours(this.visa.id)
-            .subscribe((visaResponse: HttpResponse<Visa>) => {
-                this.visa = visaResponse.body;
-            });
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
     }
-
-    retirer() {
-        this.visaService.retirer(this.visa.id)
-            .subscribe((visaResponse: HttpResponse<Visa>) => {
-                this.visa = visaResponse.body;
-            });
-    }
-
-    pret() {
-        this.visaService.pret(this.visa.id)
-            .subscribe((visaResponse: HttpResponse<Visa>) => {
-                this.visa = visaResponse.body;
-            });
-    }
-
     previousState() {
         window.history.back();
     }

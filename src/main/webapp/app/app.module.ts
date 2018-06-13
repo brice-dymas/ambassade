@@ -29,6 +29,7 @@ import {
 } from './layouts';
 import 'angular2-navigate-with-data';
 import {JasperoConfirmationsModule} from '@jaspero/ng-confirmations';
+import {FrappeDirective} from './shared/chart/frappe.directive';
 
 @NgModule({
     imports: [
@@ -49,6 +50,7 @@ import {JasperoConfirmationsModule} from '@jaspero/ng-confirmations';
         ErrorComponent,
         PageRibbonComponent,
         ActiveMenuDirective,
+        FrappeDirective,
         FooterComponent
     ],
     providers: [
