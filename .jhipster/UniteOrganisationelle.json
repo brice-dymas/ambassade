@@ -1,0 +1,19 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "libelle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180613091827",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "unite_organisationelle",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}
