@@ -1,82 +1,75 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
-    <div class="modal-header theme-bg-blue text-white">
-        <h5 class="text-uppercase modal-title" id="myPaiementLabel" jhiTranslate="ambassadeApp.paiement.home.createOrEditLabel">Create or edit a Paiement</h5>
-        <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true"
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPaiementLabel" jhiTranslate="ambassadeApp.paiement.home.createOrEditLabel">Create or edit a Paiement</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <!--
         <div class="form-group" [hidden]="!paiement.id">
             <label for="id" jhiTranslate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="paiement.id" readonly />
         </div>
-        -->
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.datePaiement" for="field_datePaiement">Date Paiement</label>
-                    <div class="input-group">
-                        <input id="field_datePaiement" type="text" class="form-control form-control-sm" name="datePaiement" ngbDatepicker  #datePaiementDp="ngbDatepicker" [(ngModel)]="paiement.datePaiement"
-                        />
-                        <span class="input-group-append">
-                    <button type="button" class="btn btn-blue btn-sm" (click)="datePaiementDp.toggle()"><i class="fa fa-calendar"></i></button>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.datePaiement" for="field_datePaiement">Date Paiement</label>
+            <div class="input-group">
+                <input id="field_datePaiement" type="text" class="form-control" name="datePaiement" ngbDatepicker  #datePaiementDp="ngbDatepicker" [(ngModel)]="paiement.datePaiement"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="datePaiementDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.visa" for="field_visa">Visa</label>
-                    <select class="form-control form-control-sm" id="field_visa" name="visa" [(ngModel)]="paiement.visa" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="visaOption.id === paiement.visa?.id ? paiement.visa : visaOption" *ngFor="let visaOption of visas; trackBy: trackVisaById">{{visaOption.nom}}</option>
-                    </select>
-                </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.passeport" for="field_passeport">Passeport</label>
-                    <select class="form-control form-control-sm" id="field_passeport" name="passeport" [(ngModel)]="paiement.passeport" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="passeportOption.id === paiement.passeport?.id ? paiement.passeport : passeportOption" *ngFor="let passeportOption of passeports; trackBy: trackPasseportById">{{passeportOption.nom}}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.typeService" for="field_typeService">Type Service</label>
-                    <select class="form-control form-control-sm" id="field_typeService" name="typeService" [(ngModel)]="paiement.typeService" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="typeServiceOption.id === paiement.typeService?.id ? paiement.typeService : typeServiceOption" *ngFor="let typeServiceOption of typeservices; trackBy: trackTypeServiceById">{{typeServiceOption.nom}}</option>
-                    </select>
-                </div>
-            </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.numeroPaiement" for="field_numeroPaiement">Numero Paiement</label>
+            <input type="text" class="form-control" name="numeroPaiement" id="field_numeroPaiement"
+                [(ngModel)]="paiement.numeroPaiement" />
         </div>
 
-        <div class="row">
-            <div class="col-12 col-sm-6">
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.user" for="field_user">User</label>
-                    <select class="form-control form-control-sm" id="field_user" name="user" [(ngModel)]="paiement.user" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id === paiement.user?.id ? paiement.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.firstName}}</option>
-                    </select>
-                </div>
-            </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.visa" for="field_visa">Visa</label>
+            <select class="form-control" id="field_visa" name="visa" [(ngModel)]="paiement.visa" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="visaOption.id === paiement.visa?.id ? paiement.visa : visaOption" *ngFor="let visaOption of visas; trackBy: trackVisaById">{{visaOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.passeport" for="field_passeport">Passeport</label>
+            <select class="form-control" id="field_passeport" name="passeport" [(ngModel)]="paiement.passeport" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="passeportOption.id === paiement.passeport?.id ? paiement.passeport : passeportOption" *ngFor="let passeportOption of passeports; trackBy: trackPasseportById">{{passeportOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.typeService" for="field_typeService">Type Service</label>
+            <select class="form-control" id="field_typeService" name="typeService" [(ngModel)]="paiement.typeService" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="typeServiceOption.id === paiement.typeService?.id ? paiement.typeService : typeServiceOption" *ngFor="let typeServiceOption of typeservices; trackBy: trackTypeServiceById">{{typeServiceOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="paiement.user" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === paiement.user?.id ? paiement.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.uniteOrganisationelle" for="field_uniteOrganisationelle">Unite Organisationelle</label>
+            <select class="form-control" id="field_uniteOrganisationelle" name="uniteOrganisationelle" [(ngModel)]="paiement.uniteOrganisationelle" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="uniteOrganisationelleOption.id === paiement.uniteOrganisationelle?.id ? paiement.uniteOrganisationelle : uniteOrganisationelleOption" *ngFor="let uniteOrganisationelleOption of uniteorganisationelles; trackBy: trackUniteOrganisationelleById">{{uniteOrganisationelleOption.id}}</option>
+            </select>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-xs plat" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary btn-xs plat">
-            <span class="fa fa-download"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>
 </form>

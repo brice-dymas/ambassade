@@ -1,57 +1,50 @@
-<div class="mb-lg-5" *ngIf="paiement">
-    <h5 class="text-uppercase"><span jhiTranslate="ambassadeApp.paiement.detail.title">Paiement</span> {{paiement.id}}</h5>
-    <div class="title-bullet title-bullet-table"><span></span></div>
+
+<div *ngIf="paiement">
+    <h2><span jhiTranslate="ambassadeApp.paiement.detail.title">Paiement</span> {{paiement.id}}</h2>
+    <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.paiement.datePaiement">Date Paiement</span></dt>
-                        <dd>
-                            <span>{{paiement.datePaiement | date:'mediumDate'}}</span>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.paiement.visa">Visa</span></dt>
-                        <dd>
-                            <div *ngIf="paiement.visa">
-                                <a [routerLink]="['/visa', paiement.visa?.id]">{{paiement.visa?.nom}}</a>
-                            </div>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.paiement.passeport">Passeport</span></dt>
-                        <dd>
-                            <div *ngIf="paiement.passeport">
-                                <a [routerLink]="['/passeport', paiement.passeport?.id]">{{paiement.passeport?.nom}}</a>
-                            </div>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.paiement.typeService">Type Service</span></dt>
-                        <dd>
-                            <div *ngIf="paiement.typeService">
-                                <a [routerLink]="['/type-service', paiement.typeService?.id]">{{paiement.typeService?.nom}}</a>
-                            </div>
-                        </dd>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.paiement.user">User</span></dt>
-                        <dd>
-                            {{paiement.user?.firstName}}
-                        </dd>
-                    </div>
-                </div>
+        <dt><span jhiTranslate="ambassadeApp.paiement.datePaiement">Date Paiement</span></dt>
+        <dd>
+            <span>{{paiement.datePaiement | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.numeroPaiement">Numero Paiement</span></dt>
+        <dd>
+            <span>{{paiement.numeroPaiement}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.visa">Visa</span></dt>
+        <dd>
+            <div *ngIf="paiement.visa">
+                <a [routerLink]="['/visa', paiement.visa?.id]">{{paiement.visa?.id}}</a>
             </div>
-        </div>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.passeport">Passeport</span></dt>
+        <dd>
+            <div *ngIf="paiement.passeport">
+                <a [routerLink]="['/passeport', paiement.passeport?.id]">{{paiement.passeport?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.typeService">Type Service</span></dt>
+        <dd>
+            <div *ngIf="paiement.typeService">
+                <a [routerLink]="['/type-service', paiement.typeService?.id]">{{paiement.typeService?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.user">User</span></dt>
+        <dd>
+            {{paiement.user?.id}}
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.uniteOrganisationelle">Unite Organisationelle</span></dt>
+        <dd>
+            <div *ngIf="paiement.uniteOrganisationelle">
+                <a [routerLink]="['/unite-organisationelle', paiement.uniteOrganisationelle?.id]">{{paiement.uniteOrganisationelle?.id}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-info btn-xs plat">
+            class="btn btn-info">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
@@ -59,7 +52,7 @@
             [routerLink]="['/', { outlets: { popup: 'paiement/'+ paiement.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-primary btn-xs plat">
+            class="btn btn-primary">
         <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

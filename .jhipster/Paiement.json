@@ -24,6 +24,12 @@
             "relationshipName": "user",
             "otherEntityName": "user",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "uniteOrganisationelle",
+            "otherEntityName": "uniteOrganisationelle",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

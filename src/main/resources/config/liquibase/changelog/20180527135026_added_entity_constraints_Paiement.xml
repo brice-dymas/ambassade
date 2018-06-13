@@ -32,5 +32,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
+        <addForeignKeyConstraint baseColumnNames="unite_organisationelle_id"
+                                 baseTableName="paiement"
+                                 constraintName="fk_paiement_unite_organisationelle_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unite_organisationelle"/>
+
     </changeSet>
 </databaseChangeLog>

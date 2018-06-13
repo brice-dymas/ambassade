@@ -21,7 +21,8 @@
             "visa": "Visa",
             "passeport": "Passeport",
             "typeService": "Type Service",
-            "user": "User"
+            "user": "User",
+            "uniteOrganisationelle": "Unite Organisationelle"
         }
     }
 }

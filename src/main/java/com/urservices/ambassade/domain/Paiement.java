@@ -41,6 +41,9 @@ public class Paiement implements Serializable {
     @ManyToOne
     private User user;
 
+    @ManyToOne
+    private UniteOrganisationelle uniteOrganisationelle;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -126,6 +129,19 @@ public class Paiement implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public UniteOrganisationelle getUniteOrganisationelle() {
+        return uniteOrganisationelle;
+    }
+
+    public Paiement uniteOrganisationelle(UniteOrganisationelle uniteOrganisationelle) {
+        this.uniteOrganisationelle = uniteOrganisationelle;
+        return this;
+    }
+
+    public void setUniteOrganisationelle(UniteOrganisationelle uniteOrganisationelle) {
+        this.uniteOrganisationelle = uniteOrganisationelle;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

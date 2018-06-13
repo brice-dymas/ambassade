@@ -9,6 +9,7 @@ export class Paiement implements BaseEntity {
         public passeport?: BaseEntity,
         public typeService?: BaseEntity,
         public user?: User,
+        public uniteOrganisationelle?: BaseEntity,
     ) {
     }
 }
