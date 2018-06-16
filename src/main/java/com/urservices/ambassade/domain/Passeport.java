@@ -516,7 +516,7 @@ public class Passeport implements Serializable {
         String numeroRecu = "";
         numeroRecu += localDate.getYear();
         numeroRecu += localDate.getMonthValue() < 10 ? "0" + localDate.getMonthValue() : localDate.getMonthValue();
-        numeroRecu += localDate.getDayOfMonth() < 10 ? "0" + localDate.getDayOfMonth() : localDate.getDayOfMonth();
+//        numeroRecu += localDate.getDayOfMonth() < 10 ? "0" + localDate.getDayOfMonth() : localDate.getDayOfMonth();
         numeroRecu += this.getId() < 10 ? "0" + this.getId() : this.getId();
         this.setRecu(numeroRecu);
     }

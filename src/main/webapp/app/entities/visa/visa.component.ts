@@ -106,12 +106,9 @@ currentAccount: any;
     registerChangeInVisas() {
         // this.eventSubscriber = this.eventManager.subscribe('visaListModification', (response) => this.loadAll());
         this.eventSubscriber = this.eventManager.subscribe('visaListModification', (response) => {
-            console.log(response);
             if (typeof response.content === 'string') {
-                console.log('query');
                 return this.loadAll();
             }else {
-                console.log('search for visas with ', response.content);
                 return this.searchVisa(response.content);
             }
         });
