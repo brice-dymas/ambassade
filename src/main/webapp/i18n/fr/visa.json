@@ -23,10 +23,8 @@
             "cedula": "Cedula",
             "numeroVisa": "Numero Visa",
             "dateEmission": "Date Emission",
+            "dateEmissionSearch": "Date Emission comprise entre ",
             "dateExpiration": "Date Expiration",
-            "nombreEntree": "Nombre Entree",
-            "type": "Type",
-            "categorie": "Categorie",
             "taxes": "Taxes",
             "adresse": "Adresse",
             "remarques": "Remarques",
@@ -40,7 +38,13 @@
             "adresseEmployeur": "Adresse Employeur",
             "telephoneEmployeur": "Telephone Employeur",
             "emailEmployeur": "Email Employeur",
-            "typeService": "Type Service"
+            "dateCreation": "Date Creation",
+            "dateModification": "Date Modification",
+            "typeService": "Type Service",
+            "typeEntree": "Type Entree",
+            "categorie": "Categorie",
+            "createdBy": "Created By",
+            "modifiedBy": "Modified By"
         }
     }
 }

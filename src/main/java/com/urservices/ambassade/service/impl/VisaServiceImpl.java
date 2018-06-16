@@ -39,31 +39,104 @@ public class VisaServiceImpl implements VisaService {
     @Override
     public Visa save(Visa visa) {
         log.debug("Request to save Visa : {}", visa);
-//        LocalDate localDate = LocalDate.now();
-//        String numeroVisa = "";
-//        numeroVisa += localDate.getYear();
-//        numeroVisa += localDate.getMonthValue();
-//        numeroVisa += localDate.getDayOfMonth();
-//        Visa visaSaved = visaRepository.save(visa);
-//        numeroVisa += visaSaved.getId();
-//        System.out.println("VisaBuilded = " + numeroVisa);
-//        visaSaved.setNumeroVisa(Long.parseLong(numeroVisa));
-//        System.out.println("Visa Setted = " + visaSaved.getNumeroVisa());
-//        return visaRepository.save(visaSaved);
         return visaRepository.save(visa);
     }
 
     /**
      * Get all the visas.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
+     *  @param nom
+     * @param prenom
+     * @param numeroPasseport
+     * @param numeroVisa
+     * @param typeService
+     * @param categorie
+     * @param dateEmissionDeb
+     * @param dateEmissionFin
+     * @param pageable the pagination information  @return the list of entities
+     * */
     @Override
     @Transactional(readOnly = true)
-    public Page<Visa> findAll(Pageable pageable) {
+    public Page<Visa> findAll(String nom, String prenom, String numeroPasseport, Long numeroVisa, Long typeService,
+                              Long categorie, LocalDate dateEmissionDeb, LocalDate dateEmissionFin, Pageable pageable) {
         log.debug("Request to get all Visas");
-        return visaRepository.findAll(pageable);
+        QVisa visa = QVisa.visa;
+        BooleanExpression predicate = null;
+        boolean added = false;
+
+        if (nom != null) {
+            predicate = visa.nom.likeIgnoreCase("%" + nom + "%");
+            added = true;
+        }
+        if (prenom != null) {
+            if (added) {
+                predicate = predicate.and(visa.prenom.likeIgnoreCase("%" + prenom + "%"));
+            } else {
+                predicate = visa.prenom.likeIgnoreCase("%" + prenom + "%");
+                added = true;
+            }
+        }
+        if (numeroVisa != null) {
+            if (added) {
+                predicate = predicate.and(visa.numeroVisa.eq(numeroVisa));
+            } else {
+                predicate = visa.numeroVisa.eq(numeroVisa);
+                added = true;
+            }
+        }
+        if (numeroPasseport != null) {
+            if (added) {
+                predicate = predicate.and(visa.numeroPasseport.likeIgnoreCase("%" + numeroPasseport + "%"));
+            } else {
+                predicate = visa.numeroPasseport.likeIgnoreCase("%" + numeroPasseport + "%");
+                added = true;
+            }
+        }
+        if (typeService != null) {
+            if (added) {
+                predicate = predicate.and(visa.typeService.id.eq(typeService));
+            } else {
+                predicate = visa.typeService.id.eq(typeService);
+                added = true;
+            }
+        }
+        if (categorie != null) {
+            if (added) {
+                predicate = predicate.and(visa.categorie.id.eq(categorie));
+            } else {
+                predicate = visa.categorie.id.eq(categorie);
+                added = true;
+            }
+        }
+        if (dateEmissionDeb != null) {
+            if (added) {
+                if (dateEmissionFin != null) {
+                    predicate = predicate.and(visa.dateEmission.between(dateEmissionDeb, dateEmissionFin));
+                } else {
+                    predicate = predicate.and(visa.dateEmission.eq(dateEmissionDeb));
+                }
+            } else {
+                if (dateEmissionFin != null) {
+                    predicate = visa.dateEmission.between(dateEmissionDeb, dateEmissionFin);
+                } else {
+                    predicate = visa.dateEmission.eq(dateEmissionDeb);
+                }
+                added = true;
+            }
+        }
+        if (dateEmissionFin != null && dateEmissionDeb == null) {
+            if (added) {
+                    predicate = predicate.and(visa.dateEmission.loe(dateEmissionFin));
+                } else {
+                    predicate = visa.dateEmission.loe(dateEmissionFin);
+                }
+            }
+
+        if (predicate != null) {
+            return visaRepository.findAll(predicate, pageable);
+        } else {
+            return visaRepository.findAll(pageable);
+        }
     }
 
     /**
@@ -155,25 +228,11 @@ public class VisaServiceImpl implements VisaService {
 //                predicate = visa.nombreEntree.likeIgnoreCase("%"+nombreEntree);
 //            }
 //        }
-        if(type!=null && !type.isEmpty()){
-            if(added){
-                predicate = predicate.and(visa.type.likeIgnoreCase("%"+type+"%"));
-            }else{
-                predicate = visa.type.likeIgnoreCase("%"+type+"%");
-            }
-        }
         if(adresse!=null && !adresse.isEmpty()){
             if(added){
                 predicate = predicate.and(visa.adresse.likeIgnoreCase("%"+adresse+"%"));
             }else{
                 predicate = visa.adresse.likeIgnoreCase("%"+adresse+"%");
-            }
-        }
-        if(categorie!=null && !categorie.isEmpty()){
-            if(added){
-                predicate = predicate.and(visa.categorie.likeIgnoreCase("%"+categorie+"%"));
-            }else{
-                predicate = visa.categorie.likeIgnoreCase("%"+categorie+"%");
             }
         }
 //        if(remarques!=null && !remarques.isEmpty()){

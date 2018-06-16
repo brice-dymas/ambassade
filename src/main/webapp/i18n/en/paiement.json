@@ -17,11 +17,17 @@
                 "title": "Paiement"
             },
             "datePaiement": "Date Paiement",
+            "datePaiementSearch": "Date Paiement comprise entre",
             "numeroPaiement": "Numero Paiement",
+            "dateCreation": "Date Creation",
+            "dateModification": "Date Modification",
             "visa": "Visa",
             "passeport": "Passeport",
             "typeService": "Type Service",
-            "user": "User"
+            "user": "User",
+            "uniteOrganisationelle": "Unite Organisationelle",
+            "createdBy": "Created By",
+            "modifiedBy": "Modified By"
         }
     }
 }

@@ -6,6 +6,37 @@
             "relationshipName": "typeService",
             "otherEntityName": "typeService",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "typeEntree",
+            "otherEntityName": "typeEntree",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "categorie",
+            "otherEntityName": "categorie",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "createdBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "visa"
+        },
+        {
+            "relationshipName": "modifiedBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "visa"
         }
     ],
     "fields": [
@@ -60,30 +91,6 @@
         {
             "fieldName": "dateExpiration",
             "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "nombreEntree",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 20
-        },
-        {
-            "fieldName": "type",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 20
-        },
-        {
-            "fieldName": "categorie",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 25
         },
         {
             "fieldName": "taxes",
@@ -142,6 +149,14 @@
         {
             "fieldName": "emailEmployeur",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20180222221155",

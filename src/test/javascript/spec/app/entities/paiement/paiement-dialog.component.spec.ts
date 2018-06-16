@@ -13,6 +13,7 @@ import { VisaService } from '../../../../../../main/webapp/app/entities/visa';
 import { PasseportService } from '../../../../../../main/webapp/app/entities/passeport';
 import { TypeServiceService } from '../../../../../../main/webapp/app/entities/type-service';
 import { UserService } from '../../../../../../main/webapp/app/shared';
+import { UniteOrganisationelleService } from '../../../../../../main/webapp/app/entities/unite-organisationelle';
 
 describe('Component Tests', () => {
 
@@ -32,6 +33,7 @@ describe('Component Tests', () => {
                     PasseportService,
                     TypeServiceService,
                     UserService,
+                    UniteOrganisationelleService,
                     PaiementService
                 ]
             })

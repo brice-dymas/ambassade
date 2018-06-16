@@ -10,6 +10,7 @@ import { PasseportDialogComponent } from '../../../../../../main/webapp/app/enti
 import { PasseportService } from '../../../../../../main/webapp/app/entities/passeport/passeport.service';
 import { Passeport } from '../../../../../../main/webapp/app/entities/passeport/passeport.model';
 import { TypeServiceService } from '../../../../../../main/webapp/app/entities/type-service';
+import { UserService } from '../../../../../../main/webapp/app/shared';
 
 describe('Component Tests', () => {
 
@@ -26,6 +27,7 @@ describe('Component Tests', () => {
                 declarations: [PasseportDialogComponent],
                 providers: [
                     TypeServiceService,
+                    UserService,
                     PasseportService
                 ]
             })

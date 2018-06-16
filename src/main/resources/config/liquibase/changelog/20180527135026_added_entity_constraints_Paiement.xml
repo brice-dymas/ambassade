@@ -32,5 +32,23 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
+        <addForeignKeyConstraint baseColumnNames="unite_organisationelle_id"
+                                 baseTableName="paiement"
+                                 constraintName="fk_paiement_unite_organisationelle_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unite_organisationelle"/>
+
+        <addForeignKeyConstraint baseColumnNames="created_by_id"
+                                 baseTableName="paiement"
+                                 constraintName="fk_paiement_created_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="modified_by_id"
+                                 baseTableName="paiement"
+                                 constraintName="fk_paiement_modified_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
     </changeSet>
 </databaseChangeLog>

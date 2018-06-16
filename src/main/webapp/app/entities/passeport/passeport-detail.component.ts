@@ -7,7 +7,7 @@ import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 import { Passeport } from './passeport.model';
 import { PasseportService } from './passeport.service';
 import { Router } from '@angular/router';
-import { ConfirmationService, ConfirmSettings, ResolveEmit } from '@jaspero/ng-confirmations';
+import {ConfirmationService, ResolveEmit} from '@jaspero/ng-confirmations';
 
 @Component({
     selector: 'jhi-passeport-detail',
@@ -44,11 +44,10 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
     }
 
     payer() {
-        this.open('Hi', 'Gervais');
-        /*this.passeportService.payer(this.passeport.id)
+        this.passeportService.payer(this.passeport.id)
             .subscribe((passeportResponse: HttpResponse<Passeport>) => {
                 this.passeport = passeportResponse.body;
-            });*/
+            });
     }
 
     encours() {

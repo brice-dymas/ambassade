@@ -4,6 +4,8 @@ import com.urservices.ambassade.AmbassadeApp;
 
 import com.urservices.ambassade.domain.Passeport;
 import com.urservices.ambassade.repository.PasseportRepository;
+import com.urservices.ambassade.repository.UserRepository;
+import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.PasseportService;
 import com.urservices.ambassade.web.rest.errors.ExceptionTranslator;
 
@@ -44,9 +46,6 @@ import com.urservices.ambassade.domain.enumeration.Sexe;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AmbassadeApp.class)
 public class PasseportResourceIntTest {
-
-    private static final Long DEFAULT_NUMERO_FORMULAIRE = 0L;
-    private static final Long UPDATED_NUMERO_FORMULAIRE = 1L;
 
     private static final String DEFAULT_NOM = "AAAAAAAAAA";
     private static final String UPDATED_NOM = "BBBBBBBBBB";
@@ -119,11 +118,23 @@ public class PasseportResourceIntTest {
     private static final Sexe DEFAULT_SEXE = Sexe.FEMININ;
     private static final Sexe UPDATED_SEXE = Sexe.MASCULIN;
 
+    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
+
     @Autowired
     private PasseportRepository passeportRepository;
 
     @Autowired
+    private PaiementService paiementService;
+
+    @Autowired
     private PasseportService passeportService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -144,7 +155,7 @@ public class PasseportResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PasseportResource passeportResource = new PasseportResource(passeportService);
+        final PasseportResource passeportResource = new PasseportResource(passeportService, paiementService, userRepository);
         this.restPasseportMockMvc = MockMvcBuilders.standaloneSetup(passeportResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -160,7 +171,6 @@ public class PasseportResourceIntTest {
      */
     public static Passeport createEntity(EntityManager em) {
         Passeport passeport = new Passeport()
-            .numeroFormulaire(DEFAULT_NUMERO_FORMULAIRE)
             .nom(DEFAULT_NOM)
             .prenom(DEFAULT_PRENOM)
             .numeroPasseport(DEFAULT_NUMERO_PASSEPORT)
@@ -184,7 +194,9 @@ public class PasseportResourceIntTest {
             .state(DEFAULT_STATE)
             .cin(DEFAULT_CIN)
             .type(DEFAULT_TYPE)
-            .sexe(DEFAULT_SEXE);
+            .sexe(DEFAULT_SEXE)
+            .dateCreation(DEFAULT_DATE_CREATION)
+            .dateModification(DEFAULT_DATE_MODIFICATION);
         return passeport;
     }
 
@@ -208,7 +220,6 @@ public class PasseportResourceIntTest {
         List<Passeport> passeportList = passeportRepository.findAll();
         assertThat(passeportList).hasSize(databaseSizeBeforeCreate + 1);
         Passeport testPasseport = passeportList.get(passeportList.size() - 1);
-        assertThat(testPasseport.getNumeroFormulaire()).isEqualTo(DEFAULT_NUMERO_FORMULAIRE);
         assertThat(testPasseport.getNom()).isEqualTo(DEFAULT_NOM);
         assertThat(testPasseport.getPrenom()).isEqualTo(DEFAULT_PRENOM);
         assertThat(testPasseport.getNumeroPasseport()).isEqualTo(DEFAULT_NUMERO_PASSEPORT);
@@ -233,6 +244,8 @@ public class PasseportResourceIntTest {
         assertThat(testPasseport.getCin()).isEqualTo(DEFAULT_CIN);
         assertThat(testPasseport.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testPasseport.getSexe()).isEqualTo(DEFAULT_SEXE);
+        assertThat(testPasseport.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
+        assertThat(testPasseport.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -252,24 +265,6 @@ public class PasseportResourceIntTest {
         // Validate the Passeport in the database
         List<Passeport> passeportList = passeportRepository.findAll();
         assertThat(passeportList).hasSize(databaseSizeBeforeCreate);
-    }
-
-    @Test
-    @Transactional
-    public void checkNumeroFormulaireIsRequired() throws Exception {
-        int databaseSizeBeforeTest = passeportRepository.findAll().size();
-        // set the field null
-        passeport.setNumeroFormulaire(null);
-
-        // Create the Passeport, which fails.
-
-        restPasseportMockMvc.perform(post("/api/passeports")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(passeport)))
-            .andExpect(status().isBadRequest());
-
-        List<Passeport> passeportList = passeportRepository.findAll();
-        assertThat(passeportList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -373,7 +368,6 @@ public class PasseportResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(passeport.getId().intValue())))
-            .andExpect(jsonPath("$.[*].numeroFormulaire").value(hasItem(DEFAULT_NUMERO_FORMULAIRE.intValue())))
             .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
             .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM.toString())))
             .andExpect(jsonPath("$.[*].numeroPasseport").value(hasItem(DEFAULT_NUMERO_PASSEPORT.toString())))
@@ -397,7 +391,9 @@ public class PasseportResourceIntTest {
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
             .andExpect(jsonPath("$.[*].cin").value(hasItem(DEFAULT_CIN.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE.toString())));
+            .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE.toString())))
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
     }
 
     @Test
@@ -411,7 +407,6 @@ public class PasseportResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(passeport.getId().intValue()))
-            .andExpect(jsonPath("$.numeroFormulaire").value(DEFAULT_NUMERO_FORMULAIRE.intValue()))
             .andExpect(jsonPath("$.nom").value(DEFAULT_NOM.toString()))
             .andExpect(jsonPath("$.prenom").value(DEFAULT_PRENOM.toString()))
             .andExpect(jsonPath("$.numeroPasseport").value(DEFAULT_NUMERO_PASSEPORT.toString()))
@@ -435,7 +430,9 @@ public class PasseportResourceIntTest {
             .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
             .andExpect(jsonPath("$.cin").value(DEFAULT_CIN.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
-            .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE.toString()));
+            .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE.toString()))
+            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
+            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
     }
 
     @Test
@@ -459,7 +456,6 @@ public class PasseportResourceIntTest {
         // Disconnect from session so that the updates on updatedPasseport are not directly saved in db
         em.detach(updatedPasseport);
         updatedPasseport
-            .numeroFormulaire(UPDATED_NUMERO_FORMULAIRE)
             .nom(UPDATED_NOM)
             .prenom(UPDATED_PRENOM)
             .numeroPasseport(UPDATED_NUMERO_PASSEPORT)
@@ -483,7 +479,9 @@ public class PasseportResourceIntTest {
             .state(UPDATED_STATE)
             .cin(UPDATED_CIN)
             .type(UPDATED_TYPE)
-            .sexe(UPDATED_SEXE);
+            .sexe(UPDATED_SEXE)
+            .dateCreation(UPDATED_DATE_CREATION)
+            .dateModification(UPDATED_DATE_MODIFICATION);
 
         restPasseportMockMvc.perform(put("/api/passeports")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -494,7 +492,6 @@ public class PasseportResourceIntTest {
         List<Passeport> passeportList = passeportRepository.findAll();
         assertThat(passeportList).hasSize(databaseSizeBeforeUpdate);
         Passeport testPasseport = passeportList.get(passeportList.size() - 1);
-        assertThat(testPasseport.getNumeroFormulaire()).isEqualTo(UPDATED_NUMERO_FORMULAIRE);
         assertThat(testPasseport.getNom()).isEqualTo(UPDATED_NOM);
         assertThat(testPasseport.getPrenom()).isEqualTo(UPDATED_PRENOM);
         assertThat(testPasseport.getNumeroPasseport()).isEqualTo(UPDATED_NUMERO_PASSEPORT);
@@ -519,6 +516,8 @@ public class PasseportResourceIntTest {
         assertThat(testPasseport.getCin()).isEqualTo(UPDATED_CIN);
         assertThat(testPasseport.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testPasseport.getSexe()).isEqualTo(UPDATED_SEXE);
+        assertThat(testPasseport.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
+        assertThat(testPasseport.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

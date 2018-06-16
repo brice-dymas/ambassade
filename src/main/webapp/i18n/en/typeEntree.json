@@ -1,0 +1,22 @@
+
+{
+    "ambassadeApp": {
+        "typeEntree" : {
+            "home": {
+                "title": "Type Entrees",
+                "createLabel": "Create a new Type Entree",
+                "createOrEditLabel": "Create or edit a Type Entree"
+            },
+            "created": "A new Type Entree is created with identifier {{ param }}",
+            "updated": "A Type Entree is updated with identifier {{ param }}",
+            "deleted": "A Type Entree is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Type Entree {{ id }}?"
+            },
+            "detail": {
+                "title": "Type Entree"
+            },
+            "libelle": "Libelle"
+        }
+    }
+}

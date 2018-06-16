@@ -34,6 +34,8 @@
     "languages": [
       "fr",
       "en"
-    ]
+    ],
+    "herokuDeployType": "jar",
+    "herokuAppName": "hambassade"
   }
 }

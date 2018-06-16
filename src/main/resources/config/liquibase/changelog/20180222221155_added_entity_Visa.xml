@@ -54,18 +54,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="nombre_entree" type="varchar(20)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="jhi_type" type="varchar(20)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="categorie" type="varchar(25)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="taxes" type="integer">
                 <constraints nullable="true" />
             </column>
@@ -121,13 +109,42 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="date_creation" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="date_modification" type="date">
+                <constraints nullable="true" />
+            </column>
+
             <column name="type_service_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="type_entree_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="categorie_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_by_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modified_by_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/visa.csv"
+                  separator=";"
+                  tableName="visa">
+        </loadData>
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

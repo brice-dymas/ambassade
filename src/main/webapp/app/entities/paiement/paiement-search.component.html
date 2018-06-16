@@ -4,10 +4,42 @@
             <div class="row">
                 <div class="col-12 col-sm-3">
                     <div class="form-group">
-                        <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.datePaiement" for="field_datePaiement">Date Paiement</label>
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.typeService"
+                               for="field_typeService">Type Service</label>
+                        <select class="form-control form-control-sm" id="field_typeService" name="typeService"
+                                [(ngModel)]="formModel.typeService">
+                            <option [ngValue]="null"></option>
+                            <option
+                                [ngValue]="typeServiceOption.id === formModel.typeService?.id ? formModel.typeService : typeServiceOption.id"
+                                *ngFor="let typeServiceOption of typeservices; trackBy: trackTypeServiceById">
+                                {{typeServiceOption.nom}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.uniteOrganisationelle"
+                               for="field_uniteOrganisationelle">uniteOrganisationelle</label>
+                        <select class="form-control form-control-sm" id="field_uniteOrganisationelle"
+                                name="uniteOrganisationelle" [(ngModel)]="formModel.uniteOrganisationelle">
+                            <option [ngValue]="null"></option>
+                            <option
+                                [ngValue]="uniteOrganisationelleOption.id === formModel.uniteOrganisationelle?.id ? formModel.uniteOrganisationelle : uniteOrganisationelleOption.id"
+                                *ngFor="let uniteOrganisationelleOption of uniteOrganisationelles; trackBy: trackUniteOrganisationelleById">
+                                {{uniteOrganisationelleOption.libelle}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.datePaiementSearch"
+                               for="field_datePaiement">Date Paiement</label>
                         <div class="input-group">
-                            <input id="field_datePaiement" type="text" class="form-control form-control-sm" name="datePaiement"
-                                   ngbDatepicker  #datePaiementDp="ngbDatepicker" [(ngModel)]="formModel.datePaiement"/>
+                            <input id="field_datePaiement" type="text" class="form-control form-control-sm"
+                                   name="datePaiement"
+                                   ngbDatepicker #datePaiementDp="ngbDatepicker" [(ngModel)]="formModel.datePaiement"/>
                             <span class="input-group-append">
                                 <button type="button" class="btn btn-blue btn-sm" (click)="datePaiementDp.toggle()">
                                     <i class="fa fa-calendar"></i>
@@ -18,23 +50,43 @@
                 </div>
                 <div class="col-12 col-sm-3">
                     <div class="form-group">
-                        <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.typeService" for="field_typeService">Type Service</label>
-                        <select class="form-control form-control-sm" id="field_typeService" name="typeService" [(ngModel)]="formModel.typeService" >
-                            <option [ngValue]="null"></option>
-                            <option [ngValue]="typeServiceOption.id === formModel.typeService?.id ? formModel.typeService : typeServiceOption.id"
-                                    *ngFor="let typeServiceOption of typeservices; trackBy: trackTypeServiceById">{{typeServiceOption.nom}}</option>
-                        </select>
+                        <label class="form-control-label" jhiTranslate="global.messages.and"
+                               for="field_datePaiementFin">Date Paiement</label>
+                        <div class="input-group">
+                            <input id="field_datePaiementFin" type="text" class="form-control form-control-sm"
+                                   name="datePaiementFin"
+                                   ngbDatepicker #datePaiementFinDp="ngbDatepicker"
+                                   [(ngModel)]="formModel.datePaiementFin"/>
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-blue btn-sm" (click)="datePaiementFinDp.toggle()">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 align-self-end">
-                    <div class="form-group pull-right">
-                        <button (click)="resetSearch()" class="btn btn-xs plat btn-danger">
-                            <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                        </button>&nbsp;
-                        <button type="submit" (click)="search()" class="btn btn-xs plat btn-primary">
-                            <span class="fa fa-search"></span>&nbsp;<span jhiTranslate="entity.action.search">Search</span>
-                        </button>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.numeroPaiement"
+                               for="field_numeroPaiement">numero Paiement</label>
+                        <input class="form-control form-control-sm" name="numeroPaiement"
+                               id="field_numeroPaiement"
+                               [(ngModel)]="formModel.numeroPaiement"/>
                     </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 align-self-end">
+                <div class="form-group pull-right">
+                    <button (click)="resetSearch()" class="btn btn-xs plat btn-danger">
+                        <span class="fa fa-refresh"></span>&nbsp;<span
+                        jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>&nbsp;
+                    <button type="submit" (click)="search()" class="btn btn-xs plat btn-primary">
+                        <span class="fa fa-search"></span>&nbsp;<span
+                        jhiTranslate="entity.action.search">Search</span>
+                    </button>
                 </div>
             </div>
         </div>

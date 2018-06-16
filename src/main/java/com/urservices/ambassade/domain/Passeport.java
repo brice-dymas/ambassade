@@ -15,6 +15,7 @@ import com.urservices.ambassade.domain.enumeration.Statut;
 import com.urservices.ambassade.domain.enumeration.State;
 
 import com.urservices.ambassade.domain.enumeration.Sexe;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * A Passeport.
@@ -22,6 +23,7 @@ import com.urservices.ambassade.domain.enumeration.Sexe;
 @Entity
 @Table(name = "passeport")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@EntityListeners({AuditingEntityListener.class})
 public class Passeport implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,11 +31,6 @@ public class Passeport implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
-    @Min(value = 0L)
-    @Column(name = "numero_formulaire", nullable = false)
-    private Long numeroFormulaire;
 
     @NotNull
     @Size(max = 30)
@@ -124,8 +121,20 @@ public class Passeport implements Serializable {
     @Column(name = "sexe")
     private Sexe sexe;
 
+    @Column(name = "date_creation")
+    private LocalDate dateCreation;
+
+    @Column(name = "date_modification")
+    private LocalDate dateModification;
+
     @ManyToOne
     private TypeService typeService;
+
+    @ManyToOne
+    private User createdBy;
+
+    @ManyToOne
+    private User modifiedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -134,19 +143,6 @@ public class Passeport implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getNumeroFormulaire() {
-        return numeroFormulaire;
-    }
-
-    public Passeport numeroFormulaire(Long numeroFormulaire) {
-        this.numeroFormulaire = numeroFormulaire;
-        return this;
-    }
-
-    public void setNumeroFormulaire(Long numeroFormulaire) {
-        this.numeroFormulaire = numeroFormulaire;
     }
 
     public String getNom() {
@@ -461,6 +457,32 @@ public class Passeport implements Serializable {
         this.sexe = sexe;
     }
 
+    public LocalDate getDateCreation() {
+        return dateCreation;
+    }
+
+    public Passeport dateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+        return this;
+    }
+
+    public void setDateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public LocalDate getDateModification() {
+        return dateModification;
+    }
+
+    public Passeport dateModification(LocalDate dateModification) {
+        this.dateModification = dateModification;
+        return this;
+    }
+
+    public void setDateModification(LocalDate dateModification) {
+        this.dateModification = dateModification;
+    }
+
     public TypeService getTypeService() {
         return typeService;
     }
@@ -472,6 +494,32 @@ public class Passeport implements Serializable {
 
     public void setTypeService(TypeService typeService) {
         this.typeService = typeService;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public Passeport createdBy(User user) {
+        this.createdBy = user;
+        return this;
+    }
+
+    public void setCreatedBy(User user) {
+        this.createdBy = user;
+    }
+
+    public User getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public Passeport modifiedBy(User user) {
+        this.modifiedBy = user;
+        return this;
+    }
+
+    public void setModifiedBy(User user) {
+        this.modifiedBy = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -499,7 +547,6 @@ public class Passeport implements Serializable {
     public String toString() {
         return "Passeport{" +
             "id=" + getId() +
-            ", numeroFormulaire=" + getNumeroFormulaire() +
             ", nom='" + getNom() + "'" +
             ", prenom='" + getPrenom() + "'" +
             ", numeroPasseport='" + getNumeroPasseport() + "'" +
@@ -524,6 +571,19 @@ public class Passeport implements Serializable {
             ", cin='" + getCin() + "'" +
             ", type='" + getType() + "'" +
             ", sexe='" + getSexe() + "'" +
+            ", dateCreation='" + getDateCreation() + "'" +
+            ", dateModification='" + getDateModification() + "'" +
             "}";
+    }
+
+    @PostPersist
+    public void generateNumeroRecu() {
+        LocalDate localDate = LocalDate.now();
+        String numeroRecu = "";
+        numeroRecu += localDate.getYear();
+        numeroRecu += localDate.getMonthValue() < 10 ? "0" + localDate.getMonthValue() : localDate.getMonthValue();
+//        numeroRecu += localDate.getDayOfMonth() < 10 ? "0" + localDate.getDayOfMonth() : localDate.getDayOfMonth();
+        numeroRecu += this.getId() < 10 ? "0" + this.getId() : this.getId();
+        this.setRecu(numeroRecu);
     }
 }

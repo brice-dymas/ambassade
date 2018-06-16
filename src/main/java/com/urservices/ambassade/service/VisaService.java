@@ -3,7 +3,6 @@ package com.urservices.ambassade.service;
 import com.urservices.ambassade.domain.Visa;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 
@@ -23,10 +22,18 @@ public interface VisaService {
     /**
      * Get all the visas.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    Page<Visa> findAll(Pageable pageable);
+     *  @param nom
+     * @param prenom
+     * @param numeroPasseport
+     * @param numeroVisa
+     * @param typeService
+     * @param categorie
+     * @param dateEmissionDeb
+     * @param dateEmissionFin
+     * @param pageable the pagination information  @return the list of entities
+     * */
+    Page<Visa> findAll(String nom, String prenom, String numeroPasseport, Long numeroVisa, Long typeService,
+                       Long categorie, LocalDate dateEmissionDeb, LocalDate dateEmissionFin, Pageable pageable);
 
     /**
      * Get the "id" visa.

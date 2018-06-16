@@ -1,4 +1,4 @@
-import { BaseEntity } from './../../shared';
+import { BaseEntity, User } from './../../shared';
 
 export const enum State {
     'NOUVEAU',
@@ -19,9 +19,6 @@ export class Visa implements BaseEntity {
         public numeroVisa?: number,
         public dateEmission?: any,
         public dateExpiration?: any,
-        public nombreEntree?: string,
-        public type?: string,
-        public categorie?: string,
         public taxes?: number,
         public adresse?: string,
         public remarques?: string,
@@ -36,7 +33,13 @@ export class Visa implements BaseEntity {
         public adresseEmployeur?: string,
         public telephoneEmployeur?: string,
         public emailEmployeur?: string,
+        public dateCreation?: any,
+        public dateModification?: any,
         public typeService?: BaseEntity,
+        public typeEntree?: BaseEntity,
+        public categorie?: BaseEntity,
+        public createdBy?: User,
+        public modifiedBy?: User,
     ) {
     }
 }

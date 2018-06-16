@@ -23,19 +23,19 @@
             <br/>&nbsp;
             <div class="row mb-lg-5">
                 <div class="col-md-3">
-                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.numeroFormulaire">Numero Formulaire</span>
-                    <span>{{passeport.numeroFormulaire}}</span>
+                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.recu">recu</span>
+                    <span>{{passeport.recu}}</span>
                 </div>
                 <div class="col-md-3">
                     <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.nom">nom</span>
                     <span>{{passeport.nom}}</span>
                 </div>
                 <div class="col-md-3">
-                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.numeroFormulaire">prenom</span>
+                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.prenom">prenom</span>
                     <span>{{passeport.prenom}}</span>
                 </div>
                 <div class="col-md-3">
-                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.numeroFormulaire">numeroPasseport</span>
+                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.numeroPasseport">numeroPasseport</span>
                     <span>{{passeport.numeroPasseport}}</span>
                 </div>
             </div>
@@ -98,9 +98,19 @@
                     <span>{{passeport.dateExpiration | date:'mediumDate'}}</span>
                 </div>
                 <div class="col-md-3">
-                    <span style="font-weight: 900!important;"
-                          jhiTranslate="ambassadeApp.passeport.montant">montant</span>
-                    <span>{{passeport.montant | number}}</span>
+                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.taille">taille</span>
+                    <span>{{passeport.taille}}</span>
+                </div>
+            </div>
+
+            <div class="row mb-lg-5">
+                <div class="col-md-3">
+                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.state">state</span>
+                    <span jhiTranslate="{{'ambassadeApp.State.' + passeport.state}}">{{passeport.state}}</span>
+                </div>
+                <div class="col-md-3" *ngIf="passeport.typeService">
+                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.typeService">typeService</span>
+                    <span>{{passeport.typeService.nom}} - {{passeport.typeService.montant}} Frs CFA</span>
                 </div>
             </div>
 
@@ -111,32 +121,8 @@
                     {{passeport.photoContentType}}, {{byteSize(passeport.photo)}}
                 </div>
                 <div class="col-md-8">
-                    <span jhiTranslate="ambassadeApp.passeport.remarques">remarques</span>
+                    <span style="font-weight: 900!important;"  jhiTranslate="ambassadeApp.passeport.remarques">remarques</span>
                     <span>{{passeport.remarques}}</span>
-                </div>
-            </div>
-
-            <div class="row mb-lg-5">
-                <div class="col-md-3">
-                    <span style="font-weight: 900!important;"
-                          jhiTranslate="ambassadeApp.passeport.documents">documents</span>
-                    <span>{{passeport.documents}}</span>
-                </div>
-                <div class="col-md-3">
-                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.taille">taille</span>
-                    <span>{{passeport.taille}}</span>
-                </div>
-                <div class="col-md-3">
-                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.recu">recu</span>
-                    <span>{{passeport.recu}}</span>
-                </div>
-                <div class="col-md-3">
-                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.state">state</span>
-                    <span jhiTranslate="{{'ambassadeApp.State.' + passeport.state}}">{{passeport.state}}</span>
-                </div>
-                <div class="col-md-3" *ngIf="passeport.typeService">
-                    <span style="font-weight: 900!important;" jhiTranslate="ambassadeApp.passeport.typeService">typeService</span>
-                    <span>{{passeport.typeService.nom}} - {{passeport.typeService.montant}} Frs CFA</span>
                 </div>
             </div>
         </div>

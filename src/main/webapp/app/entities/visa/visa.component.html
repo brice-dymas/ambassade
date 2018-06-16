@@ -44,16 +44,10 @@
                     <td>{{visa.numeroVisa}}</td>
                     <td>{{visa.dateEmission | date:'mediumDate'}}</td>
                     <td>{{visa.dateExpiration | date:'mediumDate'}}</td>
-                    <td>{{visa.typeService.nom}}</td>
+                    <td>{{visa.typeService?.nom}}</td>
                     <td>{{visa.state}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    [routerLink]="['../visa', visa.id ]"
-                                    class="btn btn-info btn-xs plat">
-                                <span class="fa fa-eye"></span>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
                             <button type="submit"
                                     [routerLink]="['/', { outlets: { popup: 'visa/'+ visa.id + '/edit'} }]"
                                     replaceUrl="true"
@@ -62,15 +56,21 @@
                                     *ngIf="visa.state=='NOUVEAU'">
                                 <span class="fa fa-pencil"></span>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
+                            </button>&nbsp;
                             <button type="submit"
-                                    [routerLink]="['/', { outlets: { popup: 'visa/'+ visa.id + '/delete'} }]"
-                                    replaceUrl="true"
-                                    queryParamsHandling="merge"
-                                    class="btn btn-danger btn-xs plat">
-                                <span class="fa fa-trash"></span>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                    [routerLink]="['../visa', visa.id ]"
+                                    class="btn btn-info btn-xs plat">
+                                <span class="fa fa-eye"></span>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
+                            <!--<button type="submit"-->
+                                    <!--[routerLink]="['/', { outlets: { popup: 'visa/'+ visa.id + '/delete'} }]"-->
+                                    <!--replaceUrl="true"-->
+                                    <!--queryParamsHandling="merge"-->
+                                    <!--class="btn btn-danger btn-xs plat">-->
+                                <!--<span class="fa fa-trash"></span>-->
+                                <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
+                            <!--</button>-->
                         </div>
                     </td>
                 </tr>

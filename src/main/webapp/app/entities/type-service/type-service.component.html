@@ -1,78 +1,76 @@
-<div class="mb-lg-5">
-    <h5 class="text-uppercase">
+<div>
+    <h2>
         <span jhiTranslate="ambassadeApp.typeService.home.title">Type Services</span>
-        <button class="btn btn-blue btn-xs plat float-right jh-create-entity create-type-service" [routerLink]="['/', { outlets: { popup: ['type-service-new'] } }]">
-            <span class="fa fa-pencil-square-o"></span>
+        <button class="btn btn-primary float-right jh-create-entity create-type-service" [routerLink]="['/', { outlets: { popup: ['type-service-new'] } }]">
+            <span class="fa fa-plus"></span>
             <span  jhiTranslate="ambassadeApp.typeService.home.createLabel">
             Create new Type Service
             </span>
         </button>
-    </h5>
-    <div class="title-bullet title-bullet-table"><span></span></div>
+    </h2>
     <jhi-alert></jhi-alert>
-    <div *ngIf="typeServices">
-        <table class="table table-striped dash-row table-sm">
-            <thead class="theme-bg-blue text-white">
-                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                    <!--
-                    <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-                    -->
-                    <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.typeService.nom">Nom</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="montant"><span jhiTranslate="ambassadeApp.typeService.montant">Montant</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="deleted"><span jhiTranslate="ambassadeApp.typeService.deleted">Deleted</span> <span class="fa fa-sort"></span></th>
-                    <th></th>
-                </tr>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="typeServices">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.typeService.nom">Nom</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="montant"><span jhiTranslate="ambassadeApp.typeService.montant">Montant</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="deleted"><span jhiTranslate="ambassadeApp.typeService.deleted">Deleted</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="uniteOrganisationelle.id"><span jhiTranslate="ambassadeApp.typeService.uniteOrganisationelle">Unite Organisationelle</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let typeService of typeServices ;trackBy: trackId">
-                    <!--
-                    <td><a [routerLink]="['../type-service', typeService.id ]">{{typeService.id}}</a></td>
-                    -->
-                    <td>{{typeService.nom}}</td>
-                    <td>{{typeService.montant}}</td>
-                    <td>{{typeService.deleted}}</td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    [routerLink]="['../type-service', typeService.id ]"
-                                    class="btn btn-info btn-xs plat">
-                                <span class="fa fa-eye"></span>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
-                            <button type="submit"
-                                    [routerLink]="['/', { outlets: { popup: 'type-service/'+ typeService.id + '/edit'} }]"
-                                    replaceUrl="true"
-                                    queryParamsHandling="merge"
-                                    class="btn btn-primary btn-xs plat">
-                                <span class="fa fa-pencil"></span>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
-                            <button type="submit"
-                                    [routerLink]="['/', { outlets: { popup: 'type-service/'+ typeService.id + '/delete'} }]"
-                                    replaceUrl="true"
-                                    queryParamsHandling="merge"
-                                    class="btn btn-danger btn-xs plat">
-                                <span class="fa fa-trash"></span>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+            <tr *ngFor="let typeService of typeServices ;trackBy: trackId">
+                <td><a [routerLink]="['../type-service', typeService.id ]">{{typeService.id}}</a></td>
+                <td>{{typeService.nom}}</td>
+                <td>{{typeService.montant}}</td>
+                <td>{{typeService.deleted}}</td>
+                <td>
+                    <div *ngIf="typeService.uniteOrganisationelle">
+                        <a [routerLink]="['../unite-organisationelle', typeService.uniteOrganisationelle?.id ]" >{{typeService.uniteOrganisationelle?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../type-service', typeService.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'type-service/'+ typeService.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'type-service/'+ typeService.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
     <div *ngIf="typeServices && typeServices.length">
-        <div class="row">
-            <div class="col-6">
-                <div class="text-sm">
-                    <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="pagination-sm pull-right">
-                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-                </div>
-            </div>
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>
