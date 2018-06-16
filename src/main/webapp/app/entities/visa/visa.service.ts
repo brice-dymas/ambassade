@@ -119,10 +119,10 @@ export class VisaService {
             .convertLocalDateToServer(visa.dateEmission);
         copy.dateEmissionFin = this.dateUtils
             .convertLocalDateToServer(visa.dateEmissionFin);
-        copy.dateExpiration = this.dateUtils
-            .convertLocalDateToServer(visa.dateExpiration);
-        copy.dateExpirationFin = this.dateUtils
-            .convertLocalDateToServer(visa.dateExpirationFin);
+        // copy.dateExpiration = this.dateUtils
+        //     .convertLocalDateToServer(visa.dateExpiration);
+        // copy.dateExpirationFin = this.dateUtils
+        //     .convertLocalDateToServer(visa.dateExpirationFin);
         return copy;
     }
 }

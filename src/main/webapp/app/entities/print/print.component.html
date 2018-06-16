@@ -1,34 +1,56 @@
-<div style='text-align: center'>
+<div class="no-print" style='text-align: center'>
     <h3>PAGE D'IMPRESSION DE DONNEES</h3>
-    <!--<button (click)="downloadPDF()" class="btn btn-info">Export to PDF</button>-->
-    <button (click)="downloadPDF()" type="submit" [routerLink]="['../print']" class="btn btn-info">Export to PDF</button>
+    <button (click)="downloadPDF()" type="submit" [routerLink]="['../print']" class="btn btn-info">Export to PDF
+    </button>&nbsp;
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
 </div>
 <br/>
-<div *ngIf="dataContent" class="paper container">
+
+<div *ngIf="visas" class="paper container sheet padding-25mm">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <h4 style="font-weight: 900!important;" class="card-title h2"
+                jhiTranslate="ambassadeApp.visa.home.title"></h4>
+        </div>
+    </div>
     <div class="row" id="content">
         <div class="col-12 col A4 landscape">
-            <div style='text-align: center'>
-                <h4 class="card-title">My awesome Paper card!</h4>
-            </div>
             <br/>&nbsp;
-            <table>
-                <thead>
-                    <tr>
-                        <th *ngFor="let titre of dataHeader">
-                            <span jhiTranslate="{{titre}}"></span>
-                        </th>
-                    </tr>
+            <table class="table table-striped table-bordered">
+                <thead class="theme-bg-blue text-white">
+                <tr>
+                    <th><span jhiTranslate="ambassadeApp.visa.nom">Nom</span></th>
+                    <th><span jhiTranslate="ambassadeApp.visa.prenom">Prenom</span></th>
+                    <th><span jhiTranslate="ambassadeApp.visa.numeroVisa">Numero Visa</span></th>
+                    <th><span jhiTranslate="ambassadeApp.visa.numeroPasseport">Numero Passeport</span></th>
+                    <th><span jhiTranslate="ambassadeApp.visa.dateEmission">date Emision</span></th>
+                    <th><span jhiTranslate="ambassadeApp.visa.dateExpiration">date Expiration</span></th>
+                    <th><span jhiTranslate="ambassadeApp.visa.typeService">type Service</span></th>
+                </tr>
                 </thead>
-                <tbody>
-                    <tr *ngFor="let donnee of dataContent">
-                        <td *ngFor="let nom of property">
-                            {{donnee[nom]}}
-                            <!--<td>{{donnee[titre]}}</td>-->
-                            <!--<td>{{donnee[titre]}}</td>-->
-                        </td>
-                    </tr>
+                <tbody class="table-sm">
+                <tr *ngFor="let visa of visas; trackBy: trackId">
+                    <td>{{visa.nom}}</td>
+                    <td>{{visa.prenom}}</td>
+                    <td>{{visa.numeroVisa}}</td>
+                    <td>{{visa.numeroPasseport}}</td>
+                    <td>{{visa.dateEmission | date:'mediumDate'}}</td>
+                    <td>{{visa.dateExpiration | date:'mediumDate'}}</td>
+                    <td *ngIf="visa.typeService" >{{visa.typeService.nom}}</td>
+                </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+<button type="button"
+        (click)="previousState()"
+        class="btn btn-info btn-xs plat no-print mb-lg-5">
+    <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+</button>

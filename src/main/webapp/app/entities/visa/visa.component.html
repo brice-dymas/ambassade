@@ -21,7 +21,7 @@
             <thead class="theme-bg-blue text-white">
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                     <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
-                    <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.visa.nom">Nom</span> <span class="fa fa-sort"></span></th>
+                    <!--<th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.visa.nom">Nom</span> <span class="fa fa-sort"></span></th>-->
                     <th jhiSortBy="prenom"><span jhiTranslate="ambassadeApp.visa.prenom">Prenom</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="nationalite"><span jhiTranslate="ambassadeApp.visa.nationalite">Nationalite</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="numeroPasseport"><span jhiTranslate="ambassadeApp.visa.numeroPasseport">Numero Passeport</span> <span class="fa fa-sort"></span></th>
@@ -36,7 +36,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let visa of visas ;trackBy: trackId">
-                    <td>{{visa.nom}}</td>
+                    <!--<td>{{visa.nom}}</td>-->
                     <td>{{visa.prenom}}</td>
                     <td>{{visa.nationalite}}</td>
                     <td>{{visa.numeroPasseport}}</td>
@@ -44,7 +44,7 @@
                     <td>{{visa.numeroVisa}}</td>
                     <td>{{visa.dateEmission | date:'mediumDate'}}</td>
                     <td>{{visa.dateExpiration | date:'mediumDate'}}</td>
-                    <td>{{visa.typeService.nom}}</td>
+                    <td>{{visa.typeService?.nom}}</td>
                     <td>{{visa.state}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

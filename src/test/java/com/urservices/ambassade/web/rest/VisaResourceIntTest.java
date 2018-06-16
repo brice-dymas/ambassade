@@ -161,7 +161,6 @@ public class VisaResourceIntTest {
             .numeroVisa(DEFAULT_NUMERO_VISA)
             .dateEmission(DEFAULT_DATE_EMISSION)
             .dateExpiration(DEFAULT_DATE_EXPIRATION)
-            .nombreEntree(DEFAULT_NOMBRE_ENTREE)
             .taxes(DEFAULT_TAXES)
             .adresse(DEFAULT_ADRESSE)
             .remarques(DEFAULT_REMARQUES)
@@ -212,7 +211,6 @@ public class VisaResourceIntTest {
         assertThat(testVisa.getNumeroVisa()).isEqualTo(DEFAULT_NUMERO_VISA);
         assertThat(testVisa.getDateEmission()).isEqualTo(DEFAULT_DATE_EMISSION);
         assertThat(testVisa.getDateExpiration()).isEqualTo(DEFAULT_DATE_EXPIRATION);
-        assertThat(testVisa.getNombreEntree()).isEqualTo(DEFAULT_NOMBRE_ENTREE);
         assertThat(testVisa.getTaxes()).isEqualTo(DEFAULT_TAXES);
         assertThat(testVisa.getAdresse()).isEqualTo(DEFAULT_ADRESSE);
         assertThat(testVisa.getRemarques()).isEqualTo(DEFAULT_REMARQUES);
@@ -267,7 +265,6 @@ public class VisaResourceIntTest {
             .andExpect(jsonPath("$.[*].numeroVisa").value(hasItem(DEFAULT_NUMERO_VISA.intValue())))
             .andExpect(jsonPath("$.[*].dateEmission").value(hasItem(DEFAULT_DATE_EMISSION.toString())))
             .andExpect(jsonPath("$.[*].dateExpiration").value(hasItem(DEFAULT_DATE_EXPIRATION.toString())))
-            .andExpect(jsonPath("$.[*].nombreEntree").value(hasItem(DEFAULT_NOMBRE_ENTREE.toString())))
             .andExpect(jsonPath("$.[*].taxes").value(hasItem(DEFAULT_TAXES)))
             .andExpect(jsonPath("$.[*].adresse").value(hasItem(DEFAULT_ADRESSE.toString())))
             .andExpect(jsonPath("$.[*].remarques").value(hasItem(DEFAULT_REMARQUES.toString())))
@@ -303,7 +300,6 @@ public class VisaResourceIntTest {
             .andExpect(jsonPath("$.numeroVisa").value(DEFAULT_NUMERO_VISA.intValue()))
             .andExpect(jsonPath("$.dateEmission").value(DEFAULT_DATE_EMISSION.toString()))
             .andExpect(jsonPath("$.dateExpiration").value(DEFAULT_DATE_EXPIRATION.toString()))
-            .andExpect(jsonPath("$.nombreEntree").value(DEFAULT_NOMBRE_ENTREE.toString()))
             .andExpect(jsonPath("$.taxes").value(DEFAULT_TAXES))
             .andExpect(jsonPath("$.adresse").value(DEFAULT_ADRESSE.toString()))
             .andExpect(jsonPath("$.remarques").value(DEFAULT_REMARQUES.toString()))
@@ -349,7 +345,6 @@ public class VisaResourceIntTest {
             .numeroVisa(UPDATED_NUMERO_VISA)
             .dateEmission(UPDATED_DATE_EMISSION)
             .dateExpiration(UPDATED_DATE_EXPIRATION)
-            .nombreEntree(UPDATED_NOMBRE_ENTREE)
             .taxes(UPDATED_TAXES)
             .adresse(UPDATED_ADRESSE)
             .remarques(UPDATED_REMARQUES)
@@ -382,7 +377,6 @@ public class VisaResourceIntTest {
         assertThat(testVisa.getNumeroVisa()).isEqualTo(UPDATED_NUMERO_VISA);
         assertThat(testVisa.getDateEmission()).isEqualTo(UPDATED_DATE_EMISSION);
         assertThat(testVisa.getDateExpiration()).isEqualTo(UPDATED_DATE_EXPIRATION);
-        assertThat(testVisa.getNombreEntree()).isEqualTo(UPDATED_NOMBRE_ENTREE);
         assertThat(testVisa.getTaxes()).isEqualTo(UPDATED_TAXES);
         assertThat(testVisa.getAdresse()).isEqualTo(UPDATED_ADRESSE);
         assertThat(testVisa.getRemarques()).isEqualTo(UPDATED_REMARQUES);

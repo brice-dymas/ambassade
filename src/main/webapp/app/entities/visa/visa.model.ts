@@ -19,7 +19,6 @@ export class Visa implements BaseEntity {
         public numeroVisa?: number,
         public dateEmission?: any,
         public dateExpiration?: any,
-        public nombreEntree?: string,
         public taxes?: number,
         public adresse?: string,
         public remarques?: string,

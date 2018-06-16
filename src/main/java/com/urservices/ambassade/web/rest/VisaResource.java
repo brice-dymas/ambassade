@@ -2,6 +2,7 @@ package com.urservices.ambassade.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.urservices.ambassade.domain.Visa;
+import com.urservices.ambassade.domain.enumeration.Statut;
 import com.urservices.ambassade.service.VisaService;
 import com.urservices.ambassade.web.rest.errors.BadRequestAlertException;
 import com.urservices.ambassade.web.rest.util.HeaderUtil;
@@ -15,11 +16,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,9 +94,39 @@ public class VisaResource {
      */
     @GetMapping("/visas")
     @Timed
-    public ResponseEntity<List<Visa>> getAllVisas(Pageable pageable) {
+    public ResponseEntity<List<Visa>> getAllVisas(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Visas");
-        Page<Visa> page = visaService.findAll(pageable);
+        String nom = webRequest.getParameter("nom") !=null && !webRequest.getParameter("nom").isEmpty()
+            ? webRequest.getParameter("nom"): null;
+        String prenom = webRequest.getParameter("prenom") !=null && !webRequest.getParameter("prenom").isEmpty()
+            ? webRequest.getParameter("prenom"): null;
+        String numeroPasseport = webRequest.getParameter("numeroPasseport") !=null && !webRequest.getParameter("numeroPasseport").isEmpty()
+            ? webRequest.getParameter("numeroPasseport"): null;
+        Long numeroVisa = webRequest.getParameter("numeroVisa") !=null && !webRequest.getParameter("numeroVisa").isEmpty()
+            ? Long.valueOf(webRequest.getParameter("numeroVisa")): null;
+        Long typeService = webRequest.getParameter("typeService") !=null && !webRequest.getParameter("typeService").isEmpty()
+            ? Long.valueOf(webRequest.getParameter("typeService")): null;
+        Long categorie = webRequest.getParameter("categorie") !=null && !webRequest.getParameter("categorie").isEmpty()
+            ? Long.valueOf(webRequest.getParameter("categorie")): null;
+
+        String dateEmissionDebStr = webRequest.getParameter("dateEmission") !=null && !webRequest.getParameter("dateEmission").isEmpty()
+            ? webRequest.getParameter("dateEmission"): null;
+        String dateExpirationDebStr= webRequest.getParameter("dateExpiration") !=null && !webRequest.getParameter("dateExpiration").isEmpty()
+            ? webRequest.getParameter("dateExpiration"): null;
+
+        String dateEmissionFinStr = webRequest.getParameter("dateEmissionFin") !=null && !webRequest.getParameter("dateEmissionFin").isEmpty()
+            ? webRequest.getParameter("dateEmissionFin"): null;
+        String dateExpirationFinStr= webRequest.getParameter("dateExpirationFin") !=null && !webRequest.getParameter("dateExpirationFin").isEmpty()
+            ? webRequest.getParameter("dateExpirationFin"): null;
+
+        LocalDate dateEmissionDeb = dateEmissionDebStr != null ? LocalDate.parse(dateEmissionDebStr) : null;
+        LocalDate dateExpirationDeb = dateExpirationDebStr != null ?  LocalDate.parse(dateExpirationDebStr) : null;
+
+        LocalDate dateEmissionFin = dateEmissionFinStr != null ? LocalDate.parse(dateEmissionFinStr) : null;
+        LocalDate dateExpirationFin = dateExpirationFinStr != null ?  LocalDate.parse(dateExpirationFinStr) : null;
+
+        Page<Visa> page = visaService.findAll(nom, prenom, numeroPasseport, numeroVisa, typeService, categorie,
+            dateEmissionDeb, dateEmissionFin, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/visas");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

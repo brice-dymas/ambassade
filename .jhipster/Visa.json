@@ -77,14 +77,6 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "nombreEntree",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 20
-        },
-        {
             "fieldName": "taxes",
             "fieldType": "Integer"
         },

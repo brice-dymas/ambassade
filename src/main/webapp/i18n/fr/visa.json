@@ -23,6 +23,7 @@
             "cedula": "Cedula",
             "numeroVisa": "Numero Visa",
             "dateEmission": "Date Emission",
+            "dateEmissionSearch": "Date Emission comprise entre",
             "dateExpiration": "Date Expiration",
             "nombreEntree": "Nombre Entree",
             "taxes": "Taxes",

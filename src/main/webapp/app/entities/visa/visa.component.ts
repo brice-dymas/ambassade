@@ -126,28 +126,9 @@ currentAccount: any;
     }
 
     printPage() {
-        const callVerbose: {
-            dataHeader: any;
-            dataContent: any;
-            property: any;
-        } = {
-            dataHeader: ['ambassadeApp.visa.nom',
-                'ambassadeApp.visa.prenom',
-                'ambassadeApp.visa.adresse',
-                'ambassadeApp.visa.nationalite',
-                'ambassadeApp.visa.numeroPasseport',
-                'ambassadeApp.visa.numeroVisa',
-                'ambassadeApp.visa.dateEmission',
-                'ambassadeApp.visa.dateExpiration',
-                'ambassadeApp.visa.type',
-                'ambassadeApp.visa.categorie'],
-            dataContent: this.visas,
-            property: Object.getOwnPropertyNames(this.visas[0]),
-        };
         this.router.navigateByData({
             url: ['/print'],
-            // data: this.categories
-            data: callVerbose
+            data: this.visas
         });
     }
 

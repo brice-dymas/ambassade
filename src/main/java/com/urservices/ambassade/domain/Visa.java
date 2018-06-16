@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import com.urservices.ambassade.domain.enumeration.State;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * A Visa.
@@ -18,6 +19,7 @@ import com.urservices.ambassade.domain.enumeration.State;
 @Entity
 @Table(name = "visa")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@EntityListeners(AuditingEntityListener.class)
 public class Visa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,10 +56,6 @@ public class Visa implements Serializable {
 
     @Column(name = "date_expiration")
     private LocalDate dateExpiration;
-
-    @Size(max = 20)
-    @Column(name = "nombre_entree", length = 20)
-    private String nombreEntree;
 
     @Column(name = "taxes")
     private Integer taxes;
@@ -225,19 +223,6 @@ public class Visa implements Serializable {
 
     public void setDateExpiration(LocalDate dateExpiration) {
         this.dateExpiration = dateExpiration;
-    }
-
-    public String getNombreEntree() {
-        return nombreEntree;
-    }
-
-    public Visa nombreEntree(String nombreEntree) {
-        this.nombreEntree = nombreEntree;
-        return this;
-    }
-
-    public void setNombreEntree(String nombreEntree) {
-        this.nombreEntree = nombreEntree;
     }
 
     public Integer getTaxes() {
@@ -494,7 +479,6 @@ public class Visa implements Serializable {
             ", numeroVisa=" + getNumeroVisa() +
             ", dateEmission='" + getDateEmission() + "'" +
             ", dateExpiration='" + getDateExpiration() + "'" +
-            ", nombreEntree='" + getNombreEntree() + "'" +
             ", taxes=" + getTaxes() +
             ", adresse='" + getAdresse() + "'" +
             ", remarques='" + getRemarques() + "'" +
@@ -510,5 +494,16 @@ public class Visa implements Serializable {
             ", telephoneEmployeur='" + getTelephoneEmployeur() + "'" +
             ", emailEmployeur='" + getEmailEmployeur() + "'" +
             "}";
+    }
+
+    @PostPersist
+    public void generateNumeroVisa() {
+        LocalDate localDate = LocalDate.now();
+        String numeroVisa = "";
+        numeroVisa += localDate.getYear();
+        numeroVisa += localDate.getMonthValue() < 10 ? "0" + localDate.getMonthValue() : localDate.getMonthValue();
+        numeroVisa += localDate.getDayOfMonth() < 10 ? "0" + localDate.getDayOfMonth() : localDate.getDayOfMonth();
+        numeroVisa += this.getId() < 10 ? "0" + this.getId() : this.getId();
+        this.setNumeroVisa(Long.parseLong(numeroVisa));
     }
 }
