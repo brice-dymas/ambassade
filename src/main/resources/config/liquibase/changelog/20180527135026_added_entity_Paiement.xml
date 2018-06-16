@@ -30,6 +30,14 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="date_creation" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="date_modification" type="date">
+                <constraints nullable="true" />
+            </column>
+
             <column name="visa_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -47,6 +55,14 @@
             </column>
 
             <column name="unite_organisationelle_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_by_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modified_by_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

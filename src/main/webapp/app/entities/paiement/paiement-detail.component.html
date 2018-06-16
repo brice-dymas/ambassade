@@ -12,6 +12,14 @@
         <dd>
             <span>{{paiement.numeroPaiement}}</span>
         </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.dateCreation">Date Creation</span></dt>
+        <dd>
+            <span>{{paiement.dateCreation | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.dateModification">Date Modification</span></dt>
+        <dd>
+            <span>{{paiement.dateModification | date:'mediumDate'}}</span>
+        </dd>
         <dt><span jhiTranslate="ambassadeApp.paiement.visa">Visa</span></dt>
         <dd>
             <div *ngIf="paiement.visa">
@@ -39,6 +47,14 @@
             <div *ngIf="paiement.uniteOrganisationelle">
                 <a [routerLink]="['/unite-organisationelle', paiement.uniteOrganisationelle?.id]">{{paiement.uniteOrganisationelle?.id}}</a>
             </div>
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.createdBy">Created By</span></dt>
+        <dd>
+            {{paiement.createdBy?.login}}
+        </dd>
+        <dt><span jhiTranslate="ambassadeApp.paiement.modifiedBy">Modified By</span></dt>
+        <dd>
+            {{paiement.modifiedBy?.login}}
         </dd>
     </dl>
 

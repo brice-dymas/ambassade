@@ -6,6 +6,22 @@
             "relationshipName": "typeService",
             "otherEntityName": "typeService",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "createdBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "passeport"
+        },
+        {
+            "relationshipName": "modifiedBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "passeport"
         }
     ],
     "fields": [
@@ -145,6 +161,14 @@
             "fieldName": "sexe",
             "fieldType": "Sexe",
             "fieldValues": "FEMININ, MASCULIN"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20180222221146",

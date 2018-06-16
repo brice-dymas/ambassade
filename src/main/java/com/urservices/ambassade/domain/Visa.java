@@ -19,7 +19,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "visa")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners({AuditingEntityListener.class})
 public class Visa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -102,6 +102,12 @@ public class Visa implements Serializable {
     @Column(name = "email_employeur")
     private String emailEmployeur;
 
+    @Column(name = "date_creation")
+    private LocalDate dateCreation;
+
+    @Column(name = "date_modification")
+    private LocalDate dateModification;
+
     @ManyToOne
     private TypeService typeService;
 
@@ -111,6 +117,12 @@ public class Visa implements Serializable {
 
     @ManyToOne
     private Categorie categorie;
+
+    @ManyToOne
+    private User createdBy;
+
+    @ManyToOne
+    private User modifiedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -407,6 +419,32 @@ public class Visa implements Serializable {
         this.emailEmployeur = emailEmployeur;
     }
 
+    public LocalDate getDateCreation() {
+        return dateCreation;
+    }
+
+    public Visa dateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+        return this;
+    }
+
+    public void setDateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public LocalDate getDateModification() {
+        return dateModification;
+    }
+
+    public Visa dateModification(LocalDate dateModification) {
+        this.dateModification = dateModification;
+        return this;
+    }
+
+    public void setDateModification(LocalDate dateModification) {
+        this.dateModification = dateModification;
+    }
+
     public TypeService getTypeService() {
         return typeService;
     }
@@ -444,6 +482,32 @@ public class Visa implements Serializable {
 
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public Visa createdBy(User user) {
+        this.createdBy = user;
+        return this;
+    }
+
+    public void setCreatedBy(User user) {
+        this.createdBy = user;
+    }
+
+    public User getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public Visa modifiedBy(User user) {
+        this.modifiedBy = user;
+        return this;
+    }
+
+    public void setModifiedBy(User user) {
+        this.modifiedBy = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -493,6 +557,8 @@ public class Visa implements Serializable {
             ", adresseEmployeur='" + getAdresseEmployeur() + "'" +
             ", telephoneEmployeur='" + getTelephoneEmployeur() + "'" +
             ", emailEmployeur='" + getEmailEmployeur() + "'" +
+            ", dateCreation='" + getDateCreation() + "'" +
+            ", dateModification='" + getDateModification() + "'" +
             "}";
     }
 
@@ -502,7 +568,7 @@ public class Visa implements Serializable {
         String numeroVisa = "";
         numeroVisa += localDate.getYear();
         numeroVisa += localDate.getMonthValue() < 10 ? "0" + localDate.getMonthValue() : localDate.getMonthValue();
-        numeroVisa += localDate.getDayOfMonth() < 10 ? "0" + localDate.getDayOfMonth() : localDate.getDayOfMonth();
+//        numeroVisa += localDate.getDayOfMonth() < 10 ? "0" + localDate.getDayOfMonth() : localDate.getDayOfMonth();
         numeroVisa += this.getId() < 10 ? "0" + this.getId() : this.getId();
         this.setNumeroVisa(Long.parseLong(numeroVisa));
     }

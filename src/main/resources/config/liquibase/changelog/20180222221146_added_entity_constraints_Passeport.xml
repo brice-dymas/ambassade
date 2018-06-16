@@ -14,5 +14,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="type_service"/>
 
+        <addForeignKeyConstraint baseColumnNames="created_by_id"
+                                 baseTableName="passeport"
+                                 constraintName="fk_passeport_created_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="modified_by_id"
+                                 baseTableName="passeport"
+                                 constraintName="fk_passeport_modified_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
     </changeSet>
 </databaseChangeLog>

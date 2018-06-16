@@ -1,4 +1,4 @@
-import { BaseEntity } from './../../shared';
+import { BaseEntity, User } from './../../shared';
 
 export const enum Statut {
     'CELIBATAIRE',
@@ -48,7 +48,11 @@ export class Passeport implements BaseEntity {
         public cin?: string,
         public type?: string,
         public sexe?: Sexe,
+        public dateCreation?: any,
+        public dateModification?: any,
         public typeService?: BaseEntity,
+        public createdBy?: User,
+        public modifiedBy?: User,
     ) {
     }
 }

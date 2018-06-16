@@ -4,7 +4,9 @@ import com.urservices.ambassade.AmbassadeApp;
 
 import com.urservices.ambassade.domain.Visa;
 import com.urservices.ambassade.domain.TypeEntree;
+import com.urservices.ambassade.repository.UserRepository;
 import com.urservices.ambassade.repository.VisaRepository;
+import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.VisaService;
 import com.urservices.ambassade.web.rest.errors.ExceptionTranslator;
 
@@ -68,9 +70,6 @@ public class VisaResourceIntTest {
     private static final LocalDate DEFAULT_DATE_EXPIRATION = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_EXPIRATION = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_NOMBRE_ENTREE = "AAAAAAAAAA";
-    private static final String UPDATED_NOMBRE_ENTREE = "BBBBBBBBBB";
-
     private static final Integer DEFAULT_TAXES = 1;
     private static final Integer UPDATED_TAXES = 2;
 
@@ -112,8 +111,20 @@ public class VisaResourceIntTest {
     private static final String DEFAULT_EMAIL_EMPLOYEUR = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL_EMPLOYEUR = "BBBBBBBBBB";
 
+    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
+
     @Autowired
     private VisaRepository visaRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PaiementService paiementService;
 
     @Autowired
     private VisaService visaService;
@@ -137,7 +148,7 @@ public class VisaResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final VisaResource visaResource = new VisaResource(visaService);
+        final VisaResource visaResource = new VisaResource(visaService, paiementService, userRepository);
         this.restVisaMockMvc = MockMvcBuilders.standaloneSetup(visaResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -174,7 +185,9 @@ public class VisaResourceIntTest {
             .nomEmployeur(DEFAULT_NOM_EMPLOYEUR)
             .adresseEmployeur(DEFAULT_ADRESSE_EMPLOYEUR)
             .telephoneEmployeur(DEFAULT_TELEPHONE_EMPLOYEUR)
-            .emailEmployeur(DEFAULT_EMAIL_EMPLOYEUR);
+            .emailEmployeur(DEFAULT_EMAIL_EMPLOYEUR)
+            .dateCreation(DEFAULT_DATE_CREATION)
+            .dateModification(DEFAULT_DATE_MODIFICATION);
         // Add required entity
         TypeEntree typeEntree = TypeEntreeResourceIntTest.createEntity(em);
         em.persist(typeEntree);
@@ -225,6 +238,8 @@ public class VisaResourceIntTest {
         assertThat(testVisa.getAdresseEmployeur()).isEqualTo(DEFAULT_ADRESSE_EMPLOYEUR);
         assertThat(testVisa.getTelephoneEmployeur()).isEqualTo(DEFAULT_TELEPHONE_EMPLOYEUR);
         assertThat(testVisa.getEmailEmployeur()).isEqualTo(DEFAULT_EMAIL_EMPLOYEUR);
+        assertThat(testVisa.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
+        assertThat(testVisa.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -278,7 +293,9 @@ public class VisaResourceIntTest {
             .andExpect(jsonPath("$.[*].nomEmployeur").value(hasItem(DEFAULT_NOM_EMPLOYEUR.toString())))
             .andExpect(jsonPath("$.[*].adresseEmployeur").value(hasItem(DEFAULT_ADRESSE_EMPLOYEUR.toString())))
             .andExpect(jsonPath("$.[*].telephoneEmployeur").value(hasItem(DEFAULT_TELEPHONE_EMPLOYEUR.toString())))
-            .andExpect(jsonPath("$.[*].emailEmployeur").value(hasItem(DEFAULT_EMAIL_EMPLOYEUR.toString())));
+            .andExpect(jsonPath("$.[*].emailEmployeur").value(hasItem(DEFAULT_EMAIL_EMPLOYEUR.toString())))
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
     }
 
     @Test
@@ -313,7 +330,9 @@ public class VisaResourceIntTest {
             .andExpect(jsonPath("$.nomEmployeur").value(DEFAULT_NOM_EMPLOYEUR.toString()))
             .andExpect(jsonPath("$.adresseEmployeur").value(DEFAULT_ADRESSE_EMPLOYEUR.toString()))
             .andExpect(jsonPath("$.telephoneEmployeur").value(DEFAULT_TELEPHONE_EMPLOYEUR.toString()))
-            .andExpect(jsonPath("$.emailEmployeur").value(DEFAULT_EMAIL_EMPLOYEUR.toString()));
+            .andExpect(jsonPath("$.emailEmployeur").value(DEFAULT_EMAIL_EMPLOYEUR.toString()))
+            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
+            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
     }
 
     @Test
@@ -358,7 +377,9 @@ public class VisaResourceIntTest {
             .nomEmployeur(UPDATED_NOM_EMPLOYEUR)
             .adresseEmployeur(UPDATED_ADRESSE_EMPLOYEUR)
             .telephoneEmployeur(UPDATED_TELEPHONE_EMPLOYEUR)
-            .emailEmployeur(UPDATED_EMAIL_EMPLOYEUR);
+            .emailEmployeur(UPDATED_EMAIL_EMPLOYEUR)
+            .dateCreation(UPDATED_DATE_CREATION)
+            .dateModification(UPDATED_DATE_MODIFICATION);
 
         restVisaMockMvc.perform(put("/api/visas")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -391,6 +412,8 @@ public class VisaResourceIntTest {
         assertThat(testVisa.getAdresseEmployeur()).isEqualTo(UPDATED_ADRESSE_EMPLOYEUR);
         assertThat(testVisa.getTelephoneEmployeur()).isEqualTo(UPDATED_TELEPHONE_EMPLOYEUR);
         assertThat(testVisa.getEmailEmployeur()).isEqualTo(UPDATED_EMAIL_EMPLOYEUR);
+        assertThat(testVisa.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
+        assertThat(testVisa.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

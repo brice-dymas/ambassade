@@ -7,6 +7,7 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Paiement } from './paiement.model';
 import { PaiementService } from './paiement.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
+import {PaiementSearchModel} from './paiement-search.model';
 
 @Component({
     selector: 'jhi-paiement',
@@ -56,6 +57,12 @@ currentAccount: any;
                 (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+    searchPaiement(paiement: PaiementSearchModel) {
+        this.paiementService.search(paiement).subscribe(
+            (res: HttpResponse<Paiement[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
@@ -97,7 +104,15 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInPaiements() {
-        this.eventSubscriber = this.eventManager.subscribe('paiementListModification', (response) => this.loadAll());
+        // this.eventSubscriber = this.eventManager.subscribe('paiementListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('paiementListModification', (response) => {
+            console.log(response);
+            if (typeof response.content === 'string') {
+                return this.loadAll();
+            }else {
+                return this.searchPaiement(response.content);
+            }
+        });
     }
 
     sort() {

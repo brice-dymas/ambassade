@@ -1,13 +1,12 @@
 import { BaseEntity } from './../../shared';
 
-export class PaiementSearchModel implements BaseEntity {
+export class PaiementSearchModel {
     constructor(
-        public id?: number,
         public datePaiement?: string,
-        public visa?: number,
-        public passeport?: number,
+        public datePaiementFin?: string,
+        public numeroPaiement?: string,
         public typeService?: number,
-        public user?: number,
+        public uniteOrganisationelle?: number,
     ) {
     }
 }

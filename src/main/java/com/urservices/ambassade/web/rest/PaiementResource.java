@@ -2,6 +2,8 @@ package com.urservices.ambassade.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.urservices.ambassade.domain.Paiement;
+import com.urservices.ambassade.domain.User;
+import com.urservices.ambassade.repository.UserRepository;
 import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.web.rest.errors.BadRequestAlertException;
 import com.urservices.ambassade.web.rest.util.HeaderUtil;
@@ -14,6 +16,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
@@ -37,8 +43,12 @@ public class PaiementResource {
 
     private final PaiementService paiementService;
 
-    public PaiementResource(PaiementService paiementService) {
+    private final UserRepository userRepository;
+
+
+    public PaiementResource(PaiementService paiementService, UserRepository userRepository) {
         this.paiementService = paiementService;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -55,6 +65,10 @@ public class PaiementResource {
         if (paiement.getId() != null) {
             throw new BadRequestAlertException("A new paiement cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        paiement.setCreatedBy(user);
+        paiement.setDateCreation(LocalDate.now());
         Paiement result = paiementService.save(paiement);
         return ResponseEntity.created(new URI("/api/paiements/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -77,6 +91,10 @@ public class PaiementResource {
         if (paiement.getId() == null) {
             return createPaiement(paiement);
         }
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        paiement.setModifiedBy(user);
+        paiement.setDateModification(LocalDate.now());
         Paiement result = paiementService.save(paiement);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, paiement.getId().toString()))
@@ -102,14 +120,20 @@ public class PaiementResource {
             ? webRequest.getParameter("numeroPaiement"): null;
         Long visa = webRequest.getParameter("visa") !=null && !webRequest.getParameter("visa").isEmpty()
             ? Long.valueOf(webRequest.getParameter("visa")): null;
-        Long passeport = webRequest.getParameter("passeport") !=null && !webRequest.getParameter("passeport").isEmpty()
-            ? Long.valueOf(webRequest.getParameter("passeport")): null;
+        Long uniteOrganisationelle = webRequest.getParameter("uniteOrganisationelle") !=null && !webRequest.getParameter("uniteOrganisationelle").isEmpty()
+            ? Long.valueOf(webRequest.getParameter("uniteOrganisationelle")): null;
         Long typeService = webRequest.getParameter("typeService") !=null && !webRequest.getParameter("typeService").isEmpty()
             ? Long.valueOf(webRequest.getParameter("typeService")): null;
         LocalDate datePaiement = datePaiementStr != null ? LocalDate.parse(datePaiementStr) : null;
-        LocalDate datePaiementFin = datePaiementStr != null ? LocalDate.parse(datePaiementStr) : null;
+        LocalDate datePaiementFin = datePaiementStr != null ? LocalDate.parse(datePaiementFinStr) : null;
 
-        Page<Paiement> page = paiementService.findAll(numeroPaiement, datePaiement,datePaiementFin,visa,passeport,typeService,pageable);
+        System.out.println("numeroPaiement= "+numeroPaiement);
+        System.out.println("datePaiement= "+datePaiement);
+        System.out.println("datePaiementFin= "+datePaiementFin);
+        System.out.println("visa= "+visa);
+        System.out.println("uniteOrganisationelle= "+uniteOrganisationelle);
+        System.out.println("typeService= "+typeService);
+        Page<Paiement> page = paiementService.findAll(numeroPaiement, datePaiement,datePaiementFin,visa,uniteOrganisationelle,typeService,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/paiements");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -140,5 +164,17 @@ public class PaiementResource {
         log.debug("REST request to delete Paiement : {}", id);
         paiementService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    public final String getCurrentUserLogin() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String login = null;
+        if (authentication != null)
+            if (authentication.getPrincipal() instanceof UserDetails)
+                login = ((UserDetails) authentication.getPrincipal()).getUsername();
+            else if (authentication.getPrincipal() instanceof String)
+                login = (String) authentication.getPrincipal();
+        return login;
     }
 }

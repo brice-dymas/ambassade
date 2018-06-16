@@ -73,6 +73,10 @@ export class PaiementService {
         const copy: Paiement = Object.assign({}, paiement);
         copy.datePaiement = this.dateUtils
             .convertLocalDateFromServer(paiement.datePaiement);
+        copy.dateCreation = this.dateUtils
+            .convertLocalDateFromServer(paiement.dateCreation);
+        copy.dateModification = this.dateUtils
+            .convertLocalDateFromServer(paiement.dateModification);
         return copy;
     }
 
@@ -83,6 +87,10 @@ export class PaiementService {
         const copy: Paiement = Object.assign({}, paiement);
         copy.datePaiement = this.dateUtils
             .convertLocalDateToServer(paiement.datePaiement);
+        copy.dateCreation = this.dateUtils
+            .convertLocalDateToServer(paiement.dateCreation);
+        copy.dateModification = this.dateUtils
+            .convertLocalDateToServer(paiement.dateModification);
         return copy;
     }
 
@@ -93,6 +101,8 @@ export class PaiementService {
         const copy: PaiementSearchModel = Object.assign({}, paiement);
         copy.datePaiement = this.dateUtils
             .convertLocalDateToServer(paiement.datePaiement);
+        copy.datePaiementFin = this.dateUtils
+            .convertLocalDateToServer(paiement.datePaiementFin);
         return copy;
     }
 }

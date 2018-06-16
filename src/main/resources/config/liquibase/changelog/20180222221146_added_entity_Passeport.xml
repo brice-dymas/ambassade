@@ -22,7 +22,6 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-
             <column name="nom" type="varchar(30)">
                 <constraints nullable="false" />
             </column>
@@ -118,7 +117,23 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="date_creation" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="date_modification" type="date">
+                <constraints nullable="true" />
+            </column>
+
             <column name="type_service_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_by_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modified_by_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

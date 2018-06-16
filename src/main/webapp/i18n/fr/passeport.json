@@ -16,7 +16,6 @@
             "detail": {
                 "title": "Passeport"
             },
-            "numeroFormulaire": "Numero Formulaire",
             "nom": "Nom",
             "prenom": "Prenom",
             "numeroPasseport": "Numero Passeport",
@@ -41,7 +40,11 @@
             "cin": "Cin",
             "type": "Type",
             "sexe": "Sexe",
-            "typeService": "Type Service"
+            "dateCreation": "Date Creation",
+            "dateModification": "Date Modification",
+            "typeService": "Type Service",
+            "createdBy": "Created By",
+            "modifiedBy": "Modified By"
         }
     }
 }

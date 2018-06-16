@@ -121,8 +121,20 @@ public class Passeport implements Serializable {
     @Column(name = "sexe")
     private Sexe sexe;
 
+    @Column(name = "date_creation")
+    private LocalDate dateCreation;
+
+    @Column(name = "date_modification")
+    private LocalDate dateModification;
+
     @ManyToOne
     private TypeService typeService;
+
+    @ManyToOne
+    private User createdBy;
+
+    @ManyToOne
+    private User modifiedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -445,6 +457,32 @@ public class Passeport implements Serializable {
         this.sexe = sexe;
     }
 
+    public LocalDate getDateCreation() {
+        return dateCreation;
+    }
+
+    public Passeport dateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+        return this;
+    }
+
+    public void setDateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public LocalDate getDateModification() {
+        return dateModification;
+    }
+
+    public Passeport dateModification(LocalDate dateModification) {
+        this.dateModification = dateModification;
+        return this;
+    }
+
+    public void setDateModification(LocalDate dateModification) {
+        this.dateModification = dateModification;
+    }
+
     public TypeService getTypeService() {
         return typeService;
     }
@@ -456,6 +494,32 @@ public class Passeport implements Serializable {
 
     public void setTypeService(TypeService typeService) {
         this.typeService = typeService;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public Passeport createdBy(User user) {
+        this.createdBy = user;
+        return this;
+    }
+
+    public void setCreatedBy(User user) {
+        this.createdBy = user;
+    }
+
+    public User getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public Passeport modifiedBy(User user) {
+        this.modifiedBy = user;
+        return this;
+    }
+
+    public void setModifiedBy(User user) {
+        this.modifiedBy = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -507,6 +571,8 @@ public class Passeport implements Serializable {
             ", cin='" + getCin() + "'" +
             ", type='" + getType() + "'" +
             ", sexe='" + getSexe() + "'" +
+            ", dateCreation='" + getDateCreation() + "'" +
+            ", dateModification='" + getDateModification() + "'" +
             "}";
     }
 

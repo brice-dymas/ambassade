@@ -60,13 +60,13 @@ public class PaiementServiceImpl implements PaiementService {
      *
      * @param datePaiement
      * @param visa
-     * @param passeport
+     * @param uniteOrganisationelle
      * @param typeService
      * @param pageable     the pagination information  @return the list of entities
      */
     @Override
     public Page<Paiement> findAll(String numeroPaiement, LocalDate datePaiement, LocalDate datePaiementFin,
-                                  Long visa, Long passeport, Long typeService, Pageable pageable) {
+                                  Long visa, Long uniteOrganisationelle, Long typeService, Pageable pageable) {
         QPaiement paiement = QPaiement.paiement;
         BooleanExpression predicate = null;
         boolean added = false;
@@ -102,11 +102,11 @@ public class PaiementServiceImpl implements PaiementService {
                 added = true;
             }
         }
-        if (passeport != null) {
+        if (uniteOrganisationelle != null) {
             if (added) {
-                predicate = predicate.and(paiement.passeport.id.eq(passeport));
+                predicate = predicate.and(paiement.uniteOrganisationelle.id.eq(uniteOrganisationelle));
             } else {
-                predicate = paiement.passeport.id.eq(passeport);
+                predicate = paiement.uniteOrganisationelle.id.eq(uniteOrganisationelle);
                 added = true;
             }
         }

@@ -4,6 +4,7 @@ import com.urservices.ambassade.AmbassadeApp;
 
 import com.urservices.ambassade.domain.Passeport;
 import com.urservices.ambassade.repository.PasseportRepository;
+import com.urservices.ambassade.repository.UserRepository;
 import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.PasseportService;
 import com.urservices.ambassade.web.rest.errors.ExceptionTranslator;
@@ -117,14 +118,23 @@ public class PasseportResourceIntTest {
     private static final Sexe DEFAULT_SEXE = Sexe.FEMININ;
     private static final Sexe UPDATED_SEXE = Sexe.MASCULIN;
 
+    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
+
     @Autowired
     private PasseportRepository passeportRepository;
 
     @Autowired
-    PaiementService paiementService;
+    private PaiementService paiementService;
 
     @Autowired
     private PasseportService passeportService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -145,7 +155,7 @@ public class PasseportResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PasseportResource passeportResource = new PasseportResource(passeportService, paiementService);
+        final PasseportResource passeportResource = new PasseportResource(passeportService, paiementService, userRepository);
         this.restPasseportMockMvc = MockMvcBuilders.standaloneSetup(passeportResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -184,7 +194,9 @@ public class PasseportResourceIntTest {
             .state(DEFAULT_STATE)
             .cin(DEFAULT_CIN)
             .type(DEFAULT_TYPE)
-            .sexe(DEFAULT_SEXE);
+            .sexe(DEFAULT_SEXE)
+            .dateCreation(DEFAULT_DATE_CREATION)
+            .dateModification(DEFAULT_DATE_MODIFICATION);
         return passeport;
     }
 
@@ -232,6 +244,8 @@ public class PasseportResourceIntTest {
         assertThat(testPasseport.getCin()).isEqualTo(DEFAULT_CIN);
         assertThat(testPasseport.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testPasseport.getSexe()).isEqualTo(DEFAULT_SEXE);
+        assertThat(testPasseport.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
+        assertThat(testPasseport.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -377,7 +391,9 @@ public class PasseportResourceIntTest {
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
             .andExpect(jsonPath("$.[*].cin").value(hasItem(DEFAULT_CIN.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE.toString())));
+            .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE.toString())))
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
     }
 
     @Test
@@ -414,7 +430,9 @@ public class PasseportResourceIntTest {
             .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
             .andExpect(jsonPath("$.cin").value(DEFAULT_CIN.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
-            .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE.toString()));
+            .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE.toString()))
+            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
+            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
     }
 
     @Test
@@ -461,7 +479,9 @@ public class PasseportResourceIntTest {
             .state(UPDATED_STATE)
             .cin(UPDATED_CIN)
             .type(UPDATED_TYPE)
-            .sexe(UPDATED_SEXE);
+            .sexe(UPDATED_SEXE)
+            .dateCreation(UPDATED_DATE_CREATION)
+            .dateModification(UPDATED_DATE_MODIFICATION);
 
         restPasseportMockMvc.perform(put("/api/passeports")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -496,6 +516,8 @@ public class PasseportResourceIntTest {
         assertThat(testPasseport.getCin()).isEqualTo(UPDATED_CIN);
         assertThat(testPasseport.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testPasseport.getSexe()).isEqualTo(UPDATED_SEXE);
+        assertThat(testPasseport.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
+        assertThat(testPasseport.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

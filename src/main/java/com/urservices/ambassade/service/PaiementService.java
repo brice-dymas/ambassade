@@ -35,7 +35,7 @@ public interface PaiementService {
      *@param pageable the pagination information  @return the list of entities
      */
     Page<Paiement> findAll(String numeroPaiement, LocalDate datePaiement, LocalDate datePaiementFin,
-                           Long visa, Long passeport, Long typeService, Pageable pageable);
+                           Long visa, Long uniteOrganisationelle, Long typeService, Pageable pageable);
 
     /**
      * Get the "id" paiement.

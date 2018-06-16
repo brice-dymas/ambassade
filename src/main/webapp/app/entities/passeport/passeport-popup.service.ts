@@ -64,6 +64,20 @@ export class PasseportPopupService {
                                 day: passeport.dateExpiration.getDate()
                             };
                         }
+                        if (passeport.dateCreation) {
+                            passeport.dateCreation = {
+                                year: passeport.dateCreation.getFullYear(),
+                                month: passeport.dateCreation.getMonth() + 1,
+                                day: passeport.dateCreation.getDate()
+                            };
+                        }
+                        if (passeport.dateModification) {
+                            passeport.dateModification = {
+                                year: passeport.dateModification.getFullYear(),
+                                month: passeport.dateModification.getMonth() + 1,
+                                day: passeport.dateModification.getDate()
+                            };
+                        }
                         this.ngbModalRef = this.passeportModalRef(component, passeport);
                         resolve(this.ngbModalRef);
                     });

@@ -2,6 +2,7 @@ package com.urservices.ambassade.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
@@ -15,6 +16,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "paiement")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@EntityListeners({AuditingEntityListener.class})
 public class Paiement implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,6 +30,12 @@ public class Paiement implements Serializable {
 
     @Column(name = "numero_paiement")
     private String numeroPaiement;
+
+    @Column(name = "date_creation")
+    private LocalDate dateCreation;
+
+    @Column(name = "date_modification")
+    private LocalDate dateModification;
 
     @ManyToOne
     private Visa visa;
@@ -43,6 +51,12 @@ public class Paiement implements Serializable {
 
     @ManyToOne
     private UniteOrganisationelle uniteOrganisationelle;
+
+    @ManyToOne
+    private User createdBy;
+
+    @ManyToOne
+    private User modifiedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -77,6 +91,32 @@ public class Paiement implements Serializable {
 
     public void setNumeroPaiement(String numeroPaiement) {
         this.numeroPaiement = numeroPaiement;
+    }
+
+    public LocalDate getDateCreation() {
+        return dateCreation;
+    }
+
+    public Paiement dateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+        return this;
+    }
+
+    public void setDateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public LocalDate getDateModification() {
+        return dateModification;
+    }
+
+    public Paiement dateModification(LocalDate dateModification) {
+        this.dateModification = dateModification;
+        return this;
+    }
+
+    public void setDateModification(LocalDate dateModification) {
+        this.dateModification = dateModification;
     }
 
     public Visa getVisa() {
@@ -143,6 +183,32 @@ public class Paiement implements Serializable {
     public void setUniteOrganisationelle(UniteOrganisationelle uniteOrganisationelle) {
         this.uniteOrganisationelle = uniteOrganisationelle;
     }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public Paiement createdBy(User user) {
+        this.createdBy = user;
+        return this;
+    }
+
+    public void setCreatedBy(User user) {
+        this.createdBy = user;
+    }
+
+    public User getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public Paiement modifiedBy(User user) {
+        this.modifiedBy = user;
+        return this;
+    }
+
+    public void setModifiedBy(User user) {
+        this.modifiedBy = user;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -171,6 +237,18 @@ public class Paiement implements Serializable {
             "id=" + getId() +
             ", datePaiement='" + getDatePaiement() + "'" +
             ", numeroPaiement='" + getNumeroPaiement() + "'" +
+            ", dateCreation='" + getDateCreation() + "'" +
+            ", dateModification='" + getDateModification() + "'" +
             "}";
+    }
+
+    @PostPersist
+    public void generateNumeroPaiement() {
+        LocalDate localDate = LocalDate.now();
+        String numeroPaiement = "";
+        numeroPaiement += localDate.getYear();
+        numeroPaiement += localDate.getMonthValue() < 10 ? "0" + localDate.getMonthValue() : localDate.getMonthValue();
+        numeroPaiement += this.getId() < 10 ? "0" + this.getId() : this.getId();
+        this.setNumeroPaiement(numeroPaiement);
     }
 }

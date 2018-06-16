@@ -1,212 +1,241 @@
-<div class="mb-lg-5" *ngIf="passeport">
-    <h5 class="text-uppercase">
-        <span jhiTranslate="ambassadeApp.passeport.detail.title">Passeport</span> {{passeport.id}}
-        <button (click)="printPage()" class="btn btn-info btn-xs float-right plat">
-            <span class="fa fa-print"></span>&nbsp;
-            <span>Imprimer</span>
-        </button>&nbsp;
-        <!--
-        <button type="submit"
-                (click)="previousState()"
-                class="btn btn-info btn-xs float-right plat">
-            <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-        </button>
-        -->
-    </h5>
-    <div class="title-bullet title-bullet-table"><span></span></div>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.recu">Recu</span></dt>
-                        <dd>
-                            <span>{{passeport.recu}}</span>
-                        </dd>
+
+<div *ngIf="passeport">
+    <div class="mb-lg-5" *ngIf="passeport">
+        <h5 class="text-uppercase">
+            <span jhiTranslate="ambassadeApp.passeport.detail.title">Passeport</span> {{passeport.id}}
+            <button (click)="printPage()" class="btn btn-info btn-xs float-right plat">
+                <span class="fa fa-print"></span>&nbsp;
+                <span>Imprimer</span>
+            </button>&nbsp;
+            <!--
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info btn-xs float-right plat">
+                <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            -->
+        </h5>
+        <div class="title-bullet title-bullet-table"><span></span></div>
+        <jhi-alert-error></jhi-alert-error>
+        <dl class="row-md jh-entity-details">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.recu">Recu</span></dt>
+                            <dd>
+                                <span>{{passeport.recu}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.nom">Nom</span></dt>
+                            <dd>
+                                <span>{{passeport.nom}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.prenom">Prenom</span></dt>
+                            <dd>
+                                <span>{{passeport.prenom}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.numeroPasseport">Numero Passeport</span></dt>
+                            <dd>
+                                <span>{{passeport.numeroPasseport}}</span>
+                            </dd>
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.nom">Nom</span></dt>
-                        <dd>
-                            <span>{{passeport.nom}}</span>
-                        </dd>
+                    <div class="row">
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.neLe">Ne Le</span></dt>
+                            <dd>
+                                <span>{{passeport.neLe | date:'mediumDate'}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.lieuNaissance">Lieu Naissance</span></dt>
+                            <dd>
+                                <span>{{passeport.lieuNaissance}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.etatCivil">Etat Civil</span></dt>
+                            <dd>
+                                <span jhiTranslate="{{'ambassadeApp.Statut.' + passeport.etatCivil}}">{{passeport.etatCivil}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.adresse">Adresse</span></dt>
+                            <dd>
+                                <span>{{passeport.adresse}}</span>
+                            </dd>
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.prenom">Prenom</span></dt>
-                        <dd>
-                            <span>{{passeport.prenom}}</span>
-                        </dd>
+                    <div class="row">
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.telephone">Telephone</span></dt>
+                            <dd>
+                                <span>{{passeport.telephone}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.nif">Nif</span></dt>
+                            <dd>
+                                <span>{{passeport.nif}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.paysEmetteur">Pays Emetteur</span></dt>
+                            <dd>
+                                <span>{{passeport.paysEmetteur}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.soumisLe">Soumis Le</span></dt>
+                            <dd>
+                                <span>{{passeport.soumisLe | date:'mediumDate'}}</span>
+                            </dd>
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.numeroPasseport">Numero Passeport</span></dt>
-                        <dd>
-                            <span>{{passeport.numeroPasseport}}</span>
-                        </dd>
+                    <div class="row">
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.delivreLe">Delivre Le</span></dt>
+                            <dd>
+                                <span>{{passeport.delivreLe | date:'mediumDate'}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.dateExpiration">Date Expiration</span></dt>
+                            <dd>
+                                <span>{{passeport.dateExpiration | date:'mediumDate'}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.dateEmission">Date Emission</span></dt>
+                            <dd>
+                                <span>{{passeport.dateEmission | date:'mediumDate'}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.remarques">Remarques</span></dt>
+                            <dd>
+                                <span>{{passeport.remarques}}</span>
+                            </dd>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.neLe">Ne Le</span></dt>
-                        <dd>
-                            <span>{{passeport.neLe | date:'mediumDate'}}</span>
-                        </dd>
+                    <div class="row">
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.state">State</span></dt>
+                            <dd>
+                                <span jhiTranslate="{{'ambassadeApp.State.' + passeport.state}}">{{passeport.state}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.typeService">Type Service</span></dt>
+                            <dd>
+                                <div *ngIf="passeport.typeService">
+                                    <a [routerLink]="['/type-service', passeport.typeService?.id]">{{passeport.typeService?.nom}}</a>
+                                </div>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.sms">Sms</span></dt>
+                            <dd>
+                                <span>{{passeport.sms}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.taille">Taille</span></dt>
+                            <dd>
+                                <span>{{passeport.taille}}</span>
+                            </dd>
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.lieuNaissance">Lieu Naissance</span></dt>
-                        <dd>
-                            <span>{{passeport.lieuNaissance}}</span>
-                        </dd>
+                    <div class="row">
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.photo">Photo</span></dt>
+                            <dd>
+                                <div *ngIf="passeport.photo">
+                                    <a (click)="openFile(passeport.photoContentType, passeport.photo)" jhiTranslate="entity.action.open">open</a>
+                                    {{passeport.photoContentType}}, {{byteSize(passeport.photo)}}
+                                </div>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.dateCreation">Date Creation</span></dt>
+                            <dd>
+                                <span>{{passeport.dateCreation | date:'mediumDate'}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.createdBy">Created By</span></dt>
+                            <dd>
+                                {{passeport.createdBy?.lastName}} {{passeport.createdBy?.firstName}}
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.etatCivil">Etat Civil</span></dt>
-                        <dd>
-                            <span jhiTranslate="{{'ambassadeApp.Statut.' + passeport.etatCivil}}">{{passeport.etatCivil}}</span>
-                        </dd>
+                    <div class="row">
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.dateModification">Date Modification</span></dt>
+                            <dd>
+                                <span>{{passeport.dateModification | date:'mediumDate'}}</span>
+                            </dd>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <dt><span jhiTranslate="ambassadeApp.passeport.modifiedBy">modified By</span></dt>
+                            <dd>
+                                {{passeport.modifiedBy?.lastName}} {{passeport.modifiedBy?.firstName}}
+                            </dd>
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.adresse">Adresse</span></dt>
-                        <dd>
-                            <span>{{passeport.adresse}}</span>
-                        </dd>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.telephone">Telephone</span></dt>
-                        <dd>
-                            <span>{{passeport.telephone}}</span>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.nif">Nif</span></dt>
-                        <dd>
-                            <span>{{passeport.nif}}</span>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.paysEmetteur">Pays Emetteur</span></dt>
-                        <dd>
-                            <span>{{passeport.paysEmetteur}}</span>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.soumisLe">Soumis Le</span></dt>
-                        <dd>
-                            <span>{{passeport.soumisLe | date:'mediumDate'}}</span>
-                        </dd>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.delivreLe">Delivre Le</span></dt>
-                        <dd>
-                            <span>{{passeport.delivreLe | date:'mediumDate'}}</span>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.remarques">Remarques</span></dt>
-                        <dd>
-                            <span>{{passeport.remarques}}</span>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.dateEmission">Date Emission</span></dt>
-                        <dd>
-                            <span>{{passeport.dateEmission | date:'mediumDate'}}</span>
-                        </dd>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.dateExpiration">Date Expiration</span></dt>
-                        <dd>
-                            <span>{{passeport.dateExpiration | date:'mediumDate'}}</span>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.sms">Sms</span></dt>
-                        <dd>
-                            <span>{{passeport.sms}}</span>
-                        </dd>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.taille">Taille</span></dt>
-                        <dd>
-                            <span>{{passeport.taille}}</span>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.photo">Photo</span></dt>
-                        <dd>
-                            <div *ngIf="passeport.photo">
-                                <a (click)="openFile(passeport.photoContentType, passeport.photo)" jhiTranslate="entity.action.open">open</a>
-                                {{passeport.photoContentType}}, {{byteSize(passeport.photo)}}
-                            </div>
-                        </dd>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.state">State</span></dt>
-                        <dd>
-                            <span jhiTranslate="{{'ambassadeApp.State.' + passeport.state}}">{{passeport.state}}</span>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3">
-                        <dt><span jhiTranslate="ambassadeApp.passeport.typeService">Type Service</span></dt>
-                        <dd>
-                            <div *ngIf="passeport.typeService">
-                                <a [routerLink]="['/type-service', passeport.typeService?.id]">{{passeport.typeService?.nom}}</a>
-                            </div>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3"></div>
-                    <div class="col-6 col-sm-3"></div>
                 </div>
             </div>
-        </div>
-    </dl>
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info btn-xs plat">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
-    <button type="submit"
-            (click)="create()"
-            class="btn btn-info btn-xs plat">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span> BOUTON</span>
-    </button>
+        </dl>
 
-    <button type="button" *ngIf="passeport.state=='NOUVEAU'" [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/edit'} }]"
-            replaceUrl="true" queryParamsHandling="merge" class="btn btn-primary btn-xs plat">
-        <span class="fa fa-pencil"></span>&nbsp;
-        <span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
-    <button type="button" *ngIf="passeport.state=='NOUVEAU'" class="btn btn-blue btn-xs plat" (click)="payer()">
-        <span class="fa fa-money"></span>&nbsp;
-        <span jhiTranslate="entity.action.payer"> Payer</span>
-    </button>
-    <button type="button" *ngIf="passeport.state=='PAYE'" class="btn btn-success btn-xs plat" (click)="encours()">
-        <span class="fa fa-money"></span>&nbsp;
-        <span jhiTranslate="entity.action.encours"> En Cours</span>
-    </button>
-    <button type="button" *ngIf="passeport.state=='ENCOURS'" (click)="pret()" class="btn btn-warning btn-xs plat">
-        <span class="fa fa-money"></span>&nbsp;
-        <span jhiTranslate="entity.action.pret"> Prêt</span>
-    </button>
-    <button type="button" *ngIf="passeport.state=='PRET'" (click)="retirer()" class="btn btn-secondary btn-xs plat">
-        <span class="fa fa-money"></span>&nbsp;
-        <span jhiTranslate="entity.action.retirer"> Retirer</span>
-    </button>
-    <!--
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/edit'} }]"
-            replaceUrl="true"
-            queryParamsHandling="merge"
-            class="btn btn-success btn-xs plat">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
-    -->
+        <jaspero-confirmations></jaspero-confirmations>
+        <button type="submit"
+                (click)="previousState()"
+                class="btn btn-info btn-xs plat">
+            <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+        </button>
+        <button type="submit"
+                (click)="create()"
+                class="btn btn-info btn-xs plat">
+            <span class="fa fa-arrow-left"></span>&nbsp;<span> BOUTON</span>
+        </button>
+
+        <button type="button" *ngIf="passeport.state=='NOUVEAU'" [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/edit'} }]"
+                replaceUrl="true" queryParamsHandling="merge" class="btn btn-primary btn-xs plat">
+            <span class="fa fa-pencil"></span>&nbsp;
+            <span jhiTranslate="entity.action.edit"> Edit</span>
+        </button>
+        <button type="button" *ngIf="passeport.state=='NOUVEAU'" class="btn btn-blue btn-xs plat" (click)="payer()">
+            <span class="fa fa-money"></span>&nbsp;
+            <span jhiTranslate="entity.action.payer"> Payer</span>
+        </button>
+        <button type="button" *ngIf="passeport.state=='PAYE'" class="btn btn-success btn-xs plat" (click)="encours()">
+            <span class="fa fa-money"></span>&nbsp;
+            <span jhiTranslate="entity.action.encours"> En Cours</span>
+        </button>
+        <button type="button" *ngIf="passeport.state=='ENCOURS'" (click)="pret()" class="btn btn-warning btn-xs plat">
+            <span class="fa fa-money"></span>&nbsp;
+            <span jhiTranslate="entity.action.pret"> Prêt</span>
+        </button>
+        <button type="button" *ngIf="passeport.state=='PRET'" (click)="retirer()" class="btn btn-secondary btn-xs plat">
+            <span class="fa fa-money"></span>&nbsp;
+            <span jhiTranslate="entity.action.retirer"> Retirer</span>
+        </button>
+        <!--
+        <button type="button"
+                [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/edit'} }]"
+                replaceUrl="true"
+                queryParamsHandling="merge"
+                class="btn btn-success btn-xs plat">
+            <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+        </button>
+        -->
+    </div>
 </div>

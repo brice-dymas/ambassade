@@ -36,6 +36,20 @@ export class PaiementPopupService {
                                 day: paiement.datePaiement.getDate()
                             };
                         }
+                        if (paiement.dateCreation) {
+                            paiement.dateCreation = {
+                                year: paiement.dateCreation.getFullYear(),
+                                month: paiement.dateCreation.getMonth() + 1,
+                                day: paiement.dateCreation.getDate()
+                            };
+                        }
+                        if (paiement.dateModification) {
+                            paiement.dateModification = {
+                                year: paiement.dateModification.getFullYear(),
+                                month: paiement.dateModification.getMonth() + 1,
+                                day: paiement.dateModification.getDate()
+                            };
+                        }
                         this.ngbModalRef = this.paiementModalRef(component, paiement);
                         resolve(this.ngbModalRef);
                     });

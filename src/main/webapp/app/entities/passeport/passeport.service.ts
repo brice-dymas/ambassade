@@ -99,6 +99,10 @@ export class PasseportService {
             .convertLocalDateFromServer(passeport.dateEmission);
         copy.dateExpiration = this.dateUtils
             .convertLocalDateFromServer(passeport.dateExpiration);
+        copy.dateCreation = this.dateUtils
+            .convertLocalDateFromServer(passeport.dateCreation);
+        copy.dateModification = this.dateUtils
+            .convertLocalDateFromServer(passeport.dateModification);
         return copy;
     }
 
@@ -117,6 +121,10 @@ export class PasseportService {
             .convertLocalDateToServer(passeport.dateEmission);
         copy.dateExpiration = this.dateUtils
             .convertLocalDateToServer(passeport.dateExpiration);
+        copy.dateCreation = this.dateUtils
+            .convertLocalDateToServer(passeport.dateCreation);
+        copy.dateModification = this.dateUtils
+            .convertLocalDateToServer(passeport.dateModification);
         return copy;
     }
 }

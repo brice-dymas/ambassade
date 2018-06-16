@@ -21,6 +21,22 @@
             "otherEntityName": "categorie",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "createdBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "visa"
+        },
+        {
+            "relationshipName": "modifiedBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "visa"
         }
     ],
     "fields": [
@@ -133,6 +149,14 @@
         {
             "fieldName": "emailEmployeur",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20180222221155",

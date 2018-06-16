@@ -12,6 +12,7 @@ import { Visa } from '../../../../../../main/webapp/app/entities/visa/visa.model
 import { TypeServiceService } from '../../../../../../main/webapp/app/entities/type-service';
 import { TypeEntreeService } from '../../../../../../main/webapp/app/entities/type-entree';
 import { CategorieService } from '../../../../../../main/webapp/app/entities/categorie';
+import { UserService } from '../../../../../../main/webapp/app/shared';
 
 describe('Component Tests', () => {
 
@@ -30,6 +31,7 @@ describe('Component Tests', () => {
                     TypeServiceService,
                     TypeEntreeService,
                     CategorieService,
+                    UserService,
                     VisaService
                 ]
             })

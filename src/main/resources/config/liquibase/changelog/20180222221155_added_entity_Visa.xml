@@ -109,6 +109,14 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="date_creation" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="date_modification" type="date">
+                <constraints nullable="true" />
+            </column>
+
             <column name="type_service_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -118,6 +126,14 @@
             </column>
 
             <column name="categorie_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_by_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="modified_by_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
