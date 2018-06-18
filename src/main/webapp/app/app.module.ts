@@ -30,6 +30,8 @@ import {
 import 'angular2-navigate-with-data';
 import {JasperoConfirmationsModule} from '@jaspero/ng-confirmations';
 import {FrappeDirective} from './shared/chart/frappe.directive';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 
 @NgModule({
     imports: [
@@ -42,6 +44,7 @@ import {FrappeDirective} from './shared/chart/frappe.directive';
         AmbassadeAccountModule,
         AmbassadeEntityModule,
         JasperoConfirmationsModule.forRoot(),
+        NgbCollapseModule.forRoot(),
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -51,7 +54,8 @@ import {FrappeDirective} from './shared/chart/frappe.directive';
         PageRibbonComponent,
         ActiveMenuDirective,
         FrappeDirective,
-        FooterComponent
+        FooterComponent,
+        SidebarComponent
     ],
     providers: [
         ProfileService,
