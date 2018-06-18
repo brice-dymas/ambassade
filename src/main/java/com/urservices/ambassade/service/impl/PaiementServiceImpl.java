@@ -60,18 +60,39 @@ public class PaiementServiceImpl implements PaiementService {
      *
      * @param datePaiement
      * @param visa
-     * @param passeport
+     * @param uniteOrganisationelle
      * @param typeService
      * @param pageable     the pagination information  @return the list of entities
      */
     @Override
-    public Page<Paiement> findAll(LocalDate datePaiement, Long visa, Long passeport, Long typeService, Pageable pageable) {
+    public Page<Paiement> findAll(String numeroPaiement, LocalDate datePaiement, LocalDate datePaiementFin,
+                                  Long visa, Long uniteOrganisationelle, Long typeService, Pageable pageable) {
         QPaiement paiement = QPaiement.paiement;
         BooleanExpression predicate = null;
         boolean added = false;
         if (datePaiement != null){
-            predicate = paiement.datePaiement.eq(datePaiement);
+            if (datePaiementFin != null){
+                predicate = paiement.datePaiement.between(datePaiement, datePaiementFin);
+            }else {
+                predicate = paiement.datePaiement.eq(datePaiement);
+            }
             added= true;
+        }
+        if (datePaiementFin != null && datePaiement == null){
+            if (added){
+                predicate = predicate.and(paiement.datePaiement.eq(datePaiementFin));
+            }else {
+                predicate = paiement.datePaiement.eq(datePaiementFin);
+            }
+            added= true;
+        }
+        if (numeroPaiement != null) {
+            if (added) {
+                predicate = predicate.and(paiement.numeroPaiement.likeIgnoreCase("%"+numeroPaiement+"%"));
+            } else {
+                predicate = paiement.numeroPaiement.likeIgnoreCase("%"+numeroPaiement+"%");
+                added = true;
+            }
         }
         if (visa != null) {
             if (added) {
@@ -81,11 +102,11 @@ public class PaiementServiceImpl implements PaiementService {
                 added = true;
             }
         }
-        if (passeport != null) {
+        if (uniteOrganisationelle != null) {
             if (added) {
-                predicate = predicate.and(paiement.passeport.id.eq(passeport));
+                predicate = predicate.and(paiement.uniteOrganisationelle.id.eq(uniteOrganisationelle));
             } else {
-                predicate = paiement.passeport.id.eq(passeport);
+                predicate = paiement.uniteOrganisationelle.id.eq(uniteOrganisationelle);
                 added = true;
             }
         }

@@ -4,6 +4,7 @@ import com.urservices.ambassade.AmbassadeApp;
 
 import com.urservices.ambassade.domain.Paiement;
 import com.urservices.ambassade.repository.PaiementRepository;
+import com.urservices.ambassade.repository.UserRepository;
 import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.web.rest.errors.ExceptionTranslator;
 
@@ -44,6 +45,18 @@ public class PaiementResourceIntTest {
     private static final LocalDate DEFAULT_DATE_PAIEMENT = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_PAIEMENT = LocalDate.now(ZoneId.systemDefault());
 
+    private static final String DEFAULT_NUMERO_PAIEMENT = "AAAAAAAAAA";
+    private static final String UPDATED_NUMERO_PAIEMENT = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
+
+    @Autowired
+    private UserRepository userRepository;
+
     @Autowired
     private PaiementRepository paiementRepository;
 
@@ -69,7 +82,7 @@ public class PaiementResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PaiementResource paiementResource = new PaiementResource(paiementService);
+        final PaiementResource paiementResource = new PaiementResource(paiementService, userRepository);
         this.restPaiementMockMvc = MockMvcBuilders.standaloneSetup(paiementResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -85,7 +98,10 @@ public class PaiementResourceIntTest {
      */
     public static Paiement createEntity(EntityManager em) {
         Paiement paiement = new Paiement()
-            .datePaiement(DEFAULT_DATE_PAIEMENT);
+            .datePaiement(DEFAULT_DATE_PAIEMENT)
+            .numeroPaiement(DEFAULT_NUMERO_PAIEMENT)
+            .dateCreation(DEFAULT_DATE_CREATION)
+            .dateModification(DEFAULT_DATE_MODIFICATION);
         return paiement;
     }
 
@@ -110,6 +126,9 @@ public class PaiementResourceIntTest {
         assertThat(paiementList).hasSize(databaseSizeBeforeCreate + 1);
         Paiement testPaiement = paiementList.get(paiementList.size() - 1);
         assertThat(testPaiement.getDatePaiement()).isEqualTo(DEFAULT_DATE_PAIEMENT);
+        assertThat(testPaiement.getNumeroPaiement()).isEqualTo(DEFAULT_NUMERO_PAIEMENT);
+        assertThat(testPaiement.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
+        assertThat(testPaiement.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -142,7 +161,10 @@ public class PaiementResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(paiement.getId().intValue())))
-            .andExpect(jsonPath("$.[*].datePaiement").value(hasItem(DEFAULT_DATE_PAIEMENT.toString())));
+            .andExpect(jsonPath("$.[*].datePaiement").value(hasItem(DEFAULT_DATE_PAIEMENT.toString())))
+            .andExpect(jsonPath("$.[*].numeroPaiement").value(hasItem(DEFAULT_NUMERO_PAIEMENT.toString())))
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
     }
 
     @Test
@@ -156,7 +178,10 @@ public class PaiementResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(paiement.getId().intValue()))
-            .andExpect(jsonPath("$.datePaiement").value(DEFAULT_DATE_PAIEMENT.toString()));
+            .andExpect(jsonPath("$.datePaiement").value(DEFAULT_DATE_PAIEMENT.toString()))
+            .andExpect(jsonPath("$.numeroPaiement").value(DEFAULT_NUMERO_PAIEMENT.toString()))
+            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
+            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
     }
 
     @Test
@@ -180,7 +205,10 @@ public class PaiementResourceIntTest {
         // Disconnect from session so that the updates on updatedPaiement are not directly saved in db
         em.detach(updatedPaiement);
         updatedPaiement
-            .datePaiement(UPDATED_DATE_PAIEMENT);
+            .datePaiement(UPDATED_DATE_PAIEMENT)
+            .numeroPaiement(UPDATED_NUMERO_PAIEMENT)
+            .dateCreation(UPDATED_DATE_CREATION)
+            .dateModification(UPDATED_DATE_MODIFICATION);
 
         restPaiementMockMvc.perform(put("/api/paiements")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -192,6 +220,9 @@ public class PaiementResourceIntTest {
         assertThat(paiementList).hasSize(databaseSizeBeforeUpdate);
         Paiement testPaiement = paiementList.get(paiementList.size() - 1);
         assertThat(testPaiement.getDatePaiement()).isEqualTo(UPDATED_DATE_PAIEMENT);
+        assertThat(testPaiement.getNumeroPaiement()).isEqualTo(UPDATED_NUMERO_PAIEMENT);
+        assertThat(testPaiement.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
+        assertThat(testPaiement.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

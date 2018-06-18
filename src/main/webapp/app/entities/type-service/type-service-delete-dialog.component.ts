@@ -31,7 +31,7 @@ export class TypeServiceDeleteDialogComponent {
         this.typeServiceService.delete(id).subscribe((response) => {
             this.eventManager.broadcast({
                 name: 'typeServiceListModification',
-                content: 'Deleted an typeService.csv'
+                content: 'Deleted an typeService'
             });
             this.activeModal.dismiss(true);
         });

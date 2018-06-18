@@ -1,0 +1,22 @@
+
+{
+    "ambassadeApp": {
+        "uniteOrganisationelle" : {
+            "home": {
+                "title": "UniteOrganisationelles",
+                "createLabel": "Créer un nouveau Unite Organisationelle",
+                "createOrEditLabel": "Créer ou éditer un Unite Organisationelle"
+            },
+            "created": "Un nouveau Unite Organisationelle a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Unite Organisationelle avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Unite Organisationelle avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Unite Organisationelle {{ id }} ?"
+            },
+            "detail": {
+                "title": "Unite Organisationelle"
+            },
+            "libelle": "Libelle"
+        }
+    }
+}

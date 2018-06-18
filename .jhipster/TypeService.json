@@ -1,6 +1,16 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "uniteOrganisationelle",
+            "otherEntityName": "uniteOrganisationelle",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        }
+    ],
     "fields": [
         {
             "fieldName": "nom",
@@ -24,9 +34,9 @@
         }
     ],
     "changelogDate": "20180527135025",
-    "entityTableName": "type_service",
     "dto": "no",
-    "pagination": "pagination",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "type_service",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
 }

@@ -9,6 +9,7 @@ import { AmbassadeTestModule } from '../../../test.module';
 import { TypeServiceDialogComponent } from '../../../../../../main/webapp/app/entities/type-service/type-service-dialog.component';
 import { TypeServiceService } from '../../../../../../main/webapp/app/entities/type-service/type-service.service';
 import { TypeService } from '../../../../../../main/webapp/app/entities/type-service/type-service.model';
+import { UniteOrganisationelleService } from '../../../../../../main/webapp/app/entities/unite-organisationelle';
 
 describe('Component Tests', () => {
 
@@ -24,6 +25,7 @@ describe('Component Tests', () => {
                 imports: [AmbassadeTestModule],
                 declarations: [TypeServiceDialogComponent],
                 providers: [
+                    UniteOrganisationelleService,
                     TypeServiceService
                 ]
             })

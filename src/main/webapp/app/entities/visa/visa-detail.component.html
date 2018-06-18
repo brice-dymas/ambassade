@@ -1,6 +1,6 @@
 <div class="mb-lg-5" *ngIf="visa">
     <h5 class="text-uppercase">
-        <span jhiTranslate="ambassadeApp.visa.detail.title">Visa</span> {{visa.id}}
+        <span jhiTranslate="ambassadeApp.visa.detail.title">Visa</span> {{visa.numeroVisa}}
     </h5>
     <div class="title-bullet title-bullet-table"><span></span></div>
     <jhi-alert-error></jhi-alert-error>
@@ -77,35 +77,29 @@
                 </div>
                 <div class="row">
                     <div class="col-6 col-sm-3">
-                        <dt>
-                            <span jhiTranslate="ambassadeApp.visa.validePour">Valide Pour</span>
-                        </dt>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt><span jhiTranslate="ambassadeApp.visa.profession">Profession</span></dt>
                         <dd>
-                            <span>{{visa.validePour}}</span>
+                            <span>{{visa.profession}}</span>
                         </dd>
                     </div>
                     <div class="col-6 col-sm-3">
                         <dt>
-                            <span jhiTranslate="ambassadeApp.visa.nombreEntree">Nombre Entree</span>
+                            <span jhiTranslate="ambassadeApp.visa.typeService">Type Service</span>
                         </dt>
                         <dd>
-                            <span>{{visa.nombreEntree}}</span>
+                            <div *ngIf="visa.typeService">
+                                <a [routerLink]="['/type-service', visa.typeService?.id]">{{visa.typeService?.nom}}</a>
+                            </div>
                         </dd>
                     </div>
                     <div class="col-6 col-sm-3">
-                        <dt>
-                            <span jhiTranslate="ambassadeApp.visa.type">Type</span>
-                        </dt>
+                        <dt><span jhiTranslate="ambassadeApp.visa.categorie">Categorie</span></dt>
                         <dd>
-                            <span>{{visa.type}}</span>
-                        </dd>
-                    </div>
-                    <div class="col-6 col-sm-3">
-                        <dt>
-                            <span jhiTranslate="ambassadeApp.visa.categorie">Categorie</span>
-                        </dt>
-                        <dd>
-                            <span>{{visa.categorie}}</span>
+                            <div *ngIf="visa.categorie">
+                                <a [routerLink]="['/categorie', visa.categorie?.id]">{{visa.categorie?.nomCategorie}}</a>
+                            </div>
                         </dd>
                     </div>
                 </div>
@@ -145,14 +139,101 @@
                 </div>
                 <div class="row">
                     <div class="col-6 col-sm-3">
-                        <dt>
-                            <span jhiTranslate="ambassadeApp.visa.typeService">Type Service</span>
-                        </dt>
+                        <dt><span jhiTranslate="ambassadeApp.visa.nombreDeJour">Nombre De Jour</span></dt>
                         <dd>
-                            <div *ngIf="visa.typeService">
-                                <a [routerLink]="['/type-service', visa.typeService?.id]">{{visa.typeService?.nom}}</a>
+                            <span>{{visa.nombreDeJour | number}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt><span jhiTranslate="ambassadeApp.visa.email">Email</span></dt>
+                        <dd>
+                            <span>{{visa.email}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt><span jhiTranslate="ambassadeApp.visa.nomEmployeur">Nom Employeur</span></dt>
+                        <dd>
+                            <span>{{visa.nomEmployeur}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt><span jhiTranslate="ambassadeApp.visa.adresseEmployeur">Adresse Employeur</span></dt>
+                        <dd>
+                            <span>{{visa.adresseEmployeur}}</span>
+                        </dd>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 col-sm-3">
+                        <dt><span jhiTranslate="ambassadeApp.visa.telephoneEmployeur">Telephone Employeur</span></dt>
+                        <dd>
+                            <span>{{visa.telephoneEmployeur}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt><span jhiTranslate="ambassadeApp.visa.emailEmployeur">Email Employeur</span></dt>
+                        <dd>
+                            <span>{{visa.emailEmployeur}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt><span jhiTranslate="ambassadeApp.visa.adresseDeSejour">Adresse De Sejour</span></dt>
+                        <dd>
+                            <span>{{visa.adresseDeSejour}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt><span jhiTranslate="ambassadeApp.visa.typeEntree">Type Entree</span></dt>
+                        <dd>
+                            <div *ngIf="visa.typeEntree">
+                                <a [routerLink]="['/type-entree', visa.typeEntree?.id]">{{visa.typeEntree?.libelle}}</a>
                             </div>
                         </dd>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 col-sm-3">
+                        <dt><span jhiTranslate="ambassadeApp.visa.dateCreation">Date Creation</span></dt>
+                        <dd>
+                            <span>{{visa.dateCreation | date:'mediumDate'}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt><span jhiTranslate="ambassadeApp.visa.createdBy">Created By</span></dt>
+                        <dd>
+                            {{visa.createdBy?.lastName}} {{visa.createdBy?.firstName}}
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt><span jhiTranslate="ambassadeApp.visa.dateModification">Date Modification</span></dt>
+                        <dd>
+                            <span>{{visa.dateModification | date:'mediumDate'}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt><span jhiTranslate="ambassadeApp.visa.modifiedBy">Modified By</span></dt>
+                        <dd>
+                            {{visa.modifiedBy?.lastName}} {{visa.modifiedBy?.firstName}}
+                        </dd>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 col-sm-4">
+                        <dt><span jhiTranslate="ambassadeApp.visa.photoDemandeurVisa">Photo Demandeur Visa</span></dt>
+                        <dd>
+                            <div *ngIf="visa.photoDemandeurVisa">
+                                <a (click)="openFile(visa.photoDemandeurVisaContentType, visa.photoDemandeurVisa)">
+                                    <img [src]="'data:' + visa.photoDemandeurVisaContentType + ';base64,' + visa.photoDemandeurVisa" style="max-width: 100%;" alt="visa image"/>
+                                </a>
+                                {{visa.photoDemandeurVisaContentType}}, {{byteSize(visa.photoDemandeurVisa)}}
+                            </div>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                    </div>
+                    <div class="col-6 col-sm-3">
+                    </div>
+                    <div class="col-6 col-sm-3">
                     </div>
                 </div>
             </div>
@@ -165,7 +246,7 @@
     </button>
 
     <button type="button" *ngIf="visa.state=='NOUVEAU'" [routerLink]="['/', { outlets: { popup: 'visa/'+ visa.id + '/edit'} }]"
-        replaceUrl="true" queryParamsHandling="merge" class="btn btn-primary btn-xs plat">
+            replaceUrl="true" queryParamsHandling="merge" class="btn btn-primary btn-xs plat">
         <span class="fa fa-pencil"></span>&nbsp;
         <span jhiTranslate="entity.action.edit"> Edit</span>
     </button>

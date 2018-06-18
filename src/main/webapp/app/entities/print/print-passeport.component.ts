@@ -1,7 +1,7 @@
 import {Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import * as xepOnline from 'css-to-pdf/js/xepOnline.jqPlugin.js';
-import {Passeport, PasseportService} from '../passeport';
+import {Passeport} from '../passeport';
 
 @Component({
     selector: 'jhi-print-passeport',
@@ -14,12 +14,7 @@ export class PrintPasseportComponent implements OnInit {
 
     passeports: Passeport[];
 
-    routeData: any;
-    dataContent: any;
-    property: any;
-    dataHeader: any;
-
-    constructor(private router: Router, private passeportService: PasseportService ) {
+    constructor(private router: Router) {
     }
 
     ngOnInit() {

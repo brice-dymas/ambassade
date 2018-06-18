@@ -16,7 +16,6 @@
             "detail": {
                 "title": "Passeport"
             },
-            "numeroFormulaire": "Numero Formulaire",
             "nom": "Nom",
             "prenom": "Prenom",
             "numeroPasseport": "Numero Passeport",
@@ -29,23 +28,23 @@
             "paysEmetteur": "Pays Emetteur",
             "soumisLe": "Soumis Le",
             "delivreLe": "Delivre Le",
-            "montant": "Montant",
+            "delivreLeSearch": "Date Delivrance comprise entre",
             "remarques": "Remarques",
             "dateEmission": "Date Emission",
             "dateExpiration": "Date Expiration",
-            "remarquesR": "Remarques R",
             "sms": "Sms",
-            "sms2": "Sms 2",
-            "documents": "Documents",
             "taille": "Taille",
-            "recu": "Recu Number",
+            "recu": "Numero Recu",
             "photo": "Photo",
             "state": "State",
+            "cin": "Cin",
+            "type": "Type",
+            "sexe": "Sexe",
+            "dateCreation": "Date Creation",
+            "dateModification": "Date Modification",
             "typeService": "Type Service",
-            "soumisLeSearch": "Date Soumission comprise entre Le",
-            "dateExpirationSearch": "Date Expiration comprise entre Le",
-            "neLeSearch": "Date Naissance comprise entre",
-            "delivreLeSearch": "Date Delivrance comprise entre Le"
+            "createdBy": "Created By",
+            "modifiedBy": "Modified By"
         }
     }
 }

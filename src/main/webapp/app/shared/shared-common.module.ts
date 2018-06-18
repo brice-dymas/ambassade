@@ -18,7 +18,7 @@ import {
     declarations: [
         FindLanguageFromKeyPipe,
         JhiAlertComponent,
-        JhiAlertErrorComponent
+        JhiAlertErrorComponent,
     ],
     providers: [
         JhiLanguageHelper,
@@ -32,7 +32,7 @@ import {
         AmbassadeSharedLibsModule,
         FindLanguageFromKeyPipe,
         JhiAlertComponent,
-        JhiAlertErrorComponent
+        JhiAlertErrorComponent,
     ]
 })
 export class AmbassadeSharedCommonModule {

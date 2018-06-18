@@ -7,7 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -15,12 +14,16 @@ import com.urservices.ambassade.domain.enumeration.Statut;
 
 import com.urservices.ambassade.domain.enumeration.State;
 
+import com.urservices.ambassade.domain.enumeration.Sexe;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 /**
  * A Passeport.
  */
 @Entity
 @Table(name = "passeport")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@EntityListeners({AuditingEntityListener.class})
 public class Passeport implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,11 +31,6 @@ public class Passeport implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
-    @Min(value = 0L)
-    @Column(name = "numero_formulaire", nullable = false)
-    private Long numeroFormulaire;
 
     @NotNull
     @Size(max = 30)
@@ -83,11 +81,6 @@ public class Passeport implements Serializable {
     @Column(name = "delivre_le")
     private LocalDate delivreLe;
 
-    @NotNull
-    @DecimalMin(value = "0")
-    @Column(name = "montant", precision=10, scale=2, nullable = false)
-    private BigDecimal montant;
-
     @Column(name = "remarques")
     private String remarques;
 
@@ -97,20 +90,9 @@ public class Passeport implements Serializable {
     @Column(name = "date_expiration")
     private LocalDate dateExpiration;
 
-    @Column(name = "remarques_r")
-    private String remarquesR;
-
     @Size(max = 15)
     @Column(name = "sms", length = 15)
     private String sms;
-
-    @Size(max = 60)
-    @Column(name = "sms_2", length = 60)
-    private String sms2;
-
-    @Size(max = 50)
-    @Column(name = "documents", length = 50)
-    private String documents;
 
     @Column(name = "taille")
     private Integer taille;
@@ -129,8 +111,30 @@ public class Passeport implements Serializable {
     @Column(name = "state")
     private State state;
 
+    @Column(name = "cin")
+    private String cin;
+
+    @Column(name = "jhi_type")
+    private String type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sexe")
+    private Sexe sexe;
+
+    @Column(name = "date_creation")
+    private LocalDate dateCreation;
+
+    @Column(name = "date_modification")
+    private LocalDate dateModification;
+
     @ManyToOne
     private TypeService typeService;
+
+    @ManyToOne
+    private User createdBy;
+
+    @ManyToOne
+    private User modifiedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -139,19 +143,6 @@ public class Passeport implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getNumeroFormulaire() {
-        return numeroFormulaire;
-    }
-
-    public Passeport numeroFormulaire(Long numeroFormulaire) {
-        this.numeroFormulaire = numeroFormulaire;
-        return this;
-    }
-
-    public void setNumeroFormulaire(Long numeroFormulaire) {
-        this.numeroFormulaire = numeroFormulaire;
     }
 
     public String getNom() {
@@ -310,19 +301,6 @@ public class Passeport implements Serializable {
         this.delivreLe = delivreLe;
     }
 
-    public BigDecimal getMontant() {
-        return montant;
-    }
-
-    public Passeport montant(BigDecimal montant) {
-        this.montant = montant;
-        return this;
-    }
-
-    public void setMontant(BigDecimal montant) {
-        this.montant = montant;
-    }
-
     public String getRemarques() {
         return remarques;
     }
@@ -362,19 +340,6 @@ public class Passeport implements Serializable {
         this.dateExpiration = dateExpiration;
     }
 
-    public String getRemarquesR() {
-        return remarquesR;
-    }
-
-    public Passeport remarquesR(String remarquesR) {
-        this.remarquesR = remarquesR;
-        return this;
-    }
-
-    public void setRemarquesR(String remarquesR) {
-        this.remarquesR = remarquesR;
-    }
-
     public String getSms() {
         return sms;
     }
@@ -386,32 +351,6 @@ public class Passeport implements Serializable {
 
     public void setSms(String sms) {
         this.sms = sms;
-    }
-
-    public String getSms2() {
-        return sms2;
-    }
-
-    public Passeport sms2(String sms2) {
-        this.sms2 = sms2;
-        return this;
-    }
-
-    public void setSms2(String sms2) {
-        this.sms2 = sms2;
-    }
-
-    public String getDocuments() {
-        return documents;
-    }
-
-    public Passeport documents(String documents) {
-        this.documents = documents;
-        return this;
-    }
-
-    public void setDocuments(String documents) {
-        this.documents = documents;
     }
 
     public Integer getTaille() {
@@ -479,6 +418,71 @@ public class Passeport implements Serializable {
         this.state = state;
     }
 
+    public String getCin() {
+        return cin;
+    }
+
+    public Passeport cin(String cin) {
+        this.cin = cin;
+        return this;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Passeport type(String type) {
+        this.type = type;
+        return this;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Sexe getSexe() {
+        return sexe;
+    }
+
+    public Passeport sexe(Sexe sexe) {
+        this.sexe = sexe;
+        return this;
+    }
+
+    public void setSexe(Sexe sexe) {
+        this.sexe = sexe;
+    }
+
+    public LocalDate getDateCreation() {
+        return dateCreation;
+    }
+
+    public Passeport dateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+        return this;
+    }
+
+    public void setDateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public LocalDate getDateModification() {
+        return dateModification;
+    }
+
+    public Passeport dateModification(LocalDate dateModification) {
+        this.dateModification = dateModification;
+        return this;
+    }
+
+    public void setDateModification(LocalDate dateModification) {
+        this.dateModification = dateModification;
+    }
+
     public TypeService getTypeService() {
         return typeService;
     }
@@ -490,6 +494,32 @@ public class Passeport implements Serializable {
 
     public void setTypeService(TypeService typeService) {
         this.typeService = typeService;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public Passeport createdBy(User user) {
+        this.createdBy = user;
+        return this;
+    }
+
+    public void setCreatedBy(User user) {
+        this.createdBy = user;
+    }
+
+    public User getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public Passeport modifiedBy(User user) {
+        this.modifiedBy = user;
+        return this;
+    }
+
+    public void setModifiedBy(User user) {
+        this.modifiedBy = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -517,7 +547,6 @@ public class Passeport implements Serializable {
     public String toString() {
         return "Passeport{" +
             "id=" + getId() +
-            ", numeroFormulaire=" + getNumeroFormulaire() +
             ", nom='" + getNom() + "'" +
             ", prenom='" + getPrenom() + "'" +
             ", numeroPasseport='" + getNumeroPasseport() + "'" +
@@ -530,19 +559,31 @@ public class Passeport implements Serializable {
             ", paysEmetteur='" + getPaysEmetteur() + "'" +
             ", soumisLe='" + getSoumisLe() + "'" +
             ", delivreLe='" + getDelivreLe() + "'" +
-            ", montant=" + getMontant() +
             ", remarques='" + getRemarques() + "'" +
             ", dateEmission='" + getDateEmission() + "'" +
             ", dateExpiration='" + getDateExpiration() + "'" +
-            ", remarquesR='" + getRemarquesR() + "'" +
             ", sms='" + getSms() + "'" +
-            ", sms2='" + getSms2() + "'" +
-            ", documents='" + getDocuments() + "'" +
             ", taille=" + getTaille() +
             ", recu='" + getRecu() + "'" +
             ", photo='" + getPhoto() + "'" +
             ", photoContentType='" + getPhotoContentType() + "'" +
             ", state='" + getState() + "'" +
+            ", cin='" + getCin() + "'" +
+            ", type='" + getType() + "'" +
+            ", sexe='" + getSexe() + "'" +
+            ", dateCreation='" + getDateCreation() + "'" +
+            ", dateModification='" + getDateModification() + "'" +
             "}";
+    }
+
+    @PostPersist
+    public void generateNumeroRecu() {
+        LocalDate localDate = LocalDate.now();
+        String numeroRecu = "";
+        numeroRecu += localDate.getYear();
+        numeroRecu += localDate.getMonthValue() < 10 ? "0" + localDate.getMonthValue() : localDate.getMonthValue();
+//        numeroRecu += localDate.getDayOfMonth() < 10 ? "0" + localDate.getDayOfMonth() : localDate.getDayOfMonth();
+        numeroRecu += this.getId() < 10 ? "0" + this.getId() : this.getId();
+        this.setRecu(numeroRecu);
     }
 }

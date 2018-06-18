@@ -27,7 +27,7 @@ public class TypeServiceServiceImpl implements TypeServiceService {
     }
 
     /**
-     * Save a typeService.csv.
+     * Save a typeService.
      *
      * @param typeService the entity to save
      * @return the persisted entity
@@ -52,7 +52,7 @@ public class TypeServiceServiceImpl implements TypeServiceService {
     }
 
     /**
-     * Get one typeService.csv by id.
+     * Get one typeService by id.
      *
      * @param id the id of the entity
      * @return the entity
@@ -65,7 +65,7 @@ public class TypeServiceServiceImpl implements TypeServiceService {
     }
 
     /**
-     * Delete the typeService.csv by id.
+     * Delete the typeService by id.
      *
      * @param id the id of the entity
      */

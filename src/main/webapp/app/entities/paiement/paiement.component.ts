@@ -57,18 +57,17 @@ currentAccount: any;
                 (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+    searchPaiement(paiement: PaiementSearchModel) {
+        this.paiementService.search(paiement).subscribe(
+            (res: HttpResponse<Paiement[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
             this.transition();
         }
-    }
-
-    printPage() {
-        this.router.navigateByData({
-            url: ['/print/paiement'],
-            data: this.paiements
-        });
     }
     transition() {
         this.router.navigate(['/paiement'], {queryParams:
@@ -79,12 +78,6 @@ currentAccount: any;
             }
         });
         this.loadAll();
-    }
-    searchPaiement(paiement: PaiementSearchModel) {
-        this.paiementService.search(paiement).subscribe(
-            (res: HttpResponse<Paiement[]>) => this.onSuccess(res.body, res.headers),
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
     }
 
     clear() {

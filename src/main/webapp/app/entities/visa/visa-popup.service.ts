@@ -43,6 +43,20 @@ export class VisaPopupService {
                                 day: visa.dateExpiration.getDate()
                             };
                         }
+                        if (visa.dateCreation) {
+                            visa.dateCreation = {
+                                year: visa.dateCreation.getFullYear(),
+                                month: visa.dateCreation.getMonth() + 1,
+                                day: visa.dateCreation.getDate()
+                            };
+                        }
+                        if (visa.dateModification) {
+                            visa.dateModification = {
+                                year: visa.dateModification.getFullYear(),
+                                month: visa.dateModification.getMonth() + 1,
+                                day: visa.dateModification.getDate()
+                            };
+                        }
                         this.ngbModalRef = this.visaModalRef(component, visa);
                         resolve(this.ngbModalRef);
                     });

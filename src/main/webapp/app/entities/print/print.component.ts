@@ -1,9 +1,7 @@
-import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { ExcelService } from '../../excel.services';
-import { TableExport } from 'tableexport';
-import * as jsPDF from 'jspdf';
 import * as xepOnline from 'css-to-pdf/js/xepOnline.jqPlugin.js';
+import {Visa} from '../visa/visa.model';
 
 @Component({
     selector: 'jhi-print',
@@ -12,68 +10,25 @@ import * as xepOnline from 'css-to-pdf/js/xepOnline.jqPlugin.js';
         'paper.min.css'
     ]
 })
-export class PrintComponent implements OnInit, AfterViewChecked {
+export class PrintComponent implements OnInit {
 
-    routeData: any;
-    dataContent: any;
-    property: any;
-    // content: any;
-    dataHeader: any;
-    te: TableExport;
-    exportData: any;
+    visas: Visa[];
 
-    @ViewChild('content') content: ElementRef;
-
-    constructor(
-        private router: Router,
-        private excelService: ExcelService
-    ) {
-        this.excelService = excelService;
+    constructor( private router: Router ) {
     }
 
     ngOnInit() {
-        const datas = this.router.getNavigatedData();
-        this.buildData(datas);
-    }
-
-    ngAfterViewChecked(): void {
-        this.te = new TableExport(document.querySelector('#content'), {
-            formats: ['xlsx'],
-            exportButtons: false,
-        });
+        this.visas = this.router.getNavigatedData();
     }
 
     trackId(index: number, item: any) {
         return item.id;
     }
 
-    exportToExcel(event) {
-        this.exportData = this.te.getExportData()['content']['xlsx'];
-        this.te.export2file(this.exportData.data, this.exportData.mimeType, this.exportData.filename, this.exportData.fileExtension);
-    }
-
     downloadPDF() {
-       /* const doc = new jsPDF();
-        const specialElementHandlers = {
-            '#editor': function(element, renderer) {
-                return true;
-            }
-        };
-        const content = this.content.nativeElement;
-
-        doc.fromHTML(content.innerHTML, 15, 15, {
-            'width': 190,
-        });
-        doc.save('download.pdf');*/
-        return xepOnline.Formatter.Format('content',  {pageWidth: '297mm', pageHeight: '210mm'});
+        return xepOnline.Formatter.Format('content', {pageWidth: '297mm', pageHeight: '210mm'});
     }
-
-    buildData(objs) {
-        console.log('objs = ', objs);
-        // const obj = objs[0];
-        this.dataHeader = objs.dataHeader;
-        this.dataContent = objs.dataContent;
-        this.property = objs.property;
-
+    previousState() {
+        window.history.back();
     }
 }

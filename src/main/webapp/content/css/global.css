@@ -62,11 +62,11 @@ Generic styles
 }
 
 /* other generic styles */
-.jh-card {
+/* .jh-card {
     padding: 1.5%;
     margin-top: 20px;
     border: none;
-}
+} */
 
 .error {
     color: white;
@@ -249,6 +249,11 @@ Global theme color
     border-color: #00084A!important;
     background-color: #00084A!important;
     color: #ffffff;
+}
+
+.bg-footer {
+    background-color:#2D353C!important;
+    border-top: none!important;
 }
 
 .btn-red {

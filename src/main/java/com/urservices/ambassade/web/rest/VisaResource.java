@@ -2,9 +2,12 @@ package com.urservices.ambassade.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.urservices.ambassade.domain.Paiement;
-import com.urservices.ambassade.domain.TypeService;
+import com.urservices.ambassade.domain.User;
 import com.urservices.ambassade.domain.Visa;
 import com.urservices.ambassade.domain.enumeration.State;
+import com.urservices.ambassade.domain.enumeration.Statut;
+import com.urservices.ambassade.repository.UserRepository;
+import com.urservices.ambassade.security.SecurityUtils;
 import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.VisaService;
 import com.urservices.ambassade.web.rest.errors.BadRequestAlertException;
@@ -18,15 +21,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,11 +49,14 @@ public class VisaResource {
 
     private final VisaService visaService;
 
+    private final UserRepository userRepository;
+
     private final PaiementService paiementService;
 
-    public VisaResource(VisaService visaService, PaiementService paiementService) {
+    public VisaResource(VisaService visaService, PaiementService paiementService, UserRepository userRepository) {
         this.visaService = visaService;
         this.paiementService = paiementService;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -64,7 +73,10 @@ public class VisaResource {
         if (visa.getId() != null) {
             throw new BadRequestAlertException("A new visa cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        visa.setState(State.NOUVEAU);
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        visa.setCreatedBy(user);
+        visa.setDateCreation(LocalDate.now());
         Visa result = visaService.save(visa);
         return ResponseEntity.created(new URI("/api/visas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -87,6 +99,10 @@ public class VisaResource {
         if (visa.getId() == null) {
             return createVisa(visa);
         }
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        visa.setModifiedBy(user);
+        visa.setDateModification(LocalDate.now());
         Visa result = visaService.save(visa);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, visa.getId().toString()))
@@ -103,65 +119,37 @@ public class VisaResource {
     @Timed
     public ResponseEntity<List<Visa>> getAllVisas(WebRequest webRequest, Pageable pageable) {
         log.debug("REST request to get a page of Visas");
-
-        String nom = webRequest.getParameter("nom") !=null && !webRequest.getParameter("nom").isEmpty()
-            ? webRequest.getParameter("nom"): null;
-        String prenom = webRequest.getParameter("prenom") !=null && !webRequest.getParameter("prenom").isEmpty()
-            ? webRequest.getParameter("prenom"): null;
-        String nationalite = webRequest.getParameter("nationalite") !=null && !webRequest.getParameter("nationalite").isEmpty()
-            ? webRequest.getParameter("nationalite"): null;
-        String numeroPasseport = webRequest.getParameter("numeroPasseport") !=null && !webRequest.getParameter("numeroPasseport").isEmpty()
-            ? webRequest.getParameter("numeroPasseport"): null;
-        String cedula = webRequest.getParameter("cedula") !=null && !webRequest.getParameter("cedula").isEmpty()
-            ? webRequest.getParameter("cedula"): null;
-        Long numeroVisa =  (webRequest.getParameter("numeroVisa") != null && !webRequest.getParameter("numeroVisa").isEmpty())
+        String nom = webRequest.getParameter("nom") != null && !webRequest.getParameter("nom").isEmpty()
+            ? webRequest.getParameter("nom") : null;
+        String prenom = webRequest.getParameter("prenom") != null && !webRequest.getParameter("prenom").isEmpty()
+            ? webRequest.getParameter("prenom") : null;
+        String numeroPasseport = webRequest.getParameter("numeroPasseport") != null && !webRequest.getParameter("numeroPasseport").isEmpty()
+            ? webRequest.getParameter("numeroPasseport") : null;
+        Long numeroVisa = webRequest.getParameter("numeroVisa") != null && !webRequest.getParameter("numeroVisa").isEmpty()
             ? Long.valueOf(webRequest.getParameter("numeroVisa")) : null;
-        Integer validePour =  (webRequest.getParameter("validePour") != null && !webRequest.getParameter("validePour").isEmpty())
-            ? Integer.valueOf(webRequest.getParameter("validePour")) : null;
-        String nombreEntree = webRequest.getParameter("nombreEntree") !=null && !webRequest.getParameter("nombreEntree").isEmpty()
-            ? webRequest.getParameter("nombreEntree"): null;
-        String type = webRequest.getParameter("type") !=null && !webRequest.getParameter("type").isEmpty()
-            ? webRequest.getParameter("type"): null;
-        String categorie = webRequest.getParameter("categorie") !=null && !webRequest.getParameter("categorie").isEmpty()
-            ? webRequest.getParameter("categorie"): null;
-        Integer taxes =  (webRequest.getParameter("taxes") != null && !webRequest.getParameter("taxes").isEmpty())
-            ? Integer.valueOf(webRequest.getParameter("taxes")) : null;
-        String adresse = webRequest.getParameter("adresse") !=null && !webRequest.getParameter("adresse").isEmpty()
-            ? webRequest.getParameter("adresse"): null;
-        String remarques = webRequest.getParameter("remarques") !=null && !webRequest.getParameter("remarques").isEmpty()
-            ? webRequest.getParameter("remarques"): null;
+        Long typeService = webRequest.getParameter("typeService") != null && !webRequest.getParameter("typeService").isEmpty()
+            ? Long.valueOf(webRequest.getParameter("typeService")) : null;
+        Long categorie = webRequest.getParameter("categorie") != null && !webRequest.getParameter("categorie").isEmpty()
+            ? Long.valueOf(webRequest.getParameter("categorie")) : null;
 
-        String dateEmissionDebStr = webRequest.getParameter("dateEmission") !=null &&
-            !webRequest.getParameter("dateEmission").isEmpty() ? webRequest.getParameter("dateEmission"): null;
-        String dateEmissionFinStr = webRequest.getParameter("dateEmissionFin") !=null &&
-            !webRequest.getParameter("dateEmissionFin").isEmpty() ? webRequest.getParameter("dateEmissionFin"): null;
-        String dateExpirationDebStr = webRequest.getParameter("dateExpiration") !=null &&
-            !webRequest.getParameter("dateExpiration").isEmpty() ? webRequest.getParameter("dateExpiration"): null;
-        String dateExpirationFinStr = webRequest.getParameter("dateExpirationFin") !=null &&
-            !webRequest.getParameter("dateExpirationFin").isEmpty() ? webRequest.getParameter("dateExpirationFin"): null;
+        String dateEmissionDebStr = webRequest.getParameter("dateEmission") != null && !webRequest.getParameter("dateEmission").isEmpty()
+            ? webRequest.getParameter("dateEmission") : null;
+        String dateExpirationDebStr = webRequest.getParameter("dateExpiration") != null && !webRequest.getParameter("dateExpiration").isEmpty()
+            ? webRequest.getParameter("dateExpiration") : null;
 
+        String dateEmissionFinStr = webRequest.getParameter("dateEmissionFin") != null && !webRequest.getParameter("dateEmissionFin").isEmpty()
+            ? webRequest.getParameter("dateEmissionFin") : null;
+        String dateExpirationFinStr = webRequest.getParameter("dateExpirationFin") != null && !webRequest.getParameter("dateExpirationFin").isEmpty()
+            ? webRequest.getParameter("dateExpirationFin") : null;
 
-        LocalDate dateEmissionDeb= null;
-        LocalDate dateEmissionFin= null;
-        LocalDate dateExpirationDeb= null;
-        LocalDate dateExpirationFin=null;
+        LocalDate dateEmissionDeb = dateEmissionDebStr != null ? LocalDate.parse(dateEmissionDebStr) : null;
+        LocalDate dateExpirationDeb = dateExpirationDebStr != null ? LocalDate.parse(dateExpirationDebStr) : null;
 
-        if (dateEmissionDebStr != null){
-            dateEmissionDeb = LocalDate.parse(dateEmissionDebStr);
-        }
-        if (dateEmissionFinStr != null){
-            dateEmissionFin = LocalDate.parse(dateEmissionFinStr);
-        }
+        LocalDate dateEmissionFin = dateEmissionFinStr != null ? LocalDate.parse(dateEmissionFinStr) : null;
+        LocalDate dateExpirationFin = dateExpirationFinStr != null ? LocalDate.parse(dateExpirationFinStr) : null;
 
-        if (dateExpirationDebStr != null){
-            dateExpirationDeb = LocalDate.parse(dateExpirationDebStr);
-        }
-        if (dateExpirationFinStr != null){
-            dateExpirationFin = LocalDate.parse(dateExpirationFinStr);
-        }
-
-        Page<Visa> page = visaService.searchAll(nom,prenom,nationalite,numeroPasseport,numeroVisa,dateEmissionDeb, dateEmissionFin,
-            dateExpirationDeb, dateExpirationFin, type,categorie,adresse,pageable);
+        Page<Visa> page = visaService.findAll(nom, prenom, numeroPasseport, numeroVisa, typeService, categorie,
+            dateEmissionDeb, dateEmissionFin, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/visas");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -192,6 +180,10 @@ public class VisaResource {
         log.debug("REST request to get Visa : {}", id);
         Visa visa = visaService.findOne(id);
         visa.setState(State.PRET);
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        visa.setModifiedBy(user);
+        visa.setDateModification(LocalDate.now());
         visa = visaService.save(visa);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(visa));
     }
@@ -208,6 +200,10 @@ public class VisaResource {
         log.debug("REST request to get Visa : {}", id);
         Visa visa = visaService.findOne(id);
         visa.setState(State.RETIRER);
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        visa.setModifiedBy(user);
+        visa.setDateModification(LocalDate.now());
         visa = visaService.save(visa);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(visa));
     }
@@ -222,13 +218,22 @@ public class VisaResource {
     @Timed
     public ResponseEntity<Visa> getVisaPayer(@PathVariable Long id) {
         log.debug("REST request to get Visa : {}", id);
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
         Visa visa = visaService.findOne(id);
         Paiement paiement = new Paiement();
+
         paiement.setDatePaiement(LocalDate.now());
         paiement.setVisa(visa);
         paiement.setTypeService(visa.getTypeService());
+        paiement.setDateCreation(LocalDate.now());
+        paiement.setUniteOrganisationelle(visa.getTypeService().getUniteOrganisationelle());
+        paiement.setCreatedBy(user);
         paiementService.save(paiement);
+
         visa.setState(State.PAYE);
+        visa.setModifiedBy(user);
+        visa.setDateModification(LocalDate.now());
         visa = visaService.save(visa);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(visa));
     }
@@ -244,10 +249,15 @@ public class VisaResource {
     public ResponseEntity<Visa> getVisaReady(@PathVariable Long id) {
         log.debug("REST request to get Visa Ready : {}", id);
         Visa visa = visaService.findOne(id);
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        visa.setModifiedBy(user);
         visa.setState(State.ENCOURS);
+        visa.setDateModification(LocalDate.now());
         visa = visaService.save(visa);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(visa));
     }
+
 
     /**
      * DELETE  /visas/:id : delete the "id" visa.
@@ -261,5 +271,18 @@ public class VisaResource {
         log.debug("REST request to delete Visa : {}", id);
         visaService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    public String getCurrentUserLogin() {
+        org.springframework.security.core.context.SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String login = null;
+        if (authentication != null)
+            if (authentication.getPrincipal() instanceof UserDetails)
+                login = ((UserDetails) authentication.getPrincipal()).getUsername();
+            else if (authentication.getPrincipal() instanceof String)
+                login = (String) authentication.getPrincipal();
+
+        return login;
     }
 }

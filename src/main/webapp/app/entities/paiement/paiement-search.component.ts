@@ -3,9 +3,10 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
-import { Paiement } from './paiement.model';
 import {PaiementSearchModel} from './paiement-search.model';
 import { TypeService, TypeServiceService } from '../type-service';
+import {UniteOrganisationelle} from '../unite-organisationelle/unite-organisationelle.model';
+import {UniteOrganisationelleService} from '../unite-organisationelle/unite-organisationelle.service';
 
 @Component({
     selector: 'jhi-paiement-search',
@@ -17,10 +18,11 @@ export class PaiementSearchComponent implements OnInit {
     formModel: PaiementSearchModel;
 
     typeservices: TypeService[];
-    // formModel: PaiementModelDTO;
+    uniteOrganisationelles: UniteOrganisationelle[];
     constructor(
         private jhiAlertService: JhiAlertService,
         private typeServiceService: TypeServiceService,
+        private uniteOrganisationelleService: UniteOrganisationelleService,
         private eventManager: JhiEventManager
     ) {
 
@@ -30,7 +32,8 @@ export class PaiementSearchComponent implements OnInit {
         this.formModel = new PaiementSearchModel();
         this.typeServiceService.query()
             .subscribe((res: HttpResponse<TypeService[]>) => { this.typeservices = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-        // this.formModel = new PaiementModelDTO();
+        this.uniteOrganisationelleService.query()
+            .subscribe((res: HttpResponse<UniteOrganisationelle[]>) => { this.uniteOrganisationelles = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     search() {
@@ -47,6 +50,10 @@ export class PaiementSearchComponent implements OnInit {
     }
 
     trackTypeServiceById(index: number, item: TypeService) {
+        return item.id;
+    }
+
+    trackUniteOrganisationelleById(index: number, item: UniteOrganisationelle) {
         return item.id;
     }
 }

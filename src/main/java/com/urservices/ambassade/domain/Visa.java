@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import com.urservices.ambassade.domain.enumeration.State;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * A Visa.
@@ -18,6 +19,7 @@ import com.urservices.ambassade.domain.enumeration.State;
 @Entity
 @Table(name = "visa")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@EntityListeners({AuditingEntityListener.class})
 public class Visa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +48,7 @@ public class Visa implements Serializable {
     @Column(name = "cedula", length = 30)
     private String cedula;
 
-    @NotNull
-    @Column(name = "numero_visa", nullable = false)
+    @Column(name = "numero_visa")
     private Long numeroVisa;
 
     @Column(name = "date_emission")
@@ -55,21 +56,6 @@ public class Visa implements Serializable {
 
     @Column(name = "date_expiration")
     private LocalDate dateExpiration;
-
-    @Column(name = "valide_pour")
-    private Integer validePour;
-
-    @Size(max = 20)
-    @Column(name = "nombre_entree", length = 20)
-    private String nombreEntree;
-
-    @Size(max = 20)
-    @Column(name = "jhi_type", length = 20)
-    private String type;
-
-    @Size(max = 25)
-    @Column(name = "categorie", length = 25)
-    private String categorie;
 
     @Column(name = "taxes")
     private Integer taxes;
@@ -85,8 +71,58 @@ public class Visa implements Serializable {
     @Column(name = "state")
     private State state;
 
+    @Column(name = "profession")
+    private String profession;
+
+    @Column(name = "nombre_de_jour")
+    private Integer nombreDeJour;
+
+    @Lob
+    @Column(name = "photo_demandeur_visa")
+    private byte[] photoDemandeurVisa;
+
+    @Column(name = "photo_demandeur_visa_content_type")
+    private String photoDemandeurVisaContentType;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "adresse_de_sejour")
+    private String adresseDeSejour;
+
+    @Column(name = "nom_employeur")
+    private String nomEmployeur;
+
+    @Column(name = "adresse_employeur")
+    private String adresseEmployeur;
+
+    @Column(name = "telephone_employeur")
+    private String telephoneEmployeur;
+
+    @Column(name = "email_employeur")
+    private String emailEmployeur;
+
+    @Column(name = "date_creation")
+    private LocalDate dateCreation;
+
+    @Column(name = "date_modification")
+    private LocalDate dateModification;
+
     @ManyToOne
     private TypeService typeService;
+
+    @ManyToOne(optional = false)
+    @NotNull
+    private TypeEntree typeEntree;
+
+    @ManyToOne
+    private Categorie categorie;
+
+    @ManyToOne
+    private User createdBy;
+
+    @ManyToOne
+    private User modifiedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -201,58 +237,6 @@ public class Visa implements Serializable {
         this.dateExpiration = dateExpiration;
     }
 
-    public Integer getValidePour() {
-        return validePour;
-    }
-
-    public Visa validePour(Integer validePour) {
-        this.validePour = validePour;
-        return this;
-    }
-
-    public void setValidePour(Integer validePour) {
-        this.validePour = validePour;
-    }
-
-    public String getNombreEntree() {
-        return nombreEntree;
-    }
-
-    public Visa nombreEntree(String nombreEntree) {
-        this.nombreEntree = nombreEntree;
-        return this;
-    }
-
-    public void setNombreEntree(String nombreEntree) {
-        this.nombreEntree = nombreEntree;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public Visa type(String type) {
-        this.type = type;
-        return this;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getCategorie() {
-        return categorie;
-    }
-
-    public Visa categorie(String categorie) {
-        this.categorie = categorie;
-        return this;
-    }
-
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
-    }
-
     public Integer getTaxes() {
         return taxes;
     }
@@ -305,6 +289,162 @@ public class Visa implements Serializable {
         this.state = state;
     }
 
+    public String getProfession() {
+        return profession;
+    }
+
+    public Visa profession(String profession) {
+        this.profession = profession;
+        return this;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public Integer getNombreDeJour() {
+        return nombreDeJour;
+    }
+
+    public Visa nombreDeJour(Integer nombreDeJour) {
+        this.nombreDeJour = nombreDeJour;
+        return this;
+    }
+
+    public void setNombreDeJour(Integer nombreDeJour) {
+        this.nombreDeJour = nombreDeJour;
+    }
+
+    public byte[] getPhotoDemandeurVisa() {
+        return photoDemandeurVisa;
+    }
+
+    public Visa photoDemandeurVisa(byte[] photoDemandeurVisa) {
+        this.photoDemandeurVisa = photoDemandeurVisa;
+        return this;
+    }
+
+    public void setPhotoDemandeurVisa(byte[] photoDemandeurVisa) {
+        this.photoDemandeurVisa = photoDemandeurVisa;
+    }
+
+    public String getPhotoDemandeurVisaContentType() {
+        return photoDemandeurVisaContentType;
+    }
+
+    public Visa photoDemandeurVisaContentType(String photoDemandeurVisaContentType) {
+        this.photoDemandeurVisaContentType = photoDemandeurVisaContentType;
+        return this;
+    }
+
+    public void setPhotoDemandeurVisaContentType(String photoDemandeurVisaContentType) {
+        this.photoDemandeurVisaContentType = photoDemandeurVisaContentType;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Visa email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAdresseDeSejour() {
+        return adresseDeSejour;
+    }
+
+    public Visa adresseDeSejour(String adresseDeSejour) {
+        this.adresseDeSejour = adresseDeSejour;
+        return this;
+    }
+
+    public void setAdresseDeSejour(String adresseDeSejour) {
+        this.adresseDeSejour = adresseDeSejour;
+    }
+
+    public String getNomEmployeur() {
+        return nomEmployeur;
+    }
+
+    public Visa nomEmployeur(String nomEmployeur) {
+        this.nomEmployeur = nomEmployeur;
+        return this;
+    }
+
+    public void setNomEmployeur(String nomEmployeur) {
+        this.nomEmployeur = nomEmployeur;
+    }
+
+    public String getAdresseEmployeur() {
+        return adresseEmployeur;
+    }
+
+    public Visa adresseEmployeur(String adresseEmployeur) {
+        this.adresseEmployeur = adresseEmployeur;
+        return this;
+    }
+
+    public void setAdresseEmployeur(String adresseEmployeur) {
+        this.adresseEmployeur = adresseEmployeur;
+    }
+
+    public String getTelephoneEmployeur() {
+        return telephoneEmployeur;
+    }
+
+    public Visa telephoneEmployeur(String telephoneEmployeur) {
+        this.telephoneEmployeur = telephoneEmployeur;
+        return this;
+    }
+
+    public void setTelephoneEmployeur(String telephoneEmployeur) {
+        this.telephoneEmployeur = telephoneEmployeur;
+    }
+
+    public String getEmailEmployeur() {
+        return emailEmployeur;
+    }
+
+    public Visa emailEmployeur(String emailEmployeur) {
+        this.emailEmployeur = emailEmployeur;
+        return this;
+    }
+
+    public void setEmailEmployeur(String emailEmployeur) {
+        this.emailEmployeur = emailEmployeur;
+    }
+
+    public LocalDate getDateCreation() {
+        return dateCreation;
+    }
+
+    public Visa dateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+        return this;
+    }
+
+    public void setDateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public LocalDate getDateModification() {
+        return dateModification;
+    }
+
+    public Visa dateModification(LocalDate dateModification) {
+        this.dateModification = dateModification;
+        return this;
+    }
+
+    public void setDateModification(LocalDate dateModification) {
+        this.dateModification = dateModification;
+    }
+
     public TypeService getTypeService() {
         return typeService;
     }
@@ -316,6 +456,58 @@ public class Visa implements Serializable {
 
     public void setTypeService(TypeService typeService) {
         this.typeService = typeService;
+    }
+
+    public TypeEntree getTypeEntree() {
+        return typeEntree;
+    }
+
+    public Visa typeEntree(TypeEntree typeEntree) {
+        this.typeEntree = typeEntree;
+        return this;
+    }
+
+    public void setTypeEntree(TypeEntree typeEntree) {
+        this.typeEntree = typeEntree;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public Visa categorie(Categorie categorie) {
+        this.categorie = categorie;
+        return this;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public Visa createdBy(User user) {
+        this.createdBy = user;
+        return this;
+    }
+
+    public void setCreatedBy(User user) {
+        this.createdBy = user;
+    }
+
+    public User getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public Visa modifiedBy(User user) {
+        this.modifiedBy = user;
+        return this;
+    }
+
+    public void setModifiedBy(User user) {
+        this.modifiedBy = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -351,14 +543,33 @@ public class Visa implements Serializable {
             ", numeroVisa=" + getNumeroVisa() +
             ", dateEmission='" + getDateEmission() + "'" +
             ", dateExpiration='" + getDateExpiration() + "'" +
-            ", validePour=" + getValidePour() +
-            ", nombreEntree='" + getNombreEntree() + "'" +
-            ", type='" + getType() + "'" +
-            ", categorie='" + getCategorie() + "'" +
             ", taxes=" + getTaxes() +
             ", adresse='" + getAdresse() + "'" +
             ", remarques='" + getRemarques() + "'" +
             ", state='" + getState() + "'" +
+            ", profession='" + getProfession() + "'" +
+            ", nombreDeJour=" + getNombreDeJour() +
+            ", photoDemandeurVisa='" + getPhotoDemandeurVisa() + "'" +
+            ", photoDemandeurVisaContentType='" + getPhotoDemandeurVisaContentType() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", adresseDeSejour='" + getAdresseDeSejour() + "'" +
+            ", nomEmployeur='" + getNomEmployeur() + "'" +
+            ", adresseEmployeur='" + getAdresseEmployeur() + "'" +
+            ", telephoneEmployeur='" + getTelephoneEmployeur() + "'" +
+            ", emailEmployeur='" + getEmailEmployeur() + "'" +
+            ", dateCreation='" + getDateCreation() + "'" +
+            ", dateModification='" + getDateModification() + "'" +
             "}";
+    }
+
+    @PostPersist
+    public void generateNumeroVisa() {
+        LocalDate localDate = LocalDate.now();
+        String numeroVisa = "";
+        numeroVisa += localDate.getYear();
+        numeroVisa += localDate.getMonthValue() < 10 ? "0" + localDate.getMonthValue() : localDate.getMonthValue();
+//        numeroVisa += localDate.getDayOfMonth() < 10 ? "0" + localDate.getDayOfMonth() : localDate.getDayOfMonth();
+        numeroVisa += this.getId() < 10 ? "0" + this.getId() : this.getId();
+        this.setNumeroVisa(Long.parseLong(numeroVisa));
     }
 }

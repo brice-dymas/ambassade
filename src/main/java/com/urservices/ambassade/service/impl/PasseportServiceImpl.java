@@ -2,6 +2,7 @@ package com.urservices.ambassade.service.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.urservices.ambassade.domain.QPasseport;
+import com.urservices.ambassade.domain.enumeration.State;
 import com.urservices.ambassade.service.PasseportService;
 import com.urservices.ambassade.domain.Passeport;
 import com.urservices.ambassade.domain.enumeration.Statut;
@@ -41,6 +42,8 @@ public class PasseportServiceImpl implements PasseportService {
     @Override
     public Passeport save(Passeport passeport) {
         log.debug("Request to save Passeport : {}", passeport);
+        passeport.setPaysEmetteur("HAITI");
+        passeport.setState(State.NOUVEAU);
         return passeportRepository.save(passeport);
     }
 
@@ -148,22 +151,6 @@ public class PasseportServiceImpl implements PasseportService {
                 predicate = predicate.and(passeport.paysEmetteur.likeIgnoreCase("%" + paysEmetteur + "%"));
             } else {
                 predicate = passeport.paysEmetteur.likeIgnoreCase("%" + paysEmetteur + "%");
-                added = true;
-            }
-        }
-        if (documents != null) {
-            if (added) {
-                predicate = predicate.and(passeport.documents.likeIgnoreCase("%" + documents + "%"));
-            } else {
-                predicate = passeport.documents.likeIgnoreCase("%" + documents + "%");
-                added = true;
-            }
-        }
-        if (montant != null) {
-            if (added) {
-                predicate = predicate.and(passeport.montant.eq(montant));
-            } else {
-                predicate = passeport.montant.eq(montant);
                 added = true;
             }
         }

@@ -13,6 +13,7 @@ import { Visa, VisaService } from '../visa';
 import { Passeport, PasseportService } from '../passeport';
 import { TypeService, TypeServiceService } from '../type-service';
 import { User, UserService } from '../../shared';
+import { UniteOrganisationelle, UniteOrganisationelleService } from '../unite-organisationelle';
 
 @Component({
     selector: 'jhi-paiement-dialog',
@@ -30,6 +31,8 @@ export class PaiementDialogComponent implements OnInit {
     typeservices: TypeService[];
 
     users: User[];
+
+    uniteorganisationelles: UniteOrganisationelle[];
     datePaiementDp: any;
 
     constructor(
@@ -40,6 +43,7 @@ export class PaiementDialogComponent implements OnInit {
         private passeportService: PasseportService,
         private typeServiceService: TypeServiceService,
         private userService: UserService,
+        private uniteOrganisationelleService: UniteOrganisationelleService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -54,6 +58,8 @@ export class PaiementDialogComponent implements OnInit {
             .subscribe((res: HttpResponse<TypeService[]>) => { this.typeservices = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.userService.query()
             .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.uniteOrganisationelleService.query()
+            .subscribe((res: HttpResponse<UniteOrganisationelle[]>) => { this.uniteorganisationelles = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -103,6 +109,10 @@ export class PaiementDialogComponent implements OnInit {
     }
 
     trackUserById(index: number, item: User) {
+        return item.id;
+    }
+
+    trackUniteOrganisationelleById(index: number, item: UniteOrganisationelle) {
         return item.id;
     }
 }

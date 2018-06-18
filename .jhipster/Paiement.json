@@ -24,18 +24,52 @@
             "relationshipName": "user",
             "otherEntityName": "user",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "uniteOrganisationelle",
+            "otherEntityName": "uniteOrganisationelle",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "createdBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "paiement"
+        },
+        {
+            "relationshipName": "modifiedBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "paiement"
         }
     ],
     "fields": [
         {
             "fieldName": "datePaiement",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "numeroPaiement",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20180527135026",
-    "entityTableName": "paiement",
     "dto": "no",
-    "pagination": "pagination",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "paiement",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
 }

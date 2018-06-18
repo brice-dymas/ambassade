@@ -3,8 +3,10 @@ package com.urservices.ambassade.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.urservices.ambassade.domain.Paiement;
 import com.urservices.ambassade.domain.Passeport;
+import com.urservices.ambassade.domain.User;
 import com.urservices.ambassade.domain.enumeration.State;
 import com.urservices.ambassade.domain.enumeration.Statut;
+import com.urservices.ambassade.repository.UserRepository;
 import com.urservices.ambassade.service.PaiementService;
 import com.urservices.ambassade.service.PasseportService;
 import com.urservices.ambassade.web.rest.errors.BadRequestAlertException;
@@ -18,6 +20,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
@@ -43,11 +49,15 @@ public class PasseportResource {
 
     private final PasseportService passeportService;
 
+    private final UserRepository userRepository;
+
+
     private final PaiementService paiementService;
 
-    public PasseportResource(PasseportService passeportService, PaiementService paiementService) {
+    public PasseportResource(PasseportService passeportService, PaiementService paiementService, UserRepository userRepository) {
         this.passeportService = passeportService;
         this.paiementService = paiementService;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -64,6 +74,10 @@ public class PasseportResource {
         if (passeport.getId() != null) {
             throw new BadRequestAlertException("A new passeport cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        passeport.setCreatedBy(user);
+        passeport.setDateCreation(LocalDate.now());
         Passeport result = passeportService.save(passeport);
         return ResponseEntity.created(new URI("/api/passeports/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -86,6 +100,10 @@ public class PasseportResource {
         if (passeport.getId() == null) {
             return createPasseport(passeport);
         }
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        passeport.setModifiedBy(user);
+        passeport.setDateModification(LocalDate.now());
         Passeport result = passeportService.save(passeport);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, passeport.getId().toString()))
@@ -107,7 +125,7 @@ public class PasseportResource {
             ? webRequest.getParameter("nom"): null;
         String recu = webRequest.getParameter("recu") !=null && !webRequest.getParameter("recu").isEmpty()
             ? webRequest.getParameter("recu"): null;
-        String prenom = webRequest.getParameter("prenom") !=null && !webRequest.getParameter("nom").isEmpty()
+        String prenom = webRequest.getParameter("prenom") !=null && !webRequest.getParameter("prenom").isEmpty()
             ? webRequest.getParameter("prenom"): null;
         String numeroPasseport = webRequest.getParameter("numeroPasseport") !=null && !webRequest.getParameter("numeroPasseport").isEmpty()
             ? webRequest.getParameter("numeroPasseport"): null;
@@ -162,12 +180,6 @@ public class PasseportResource {
         LocalDate dateEmissionFin = dateEmissionFinStr != null ? LocalDate.parse(dateEmissionFinStr) : null;
         LocalDate dateExpirationFin = dateExpirationFinStr != null ?  LocalDate.parse(dateExpirationFinStr) : null;
 
-        String remarquesR = webRequest.getParameter("remarquesR") !=null && !webRequest.getParameter("remarquesR").isEmpty()
-            ? webRequest.getParameter("remarquesR"): null;
-        String sms = webRequest.getParameter("sms") !=null && !webRequest.getParameter("sms").isEmpty()
-            ? webRequest.getParameter("sms"): null;
-        String sms2 = webRequest.getParameter("sms2") !=null && !webRequest.getParameter("sms2").isEmpty()
-            ? webRequest.getParameter("sms2"): null;
         String documents = webRequest.getParameter("documents") !=null && !webRequest.getParameter("documents").isEmpty()
             ? webRequest.getParameter("documents"): null;
 
@@ -204,6 +216,10 @@ public class PasseportResource {
         log.debug("REST request to get Passeport : {}", id);
         Passeport passeport = passeportService.findOne(id);
         passeport.setState(State.PRET);
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        passeport.setModifiedBy(user);
+        passeport.setDateModification(LocalDate.now());
         passeport = passeportService.save(passeport);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(passeport));
     }
@@ -220,6 +236,10 @@ public class PasseportResource {
         log.debug("REST request to get Passeport : {}", id);
         Passeport passeport = passeportService.findOne(id);
         passeport.setState(State.RETIRER);
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        passeport.setModifiedBy(user);
+        passeport.setDateModification(LocalDate.now());
         passeport = passeportService.save(passeport);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(passeport));
     }
@@ -235,11 +255,20 @@ public class PasseportResource {
     public ResponseEntity<Passeport> getPasseportPayer(@PathVariable Long id) {
         log.debug("REST request to get Passeport : {}", id);
         Passeport passeport = passeportService.findOne(id);
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        passeport.setModifiedBy(user);
+        passeport.setDateModification(LocalDate.now());
+
         Paiement paiement = new Paiement();
         paiement.setDatePaiement(LocalDate.now());
         paiement.setPasseport(passeport);
         paiement.setTypeService(passeport.getTypeService());
+        paiement.setUniteOrganisationelle(passeport.getTypeService().getUniteOrganisationelle());
+        paiement.setCreatedBy(user);
+        paiement.setDateCreation(LocalDate.now());
         paiementService.save(paiement);
+
         passeport.setState(State.PAYE);
         passeport = passeportService.save(passeport);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(passeport));
@@ -257,6 +286,10 @@ public class PasseportResource {
         log.debug("REST request to get Passeport Ready : {}", id);
         Passeport passeport = passeportService.findOne(id);
         passeport.setState(State.ENCOURS);
+
+        User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
+        passeport.setModifiedBy(user);
+        passeport.setDateModification(LocalDate.now());
         passeport = passeportService.save(passeport);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(passeport));
     }
@@ -273,5 +306,17 @@ public class PasseportResource {
         log.debug("REST request to delete Passeport : {}", id);
         passeportService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    public final String getCurrentUserLogin() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String login = null;
+        if (authentication != null)
+            if (authentication.getPrincipal() instanceof UserDetails)
+                login = ((UserDetails) authentication.getPrincipal()).getUsername();
+            else if (authentication.getPrincipal() instanceof String)
+                login = (String) authentication.getPrincipal();
+        return login;
     }
 }

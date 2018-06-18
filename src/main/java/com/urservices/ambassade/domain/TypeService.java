@@ -34,6 +34,10 @@ public class TypeService implements Serializable {
     @Column(name = "deleted")
     private Boolean deleted;
 
+    @ManyToOne(optional = false)
+    @NotNull
+    private UniteOrganisationelle uniteOrganisationelle;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -80,6 +84,19 @@ public class TypeService implements Serializable {
 
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public UniteOrganisationelle getUniteOrganisationelle() {
+        return uniteOrganisationelle;
+    }
+
+    public TypeService uniteOrganisationelle(UniteOrganisationelle uniteOrganisationelle) {
+        this.uniteOrganisationelle = uniteOrganisationelle;
+        return this;
+    }
+
+    public void setUniteOrganisationelle(UniteOrganisationelle uniteOrganisationelle) {
+        this.uniteOrganisationelle = uniteOrganisationelle;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

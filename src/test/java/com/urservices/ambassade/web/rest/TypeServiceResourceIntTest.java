@@ -3,6 +3,7 @@ package com.urservices.ambassade.web.rest;
 import com.urservices.ambassade.AmbassadeApp;
 
 import com.urservices.ambassade.domain.TypeService;
+import com.urservices.ambassade.domain.UniteOrganisationelle;
 import com.urservices.ambassade.repository.TypeServiceRepository;
 import com.urservices.ambassade.service.TypeServiceService;
 import com.urservices.ambassade.web.rest.errors.ExceptionTranslator;
@@ -92,6 +93,11 @@ public class TypeServiceResourceIntTest {
             .nom(DEFAULT_NOM)
             .montant(DEFAULT_MONTANT)
             .deleted(DEFAULT_DELETED);
+        // Add required entity
+        UniteOrganisationelle uniteOrganisationelle = UniteOrganisationelleResourceIntTest.createEntity(em);
+        em.persist(uniteOrganisationelle);
+        em.flush();
+        typeService.setUniteOrganisationelle(uniteOrganisationelle);
         return typeService;
     }
 
@@ -161,7 +167,7 @@ public class TypeServiceResourceIntTest {
         // Initialize the database
         typeServiceRepository.saveAndFlush(typeService);
 
-        // Get the typeService.csv
+        // Get the typeService
         restTypeServiceMockMvc.perform(get("/api/type-services/{id}", typeService.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -174,7 +180,7 @@ public class TypeServiceResourceIntTest {
     @Test
     @Transactional
     public void getNonExistingTypeService() throws Exception {
-        // Get the typeService.csv
+        // Get the typeService
         restTypeServiceMockMvc.perform(get("/api/type-services/{id}", Long.MAX_VALUE))
             .andExpect(status().isNotFound());
     }
@@ -187,7 +193,7 @@ public class TypeServiceResourceIntTest {
 
         int databaseSizeBeforeUpdate = typeServiceRepository.findAll().size();
 
-        // Update the typeService.csv
+        // Update the typeService
         TypeService updatedTypeService = typeServiceRepository.findOne(typeService.getId());
         // Disconnect from session so that the updates on updatedTypeService are not directly saved in db
         em.detach(updatedTypeService);
@@ -236,7 +242,7 @@ public class TypeServiceResourceIntTest {
 
         int databaseSizeBeforeDelete = typeServiceRepository.findAll().size();
 
-        // Get the typeService.csv
+        // Get the typeService
         restTypeServiceMockMvc.perform(delete("/api/type-services/{id}", typeService.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());

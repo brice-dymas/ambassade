@@ -95,6 +95,10 @@ export class VisaService {
             .convertLocalDateFromServer(visa.dateEmission);
         copy.dateExpiration = this.dateUtils
             .convertLocalDateFromServer(visa.dateExpiration);
+        copy.dateCreation = this.dateUtils
+            .convertLocalDateFromServer(visa.dateCreation);
+        copy.dateModification = this.dateUtils
+            .convertLocalDateFromServer(visa.dateModification);
         return copy;
     }
 
@@ -107,6 +111,10 @@ export class VisaService {
             .convertLocalDateToServer(visa.dateEmission);
         copy.dateExpiration = this.dateUtils
             .convertLocalDateToServer(visa.dateExpiration);
+        copy.dateCreation = this.dateUtils
+            .convertLocalDateToServer(visa.dateCreation);
+        copy.dateModification = this.dateUtils
+            .convertLocalDateToServer(visa.dateModification);
         return copy;
     }
 

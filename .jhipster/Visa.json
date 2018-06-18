@@ -6,6 +6,37 @@
             "relationshipName": "typeService",
             "otherEntityName": "typeService",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "typeEntree",
+            "otherEntityName": "typeEntree",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "categorie",
+            "otherEntityName": "categorie",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "createdBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "visa"
+        },
+        {
+            "relationshipName": "modifiedBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "visa"
         }
     ],
     "fields": [
@@ -51,10 +82,7 @@
         },
         {
             "fieldName": "numeroVisa",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Long"
         },
         {
             "fieldName": "dateEmission",
@@ -63,34 +91,6 @@
         {
             "fieldName": "dateExpiration",
             "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "validePour",
-            "fieldType": "Integer"
-        },
-        {
-            "fieldName": "nombreEntree",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 20
-        },
-        {
-            "fieldName": "type",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 20
-        },
-        {
-            "fieldName": "categorie",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 25
         },
         {
             "fieldName": "taxes",
@@ -112,12 +112,57 @@
             "fieldName": "state",
             "fieldType": "State",
             "fieldValues": "NOUVEAU,PAYE,ENCOURS,PRET,RETIRER"
+        },
+        {
+            "fieldName": "profession",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nombreDeJour",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "photoDemandeurVisa",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "adresseDeSejour",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nomEmployeur",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "adresseEmployeur",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telephoneEmployeur",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "emailEmployeur",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20180222221155",
-    "entityTableName": "visa",
     "dto": "no",
-    "pagination": "pagination",
     "service": "serviceImpl",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "visa",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
 }
