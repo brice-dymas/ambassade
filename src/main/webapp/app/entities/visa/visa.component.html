@@ -1,7 +1,7 @@
 <div class="mb-lg-5">
     <h5 class="text-uppercase">
         <span jhiTranslate="ambassadeApp.visa.home.title">Visas</span>
-        <button class="btn btn-blue btn-xs plat float-right jh-create-entity create-visa" [routerLink]="['/', { outlets: { popup: ['visa-new'] } }]">
+        <button class="btn btn-blue btn-xs plat float-right jh-create-entity create-visa" [routerLink]="['../visa-new']">
             <span class="fa fa-pencil-square-o"></span>
             <span  jhiTranslate="ambassadeApp.visa.home.createLabel">Create new Visa</span>
         </button>&nbsp;
@@ -49,7 +49,7 @@
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    [routerLink]="['/', { outlets: { popup: 'visa/'+ visa.id + '/edit'} }]"
+                                    [routerLink]="['../visa', visa.id, 'edit']"
                                     replaceUrl="true"
                                     queryParamsHandling="merge"
                                     class="btn btn-primary btn-xs plat"

@@ -3,9 +3,9 @@
     <div class="modal-header theme-bg-blue text-white">
         <h4 class="modal-title" id="myPasseportLabel" jhiTranslate="ambassadeApp.passeport.home.createOrEditLabel">
             Create or edit a Passeport</h4>
-        <button type="button" class="close text-white btn-danger" data-dismiss="modal" aria-hidden="true"
-                (click)="clear()">&times;
-        </button>
+        <!--<button type="button" class="close text-white btn-danger" data-dismiss="modal" aria-hidden="true"-->
+                <!--(click)="clear()">&times;-->
+        <!--</button>-->
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
@@ -323,7 +323,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-xs btn-secondary" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-xs btn-danger" (click)="previousState()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
         <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-xs  btn-primary">

@@ -196,7 +196,7 @@
         </dl>
 
         <jaspero-confirmations></jaspero-confirmations>
-        <button type="submit"
+        <button type="button"
                 (click)="previousState()"
                 class="btn btn-info btn-xs plat">
             <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
@@ -207,8 +207,8 @@
             <span class="fa fa-arrow-left"></span>&nbsp;<span> BOUTON</span>
         </button>
 
-        <button type="button" *ngIf="passeport.state=='NOUVEAU'" [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/edit'} }]"
-                replaceUrl="true" queryParamsHandling="merge" class="btn btn-primary btn-xs plat">
+        <button type="button" *ngIf="passeport.state=='NOUVEAU'" [routerLink]="['../passeport', passeport.id, 'edit']"
+                queryParamsHandling="merge" class="btn btn-primary btn-xs plat">
             <span class="fa fa-pencil"></span>&nbsp;
             <span jhiTranslate="entity.action.edit"> Edit</span>
         </button>

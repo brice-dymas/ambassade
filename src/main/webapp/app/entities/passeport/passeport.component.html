@@ -1,7 +1,7 @@
 <div class="mb-lg-5">
     <h5 class="text-uppercase">
         <span jhiTranslate="ambassadeApp.passeport.home.title">Passeports</span>
-        <button class="btn btn-xs plat btn-blue float-right jh-create-entity create-passeport" [routerLink]="['/', { outlets: { popup: ['passeport-new'] } }]">
+        <button class="btn btn-xs plat btn-blue float-right jh-create-entity create-passeport" [routerLink]="['../passeport-new']">
             <span class="fa fa-pencil-square-o"></span>
             <span  jhiTranslate="ambassadeApp.passeport.home.createLabel">Create new Passeport</span>
         </button>&nbsp;
@@ -53,7 +53,7 @@
                                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                                 </button>&nbsp;
                                 <button type="submit"
-                                        [routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/edit'} }]"
+                                        [routerLink]="['../passeport', passeport.id, 'edit']"
                                         replaceUrl="true"
                                         queryParamsHandling="merge"
                                         class="btn btn-primary btn-xs plat">
