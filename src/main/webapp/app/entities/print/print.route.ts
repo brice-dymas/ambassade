@@ -5,11 +5,21 @@ import { PrintComponent } from './print.component';
 import {PrintDetailPasseportComponent} from './print-detail-passeport.component';
 import {PrintPasseportComponent} from './print-passeport.component';
 import {PrintPaiementComponent} from './print-paiement.component';
+import {PrintRecuPaiementComponent} from './print-recu-paiement.component';
 
 export const printRoute: Routes = [
     {
         path: 'print',
         component: PrintComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.categorie.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'print-recu-paiement',
+        component: PrintRecuPaiementComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'ambassadeApp.categorie.home.title'

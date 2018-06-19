@@ -22,8 +22,8 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
     constructor(
         private eventManager: JhiEventManager,
         private dataUtils: JhiDataUtils,
-        private passeportService: PasseportService,
-        private router: Router,
+            private passeportService: PasseportService,
+            private router: Router,
         private route: ActivatedRoute,
         private _confirmation: ConfirmationService
     ) {

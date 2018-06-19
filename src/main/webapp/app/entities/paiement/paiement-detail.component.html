@@ -1,6 +1,11 @@
 
 <div *ngIf="paiement">
-    <h2><span jhiTranslate="ambassadeApp.paiement.detail.title">Paiement</span> {{paiement.id}}</h2>
+    <h2><span jhiTranslate="ambassadeApp.paiement.detail.title">Paiement</span> {{paiement.id}}
+        <span jhiTranslate="ambassadeApp.passeport.detail.title">Passeport</span> {{passeport.id}}
+        <button (click)="printPage()" class="btn btn-info btn-xs float-right plat">
+            <span class="fa fa-print"></span>&nbsp;
+            <span>Imprimer</span>
+        </button>&nbsp;</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
