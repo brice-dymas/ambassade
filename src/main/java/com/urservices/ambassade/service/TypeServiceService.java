@@ -18,6 +18,22 @@ public interface TypeServiceService {
     TypeService save(TypeService typeService);
 
     /**
+     * Get all the typeServices for Visa.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    Page<TypeService> findAllForVisa(Pageable pageable);
+
+    /**
+     * Get all the typeServices for Passeport.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    Page<TypeService> findAllForPasseport(Pageable pageable);
+
+    /**
      * Get all the typeServices.
      *
      * @param pageable the pagination information

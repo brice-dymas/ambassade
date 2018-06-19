@@ -105,7 +105,6 @@ currentAccount: any;
     registerChangeInProduits() {
         // this.eventSubscriber = this.eventManager.subscribe('produitListModification', (response) => this.loadAll());
         this.eventSubscriber = this.eventManager.subscribe('produitListModification', (response) => {
-            console.log(response);
             if (typeof response.content === 'string') {
                 return this.loadAll();
             }else {

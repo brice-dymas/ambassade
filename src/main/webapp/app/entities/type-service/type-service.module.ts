@@ -15,6 +15,8 @@ import {
     typeServicePopupRoute,
     TypeServiceResolvePagingParams,
 } from './';
+import {TypeServicePasseportComponent} from './type-service-passeport.component';
+import {TypeServiceVisaComponent} from './type-service-visa.component';
 
 const ENTITY_STATES = [
     ...typeServiceRoute,
@@ -28,6 +30,8 @@ const ENTITY_STATES = [
     ],
     declarations: [
         TypeServiceComponent,
+        TypeServicePasseportComponent,
+        TypeServiceVisaComponent,
         TypeServiceDetailComponent,
         TypeServiceDialogComponent,
         TypeServiceDeleteDialogComponent,

@@ -7,19 +7,41 @@
                   <span class="font-bold" jhiTranslate="global.menu.home">Home</span>
               </a>
           </li>
-          <li class="nav-item" routerLink="type-service" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-              <a class="nav-link">
-                  <i class="fa fa-server" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.service">Service</span>
-              </a>
-          </li>
-          <li class="nav-item" routerLink="passeport" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <!--<li class="nav-item" routerLink="type-service" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">-->
+              <!--<a class="nav-link">-->
+                  <!--<i class="fa fa-server" aria-hidden="true"></i>-->
+                  <!--<span jhiTranslate="global.menu.entities.service">Service</span>-->
+              <!--</a>-->
+          <!--</li>-->
+          <li class="nav-item"
+              (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapsePasseport">
               <a class="nav-link">
                   <i class="fa fa-bar-chart" aria-hidden="true"></i>
                   <span jhiTranslate="global.menu.entities.passeport">Passeport</span>
+                  <i class="fa fa-chevron-right float-right"></i>
               </a>
+              <ul id="collapsePasseport" class="list-unstyled" [ngbCollapse]="isCollapsed">
+                  <li>
+                      <a routerLink="passeport-new" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                          <i class="fa fa-pencil-square-o"></i>
+                          Enregistrer Passeport
+                      </a>
+                  </li>
+                  <li>
+                      <a routerLink="passeport" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                          <i class="fa fa-folder-open"></i>
+                          Liste des Passeports
+                      </a>
+                  </li>
+                  <li>
+                      <a routerLink="type-service-passeport" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                          <i class="fa fa-newspaper-o"></i>
+                          Service Passeport
+                      </a>
+                  </li>
+              </ul>
           </li>
-          <li class="nav-item" routerLink="visa" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" 
+          <li class="nav-item"
             (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseVisa">
               <a class="nav-link">
                   <i class="fa fa-cc-visa" aria-hidden="true"></i>
@@ -28,21 +50,33 @@
               </a>
               <ul id="collapseVisa" class="list-unstyled" [ngbCollapse]="isCollapsed">
                 <li>
-                  <a href="#" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                  <a routerLink="visa-new" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                     <i class="fa fa-pencil-square-o"></i>
-                    Ajouter Visa
+                    Creer Visa
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a routerLink="visa" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                     <i class="fa fa-folder-open"></i>
-                    Liste Visa
+                    Liste des Visa
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a routerLink="type-service-visa" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                     <i class="fa fa-newspaper-o"></i>
                     Service visa
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="categorie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <i class="fa fa-group"></i>
+                    Categorie Visa
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="type-entree" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <i class="fa fa-group"></i>
+                    Classification Visa
                   </a>
                 </li>
               </ul>
@@ -65,12 +99,12 @@
                   <span jhiTranslate="global.menu.entities.livre">Livre</span>
               </a>
           </li>
-          <li class="nav-item" routerLink="categorie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-              <a class="nav-link">
-                  <i class="fa fa-database" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.categorie">Categorie</span>
-              </a>
-          </li>
+          <!--<li class="nav-item" routerLink="categorie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
+              <!--<a class="nav-link">-->
+                  <!--<i class="fa fa-database" aria-hidden="true"></i>-->
+                  <!--<span jhiTranslate="global.menu.entities.categorie">Categorie</span>-->
+              <!--</a>-->
+          <!--</li>-->
           <li class="nav-item" routerLink="rapatriement" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
               <a class="nav-link">
                   <i class="fa fa-cubes" aria-hidden="true"></i>

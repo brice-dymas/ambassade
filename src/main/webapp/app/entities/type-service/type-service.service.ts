@@ -12,6 +12,8 @@ export type EntityResponseType = HttpResponse<TypeService>;
 export class TypeServiceService {
 
     private resourceUrl =  SERVER_API_URL + 'api/type-services';
+    private resourcePasseportUrl =  SERVER_API_URL + 'api/type-services/passeport';
+    private resourceVisaUrl =  SERVER_API_URL + 'api/type-services/visa';
 
     constructor(private http: HttpClient) { }
 
@@ -35,6 +37,18 @@ export class TypeServiceService {
     query(req?: any): Observable<HttpResponse<TypeService[]>> {
         const options = createRequestOption(req);
         return this.http.get<TypeService[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .map((res: HttpResponse<TypeService[]>) => this.convertArrayResponse(res));
+    }
+
+    queryForPasseport(req?: any): Observable<HttpResponse<TypeService[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<TypeService[]>(this.resourcePasseportUrl, { params: options, observe: 'response' })
+            .map((res: HttpResponse<TypeService[]>) => this.convertArrayResponse(res));
+    }
+
+    queryForVisa(req?: any): Observable<HttpResponse<TypeService[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<TypeService[]>(this.resourceVisaUrl, { params: options, observe: 'response' })
             .map((res: HttpResponse<TypeService[]>) => this.convertArrayResponse(res));
     }
 

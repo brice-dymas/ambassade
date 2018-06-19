@@ -19,7 +19,6 @@ export class PrintPasseportComponent implements OnInit {
 
     ngOnInit() {
         this.passeports = this.router.getNavigatedData();
-        console.log('passeports = ', this.passeports);
     }
 
     trackId(index: number, item: any) {

@@ -106,7 +106,6 @@ currentAccount: any;
     registerChangeInPaiements() {
         // this.eventSubscriber = this.eventManager.subscribe('paiementListModification', (response) => this.loadAll());
         this.eventSubscriber = this.eventManager.subscribe('paiementListModification', (response) => {
-            console.log(response);
             if (typeof response.content === 'string') {
                 return this.loadAll();
             }else {
