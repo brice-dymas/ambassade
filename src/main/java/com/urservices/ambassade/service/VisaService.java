@@ -49,7 +49,7 @@ public interface VisaService {
      * @param id the id of the entity
      */
     void delete(Long id);
-    Page<Visa> searchAll(String nom, String prenom, String nationalite, String numeroPasseport, Long numeroVisa,
-                         LocalDate dateEmissionDeb, LocalDate dateEmissionFin, LocalDate dateExpirationDeb,
-                         LocalDate dateExpirationFin, String type, String categorie, String adresse,Pageable pageable);
+
+    Page<Visa> findAllNouveau(String nom, String prenom, String numeroPasseport, Long numeroVisa, Long typeService,
+                              Long categorie, LocalDate dateEmissionDeb, LocalDate dateEmissionFin, Pageable pageable);
 }

@@ -15,6 +15,7 @@ export type EntityResponseType = HttpResponse<Visa>;
 export class VisaService {
 
     private resourceUrl =  SERVER_API_URL + 'api/visas';
+    private resourceNouveauUrl =  SERVER_API_URL + 'api/visas/nouveau';
 
     constructor(private http: HttpClient, private dateUtils: JhiDateUtils) { }
 
@@ -65,6 +66,12 @@ export class VisaService {
     query(req?: any): Observable<HttpResponse<Visa[]>> {
         const options = createRequestOption(req);
         return this.http.get<Visa[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .map((res: HttpResponse<Visa[]>) => this.convertArrayResponse(res));
+    }
+
+    queryforNouveau(req?: any): Observable<HttpResponse<Visa[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Visa[]>(this.resourceNouveauUrl, { params: options, observe: 'response' })
             .map((res: HttpResponse<Visa[]>) => this.convertArrayResponse(res));
     }
 

@@ -8,6 +8,7 @@ import { VisaDetailComponent } from './visa-detail.component';
 import { VisaDialogComponent } from './visa-dialog.component';
 import { VisaDeletePopupComponent } from './visa-delete-dialog.component';
 import {PrintComponent} from '../print/print.component';
+import {VisaNouveauComponent} from './visa-nouveau.component';
 
 @Injectable()
 export class VisaResolvePagingParams implements Resolve<any> {
@@ -37,7 +38,20 @@ export const visaRoute: Routes = [
             pageTitle: 'ambassadeApp.visa.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }, {
+    },
+    {
+        path: 'visa-nouveau',
+        component: VisaNouveauComponent,
+        resolve: {
+            'pagingParams': VisaResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.visa.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
         path: 'visa/:id',
         component: VisaDetailComponent,
         data: {

@@ -1,0 +1,92 @@
+<div class="mb-lg-5">
+    <h5 class="text-uppercase">
+        <span jhiTranslate="ambassadeApp.passeport.home.title">Passeports</span>
+        <button class="btn btn-xs plat btn-blue float-right jh-create-entity create-passeport" [routerLink]="['../passeport-new']">
+            <span class="fa fa-pencil-square-o"></span>
+            <span  jhiTranslate="ambassadeApp.passeport.home.createLabel">Create new Passeport</span>
+        </button>&nbsp;
+        <button (click)="printPage()" class="btn btn-info btn-xs plat float-right mr-5 plat">
+            <span class="fa fa-print"></span>&nbsp;
+            <span>Imprimer</span>
+        </button>
+    </h5>
+    <div class="title-bullet title-bullet-table"><span></span></div>
+
+    <jhi-alert></jhi-alert>
+    <div>
+        <jhi-passeport-search></jhi-passeport-search>
+    </div>
+    <br/>
+        <div *ngIf="passeports">
+            <table class="table table-striped dash-row table-sm">
+                <thead class="theme-bg-blue text-white">
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                        <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
+                        <th jhiSortBy="recu"><span jhiTranslate="ambassadeApp.passeport.recu">Numero Recu</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.passeport.nom">Nom</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="prenom"><span jhiTranslate="ambassadeApp.passeport.prenom">Prenom</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="numeroPasseport"><span jhiTranslate="ambassadeApp.passeport.numeroPasseport">Numero Passeport</span> <span class="fa fa-sort"></span></th>
+                       <th jhiSortBy="delivreLe"><span jhiTranslate="ambassadeApp.passeport.delivreLe">Delivre Le</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="dateExpiration"><span jhiTranslate="ambassadeApp.passeport.dateExpiration">Date Expiration</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="state"><span jhiTranslate="ambassadeApp.passeport.state">statut</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="typeService"><span jhiTranslate="ambassadeApp.passeport.typeService">typeService</span> <span class="fa fa-sort"></span></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let passeport of passeports ;trackBy: trackId">
+                        <!-- <td><a [routerLink]="['../passeport', passeport.id ]">{{passeport.id}}</a></td> -->
+                        <td>{{passeport.recu}}</td>
+                        <td>{{passeport.nom}}</td>
+                        <td>{{passeport.prenom}}</td>
+                        <td>{{passeport.numeroPasseport}}</td>
+                        <td>{{passeport.delivreLe | date:'mediumDate'}}</td>
+                        <td>{{passeport.dateExpiration | date:'mediumDate'}}</td>
+                        <td jhiTranslate="{{'ambassadeApp.State.' + passeport.state}}">{{passeport.state}}</td>
+                        <td>{{passeport.typeService?.nom}}</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="submit"
+                                        [routerLink]="['../passeport', passeport.id ]"
+                                        class="btn btn-info btn-xs plat">
+                                    <span class="fa fa-eye"></span>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                </button>&nbsp;
+                                <button type="submit"
+                                        [routerLink]="['../passeport', passeport.id, 'edit']"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-primary btn-xs plat">
+                                    <span class="fa fa-pencil"></span>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>&nbsp;
+                                <!--<button type="submit"-->
+                                        <!--[routerLink]="['/', { outlets: { popup: 'passeport/'+ passeport.id + '/delete'} }]"-->
+                                        <!--replaceUrl="true"-->
+                                        <!--queryParamsHandling="merge"-->
+                                        <!--class="btn btn-danger btn-xs plat">-->
+                                    <!--<span class="fa fa-trash"></span>-->
+                                    <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>-->
+                                <!--</button>-->
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="passeports && passeports.length">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-sm">
+                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="pagination-sm pull-right">
+                        <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

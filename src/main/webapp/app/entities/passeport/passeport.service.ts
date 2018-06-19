@@ -14,6 +14,7 @@ export type EntityResponseType = HttpResponse<Passeport>;
 export class PasseportService {
 
     private resourceUrl =  SERVER_API_URL + 'api/passeports';
+    private resourceNouveauUrl =  SERVER_API_URL + 'api/passeports/nouveau';
 
     constructor(private http: HttpClient, private dateUtils: JhiDateUtils) { }
 
@@ -63,6 +64,12 @@ export class PasseportService {
     query(req?: any): Observable<HttpResponse<Passeport[]>> {
         const options = createRequestOption(req);
         return this.http.get<Passeport[]>(this.resourceUrl, { params: options, observe: 'response' })
+            .map((res: HttpResponse<Passeport[]>) => this.convertArrayResponse(res));
+    }
+
+    queryForNouveau(req?: any): Observable<HttpResponse<Passeport[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<Passeport[]>(this.resourceNouveauUrl, { params: options, observe: 'response' })
             .map((res: HttpResponse<Passeport[]>) => this.convertArrayResponse(res));
     }
 

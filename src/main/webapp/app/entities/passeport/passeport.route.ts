@@ -7,6 +7,7 @@ import { PasseportComponent } from './passeport.component';
 import { PasseportDetailComponent } from './passeport-detail.component';
 import { PasseportDialogComponent} from './passeport-dialog.component';
 import { PasseportDeletePopupComponent } from './passeport-delete-dialog.component';
+import {PasseportNouveauComponent} from './passeport-nouveau.component';
 
 @Injectable()
 export class PasseportResolvePagingParams implements Resolve<any> {
@@ -36,7 +37,20 @@ export const passeportRoute: Routes = [
             pageTitle: 'ambassadeApp.passeport.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }, {
+    },
+    {
+        path: 'passeport-nouveau',
+        component: PasseportNouveauComponent,
+        resolve: {
+            'pagingParams': PasseportResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.passeport.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
         path: 'passeport/search',
         component: PasseportComponent,
         resolve: {
