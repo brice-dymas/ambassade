@@ -47,7 +47,7 @@ export class VisaDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.typeServiceService.query()
+        this.typeServiceService.queryForVisa()
             .subscribe((res: HttpResponse<TypeService[]>) => { this.typeservices = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.typeEntreeService.query()
             .subscribe((res: HttpResponse<TypeEntree[]>) => { this.typeentrees = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));

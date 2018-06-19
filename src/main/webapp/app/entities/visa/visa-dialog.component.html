@@ -180,14 +180,14 @@
             <label class="form-control-label" jhiTranslate="ambassadeApp.visa.typeService" for="field_typeService">Type Service</label>
             <select class="form-control" id="field_typeService" name="typeService" [(ngModel)]="visa.typeService" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="typeServiceOption.id === visa.typeService?.id ? visa.typeService : typeServiceOption" *ngFor="let typeServiceOption of typeservices; trackBy: trackTypeServiceById">{{typeServiceOption.id}}</option>
+                <option [ngValue]="typeServiceOption.id === visa.typeService?.id ? visa.typeService : typeServiceOption" *ngFor="let typeServiceOption of typeservices; trackBy: trackTypeServiceById">{{typeServiceOption.nom}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="ambassadeApp.visa.typeEntree" for="field_typeEntree">Type Entree</label>
             <select class="form-control" id="field_typeEntree" name="typeEntree" [(ngModel)]="visa.typeEntree"  required>
                 <option *ngIf="!editForm.value.typeEntree" [ngValue]="null" selected></option>
-                <option [ngValue]="typeEntreeOption.id === visa.typeEntree?.id ? visa.typeEntree : typeEntreeOption" *ngFor="let typeEntreeOption of typeentrees; trackBy: trackTypeEntreeById">{{typeEntreeOption.id}}</option>
+                <option [ngValue]="typeEntreeOption.id === visa.typeEntree?.id ? visa.typeEntree : typeEntreeOption" *ngFor="let typeEntreeOption of typeentrees; trackBy: trackTypeEntreeById">{{typeEntreeOption.libelle}}</option>
             </select>
         </div>
         <div [hidden]="!(editForm.controls.typeEntree?.dirty && editForm.controls.typeEntree?.invalid)">
@@ -200,7 +200,7 @@
             <label class="form-control-label" jhiTranslate="ambassadeApp.visa.categorie" for="field_categorie">Categorie</label>
             <select class="form-control" id="field_categorie" name="categorie" [(ngModel)]="visa.categorie" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="categorieOption.id === visa.categorie?.id ? visa.categorie : categorieOption" *ngFor="let categorieOption of categories; trackBy: trackCategorieById">{{categorieOption.id}}</option>
+                <option [ngValue]="categorieOption.id === visa.categorie?.id ? visa.categorie : categorieOption" *ngFor="let categorieOption of categories; trackBy: trackCategorieById">{{categorieOption.nomCategorie}}</option>
             </select>
         </div>
     </div>

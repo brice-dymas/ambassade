@@ -76,7 +76,11 @@ public class VisaResource {
 
         User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
         visa.setCreatedBy(user);
-        visa.setState(State.NOUVEAU);
+        if (visa.getTypeService().getMontant() > 0L) {
+            visa.setState(State.NOUVEAU);
+        } else {
+            visa.setState(State.PAYE);
+        }
         visa.setDateCreation(LocalDate.now());
         Visa result = visaService.save(visa);
         return ResponseEntity.created(new URI("/api/visas/" + result.getId()))

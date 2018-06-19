@@ -36,7 +36,7 @@ export class PasseportDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.typeServiceService.query()
+        this.typeServiceService.queryForPasseport()
             .subscribe((res: HttpResponse<TypeService[]>) => {
                 this.typeservices = res.body;
             }, (res: HttpErrorResponse) => this.onError(res.message));

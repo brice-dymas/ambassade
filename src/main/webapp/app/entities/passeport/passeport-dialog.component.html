@@ -315,7 +315,7 @@
                         <option
                             [ngValue]="typeServiceOption.id === passeport.typeService?.id ? passeport.typeService : typeServiceOption"
                             *ngFor="let typeServiceOption of typeservices; trackBy: trackTypeServiceById">
-                            {{typeServiceOption.id}}
+                            {{typeServiceOption.nom}}
                         </option>
                     </select>
                 </div>
