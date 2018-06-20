@@ -7,12 +7,6 @@
                     <span class="font-bold" jhiTranslate="global.menu.home">Home</span>
                 </a>
             </li>
-            <!--<li class="nav-item" routerLink="type-service" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">-->
-            <!--<a class="nav-link">-->
-            <!--<i class="fa fa-server" aria-hidden="true"></i>-->
-            <!--<span jhiTranslate="global.menu.entities.service">Service</span>-->
-            <!--</a>-->
-            <!--</li>-->
             <li class="nav-item"
                 (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
                 aria-controls="collapsePasseport">
@@ -45,13 +39,13 @@
                 </ul>
             </li>
             <li class="nav-item"
-                (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseVisa">
+                (click)="isVisaCollapsed = !isVisaCollapsed" [attr.aria-expanded]="!isVisaCollapsed" aria-controls="visa">
                 <a class="nav-link">
                     <i class="fa fa-cc-visa" aria-hidden="true"></i>
                     <span jhiTranslate="global.menu.entities.visa">Visa</span>
                     <i class="fa fa-chevron-right float-right"></i>
                 </a>
-                <ul id="collapseVisa" class="list-unstyled" [ngbCollapse]="isCollapsed">
+                <ul id="visa" class="list-unstyled" [ngbCollapse]="isVisaCollapsed">
                     <li>
                         <a routerLink="visa-new" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                             <i class="fa fa-pencil-square-o"></i>
@@ -87,14 +81,14 @@
                 </ul>
             </li>
             <li class="nav-item"
-                (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                (click)="isPaiementCollapsed = !isPaiementCollapsed" [attr.aria-expanded]="!isPaiementCollapsed"
                 aria-controls="collapsePaiement">
                 <a class="nav-link">
                     <i class="fa fa-id-card" aria-hidden="true"></i>
                     <span jhiTranslate="global.menu.entities.paiement">paiement</span>
                     <i class="fa fa-chevron-right float-right"></i>
                 </a>
-                <ul id="collapsePaiement" class="list-unstyled" [ngbCollapse]="isCollapsed">
+                <ul id="collapsePaiement" class="list-unstyled" [ngbCollapse]="isPaiementCollapsed">
                     <li>
                         <a routerLink="passeport-nouveau" routerLinkActive="active"
                            [routerLinkActiveOptions]="{ exact: true }">
@@ -138,12 +132,6 @@
                     <span jhiTranslate="global.menu.entities.livre">Livre</span>
                 </a>
             </li>
-            <!--<li class="nav-item" routerLink="categorie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">-->
-            <!--<a class="nav-link">-->
-            <!--<i class="fa fa-database" aria-hidden="true"></i>-->
-            <!--<span jhiTranslate="global.menu.entities.categorie">Categorie</span>-->
-            <!--</a>-->
-            <!--</li>-->
             <li class="nav-item" routerLink="rapatriement" routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                 <a class="nav-link">
