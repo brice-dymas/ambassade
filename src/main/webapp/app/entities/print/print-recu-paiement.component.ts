@@ -1,28 +1,24 @@
 import {Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import * as xepOnline from 'css-to-pdf/js/xepOnline.jqPlugin.js';
-import {Passeport} from '../passeport';
+import { Paiement } from '../paiement';
 
 @Component({
-    selector: 'jhi-print-passeport',
-    templateUrl: './print-passeport.component.html',
+    selector: 'jhi-print-recu-paiement',
+    templateUrl: './print-recu-paiement.component.html',
     styleUrls: [
         'paper.min.css'
     ]
 })
-export class PrintPasseportComponent implements OnInit {
+export class PrintRecuPaiementComponent implements OnInit {
 
-    passeports: Passeport[];
+    paiement: Paiement[];
 
     constructor(private router: Router) {
     }
 
     ngOnInit() {
-        this.passeports = this.router.getNavigatedData();
-    }
-
-    trackId(index: number, item: any) {
-        return item.id;
+        this.paiement = this.router.getNavigatedData();
     }
 
     downloadPDF() {

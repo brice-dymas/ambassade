@@ -22,8 +22,8 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
     constructor(
         private eventManager: JhiEventManager,
         private dataUtils: JhiDataUtils,
-        private passeportService: PasseportService,
-        private router: Router,
+            private passeportService: PasseportService,
+            private router: Router,
         private route: ActivatedRoute,
         private _confirmation: ConfirmationService
     ) {
@@ -101,6 +101,7 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
     }
 
     create() {
+        console.log('entree dans la methode create de BUTTON');
         // const val = this.form.getRawValue();
         // const options = Object.assign({}, val);
         //
@@ -115,6 +116,7 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
     }
 
     open(title: string, message: string) {
+        console.log('entree dans la methode open de BUTTON');
         this._confirmation.create(title, message).subscribe((ans: ResolveEmit) => console.log('VOILAAAAAAAAAAAAAAAAAAAA ' + ans));
     }
 }

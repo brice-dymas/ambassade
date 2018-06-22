@@ -4,19 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { Categorie } from './categorie.model';
-import { CategorieService } from './categorie.service';
+import { TypeService } from './type-service.model';
+import { TypeServiceService } from './type-service.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
-import {UserService} from '../../shared/user/user.service';
 
 @Component({
-    selector: 'jhi-categorie',
-    templateUrl: './categorie.component.html'
+    selector: 'jhi-type-service-passeport',
+    templateUrl: './type-service-passeport.component.html'
 })
-export class CategorieComponent implements OnInit, OnDestroy {
+export class TypeServicePasseportComponent implements OnInit, OnDestroy {
 
-    currentAccount: any;
-    categories: Categorie[];
+currentAccount: any;
+    typeServices: TypeService[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -29,20 +28,17 @@ export class CategorieComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-    message: any;
 
     constructor(
-        private categorieService: CategorieService,
+        private typeServiceService: TypeServiceService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager,
-        private userService: UserService
+        private eventManager: JhiEventManager
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
-        const oto = this.userService.authorities();
         this.routeData = this.activatedRoute.data.subscribe((data) => {
             this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
@@ -52,18 +48,12 @@ export class CategorieComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.categorieService.query({
+        this.typeServiceService.queryForPasseport({
             page: this.page - 1,
             size: this.itemsPerPage,
             sort: this.sort()}).subscribe(
-            (res: HttpResponse<Categorie[]>) => this.onSuccess(res.body, res.headers),
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-    }
-    searchCategorie(categorie: Categorie) {
-        this.categorieService.search(categorie).subscribe(
-            (res: HttpResponse<Categorie[]>) => this.onSuccess(res.body, res.headers),
-            (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpResponse<TypeService[]>) => this.onSuccess(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
     loadPage(page: number) {
@@ -73,7 +63,7 @@ export class CategorieComponent implements OnInit, OnDestroy {
         }
     }
     transition() {
-        this.router.navigate(['/categorie'], {queryParams:
+        this.router.navigate(['/type-service/passeport'], {queryParams:
             {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -85,7 +75,7 @@ export class CategorieComponent implements OnInit, OnDestroy {
 
     clear() {
         this.page = 0;
-        this.router.navigate(['/categorie', {
+        this.router.navigate(['/type-service/passeport', {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
@@ -96,24 +86,18 @@ export class CategorieComponent implements OnInit, OnDestroy {
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-        this.registerChangeInCategories();
+        this.registerChangeInTypeServices();
     }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: Categorie) {
+    trackId(index: number, item: TypeService) {
         return item.id;
     }
-    registerChangeInCategories() {
-        this.eventSubscriber = this.eventManager.subscribe('categorieListModification', (response) => {
-            if (typeof response.content === 'string') {
-                return this.loadAll();
-            }else {
-                return this.searchCategorie(response.content);
-            }
-        });
+    registerChangeInTypeServices() {
+        this.eventSubscriber = this.eventManager.subscribe('typeServiceListModification', (response) => this.loadAll());
     }
 
     sort() {
@@ -123,30 +107,13 @@ export class CategorieComponent implements OnInit, OnDestroy {
         }
         return result;
     }
-    printPage() {
-        const callVerbose: {
-            dataHeader: any;
-            dataContent: any;
-            property: any;
-        } = {
-            dataHeader: ['ambassadeApp.categorie.id', 'ambassadeApp.categorie.nomCategorie'],
-            dataContent: this.categories,
-            property: Object.getOwnPropertyNames(this.categories[0]),
-        };
-        this.router.navigateByData({
-            url: ['/print'],
-            // data: this.categories
-            data: callVerbose
-        });
-    }
 
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
-        this.categories = data;
-        this.message =  data;
+        this.typeServices = data;
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);

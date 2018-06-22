@@ -44,10 +44,9 @@ public interface PasseportService {
      */
     void delete(Long id);
 
-    public Page<Passeport> searchAll(String recu, String nom, String prenom, String numeroPasseport, LocalDate neLeDeb, LocalDate neLeFin,
-                                     String lieuNaissance, Statut etatCivil, String adresse,
-                                     String paysEmetteur, LocalDate soumisLeDeb, LocalDate soumisLeFin,
-                                     LocalDate delivreLeDeb, LocalDate delivreLeFin, BigDecimal montant,
-                                     LocalDate dateEmissionDeb, LocalDate dateEmissionFin, LocalDate dateExpirationDeb,
-                                     LocalDate dateExpirationFin, String documents, Pageable pageable);
+    public Page<Passeport> searchAll(String recu, String nom, String prenom, String numeroPasseport, Statut etatCivil,
+                                     LocalDate delivreLeDeb, LocalDate delivreLeFin, Pageable pageable);
+
+    Page<Passeport> searchAllNouveau(String recu, String nom, String prenom, String numeroPasseport, Statut etatCivil,
+                                     LocalDate delivreLeDeb, LocalDate delivreLeFin, Pageable pageable);
 }

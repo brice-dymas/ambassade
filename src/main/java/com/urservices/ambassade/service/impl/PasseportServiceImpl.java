@@ -43,7 +43,6 @@ public class PasseportServiceImpl implements PasseportService {
     public Passeport save(Passeport passeport) {
         log.debug("Request to save Passeport : {}", passeport);
         passeport.setPaysEmetteur("HAITI");
-        passeport.setState(State.NOUVEAU);
         return passeportRepository.save(passeport);
     }
 
@@ -85,12 +84,8 @@ public class PasseportServiceImpl implements PasseportService {
     }
 
     @Override
-    public Page<Passeport> searchAll(String recu, String nom, String prenom, String numeroPasseport, LocalDate neLeDeb, LocalDate neLeFin,
-                                     String lieuNaissance, Statut etatCivil, String adresse,
-                                     String paysEmetteur, LocalDate soumisLeDeb, LocalDate soumisLeFin,
-                                     LocalDate delivreLeDeb, LocalDate delivreLeFin, BigDecimal montant,
-                                     LocalDate dateEmissionDeb, LocalDate dateEmissionFin, LocalDate dateExpirationDeb,
-                                     LocalDate dateExpirationFin, String documents, Pageable pageable) {
+    public Page<Passeport> searchAll(String recu, String nom, String prenom, String numeroPasseport, Statut etatCivil,
+                                     LocalDate delivreLeDeb, LocalDate delivreLeFin, Pageable pageable) {
         QPasseport passeport = QPasseport.passeport;
         BooleanExpression predicate = null;
         boolean added = false;
@@ -122,67 +117,11 @@ public class PasseportServiceImpl implements PasseportService {
                 added = true;
             }
         }
-        if (lieuNaissance != null) {
-            if (added) {
-                predicate = predicate.and(passeport.lieuNaissance.likeIgnoreCase("%" + lieuNaissance + "%"));
-            } else {
-                predicate = passeport.lieuNaissance.likeIgnoreCase("%" + lieuNaissance + "%");
-                added = true;
-            }
-        }
         if (etatCivil != null) {
             if (added) {
                 predicate = predicate.and(passeport.etatCivil.eq(etatCivil));
             } else {
                 predicate = passeport.etatCivil.eq(etatCivil);
-                added = true;
-            }
-        }
-        if (adresse != null) {
-            if (added) {
-                predicate = predicate.and(passeport.adresse.likeIgnoreCase("%" + adresse + "%"));
-            } else {
-                predicate = passeport.adresse.likeIgnoreCase("%" + adresse + "%");
-                added = true;
-            }
-        }
-        if (paysEmetteur != null) {
-            if (added) {
-                predicate = predicate.and(passeport.paysEmetteur.likeIgnoreCase("%" + paysEmetteur + "%"));
-            } else {
-                predicate = passeport.paysEmetteur.likeIgnoreCase("%" + paysEmetteur + "%");
-                added = true;
-            }
-        }
-        if (neLeDeb != null) {
-            if (added) {
-                if (neLeFin != null) {
-                    predicate = predicate.and(passeport.neLe.between(neLeDeb, neLeFin));
-                } else {
-                    predicate = predicate.and(passeport.neLe.eq(neLeDeb));
-                }
-            } else {
-                if (neLeFin != null) {
-                    predicate = passeport.neLe.between(neLeDeb, neLeFin);
-                } else {
-                    predicate = passeport.neLe.eq(neLeDeb);
-                }
-                added = true;
-            }
-        }
-        if (soumisLeDeb != null) {
-            if (added) {
-                if (soumisLeFin != null) {
-                    predicate = predicate.and(passeport.soumisLe.between(soumisLeDeb, soumisLeFin));
-                } else {
-                    predicate = predicate.and(passeport.soumisLe.goe(soumisLeDeb));
-                }
-            } else {
-                if (soumisLeFin != null) {
-                    predicate = passeport.soumisLe.between(soumisLeDeb, soumisLeFin);
-                } else {
-                    predicate = passeport.soumisLe.goe(soumisLeDeb);
-                }
                 added = true;
             }
         }
@@ -209,51 +148,42 @@ public class PasseportServiceImpl implements PasseportService {
                 predicate = passeport.delivreLe.loe(delivreLeFin);
             }
         }
-        if (dateEmissionDeb != null) {
-            if (added) {
-                if (dateEmissionFin != null) {
-                    predicate = predicate.and(passeport.dateEmission.between(dateEmissionDeb, dateEmissionFin));
-                } else {
-                    predicate = predicate.and(passeport.dateEmission.goe(dateEmissionDeb));
-                }
-            } else {
-                if (dateEmissionFin != null) {
-                    predicate = passeport.dateEmission.between(dateEmissionDeb, dateEmissionFin);
-                } else {
-                    predicate = passeport.dateEmission.goe(dateEmissionDeb);
-                }
-                added = true;
-            }
+        return predicate != null ? passeportRepository.findAll(predicate, pageable): passeportRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Passeport> searchAllNouveau(String recu, String nom, String prenom, String numeroPasseport,
+                                            Statut etatCivil, LocalDate delivreLeDeb, LocalDate delivreLeFin,
+                                            Pageable pageable) {
+        System.out.println("Searching Passeport of State=NOUVEAU");
+        QPasseport passeport = QPasseport.passeport;
+        BooleanExpression predicate = passeport.state.eq(State.NOUVEAU);
+        if (nom != null) {
+            predicate = predicate.and(passeport.nom.likeIgnoreCase("%" + nom + "%"));
         }
-        if (dateExpirationDeb != null) {
-            if (added) {
-                if (dateExpirationFin != null) {
-                    predicate = predicate.and(passeport.dateExpiration.between(dateExpirationDeb, dateExpirationFin));
+        if (recu != null) {
+                predicate = predicate.and(passeport.recu.likeIgnoreCase("%" + recu + "%"));
+        }
+        if (prenom != null) {
+                predicate = predicate.and(passeport.prenom.likeIgnoreCase("%" + prenom + "%"));
+        }
+        if (numeroPasseport != null) {
+                predicate = predicate.and(passeport.numeroPasseport.likeIgnoreCase("%" + numeroPasseport + "%"));
+        }
+        if (etatCivil != null) {
+                predicate = predicate.and(passeport.etatCivil.eq(etatCivil));
+        }
+        if (delivreLeDeb != null) {
+                if (delivreLeFin != null) {
+                    predicate = predicate.and(passeport.delivreLe.between(delivreLeDeb, delivreLeFin));
                 } else {
-                    predicate = predicate.and(passeport.dateExpiration.eq(dateExpirationDeb));
+                    predicate = predicate.and(passeport.delivreLe.eq(delivreLeDeb));
                 }
-            } else {
-                if (dateExpirationFin != null) {
-                    predicate = passeport.dateExpiration.between(dateExpirationDeb, dateExpirationFin);
-                } else {
-                    predicate = passeport.dateExpiration.eq(dateExpirationDeb);
-                }
-                added = true;
-            }
         }
-        if (dateExpirationFin != null && dateExpirationDeb==null) {
-            if (added) {
-                predicate = predicate.and(passeport.dateExpiration.loe(dateExpirationFin));
-            } else {
-                predicate = passeport.dateExpiration.loe(dateExpirationFin);
-            }
+        if (delivreLeFin != null && delivreLeDeb==null) {
+                predicate = predicate.and(passeport.delivreLe.loe(delivreLeFin));
         }
-        if (predicate != null) {
-            System.out.println("Predicate for search = "+ predicate);
-            return passeportRepository.findAll(predicate, pageable);
-        } else {
-            System.out.println("Predicate for search is NULL ");
-            return passeportRepository.findAll(pageable);
-        }
+        System.out.println("Predicate = "+ predicate);
+        return predicate != null ? passeportRepository.findAll(predicate, pageable) : passeportRepository.findAll(pageable);
     }
 }

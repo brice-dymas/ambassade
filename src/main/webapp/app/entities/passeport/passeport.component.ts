@@ -113,7 +113,6 @@ currentAccount: any;
     registerChangeInPasseports() {
         // this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => this.loadAll());
         this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => {
-            console.log(response);
             if (typeof response.content === 'string') {
                 return this.loadAll();
             }else {

@@ -7,6 +7,8 @@ import { TypeServiceComponent } from './type-service.component';
 import { TypeServiceDetailComponent } from './type-service-detail.component';
 import { TypeServicePopupComponent } from './type-service-dialog.component';
 import { TypeServiceDeletePopupComponent } from './type-service-delete-dialog.component';
+import {TypeServicePasseportComponent} from './type-service-passeport.component';
+import {TypeServiceVisaComponent} from './type-service-visa.component';
 
 @Injectable()
 export class TypeServiceResolvePagingParams implements Resolve<any> {
@@ -28,6 +30,30 @@ export const typeServiceRoute: Routes = [
     {
         path: 'type-service',
         component: TypeServiceComponent,
+        resolve: {
+            'pagingParams': TypeServiceResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.typeService.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'type-service-passeport',
+        component: TypeServicePasseportComponent,
+        resolve: {
+            'pagingParams': TypeServiceResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.typeService.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'type-service-visa',
+        component: TypeServiceVisaComponent,
         resolve: {
             'pagingParams': TypeServiceResolvePagingParams
         },

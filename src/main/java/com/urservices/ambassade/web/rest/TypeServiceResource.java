@@ -98,6 +98,36 @@ public class TypeServiceResource {
     }
 
     /**
+     * GET  /type-services/visa : get all the typeServices for visa.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of typeServices in body
+     */
+    @GetMapping("/type-services/visa")
+    @Timed
+    public ResponseEntity<List<TypeService>> getAllTypeServicesVisa(Pageable pageable) {
+        log.debug("REST request to get a page of TypeServices /visa");
+        Page<TypeService> page = typeServiceService.findAllForVisa(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/type-services/visa");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /type-services/passeport : get all the typeServices.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of typeServices in body
+     */
+    @GetMapping("/type-services/passeport")
+    @Timed
+    public ResponseEntity<List<TypeService>> getAllTypeServicesPasseport(Pageable pageable) {
+        log.debug("REST request to get a page of TypeServices /passeport");
+        Page<TypeService> page = typeServiceService.findAllForPasseport(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/type-services/passeport");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
      * GET  /type-services/:id : get the "id" typeService.
      *
      * @param id the id of the typeService to retrieve

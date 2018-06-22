@@ -1,5 +1,8 @@
 package com.urservices.ambassade.service.impl;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.urservices.ambassade.config.Constants;
+import com.urservices.ambassade.domain.QTypeService;
 import com.urservices.ambassade.service.TypeServiceService;
 import com.urservices.ambassade.domain.TypeService;
 import com.urservices.ambassade.repository.TypeServiceRepository;
@@ -36,6 +39,22 @@ public class TypeServiceServiceImpl implements TypeServiceService {
     public TypeService save(TypeService typeService) {
         log.debug("Request to save TypeService : {}", typeService);
         return typeServiceRepository.save(typeService);
+    }
+
+    @Override
+    public Page<TypeService> findAllForVisa(Pageable pageable) {
+        log.debug("Request to get all TypeServices for Visa");
+        QTypeService typeService = QTypeService.typeService;
+        BooleanExpression predicate = typeService.uniteOrganisationelle.id.eq(Constants.UNITE_ORGANISATIONNELLE_VISA);
+        return typeServiceRepository.findAll(predicate,pageable);
+    }
+
+    @Override
+    public Page<TypeService> findAllForPasseport(Pageable pageable) {
+        log.debug("Request to get all TypeServices for Passeport");
+        QTypeService typeService = QTypeService.typeService;
+        BooleanExpression predicate = typeService.uniteOrganisationelle.id.eq(Constants.UNITE_ORGANISATIONNELLE_PASSEPORT);
+        return typeServiceRepository.findAll(predicate,pageable);
     }
 
     /**

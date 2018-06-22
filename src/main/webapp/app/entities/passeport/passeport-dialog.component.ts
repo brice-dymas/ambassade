@@ -1,15 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager, JhiAlertService, JhiDataUtils} from 'ng-jhipster';
 
-import { Passeport } from './passeport.model';
-import { PasseportPopupService } from './passeport-popup.service';
-import { PasseportService } from './passeport.service';
-import { TypeService, TypeServiceService } from '../type-service';
+import {Passeport} from './passeport.model';
+import {PasseportPopupService} from './passeport-popup.service';
+import {PasseportService} from './passeport.service';
+import {TypeService, TypeServiceService} from '../type-service';
 
 @Component({
     selector: 'jhi-passeport-dialog',
@@ -21,26 +22,44 @@ export class PasseportDialogComponent implements OnInit {
     isSaving: boolean;
 
     typeservices: TypeService[];
-    neLeDp: any;
-    soumisLeDp: any;
-    delivreLeDp: any;
-    dateEmissionDp: any;
-    dateExpirationDp: any;
+    private subscription: Subscription;
+    private eventSubscriber: Subscription;
 
-    constructor(
-        public activeModal: NgbActiveModal,
-        private dataUtils: JhiDataUtils,
-        private jhiAlertService: JhiAlertService,
-        private passeportService: PasseportService,
-        private typeServiceService: TypeServiceService,
-        private eventManager: JhiEventManager
-    ) {
+    constructor(private dataUtils: JhiDataUtils,
+                private jhiAlertService: JhiAlertService,
+                private passeportService: PasseportService,
+                private typeServiceService: TypeServiceService,
+                private eventManager: JhiEventManager,
+                private route: ActivatedRoute,
+                private router: Router) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.typeServiceService.query()
-            .subscribe((res: HttpResponse<TypeService[]>) => { this.typeservices = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.typeServiceService.queryForPasseport()
+            .subscribe((res: HttpResponse<TypeService[]>) => {
+                this.typeservices = res.body;
+            }, (res: HttpErrorResponse) => this.onError(res.message));
+
+        this.route.params.subscribe((params) => {
+            if (params['id']) {
+                this.load(params['id']);
+            } else {
+                this.passeport = new Passeport();
+            }
+        });
+        this.registerChangeInPasseports();
+    }
+
+    load(id) {
+        this.passeportService.find(id)
+            .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                this.passeport = passeportResponse.body;
+            });
+    }
+
+    previousState() {
+        window.history.back();
     }
 
     byteSize(field) {
@@ -56,7 +75,7 @@ export class PasseportDialogComponent implements OnInit {
     }
 
     clear() {
-        this.activeModal.dismiss('cancel');
+        // this.activeModal.dismiss('cancel');
     }
 
     save() {
@@ -76,9 +95,10 @@ export class PasseportDialogComponent implements OnInit {
     }
 
     private onSaveSuccess(result: Passeport) {
-        this.eventManager.broadcast({ name: 'passeportListModification', content: 'OK'});
+        this.eventManager.broadcast({name: 'passeportListModification', content: 'OK'});
         this.isSaving = false;
-        this.activeModal.dismiss(result);
+        this.router.navigate(['passeport']);
+        // this.activeModal.dismiss(result);
     }
 
     private onSaveError() {
@@ -92,6 +112,13 @@ export class PasseportDialogComponent implements OnInit {
     trackTypeServiceById(index: number, item: TypeService) {
         return item.id;
     }
+
+    registerChangeInPasseports() {
+        this.eventSubscriber = this.eventManager.subscribe(
+            'passeportListModification',
+            (response) => this.load(this.passeport.id)
+        );
+    }
 }
 
 @Component({
@@ -102,14 +129,13 @@ export class PasseportPopupComponent implements OnInit, OnDestroy {
 
     routeSub: any;
 
-    constructor(
-        private route: ActivatedRoute,
-        private passeportPopupService: PasseportPopupService
-    ) {}
+    constructor(private route: ActivatedRoute,
+                private passeportPopupService: PasseportPopupService) {
+    }
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            if ( params['id'] ) {
+            if (params['id']) {
                 this.passeportPopupService
                     .open(PasseportDialogComponent as Component, params['id']);
             } else {

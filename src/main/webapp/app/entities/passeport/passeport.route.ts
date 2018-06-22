@@ -5,8 +5,9 @@ import { JhiPaginationUtil } from 'ng-jhipster';
 import { UserRouteAccessService } from '../../shared';
 import { PasseportComponent } from './passeport.component';
 import { PasseportDetailComponent } from './passeport-detail.component';
-import { PasseportPopupComponent } from './passeport-dialog.component';
+import { PasseportDialogComponent} from './passeport-dialog.component';
 import { PasseportDeletePopupComponent } from './passeport-delete-dialog.component';
+import {PasseportNouveauComponent} from './passeport-nouveau.component';
 
 @Injectable()
 export class PasseportResolvePagingParams implements Resolve<any> {
@@ -36,7 +37,20 @@ export const passeportRoute: Routes = [
             pageTitle: 'ambassadeApp.passeport.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }, {
+    },
+    {
+        path: 'passeport-nouveau',
+        component: PasseportNouveauComponent,
+        resolve: {
+            'pagingParams': PasseportResolvePagingParams
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.passeport.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
         path: 'passeport/search',
         component: PasseportComponent,
         resolve: {
@@ -79,7 +93,26 @@ export const passeportRoute: Routes = [
             pageTitle: 'ambassadeApp.passeport.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }, {
+    },
+    {
+        path: 'passeport-new',
+        component: PasseportDialogComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.passeport.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'passeport/:id/edit',
+        component: PasseportDialogComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'ambassadeApp.passeport.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
         path: 'passeport/:id',
         component: PasseportDetailComponent,
         data: {
@@ -91,26 +124,6 @@ export const passeportRoute: Routes = [
 ];
 
 export const passeportPopupRoute: Routes = [
-    {
-        path: 'passeport-new',
-        component: PasseportPopupComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'ambassadeApp.passeport.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    },
-    {
-        path: 'passeport/:id/edit',
-        component: PasseportPopupComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'ambassadeApp.passeport.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    },
     {
         path: 'passeport/:id/delete',
         component: PasseportDeletePopupComponent,

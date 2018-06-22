@@ -9,6 +9,8 @@ import { JhiLanguageHelper, Principal } from '../../shared';
 })
 export class SidebarComponent implements OnInit {
     isCollapsed = true;
+    isVisaCollapsed = true;
+    isPaiementCollapsed = true;
     isNavbarCollapsed: boolean;
     languages: any[];
     modalRef: NgbModalRef;
@@ -37,6 +39,8 @@ export class SidebarComponent implements OnInit {
 
     collapse() {
         this.isCollapsed = true;
+        this.isVisaCollapsed = true;
+        this.isPaiementCollapsed = true;
     }
 
 }

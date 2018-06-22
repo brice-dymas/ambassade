@@ -10,6 +10,7 @@ import {
 import {PrintDetailPasseportComponent} from './print-detail-passeport.component';
 import {PrintPasseportComponent} from './print-passeport.component';
 import {PrintPaiementComponent} from './print-paiement.component';
+import {PrintRecuPaiementComponent} from './print-recu-paiement.component';
 // import {printRoute} from "./print.route";
 
 const ENTITY_STATES = [
@@ -25,6 +26,7 @@ const ENTITY_STATES = [
         PrintComponent,
         PrintPasseportComponent,
         PrintPaiementComponent,
+        PrintRecuPaiementComponent,
         PrintDetailPasseportComponent
     ],
     entryComponents: [

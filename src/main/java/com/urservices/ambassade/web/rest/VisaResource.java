@@ -76,6 +76,11 @@ public class VisaResource {
 
         User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
         visa.setCreatedBy(user);
+        if (visa.getTypeService().getMontant() > 0L) {
+            visa.setState(State.NOUVEAU);
+        } else {
+            visa.setState(State.PAYE);
+        }
         visa.setDateCreation(LocalDate.now());
         Visa result = visaService.save(visa);
         return ResponseEntity.created(new URI("/api/visas/" + result.getId()))
@@ -134,23 +139,54 @@ public class VisaResource {
 
         String dateEmissionDebStr = webRequest.getParameter("dateEmission") != null && !webRequest.getParameter("dateEmission").isEmpty()
             ? webRequest.getParameter("dateEmission") : null;
-        String dateExpirationDebStr = webRequest.getParameter("dateExpiration") != null && !webRequest.getParameter("dateExpiration").isEmpty()
-            ? webRequest.getParameter("dateExpiration") : null;
-
         String dateEmissionFinStr = webRequest.getParameter("dateEmissionFin") != null && !webRequest.getParameter("dateEmissionFin").isEmpty()
             ? webRequest.getParameter("dateEmissionFin") : null;
-        String dateExpirationFinStr = webRequest.getParameter("dateExpirationFin") != null && !webRequest.getParameter("dateExpirationFin").isEmpty()
-            ? webRequest.getParameter("dateExpirationFin") : null;
 
         LocalDate dateEmissionDeb = dateEmissionDebStr != null ? LocalDate.parse(dateEmissionDebStr) : null;
-        LocalDate dateExpirationDeb = dateExpirationDebStr != null ? LocalDate.parse(dateExpirationDebStr) : null;
-
         LocalDate dateEmissionFin = dateEmissionFinStr != null ? LocalDate.parse(dateEmissionFinStr) : null;
-        LocalDate dateExpirationFin = dateExpirationFinStr != null ? LocalDate.parse(dateExpirationFinStr) : null;
 
         Page<Visa> page = visaService.findAll(nom, prenom, numeroPasseport, numeroVisa, typeService, categorie,
             dateEmissionDeb, dateEmissionFin, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/visas");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /visas/nouveau : get all the visas wirh State = NOUVEAU.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of visas in body
+     */
+    @GetMapping("/visas/nouveau")
+    @Timed
+    public ResponseEntity<List<Visa>> getAllVisasByStateNouveau(WebRequest webRequest, Pageable pageable) {
+
+        log.debug("REST request to get Visas with state = NOUVEAU : {}", webRequest);
+
+        String nom = webRequest.getParameter("nom") != null && !webRequest.getParameter("nom").isEmpty()
+            ? webRequest.getParameter("nom") : null;
+        String prenom = webRequest.getParameter("prenom") != null && !webRequest.getParameter("prenom").isEmpty()
+            ? webRequest.getParameter("prenom") : null;
+        String numeroPasseport = webRequest.getParameter("numeroPasseport") != null && !webRequest.getParameter("numeroPasseport").isEmpty()
+            ? webRequest.getParameter("numeroPasseport") : null;
+        Long numeroVisa = webRequest.getParameter("numeroVisa") != null && !webRequest.getParameter("numeroVisa").isEmpty()
+            ? Long.valueOf(webRequest.getParameter("numeroVisa")) : null;
+        Long typeService = webRequest.getParameter("typeService") != null && !webRequest.getParameter("typeService").isEmpty()
+            ? Long.valueOf(webRequest.getParameter("typeService")) : null;
+        Long categorie = webRequest.getParameter("categorie") != null && !webRequest.getParameter("categorie").isEmpty()
+            ? Long.valueOf(webRequest.getParameter("categorie")) : null;
+
+        String dateEmissionDebStr = webRequest.getParameter("dateEmission") != null && !webRequest.getParameter("dateEmission").isEmpty()
+            ? webRequest.getParameter("dateEmission") : null;
+        String dateEmissionFinStr = webRequest.getParameter("dateEmissionFin") != null && !webRequest.getParameter("dateEmissionFin").isEmpty()
+            ? webRequest.getParameter("dateEmissionFin") : null;
+
+        LocalDate dateEmissionDeb = dateEmissionDebStr != null ? LocalDate.parse(dateEmissionDebStr) : null;
+        LocalDate dateEmissionFin = dateEmissionFinStr != null ? LocalDate.parse(dateEmissionFinStr) : null;
+
+        Page<Visa> page = visaService.findAllNouveau(nom, prenom, numeroPasseport, numeroVisa, typeService, categorie,
+            dateEmissionDeb, dateEmissionFin, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/visas/nouveau");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
