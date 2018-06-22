@@ -5,4 +5,6 @@ export * from './type-service-dialog.component';
 export * from './type-service-delete-dialog.component';
 export * from './type-service-detail.component';
 export * from './type-service.component';
+export * from './type-service-visa.component';
+export * from './type-service-passeport.component';
 export * from './type-service.route';

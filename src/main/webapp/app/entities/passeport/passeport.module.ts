@@ -16,6 +16,7 @@ import {
     passeportPopupRoute,
     PasseportResolvePagingParams,
 } from './';
+import {PasseportNouveauComponent} from './passeport-nouveau.component';
 
 const ENTITY_STATES = [
     ...passeportRoute,
@@ -29,6 +30,7 @@ const ENTITY_STATES = [
     ],
     declarations: [
         PasseportComponent,
+        PasseportNouveauComponent,
         PasseportDetailComponent,
         PasseportDialogComponent,
         PasseportDeleteDialogComponent,

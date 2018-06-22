@@ -2,21 +2,20 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
-import { Categorie } from './categorie.model';
-import { CategorieService } from './categorie.service';
+import { Passeport } from './passeport.model';
+import { PasseportService } from './passeport.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
-import {UserService} from '../../shared/user/user.service';
 
 @Component({
-    selector: 'jhi-categorie',
-    templateUrl: './categorie.component.html'
+    selector: 'jhi-passeport-nouveau',
+    templateUrl: './passeport-nouveau.component.html'
 })
-export class CategorieComponent implements OnInit, OnDestroy {
+export class PasseportNouveauComponent implements OnInit, OnDestroy {
 
-    currentAccount: any;
-    categories: Categorie[];
+currentAccount: any;
+    passeports: Passeport[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -29,20 +28,18 @@ export class CategorieComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-    message: any;
 
     constructor(
-        private categorieService: CategorieService,
+        private passeportService: PasseportService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
+        private dataUtils: JhiDataUtils,
         private router: Router,
-        private eventManager: JhiEventManager,
-        private userService: UserService
+        private eventManager: JhiEventManager
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
-        const oto = this.userService.authorities();
         this.routeData = this.activatedRoute.data.subscribe((data) => {
             this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
@@ -52,18 +49,12 @@ export class CategorieComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.categorieService.query({
+        this.passeportService.queryForNouveau({
             page: this.page - 1,
             size: this.itemsPerPage,
             sort: this.sort()}).subscribe(
-            (res: HttpResponse<Categorie[]>) => this.onSuccess(res.body, res.headers),
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-    }
-    searchCategorie(categorie: Categorie) {
-        this.categorieService.search(categorie).subscribe(
-            (res: HttpResponse<Categorie[]>) => this.onSuccess(res.body, res.headers),
-            (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpResponse<Passeport[]>) => this.onSuccess(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
     loadPage(page: number) {
@@ -73,7 +64,7 @@ export class CategorieComponent implements OnInit, OnDestroy {
         }
     }
     transition() {
-        this.router.navigate(['/categorie'], {queryParams:
+        this.router.navigate(['/passeport-nouveau'], {queryParams:
             {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -82,10 +73,15 @@ export class CategorieComponent implements OnInit, OnDestroy {
         });
         this.loadAll();
     }
-
+    searchPasseport(passeport: Passeport) {
+        this.passeportService.search(passeport).subscribe(
+            (res: HttpResponse<Passeport[]>) => this.onSuccess(res.body, res.headers),
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     clear() {
         this.page = 0;
-        this.router.navigate(['/categorie', {
+        this.router.navigate(['/passeport-nouveau', {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
@@ -96,22 +92,31 @@ export class CategorieComponent implements OnInit, OnDestroy {
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-        this.registerChangeInCategories();
+        this.registerChangeInPasseports();
     }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: Categorie) {
+    trackId(index: number, item: Passeport) {
         return item.id;
     }
-    registerChangeInCategories() {
-        this.eventSubscriber = this.eventManager.subscribe('categorieListModification', (response) => {
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+    registerChangeInPasseports() {
+        // this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('passeportListModification', (response) => {
             if (typeof response.content === 'string') {
                 return this.loadAll();
             }else {
-                return this.searchCategorie(response.content);
+                return this.searchPasseport(response.content);
             }
         });
     }
@@ -123,20 +128,11 @@ export class CategorieComponent implements OnInit, OnDestroy {
         }
         return result;
     }
+
     printPage() {
-        const callVerbose: {
-            dataHeader: any;
-            dataContent: any;
-            property: any;
-        } = {
-            dataHeader: ['ambassadeApp.categorie.id', 'ambassadeApp.categorie.nomCategorie'],
-            dataContent: this.categories,
-            property: Object.getOwnPropertyNames(this.categories[0]),
-        };
         this.router.navigateByData({
-            url: ['/print'],
-            // data: this.categories
-            data: callVerbose
+            url: ['/print/passeport'],
+            data: this.passeports
         });
     }
 
@@ -145,8 +141,7 @@ export class CategorieComponent implements OnInit, OnDestroy {
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
-        this.categories = data;
-        this.message =  data;
+        this.passeports = data;
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);

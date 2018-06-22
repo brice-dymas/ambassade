@@ -4,19 +4,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { Categorie } from './categorie.model';
-import { CategorieService } from './categorie.service';
+import { Visa, State } from './visa.model';
+import { VisaService } from './visa.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
-import {UserService} from '../../shared/user/user.service';
+import {VisaDtoModel} from './visa-dto.model';
 
 @Component({
-    selector: 'jhi-categorie',
-    templateUrl: './categorie.component.html'
+    selector: 'jhi-visa-nouveau',
+    templateUrl: './visa-nouveau.component.html'
 })
-export class CategorieComponent implements OnInit, OnDestroy {
+export class VisaNouveauComponent implements OnInit, OnDestroy {
 
-    currentAccount: any;
-    categories: Categorie[];
+currentAccount: any;
+    visas: Visa[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -29,20 +29,17 @@ export class CategorieComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-    message: any;
 
     constructor(
-        private categorieService: CategorieService,
+        private visaService: VisaService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager,
-        private userService: UserService
+        private eventManager: JhiEventManager
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
-        const oto = this.userService.authorities();
         this.routeData = this.activatedRoute.data.subscribe((data) => {
             this.page = data.pagingParams.page;
             this.previousPage = data.pagingParams.page;
@@ -52,17 +49,17 @@ export class CategorieComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.categorieService.query({
+        this.visaService.queryforNouveau({
             page: this.page - 1,
             size: this.itemsPerPage,
             sort: this.sort()}).subscribe(
-            (res: HttpResponse<Categorie[]>) => this.onSuccess(res.body, res.headers),
-            (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpResponse<Visa[]>) => this.onSuccess(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
-    searchCategorie(categorie: Categorie) {
-        this.categorieService.search(categorie).subscribe(
-            (res: HttpResponse<Categorie[]>) => this.onSuccess(res.body, res.headers),
+    searchVisa(visa: VisaDtoModel) {
+        this.visaService.search(visa).subscribe(
+            (res: HttpResponse<Visa[]>) => this.onSuccess(res.body, res.headers),
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
@@ -73,7 +70,7 @@ export class CategorieComponent implements OnInit, OnDestroy {
         }
     }
     transition() {
-        this.router.navigate(['/categorie'], {queryParams:
+        this.router.navigate(['/visa-nouveau'], {queryParams:
             {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -85,7 +82,7 @@ export class CategorieComponent implements OnInit, OnDestroy {
 
     clear() {
         this.page = 0;
-        this.router.navigate(['/categorie', {
+        this.router.navigate(['/visa-nouveau', {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
@@ -96,22 +93,23 @@ export class CategorieComponent implements OnInit, OnDestroy {
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-        this.registerChangeInCategories();
+        this.registerChangeInVisas();
     }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: Categorie) {
+    trackId(index: number, item: Visa) {
         return item.id;
     }
-    registerChangeInCategories() {
-        this.eventSubscriber = this.eventManager.subscribe('categorieListModification', (response) => {
+    registerChangeInVisas() {
+        // this.eventSubscriber = this.eventManager.subscribe('visaListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('visaListModification', (response) => {
             if (typeof response.content === 'string') {
                 return this.loadAll();
             }else {
-                return this.searchCategorie(response.content);
+                return this.searchVisa(response.content);
             }
         });
     }
@@ -123,20 +121,11 @@ export class CategorieComponent implements OnInit, OnDestroy {
         }
         return result;
     }
+
     printPage() {
-        const callVerbose: {
-            dataHeader: any;
-            dataContent: any;
-            property: any;
-        } = {
-            dataHeader: ['ambassadeApp.categorie.id', 'ambassadeApp.categorie.nomCategorie'],
-            dataContent: this.categories,
-            property: Object.getOwnPropertyNames(this.categories[0]),
-        };
         this.router.navigateByData({
             url: ['/print'],
-            // data: this.categories
-            data: callVerbose
+            data: this.visas
         });
     }
 
@@ -145,8 +134,7 @@ export class CategorieComponent implements OnInit, OnDestroy {
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
-        this.categories = data;
-        this.message =  data;
+        this.visas = data;
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);

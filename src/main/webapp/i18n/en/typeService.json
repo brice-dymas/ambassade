@@ -3,7 +3,7 @@
     "ambassadeApp": {
         "typeService" : {
             "home": {
-                "title": "Type Services",
+                "title": "Liste des Services",
                 "createLabel": "Create a new Type Service",
                 "createOrEditLabel": "Create or edit a Type Service"
             },
@@ -14,7 +14,7 @@
                 "question": "Are you sure you want to delete Type Service {{ id }}?"
             },
             "detail": {
-                "title": "Type Service"
+                "title": "Detail d'un Service"
             },
             "nom": "Nom",
             "montant": "Montant",

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager } from 'ng-jhipster';
@@ -20,6 +20,7 @@ export class PaiementDetailComponent implements OnInit, OnDestroy {
     constructor(
         private eventManager: JhiEventManager,
         private paiementService: PaiementService,
+        private router: Router,
         private route: ActivatedRoute
     ) {
     }
@@ -29,6 +30,13 @@ export class PaiementDetailComponent implements OnInit, OnDestroy {
             this.load(params['id']);
         });
         this.registerChangeInPaiements();
+    }
+
+    printPage() {
+        this.router.navigateByData({
+            url: ['print-recu-paiement'],
+            data: this.paiement
+        });
     }
 
     load(id) {

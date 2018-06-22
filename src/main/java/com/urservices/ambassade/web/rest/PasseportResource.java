@@ -77,6 +77,11 @@ public class PasseportResource {
 
         User user = userRepository.findOneByLogin(getCurrentUserLogin()).get();
         passeport.setCreatedBy(user);
+        if (passeport.getTypeService().getMontant() > 0L) {
+            passeport.setState(State.NOUVEAU);
+        } else {
+            passeport.setState(State.PAYE);
+        }
         passeport.setDateCreation(LocalDate.now());
         Passeport result = passeportService.save(passeport);
         return ResponseEntity.created(new URI("/api/passeports/" + result.getId()))
@@ -118,75 +123,64 @@ public class PasseportResource {
      */
     @GetMapping("/passeports")
     @Timed
-    public ResponseEntity<List<Passeport>> getAllPasseports(WebRequest webRequest,  Pageable pageable) {
+    public ResponseEntity<List<Passeport>> getAllPasseports(WebRequest webRequest, Pageable pageable) {
 
-
-        String nom = webRequest.getParameter("nom") !=null && !webRequest.getParameter("nom").isEmpty()
-            ? webRequest.getParameter("nom"): null;
-        String recu = webRequest.getParameter("recu") !=null && !webRequest.getParameter("recu").isEmpty()
-            ? webRequest.getParameter("recu"): null;
-        String prenom = webRequest.getParameter("prenom") !=null && !webRequest.getParameter("prenom").isEmpty()
-            ? webRequest.getParameter("prenom"): null;
-        String numeroPasseport = webRequest.getParameter("numeroPasseport") !=null && !webRequest.getParameter("numeroPasseport").isEmpty()
-            ? webRequest.getParameter("numeroPasseport"): null;
-        String lieuNaissance = webRequest.getParameter("lieuNaissance") !=null && !webRequest.getParameter("lieuNaissance").isEmpty()
-            ? webRequest.getParameter("lieuNaissance"): null;
-        Statut etatCivil  = webRequest.getParameter("etatCivil") !=null  && !webRequest.getParameter("etatCivil").isEmpty() ?
+        String nom = webRequest.getParameter("nom") != null && !webRequest.getParameter("nom").isEmpty()
+            ? webRequest.getParameter("nom") : null;
+        String recu = webRequest.getParameter("recu") != null && !webRequest.getParameter("recu").isEmpty()
+            ? webRequest.getParameter("recu") : null;
+        String prenom = webRequest.getParameter("prenom") != null && !webRequest.getParameter("prenom").isEmpty()
+            ? webRequest.getParameter("prenom") : null;
+        String numeroPasseport = webRequest.getParameter("numeroPasseport") != null && !webRequest.getParameter("numeroPasseport").isEmpty()
+            ? webRequest.getParameter("numeroPasseport") : null;
+        Statut etatCivil = webRequest.getParameter("etatCivil") != null && !webRequest.getParameter("etatCivil").isEmpty() ?
             Statut.valueOf(webRequest.getParameter("etatCivil")) : null;
-        String adresse = webRequest.getParameter("adresse") !=null && !webRequest.getParameter("adresse").isEmpty()
-            ? webRequest.getParameter("adresse"): null;
-        String telephone = webRequest.getParameter("telephone") !=null && !webRequest.getParameter("telephone").isEmpty()
-            ? webRequest.getParameter("telephone"): null;
-        String nif = webRequest.getParameter("nif") !=null && !webRequest.getParameter("nif").isEmpty()
-            ? webRequest.getParameter("nif"): null;
-        String paysEmetteur = webRequest.getParameter("paysEmetteur") !=null && !webRequest.getParameter("paysEmetteur").isEmpty()
-            ? webRequest.getParameter("paysEmetteur"): null;
-        BigDecimal montant =  webRequest.getParameter("montant") !=null && !webRequest.getParameter("montant").isEmpty() ?
-            new BigDecimal(webRequest.getParameter("montant")): null;
-        String remarques = webRequest.getParameter("remarques") !=null && !webRequest.getParameter("remarques").isEmpty()
-            ? webRequest.getParameter("remarques"): null;
+        String delivreLeDebStr = webRequest.getParameter("delivreLe") != null && !webRequest.getParameter("delivreLe").isEmpty()
+            ? webRequest.getParameter("delivreLe") : null;
+        String delivreLeFinStr = webRequest.getParameter("delivreLeFin") != null && !webRequest.getParameter("delivreLeFin").isEmpty()
+            ? webRequest.getParameter("delivreLeFin") : null;
 
-        String neLeDebStr = webRequest.getParameter("neLe") !=null && !webRequest.getParameter("neLe").isEmpty()
-            ? webRequest.getParameter("neLe"): null;
-        String soumisLeDebStr = webRequest.getParameter("soumisLe") !=null && !webRequest.getParameter("soumisLe").isEmpty()
-            ? webRequest.getParameter("soumisLe"): null;
-        String delivreLeDebStr = webRequest.getParameter("delivreLe") !=null && !webRequest.getParameter("delivreLe").isEmpty()
-            ? webRequest.getParameter("delivreLe"): null;
-        String dateEmissionDebStr = webRequest.getParameter("dateEmission") !=null && !webRequest.getParameter("dateEmission").isEmpty()
-            ? webRequest.getParameter("dateEmission"): null;
-        String dateExpirationDebStr= webRequest.getParameter("dateExpiration") !=null && !webRequest.getParameter("dateExpiration").isEmpty()
-            ? webRequest.getParameter("dateExpirationDeb"): null;
-
-        String neLeFinStr = webRequest.getParameter("neLeFin") !=null && !webRequest.getParameter("neLeFin").isEmpty()
-            ? webRequest.getParameter("neLeFin"): null;
-        String soumisLeFinStr = webRequest.getParameter("soumisLeFin") !=null && !webRequest.getParameter("soumisLeFin").isEmpty()
-            ? webRequest.getParameter("soumisLeFin"):  null;
-        String delivreLeFinStr = webRequest.getParameter("delivreLeFin") !=null && !webRequest.getParameter("delivreLeFin").isEmpty()
-            ? webRequest.getParameter("delivreLeFin"): null;
-        String dateEmissionFinStr = webRequest.getParameter("dateEmissionFin") !=null && !webRequest.getParameter("dateEmissionFin").isEmpty()
-            ? webRequest.getParameter("dateEmissionFin"): null;
-        String dateExpirationFinStr= webRequest.getParameter("dateExpirationFin") !=null && !webRequest.getParameter("dateExpirationFin").isEmpty()
-            ? webRequest.getParameter("dateExpirationFin"): null;
-
-        LocalDate neLeDeb = neLeDebStr != null ? LocalDate.parse(neLeDebStr) : null;
-        LocalDate soumisLeDeb = soumisLeDebStr != null ? LocalDate.parse(soumisLeDebStr) : null;
         LocalDate delivreLeDeb = delivreLeDebStr != null ? LocalDate.parse(delivreLeDebStr) : null;
-        LocalDate dateEmissionDeb = dateEmissionDebStr != null ? LocalDate.parse(dateEmissionDebStr) : null;
-        LocalDate dateExpirationDeb = dateExpirationDebStr != null ?  LocalDate.parse(dateExpirationDebStr) : null;
-
-        LocalDate neLeFin = neLeFinStr != null ? LocalDate.parse(neLeFinStr) : null;
-        LocalDate soumisLeFin = soumisLeFinStr != null ? LocalDate.parse(soumisLeFinStr) : null;
         LocalDate delivreLeFin = delivreLeFinStr != null ? LocalDate.parse(delivreLeFinStr) : null;
-        LocalDate dateEmissionFin = dateEmissionFinStr != null ? LocalDate.parse(dateEmissionFinStr) : null;
-        LocalDate dateExpirationFin = dateExpirationFinStr != null ?  LocalDate.parse(dateExpirationFinStr) : null;
 
-        String documents = webRequest.getParameter("documents") !=null && !webRequest.getParameter("documents").isEmpty()
-            ? webRequest.getParameter("documents"): null;
-
-        Page<Passeport> page = passeportService.searchAll(recu, nom,prenom,numeroPasseport,neLeDeb, neLeFin,lieuNaissance,etatCivil,
-            adresse,paysEmetteur,soumisLeDeb, soumisLeFin, delivreLeDeb, delivreLeFin, montant,
-            dateEmissionDeb, dateEmissionFin, dateExpirationDeb, dateExpirationFin, documents,pageable);
+        Page<Passeport> page = passeportService.searchAll(recu, nom, prenom, numeroPasseport, etatCivil, delivreLeDeb,
+            delivreLeFin, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/passeports");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /passeports/nouveau : get all the passeports with State=NOUVEAU.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of passeports in body
+     */
+    @GetMapping("/passeports/nouveau")
+    @Timed
+    public ResponseEntity<List<Passeport>> getAllPasseportsOfStateNouveau(WebRequest webRequest, Pageable pageable) {
+
+        log.debug("REST request to get Passeport with state = NOUVEAU : {}", webRequest);
+        String nom = webRequest.getParameter("nom") != null && !webRequest.getParameter("nom").isEmpty()
+            ? webRequest.getParameter("nom") : null;
+        String recu = webRequest.getParameter("recu") != null && !webRequest.getParameter("recu").isEmpty()
+            ? webRequest.getParameter("recu") : null;
+        String prenom = webRequest.getParameter("prenom") != null && !webRequest.getParameter("prenom").isEmpty()
+            ? webRequest.getParameter("prenom") : null;
+        String numeroPasseport = webRequest.getParameter("numeroPasseport") != null && !webRequest.getParameter("numeroPasseport").isEmpty()
+            ? webRequest.getParameter("numeroPasseport") : null;
+        Statut etatCivil = webRequest.getParameter("etatCivil") != null && !webRequest.getParameter("etatCivil").isEmpty() ?
+            Statut.valueOf(webRequest.getParameter("etatCivil")) : null;
+        String delivreLeDebStr = webRequest.getParameter("delivreLe") != null && !webRequest.getParameter("delivreLe").isEmpty()
+            ? webRequest.getParameter("delivreLe") : null;
+        String delivreLeFinStr = webRequest.getParameter("delivreLeFin") != null && !webRequest.getParameter("delivreLeFin").isEmpty()
+            ? webRequest.getParameter("delivreLeFin") : null;
+
+        LocalDate delivreLeDeb = delivreLeDebStr != null ? LocalDate.parse(delivreLeDebStr) : null;
+        LocalDate delivreLeFin = delivreLeFinStr != null ? LocalDate.parse(delivreLeFinStr) : null;
+
+        Page<Passeport> page = passeportService.searchAllNouveau(recu, nom, prenom, numeroPasseport, etatCivil, delivreLeDeb,
+            delivreLeFin, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/passeports/nouveau");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

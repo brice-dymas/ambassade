@@ -177,7 +177,6 @@ currentAccount: any;
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
         this.donneesActes = data;
-        console.log('donneesActes', this.donneesActes);
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);

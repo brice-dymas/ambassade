@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
@@ -27,11 +28,10 @@ export class VisaDialogComponent implements OnInit {
     typeentrees: TypeEntree[];
 
     categories: Categorie[];
-    dateEmissionDp: any;
-    dateExpirationDp: any;
+    private subscription: Subscription;
+    private eventSubscriber: Subscription;
 
     constructor(
-        public activeModal: NgbActiveModal,
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private visaService: VisaService,
@@ -39,18 +39,40 @@ export class VisaDialogComponent implements OnInit {
         private typeEntreeService: TypeEntreeService,
         private categorieService: CategorieService,
         private elementRef: ElementRef,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private route: ActivatedRoute,
+        private router: Router
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.typeServiceService.query()
+        this.typeServiceService.queryForVisa()
             .subscribe((res: HttpResponse<TypeService[]>) => { this.typeservices = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.typeEntreeService.query()
             .subscribe((res: HttpResponse<TypeEntree[]>) => { this.typeentrees = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.categorieService.query()
             .subscribe((res: HttpResponse<Categorie[]>) => { this.categories = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+
+        this.route.params.subscribe((params) => {
+            if (params['id']) {
+                this.load(params['id']);
+            } else {
+                this.visa = new Visa();
+            }
+        });
+        this.registerChangeInVisas();
+    }
+
+    load(id) {
+        this.visaService.find(id)
+            .subscribe((visaResponse: HttpResponse<Visa>) => {
+                this.visa = visaResponse.body;
+            });
+    }
+
+    previousState() {
+        window.history.back();
     }
 
     byteSize(field) {
@@ -70,7 +92,7 @@ export class VisaDialogComponent implements OnInit {
     }
 
     clear() {
-        this.activeModal.dismiss('cancel');
+        // this.activeModal.dismiss('cancel');
     }
 
     save() {
@@ -92,7 +114,8 @@ export class VisaDialogComponent implements OnInit {
     private onSaveSuccess(result: Visa) {
         this.eventManager.broadcast({ name: 'visaListModification', content: 'OK'});
         this.isSaving = false;
-        this.activeModal.dismiss(result);
+        this.router.navigate(['visa']);
+        // this.activeModal.dismiss(result);
     }
 
     private onSaveError() {
@@ -113,6 +136,13 @@ export class VisaDialogComponent implements OnInit {
 
     trackCategorieById(index: number, item: Categorie) {
         return item.id;
+    }
+
+    registerChangeInVisas() {
+        this.eventSubscriber = this.eventManager.subscribe(
+            'visaListModification',
+            (response) => this.load(this.visa.id)
+        );
     }
 }
 

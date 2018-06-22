@@ -22,7 +22,6 @@ export class PasseportSearchComponent implements OnInit {
     }
 
     search() {
-        console.log(this.formModel);
         this.eventManager.broadcast({ name: 'passeportListModification', content: this.formModel});
     }
     resetSearch() {

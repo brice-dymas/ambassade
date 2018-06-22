@@ -1,106 +1,172 @@
 <div class="col-2 col-sm-2 col-md-2 side-menu" id="sidebar" [ngSwitch]="isAuthenticated()">
-  <nav *jhiHasAnyAuthority="'ROLE_ADMIN'" [ngSwitch]="isAuthenticated()">
-      <ul class="list-unstyled components">
-          <li class="nav-item">
-              <a class="nav-link" routerLink="/">
-                  <i class="fa fa-home" aria-hidden="true"></i>
-                  <span class="font-bold" jhiTranslate="global.menu.home">Home</span>
-              </a>
-          </li>
-          <li class="nav-item" routerLink="type-service" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-              <a class="nav-link">
-                  <i class="fa fa-server" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.service">Service</span>
-              </a>
-          </li>
-          <li class="nav-item" routerLink="passeport" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-              <a class="nav-link">
-                  <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.passeport">Passeport</span>
-              </a>
-          </li>
-          <li class="nav-item" routerLink="visa" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" 
-            (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseVisa">
-              <a class="nav-link">
-                  <i class="fa fa-cc-visa" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.visa">Visa</span>
-                  <i class="fa fa-chevron-right float-right"></i>
-              </a>
-              <ul id="collapseVisa" class="list-unstyled" [ngbCollapse]="isCollapsed">
-                <li>
-                  <a href="#" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                    <i class="fa fa-pencil-square-o"></i>
-                    Ajouter Visa
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-folder-open"></i>
-                    Liste Visa
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-newspaper-o"></i>
-                    Service visa
-                  </a>
-                </li>
-              </ul>
-          </li>
-          <li class="nav-item" routerLink="paiement" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-              <a class="nav-link">
-                  <i class="fa fa-id-card" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.paiement">Paiement</span>
-              </a>
-          </li>
-          <li class="nav-item" routerLink="donnees-acte" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-              <a class="nav-link">
-                  <i class="fa fa-briefcase" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.donneesActe">Donnees Acte</span>
-              </a>
-          </li>
-          <li class="nav-item" routerLink="livre" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-              <a class="nav-link">
-                  <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.livre">Livre</span>
-              </a>
-          </li>
-          <li class="nav-item" routerLink="categorie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-              <a class="nav-link">
-                  <i class="fa fa-database" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.categorie">Categorie</span>
-              </a>
-          </li>
-          <li class="nav-item" routerLink="rapatriement" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-              <a class="nav-link">
-                  <i class="fa fa-cubes" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.rapatriement">Rapatriement</span>
-              </a>
-          </li>
-          <li class="nav-item" routerLink="caisse" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-              <a class="nav-link">
-                  <i class="fa fa-tachometer" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.caisse">Caisse</span>
-              </a>
-          </li>
-          <li class="nav-item" routerLink="monnaie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-              <a class="nav-link">
-                  <i class="fa fa-money" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.monnaie">Monnaie</span>
-              </a>
-          </li>
-          <li class="nav-item" routerLink="montant" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-              <a class="nav-link">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.montant">Montant</span>
-              </a>
-          </li>
-          <li class="nav-item" routerLink="produit" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-              <a class="nav-link">
-                  <i class="fa fa-folder" aria-hidden="true"></i>
-                  <span jhiTranslate="global.menu.entities.produit">Produit</span>
-              </a>
-          </li>
-      </ul>
-  </nav>
+    <nav *jhiHasAnyAuthority="'ROLE_ADMIN'" [ngSwitch]="isAuthenticated()">
+        <ul class="list-unstyled components">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <span class="font-bold" jhiTranslate="global.menu.home">Home</span>
+                </a>
+            </li>
+            <li class="nav-item"
+                (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                aria-controls="collapsePasseport">
+                <a class="nav-link">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.entities.passeport">Passeport</span>
+                    <i class="fa fa-chevron-right float-right"></i>
+                </a>
+                <ul id="collapsePasseport" class="list-unstyled" [ngbCollapse]="isCollapsed">
+                    <li>
+                        <a routerLink="passeport-new" routerLinkActive="active"
+                           [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fa fa-pencil-square-o"></i>
+                            Enregistrer Passeport
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="passeport" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fa fa-folder-open"></i>
+                            Liste des Passeports
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="type-service-passeport" routerLinkActive="active"
+                           [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fa fa-newspaper-o"></i>
+                            Service Passeport
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item"
+                (click)="isVisaCollapsed = !isVisaCollapsed" [attr.aria-expanded]="!isVisaCollapsed" aria-controls="visa">
+                <a class="nav-link">
+                    <i class="fa fa-cc-visa" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.entities.visa">Visa</span>
+                    <i class="fa fa-chevron-right float-right"></i>
+                </a>
+                <ul id="visa" class="list-unstyled" [ngbCollapse]="isVisaCollapsed">
+                    <li>
+                        <a routerLink="visa-new" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fa fa-pencil-square-o"></i>
+                            Creer Visa
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="visa" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fa fa-folder-open"></i>
+                            Liste des Visa
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="type-service-visa" routerLinkActive="active"
+                           [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fa fa-newspaper-o"></i>
+                            Service visa
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="categorie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fa fa-group"></i>
+                            Categorie Visa
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="type-entree" routerLinkActive="active"
+                           [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fa fa-group"></i>
+                            Classification Visa
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item"
+                (click)="isPaiementCollapsed = !isPaiementCollapsed" [attr.aria-expanded]="!isPaiementCollapsed"
+                aria-controls="collapsePaiement">
+                <a class="nav-link">
+                    <i class="fa fa-id-card" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.entities.paiement">paiement</span>
+                    <i class="fa fa-chevron-right float-right"></i>
+                </a>
+                <ul id="collapsePaiement" class="list-unstyled" [ngbCollapse]="isPaiementCollapsed">
+                    <li>
+                        <a routerLink="passeport-nouveau" routerLinkActive="active"
+                           [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fa fa-pencil-square-o"></i>
+                            Nouveaux Passeport
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="visa-nouveau" routerLinkActive="active"
+                           [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fa fa-folder-open"></i>
+                            Les Nouveaux Visas
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="paiement" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fa fa-dollar"></i>
+                            Liste des Paiements
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="type-service" routerLinkActive="active"
+                           [routerLinkActiveOptions]="{ exact: true }">
+                            <i class="fa fa-dollar"></i>
+                            Liste des Services
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" routerLink="donnees-acte" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                <a class="nav-link">
+                    <i class="fa fa-briefcase" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.entities.donneesActe">Donnees Acte</span>
+                </a>
+            </li>
+            <li class="nav-item" routerLink="livre" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                <a class="nav-link">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.entities.livre">Livre</span>
+                </a>
+            </li>
+            <li class="nav-item" routerLink="rapatriement" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                <a class="nav-link">
+                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.entities.rapatriement">Rapatriement</span>
+                </a>
+            </li>
+            <li class="nav-item" routerLink="caisse" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                <a class="nav-link">
+                    <i class="fa fa-tachometer" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.entities.caisse">Caisse</span>
+                </a>
+            </li>
+            <li class="nav-item" routerLink="monnaie" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                <a class="nav-link">
+                    <i class="fa fa-money" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.entities.monnaie">Monnaie</span>
+                </a>
+            </li>
+            <li class="nav-item" routerLink="montant" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                <a class="nav-link">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.entities.montant">Montant</span>
+                </a>
+            </li>
+            <li class="nav-item" routerLink="produit" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                <a class="nav-link">
+                    <i class="fa fa-folder" aria-hidden="true"></i>
+                    <span jhiTranslate="global.menu.entities.produit">Produit</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>

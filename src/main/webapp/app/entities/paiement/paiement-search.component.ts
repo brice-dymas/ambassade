@@ -37,7 +37,6 @@ export class PaiementSearchComponent implements OnInit {
     }
 
     search() {
-        console.log(this.formModel);
         this.eventManager.broadcast({ name: 'paiementListModification', content: this.formModel});
     }
     resetSearch() {

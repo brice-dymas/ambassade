@@ -1,0 +1,122 @@
+<div class="no-print" style='text-align: center'>
+    <h3>PAGE D'IMPRESSION DE DONNEES</h3>
+    <button (click)="downloadPDF()" type="submit" [routerLink]="['../print-recu-paiement']" class="btn btn-info">Export to PDF
+    </button>&nbsp;
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+</div>
+<br/>
+
+<div *ngIf="paiement" class="paper container sheet padding-25mm">
+    <div class="row" id="content">
+        <div class="col-12 col A4 landscape">
+            <br/>&nbsp;
+            <div *ngIf="paiement">
+                <h2 style="font-weight: 900!important;" class="card-title h4">
+                    <span jhiTranslate="ambassadeApp.paiement.detail.title">Paiement</span>  No {{paiement.numeroPaiement}}
+                </h2>
+                <div class="row flex-md-row">
+                    <a class="col-md-4 logo-img">
+                        <img src="../../../content/images/coat-of-arms.png" class="img-fluid rounded float-left img-thumbnail" style="height: 40px;">
+                    </a>
+                    <div class="col-md-8 ">
+                        FACTURE DE PAIEMENT No <dd><span>{{paiement.numeroPaiement}} </span></dd>
+                    </div>
+                    <div class="col-md-6 ">
+                        <b>HAITI LE {{paiement.datePaiement | date:'mediumDate'}}</b>
+                    </div>
+                </div>
+                <div *ngIf="paiement.visa" class="row flex-md-row">
+                    Établie pour le Visa du concerné possédant les informations suivantes  :
+                    <br>
+                    <div class="col-6 col-sm-3">
+                        <dt>
+                            <span jhiTranslate="ambassadeApp.visa.nom">Nom</span>
+                        </dt>
+                        <dd>
+                            <span>{{paiement.visa.nom}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt>
+                            <span jhiTranslate="ambassadeApp.visa.prenom">Prenom</span>
+                        </dt>
+                        <dd>
+                            <span>{{paiement.visa.prenom}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt>
+                            <span jhiTranslate="ambassadeApp.visa.nationalite">Nationalite</span>
+                        </dt>
+                        <dd>
+                            <span>{{paiement.visa.nationalite}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt>
+                            <span jhiTranslate="ambassadeApp.visa.numeroVisa">Numero Visa</span>
+                        </dt>
+                        <dd>
+                            <span>{{paiement.visa.numeroVisa}}</span>
+                        </dd>
+                    </div>
+                </div>
+                <div *ngIf="paiement.passeport" class="row flex-md-row">
+                    Établie pour le passeport du concerné possédant les informations suivantes  :
+                    <br>
+                    <div class="col-6 col-sm-3">
+                        <dt>
+                            <span jhiTranslate="ambassadeApp.passeport.nom">Nom</span>
+                        </dt>
+                        <dd>
+                            <span>{{paiement.passeport.nom}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt>
+                            <span jhiTranslate="ambassadeApp.passeport.prenom">Prenom</span>
+                        </dt>
+                        <dd>
+                            <span>{{paiement.passeport.prenom}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt>
+                            <span jhiTranslate="ambassadeApp.passeport.lieuNaissance">lieuNaissance</span>
+                        </dt>
+                        <dd>
+                            <span>{{paiement.passeport.lieuNaissance}}</span>
+                        </dd>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <dt>
+                            <span jhiTranslate="ambassadeApp.passeport.numeroPasseport">Numero Passeport</span>
+                        </dt>
+                        <dd>
+                            <span>{{paiement.passeport.numeroPasseport}}</span>
+                        </dd>
+                    </div>
+                </div>
+                <div class="row flex-md-row">
+                    <div class="col-md-9 ">
+                        Ledit Paiement a été enregistré par un responsable de l'ambassade d'Haiti en la personne de
+                        <b> {{paiement.createdBy?.lastName}} {{paiement.createdBy?.firstName}}</b>
+
+                        <br>
+                        En foi de quoi ce document est etablie pour servir et valoir ce que de droit.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button type="button"
+        (click)="previousState()"
+        class="btn btn-info btn-xs plat no-print mb-lg-5">
+    <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+</button>

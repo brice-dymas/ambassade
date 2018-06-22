@@ -24,7 +24,6 @@ export class PrintPaiementComponent implements OnInit {
 
     ngOnInit() {
         this.paiements = this.router.getNavigatedData();
-        console.log('paiements = ', this.paiements);
     }
 
     trackId(index: number, item: any) {

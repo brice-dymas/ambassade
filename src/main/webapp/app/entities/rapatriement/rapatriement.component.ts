@@ -115,12 +115,9 @@ currentAccount: any;
     registerChangeInRapatriements() {
         // this.eventSubscriber = this.eventManager.subscribe('rapatriementListModification', (response) => this.loadAll());
         this.eventSubscriber = this.eventManager.subscribe('rapatriementListModification', (response) => {
-            console.log(response);
             if (typeof response.content === 'string') {
-                console.log('query');
                 return this.loadAll();
             }else {
-                console.log('search Rapatriement');
                 return this.searchRapatriement(response.content);
             }
         });

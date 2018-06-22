@@ -30,7 +30,7 @@
                     <th jhiSortBy="dateEmission"><span jhiTranslate="ambassadeApp.visa.dateEmission">Date Emission</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="dateExpiration"><span jhiTranslate="ambassadeApp.visa.dateExpiration">Date Expiration</span> <span class="fa fa-sort"></span></th>
                     <th><span jhiTranslate="ambassadeApp.passeport.typeService">TypeService</span> <span class="fa fa-sort"></span></th>
-                    <th><span jhiTranslate="ambassadeApp.visa.state">État</span> <span class="fa fa-sort"></span></th>
+                    <!--<th><span jhiTranslate="ambassadeApp.visa.state">État</span> <span class="fa fa-sort"></span></th>-->
                    <th></th>
                 </tr>
             </thead>
@@ -45,7 +45,7 @@
                     <td>{{visa.dateEmission | date:'mediumDate'}}</td>
                     <td>{{visa.dateExpiration | date:'mediumDate'}}</td>
                     <td>{{visa.typeService?.nom}}</td>
-                    <td>{{visa.state}}</td>
+                    <!--<td>{{visa.state}}</td>-->
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
