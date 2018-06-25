@@ -1,66 +1,76 @@
 
 <div *ngIf="rapatriement">
-    <h5 class="text-uppercase"><span jhiTranslate="ambassadeApp.rapatriement.detail.title">Rapatriement</span> {{rapatriement.id}}</h5>
-    <div class="title-bullet"><span></span></div>
+    <div class="card" style="border-bottom: none!important;">
+        <div class="card-body card-sm">
+            <h5 class="text-uppercase">
+                <span jhiTranslate="ambassadeApp.rapatriement.detail.title">Rapatriement</span> {{rapatriement.id}}
+            </h5>
+        </div>
+    </div>
+
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.rapatriement.reference">Reference</label></dt>
+                <div></div>
+                <div class="row mb-1">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.rapatriement.reference">Reference</strong> &nbsp;
                         <span>{{rapatriement.reference}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.rapatriement.numeroDossier">Numero Dossier</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.rapatriement.numeroDossier">Numero Dossier</strong> &nbsp;
                         <span>{{rapatriement.numeroDossier}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.rapatriement.nom">Nom</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.rapatriement.nom">Nom</strong> &nbsp;
                         <span>{{rapatriement.nom}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.rapatriement.prenom">Prenom</label></dt>
+                </div>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.rapatriement.prenom">Prenom</strong> &nbsp;
                         <span>{{rapatriement.prenom}}</span>
                     </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.rapatriement.dateNaissance">Date Naissance</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.rapatriement.dateNaissance">Date Naissance</strong> &nbsp;
                         <span>{{rapatriement.dateNaissance | date:'mediumDate'}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.rapatriement.documentID">Document ID</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.rapatriement.documentID">Document ID</strong> &nbsp;
                         <span>{{rapatriement.documentID}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.rapatriement.sexe">Sexe</label></dt>
+                </div>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.rapatriement.sexe">Sexe</strong> &nbsp;
                         <span jhiTranslate="{{'ambassadeApp.Sexe.' + rapatriement.sexe}}">{{rapatriement.sexe}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.rapatriement.motif">Motif</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.rapatriement.motif">Motif</strong> &nbsp;
                         <span>{{rapatriement.motif}}</span>
                     </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.rapatriement.dateRapatriement">Date Rapatriement</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.rapatriement.dateRapatriement">Date Rapatriement</strong>
                         <span>{{rapatriement.dateRapatriement | date:'mediumDate'}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.rapatriement.frontiere">Frontiere</label></dt>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.rapatriement.frontiere">Frontiere</strong>
                         <span>{{rapatriement.frontiere}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.rapatriement.documentScanne">Document Scanne</label></dt>
-                            <div *ngIf="rapatriement.documentScanne">
-                                <a (click)="openFile(rapatriement.documentScanneContentType, rapatriement.documentScanne)" jhiTranslate="entity.action.open">open</a> : &nbsp;{{rapatriement.documentScanneContentType}}, {{byteSize(rapatriement.documentScanne)}}
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.rapatriement.documentScanne">Document Scanne</strong>
+                        <div *ngIf="rapatriement.documentScanne">
+                            <a (click)="openFile(rapatriement.documentScanneContentType, rapatriement.documentScanne)" jhiTranslate="entity.action.open">open</a> : &nbsp;{{rapatriement.documentScanneContentType}}, {{byteSize(rapatriement.documentScanne)}}
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.rapatriement.createdByPHPRunner">Created By PHP Runner</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.rapatriement.createdByPHPRunner">Created By PHP Runner</strong>
                         <span>{{rapatriement.createdByPHPRunner}}</span>
                     </div>
                 </div>
@@ -70,7 +80,7 @@
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-info btn-xs plat">
+            class="btn btn-info btn-xs">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
@@ -78,7 +88,7 @@
             [routerLink]="['/', { outlets: { popup: 'rapatriement/'+ rapatriement.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-blue btn-xs plat pull-right">
+            class="btn btn-primary btn-xs">
         <span class="fa fa-pencil-square-o"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

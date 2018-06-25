@@ -1,19 +1,22 @@
-<div>
-    <h2>
-        <span jhiTranslate="ambassadeApp.paiement.home.title">Paiements</span>
-        <!--<button class="btn btn-primary float-right jh-create-entity create-paiement" [routerLink]="['/', { outlets: { popup: ['paiement-new'] } }]">-->
+<div class="card" style="border-bottom: none!important;">
+    <div class="card-body card-sm">
+        <h5 class="text-uppercase">
+            <span jhiTranslate="ambassadeApp.paiement.home.title">Paiements</span>
+            <!--<button class="btn btn-primary float-right jh-create-entity create-paiement" [routerLink]="['/', { outlets: { popup: ['paiement-new'] } }]">-->
             <!--<span class="fa fa-plus"></span>-->
             <!--<span  jhiTranslate="ambassadeApp.paiement.home.createLabel">-->
             <!--Create new Paiement-->
             <!--</span>-->
-        <!--</button>-->
-    </h2>
+            <!--</button>-->
+        </h5>
+    </div>
+</div>
     <jhi-alert></jhi-alert>
         <jhi-paiement-search></jhi-paiement-search>
     <br/>
     <div class="table-responsive" *ngIf="paiements">
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-hover dash-row bg-white table-sm">
+            <thead class="bg-table-light">
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="datePaiement"><span jhiTranslate="ambassadeApp.paiement.datePaiement">Date Paiement</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="numeroPaiement"><span jhiTranslate="ambassadeApp.paiement.numeroPaiement">Numero Paiement</span> <span class="fa fa-sort"></span></th>
@@ -44,7 +47,7 @@
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['../paiement', paiement.id ]"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-info btn-xs plat">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
@@ -70,12 +73,15 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="paiements && paiements.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    <div class="row" *ngIf="paiements && paiements.length">
+        <div class="col-6">
+            <div class="text-sm">
+                <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
         </div>
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        <div class="col-6">
+            <div class="pagination-sm pull-right">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
         </div>
     </div>
-</div>

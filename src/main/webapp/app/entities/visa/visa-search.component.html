@@ -1,8 +1,9 @@
 <form name="searchForm" role="form" novalidate (ngSubmit)="search()" #searchForm="ngForm">
     <div class="card plat">
         <div class="card-body plat">
+            <div></div>
             <div class="row">
-                <div class="col-12 col-sm-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.visa.nom"
                                for="field_nom">Nom</label>
@@ -17,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.visa.prenom" for="field_prenom">Prenom</label>
                         <input type="text" class="form-control form-control-sm" name="prenom" id="field_prenom"
@@ -31,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.visa.numeroVisa"
                                for="field_numeroVisa">Numero Visa</label>
@@ -53,34 +54,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.visa.numeroPasseport"
-                               for="field_numeroPasseport">Numero Passeport</label>
+                                for="field_numeroPasseport">Numero Passeport</label>
                         <input type="text" class="form-control form-control-sm" name="numeroPasseport"
-                               id="field_numeroPasseport"
-                               [(ngModel)]="formModel.numeroPasseport" maxlength="30"/>
+                                id="field_numeroPasseport"
+                                [(ngModel)]="formModel.numeroPasseport" maxlength="30"/>
                         <div
                             [hidden]="!(searchForm.controls.numeroPasseport?.dirty && searchForm.controls.numeroPasseport?.invalid)">
                             <small class="form-text text-danger"
-                                   [hidden]="!searchForm.controls.numeroPasseport?.errors?.maxlength"
-                                   jhiTranslate="entity.validation.maxlength" translateValues="{ max: 30 }">
+                                    [hidden]="!searchForm.controls.numeroPasseport?.errors?.maxlength"
+                                    jhiTranslate="entity.validation.maxlength" translateValues="{ max: 30 }">
                                 This field cannot be longer than 30 characters.
                             </small>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12 col-sm-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.visa.dateEmissionSearch"
-                               for="field_dateEmission">Date Emission</label>
+                                for="field_dateEmission">Date Emission</label>
                         <div class="input-group">
                             <input id="field_dateEmission" type="text" class="form-control form-control-sm"
-                                   name="dateEmission" ngbDatepicker #dateEmissionDp="ngbDatepicker"
-                                   [(ngModel)]="formModel.dateEmission"
+                                    name="dateEmission" ngbDatepicker #dateEmissionDp="ngbDatepicker"
+                                    [(ngModel)]="formModel.dateEmission"
                             />
                             <span class="input-group-append">
                         <button type="button" class="btn btn-sm btn-blue" (click)="dateEmissionDp.toggle()"><i
@@ -89,14 +90,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="entity.action.and" for="field_dateEmissionFin">Date
                             Emission</label>
                         <div class="input-group">
                             <input id="field_dateEmissionFin" type="text" class="form-control form-control-sm"
-                                   name="dateEmissionFin" ngbDatepicker #dateEmissionFinDp="ngbDatepicker"
-                                   [(ngModel)]="formModel.dateEmissionFin"
+                                    name="dateEmissionFin" ngbDatepicker #dateEmissionFinDp="ngbDatepicker"
+                                    [(ngModel)]="formModel.dateEmissionFin"
                             />
                             <span class="input-group-append">
                         <button type="button" class="btn btn-sm btn-blue" (click)="dateEmissionFinDp.toggle()"><i
@@ -105,7 +106,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.passeport.typeService"
                                for="field_typeService">Type Service</label>
@@ -120,7 +124,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.visa.categorie"
                                for="field_categorie">categorie</label>
@@ -135,16 +139,17 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="row justify-content-end mr-1">
+                        <button type="reset" class="btn btn-danger btn-sm mr-4" data-dismiss="modal" (click)="searchReset()">
+                            <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>&nbsp;
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <span class="fa fa-search"></span>&nbsp;<span jhiTranslate="entity.action.search">Search</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="modal-footer">
-        <button type="reset" class="btn btn-danger btn-xs plat" data-dismiss="modal" (click)="searchReset()">
-            <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>&nbsp;
-        <button type="submit" class="btn btn-primary btn-xs plat">
-            <span class="fa fa-search"></span>&nbsp;<span jhiTranslate="entity.action.search">Search</span>
-        </button>
     </div>
 </form>

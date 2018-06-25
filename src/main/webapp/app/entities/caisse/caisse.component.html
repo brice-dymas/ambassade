@@ -1,101 +1,101 @@
-<div class="mb-lg-5">
-    <h5 class="text-uppercase">
-        <span jhiTranslate="ambassadeApp.caisse.home.title">Caisses</span>
-        <button class="btn btn-blue btn-xs plat float-right jh-create-entity create-caisse" [routerLink]="['/', { outlets: { popup: ['caisse-new'] } }]">
-            <span class="fa fa-pencil-square-o"></span>
-            <span  jhiTranslate="ambassadeApp.caisse.home.createLabel">Create new Caisse</span>
-        </button>&nbsp;
-        <button *jhiHasAnyAuthority="['ROLE_CAISSE_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
-                class="btn btn-info btn-xs plat float-right mr-5">
-            <span class="fa fa-print"></span>
-            <span>Imprimer</span>
-        </button>
-    </h5>
-    <div class="title-bullet"><span></span></div>
-    <jhi-alert></jhi-alert>
-    <div>
-        <jhi-caisse-search></jhi-caisse-search>
+<div class="card" style="border-bottom: none!important;">
+    <div class="card-body card-sm">
+        <h5 class="text-uppercase">
+            <span jhiTranslate="ambassadeApp.caisse.home.title">Caisses</span>
+            <button class="btn btn-primary btn-xs float-right jh-create-entity create-caisse" [routerLink]="['/', { outlets: { popup: ['caisse-new'] } }]">
+                <span class="fa fa-pencil-square-o"></span>
+                <span  jhiTranslate="ambassadeApp.caisse.home.createLabel">Create new Caisse</span>
+            </button>&nbsp;
+            <button *jhiHasAnyAuthority="['ROLE_CAISSE_MANAGER']"  (click)="printPage()" type="submit" [routerLink]="['../print']"
+                    class="btn btn-info btn-xs float-right mr-5">
+                <span class="fa fa-print"></span>
+                <span>Imprimer</span>
+            </button>
+        </h5>
     </div>
-    <br/>
-    <div *ngIf="caisses">
-        <table class="table table-striped dash-row table-sm">
-            <thead class="theme-bg-blue text-white">
-                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                    <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
-                    <th jhiSortBy="reference"><span jhiTranslate="ambassadeApp.caisse.reference">Reference</span> <span class="fa fa-sort"></span></th>
-                    <!-- <th jhiSortBy="dateDuJour"><span jhiTranslate="ambassadeApp.caisse.dateDuJour">Date Du Jour</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.caisse.nom">Nom</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="prenom"><span jhiTranslate="ambassadeApp.caisse.prenom">Prenom</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="typeID"><span jhiTranslate="ambassadeApp.caisse.typeID">Type ID</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="numeroID"><span jhiTranslate="ambassadeApp.caisse.numeroID">Numero ID</span> <span class="fa fa-sort"></span></th> -->
-                    <th jhiSortBy="serviceConcerne"><span jhiTranslate="ambassadeApp.caisse.serviceConcerne">Service Concerne</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="monnaie"><span jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="montant"><span jhiTranslate="ambassadeApp.caisse.montant">Montant</span> <span class="fa fa-sort"></span></th>
-                    <!-- <th jhiSortBy="dateRetour"><span jhiTranslate="ambassadeApp.caisse.dateRetour">Date Retour</span> <span class="fa fa-sort"></span></th> -->
-                    <th jhiSortBy="telephone"><span jhiTranslate="ambassadeApp.caisse.telephone">Telephone</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="num"><span jhiTranslate="ambassadeApp.caisse.num">Num</span> <span class="fa fa-sort"></span></th>
-                    <!-- <th jhiSortBy="paiement"><span jhiTranslate="ambassadeApp.caisse.paiement">Paiement</span> <span class="fa fa-sort"></span></th> -->
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let caisse of caisses ;trackBy: trackId">
-                    <!-- <td><a [routerLink]="['../caisse', caisse.id ]">{{caisse.id}}</a></td> -->
-                    <td>{{caisse.reference}}</td>
-                    <!-- <td>{{caisse.dateDuJour | date:'mediumDate'}}</td>
-                    <td>{{caisse.nom}}</td>
-                    <td>{{caisse.prenom}}</td>
-                    <td>{{caisse.typeID}}</td>
-                    <td>{{caisse.numeroID}}</td> -->
-                    <td>{{caisse.serviceConcerne}}</td>
-                    <td>{{caisse.monnaie}}</td>
-                    <td>{{caisse.montant}}</td>
-                    <!-- <td>{{caisse.dateRetour | date:'mediumDate'}}</td> -->
-                    <td>{{caisse.telephone}}</td>
-                    <td>{{caisse.num}}</td>
-                    <!-- <td>{{caisse.paiement}}</td> -->
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    [routerLink]="['../caisse', caisse.id ]"
-                                    class="btn btn-info btn-xs plat">
-                                <span class="fa fa-eye"></span>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
-                            <button type="submit"
-                                    [routerLink]="['/', { outlets: { popup: 'caisse/'+ caisse.id + '/edit'} }]"
-                                    replaceUrl="true"
-                                    queryParamsHandling="merge"
-                                    class="btn btn-primary btn-xs plat">
-                                <span class="fa fa-pencil"></span>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
-                            <button type="submit"
-                                    [routerLink]="['/', { outlets: { popup: 'caisse/'+ caisse.id + '/delete'} }]"
-                                    replaceUrl="true"
-                                    queryParamsHandling="merge"
-                                    class="btn btn-danger btn-xs plat">
-                                <span class="fa fa-trash"></span>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+</div>
+
+<jhi-alert></jhi-alert>
+<div>
+    <jhi-caisse-search></jhi-caisse-search>
+</div>
+<br/>
+<div *ngIf="caisses">
+    <table class="table table-hover bg-white dash-row table-sm">
+        <thead class="bg-table-light">
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
+                <th jhiSortBy="reference"><span jhiTranslate="ambassadeApp.caisse.reference">Reference</span> <span class="fa fa-sort"></span></th>
+                <!-- <th jhiSortBy="dateDuJour"><span jhiTranslate="ambassadeApp.caisse.dateDuJour">Date Du Jour</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="nom"><span jhiTranslate="ambassadeApp.caisse.nom">Nom</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="prenom"><span jhiTranslate="ambassadeApp.caisse.prenom">Prenom</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="typeID"><span jhiTranslate="ambassadeApp.caisse.typeID">Type ID</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="numeroID"><span jhiTranslate="ambassadeApp.caisse.numeroID">Numero ID</span> <span class="fa fa-sort"></span></th> -->
+                <th jhiSortBy="serviceConcerne"><span jhiTranslate="ambassadeApp.caisse.serviceConcerne">Service Concerne</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="monnaie"><span jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="montant"><span jhiTranslate="ambassadeApp.caisse.montant">Montant</span> <span class="fa fa-sort"></span></th>
+                <!-- <th jhiSortBy="dateRetour"><span jhiTranslate="ambassadeApp.caisse.dateRetour">Date Retour</span> <span class="fa fa-sort"></span></th> -->
+                <th jhiSortBy="telephone"><span jhiTranslate="ambassadeApp.caisse.telephone">Telephone</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="num"><span jhiTranslate="ambassadeApp.caisse.num">Num</span> <span class="fa fa-sort"></span></th>
+                <!-- <th jhiSortBy="paiement"><span jhiTranslate="ambassadeApp.caisse.paiement">Paiement</span> <span class="fa fa-sort"></span></th> -->
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let caisse of caisses ;trackBy: trackId">
+                <!-- <td><a [routerLink]="['../caisse', caisse.id ]">{{caisse.id}}</a></td> -->
+                <td>{{caisse.reference}}</td>
+                <!-- <td>{{caisse.dateDuJour | date:'mediumDate'}}</td>
+                <td>{{caisse.nom}}</td>
+                <td>{{caisse.prenom}}</td>
+                <td>{{caisse.typeID}}</td>
+                <td>{{caisse.numeroID}}</td> -->
+                <td>{{caisse.serviceConcerne}}</td>
+                <td>{{caisse.monnaie}}</td>
+                <td>{{caisse.montant}}</td>
+                <!-- <td>{{caisse.dateRetour | date:'mediumDate'}}</td> -->
+                <td>{{caisse.telephone}}</td>
+                <td>{{caisse.num}}</td>
+                <!-- <td>{{caisse.paiement}}</td> -->
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../caisse', caisse.id ]"
+                                class="btn btn-info btn-xs plat">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'caisse/'+ caisse.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-xs plat">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'caisse/'+ caisse.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-xs plat">
+                            <span class="fa fa-trash"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row" *ngIf="caisses && caisses.length">
+    <div class="col-md-6">
+        <div class="text-sm">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
     </div>
-    <div *ngIf="caisses && caisses.length">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="text-sm">
-                    <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="pagination-sm pull-right">
-                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-                </div>
-            </div>
+    <div class="col-md-6">
+        <div class="pagination-sm pull-right">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>

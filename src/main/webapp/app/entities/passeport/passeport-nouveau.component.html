@@ -1,16 +1,18 @@
-<div class="mb-lg-5">
-    <h5 class="text-uppercase">
-        <span jhiTranslate="ambassadeApp.passeport.home.title">Passeports</span>
-        <button class="btn btn-xs plat btn-blue float-right jh-create-entity create-passeport" [routerLink]="['../passeport-new']">
-            <span class="fa fa-pencil-square-o"></span>
-            <span  jhiTranslate="ambassadeApp.passeport.home.createLabel">Create new Passeport</span>
-        </button>&nbsp;
-        <button (click)="printPage()" class="btn btn-info btn-xs plat float-right mr-5 plat">
-            <span class="fa fa-print"></span>&nbsp;
-            <span>Imprimer</span>
-        </button>
-    </h5>
-    <div class="title-bullet title-bullet-table"><span></span></div>
+<div class="card" style="border-bottom: none!important;">
+    <div class="card-body card-sm">
+        <h5 class="text-uppercase">
+            <span jhiTranslate="ambassadeApp.passeport.home.title">Passeports</span>
+            <button class="btn btn-xs btn-primary float-right jh-create-entity create-passeport" [routerLink]="['../passeport-new']">
+                <span class="fa fa-pencil-square-o"></span>
+                <span  jhiTranslate="ambassadeApp.passeport.home.createLabel">Create new Passeport</span>
+            </button>&nbsp;
+            <button (click)="printPage()" class="btn btn-info btn-xs float-right mr-5">
+                <span class="fa fa-print"></span>&nbsp;
+                <span>Imprimer</span>
+            </button>
+        </h5>
+    </div>
+</div>
 
     <jhi-alert></jhi-alert>
     <div>
@@ -18,8 +20,8 @@
     </div>
     <br/>
         <div *ngIf="passeports">
-            <table class="table table-striped dash-row table-sm">
-                <thead class="theme-bg-blue text-white">
+            <table class="table table-hover dash-row table-sm bg-white">
+                <thead class="bg-table-light">
                     <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                         <!-- <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th> -->
                         <th jhiSortBy="recu"><span jhiTranslate="ambassadeApp.passeport.recu">Numero Recu</span> <span class="fa fa-sort"></span></th>
@@ -74,19 +76,16 @@
                 </tbody>
             </table>
         </div>
-        <div *ngIf="passeports && passeports.length">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="text-sm">
-                        <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-                    </div>
+        <div class="row" *ngIf="passeports && passeports.length">
+            <div class="col-md-6">
+                <div class="text-sm">
+                    <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
                 </div>
-                <div class="col-md-6">
-                    <div class="pagination-sm pull-right">
-                        <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pagination-sm pull-right">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
                 </div>
             </div>
         </div>
     </div>
-</div>

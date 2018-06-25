@@ -1,28 +1,29 @@
 
 <div *ngIf="produit">
-    <div class="row">
-        <div class="col-md-6">
-            <h5 class="text-uppercase"><span jhiTranslate="ambassadeApp.produit.detail.title">Produit</span> {{produit.id}}</h5>
+    <div class="card" style="border-bottom: none!important;">
+        <div class="card-body card-sm">
+            <h5 class="text-uppercase">
+                <span jhiTranslate="ambassadeApp.produit.detail.title">Produit</span> {{produit.id}}
+            </h5>
         </div>
-        <div class="col-md-6"></div>
     </div>
-    <div class="title-bullet"><span></span></div>
 
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
         <div class="card">
             <div class="card-body">
+                <div></div>
                 <div class="row">
                     <div class="col-md-4">
-                        <label jhiTranslate="ambassadeApp.produit.nomProduit">Nom Produit</label> : &nbsp;
+                        <strong jhiTranslate="ambassadeApp.produit.nomProduit">Nom Produit</strong> : &nbsp;
                         <span>{{produit.nomProduit}}</span>
                     </div>
                     <div class="col-md-4">
-                        <label jhiTranslate="ambassadeApp.produit.monnaie">Monnaie</label> : &nbsp;
+                        <strong jhiTranslate="ambassadeApp.produit.monnaie">Monnaie</strong> : &nbsp;
                         <span>{{produit.monnaie}}</span>
                     </div>
                     <div class="col-md-4">
-                        <label jhiTranslate="ambassadeApp.produit.montant">Montant</label> : &nbsp;
+                        <strong jhiTranslate="ambassadeApp.produit.montant">Montant</strong> : &nbsp;
                         <span>{{produit.montant}}</span>
                     </div>
                 </div>
@@ -40,7 +41,7 @@
             [routerLink]="['/', { outlets: { popup: 'produit/'+ produit.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-blue pull-right btn-xs">
+            class="btn btn-primary btn-xs">
         <span class="fa fa-pencil-square-o"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>
