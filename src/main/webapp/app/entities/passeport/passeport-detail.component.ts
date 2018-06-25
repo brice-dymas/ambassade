@@ -117,6 +117,6 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
 
     open(title: string, message: string) {
         console.log('entree dans la methode open de BUTTON');
-        this._confirmation.create(title, message).subscribe((ans: ResolveEmit) => console.log('VOILAAAAAAAAAAAAAAAAAAAA ' + ans));
+        this._confirmation.create(title, message).subscribe((ans: ResolveEmit) => console.log('VOILAAAAAAAAAAAAAAAAAAAA ' + ans.resolved));
     }
 }
