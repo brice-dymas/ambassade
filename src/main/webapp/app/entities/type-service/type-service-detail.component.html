@@ -1,32 +1,48 @@
 
 <div *ngIf="typeService">
-    <h2><span jhiTranslate="ambassadeApp.typeService.detail.title">Type Service</span> {{typeService.id}}</h2>
-    <hr>
+    <div class="card" style="border-bottom: none!important;">
+        <div class="card-body card-sm">
+            <h5 class="text-uppercase">
+                <span jhiTranslate="ambassadeApp.typeService.detail.title">Type Service</span> {{typeService.id}}
+            </h5>
+        </div>
+    </div>
+
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="ambassadeApp.typeService.nom">Nom</span></dt>
-        <dd>
-            <span>{{typeService.nom}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.typeService.montant">Montant</span></dt>
-        <dd>
-            <span>{{typeService.montant}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.typeService.deleted">Deleted</span></dt>
-        <dd>
-            <span>{{typeService.deleted}}</span>
-        </dd>
-        <dt><span jhiTranslate="ambassadeApp.typeService.uniteOrganisationelle">Unite Organisationelle</span></dt>
-        <dd>
-            <div *ngIf="typeService.uniteOrganisationelle">
-                <a [routerLink]="['/unite-organisationelle', typeService.uniteOrganisationelle?.id]">{{typeService.uniteOrganisationelle?.id}}</a>
+        <div class="card">
+            <div class="card-body">
+                <div></div>
+                <div class="row mb-1">
+                    <div class="col-12 col-md-4">
+                        <strong jhiTranslate="ambassadeApp.typeService.nom">Nom</strong> &nbsp;
+                        <span>{{typeService.nom}}</span>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <strong jhiTranslate="ambassadeApp.typeService.montant">Montant</strong> &nbsp;
+                        <span>{{typeService.montant}}</span>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <strong jhiTranslate="ambassadeApp.typeService.deleted">Deleted</strong> &nbsp;
+                        <span>{{typeService.deleted}}</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <strong jhiTranslate="ambassadeApp.typeService.uniteOrganisationelle">Unite Organisationelle</strong> &nbsp;
+                        <div *ngIf="typeService.uniteOrganisationelle">
+                            <a [routerLink]="['/unite-organisationelle', typeService.uniteOrganisationelle?.id]">{{typeService.uniteOrganisationelle?.id}}</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </dd>
+        </div>
     </dl>
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-info">
+            class="btn btn-info btn-xs">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
@@ -34,7 +50,7 @@
             [routerLink]="['/', { outlets: { popup: 'type-service/'+ typeService.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-primary">
+            class="btn btn-primary btn-xs">
         <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

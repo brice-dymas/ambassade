@@ -1,91 +1,95 @@
 <form name="searchForm" role="form" novalidate (ngSubmit)="search()" #searchForm="ngForm">
     <div class="card">
         <div class="card-body">
+            <div></div>
             <div class="row">
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.codeISBN" for="field_codeISBN">Code ISBN</label>
                         <input type="text" class="form-control form-control-sm" name="codeISBN" id="field_codeISBN"
                                [(ngModel)]="formModel.codeISBN" maxlength="50"/>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.auteur" for="field_auteur">Auteur</label>
                         <input type="text" class="form-control form-control-sm" name="auteur" id="field_auteur"
                                [(ngModel)]="formModel.auteur" maxlength="50"/>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.titre" for="field_titre">Titre</label>
                         <input type="text" class="form-control form-control-sm" name="titre" id="field_titre"
                                [(ngModel)]="formModel.titre" maxlength="100"/>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.edition" for="field_edition">Edition</label>
                         <input type="text" class="form-control form-control-sm" name="edition" id="field_edition"
                                [(ngModel)]="formModel.edition" maxlength="50"/>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.annee" for="field_annee">Annee</label>
                         <input type="number" class="form-control form-control-sm" name="annee" id="field_annee"
                                [(ngModel)]="formModel.annee" min="1970"/>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.categorie" for="field_categorie">Categorie</label>
                         <input type="text" class="form-control form-control-sm" name="categorie" id="field_categorie"
                                [(ngModel)]="formModel.categorie" maxlength="50"/>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.quantite" for="field_quantite">Quantite</label>
                         <input type="number" class="form-control form-control-sm" name="quantite" id="field_quantite"
                                [(ngModel)]="formModel.quantite" min="0"/>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.disponible" for="field_disponible">Disponible</label>
                         <input type="text" class="form-control form-control-sm" name="disponible" id="field_disponible"
                                [(ngModel)]="formModel.disponible" maxlength="50"/>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.origine" for="field_origine">Origine</label>
                         <input type="text" class="form-control form-control-sm" name="origine" id="field_origine"
                                [(ngModel)]="formModel.origine" maxlength="50"/>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.collection" for="field_collection">Collection</label>
                         <input type="text" class="form-control form-control-sm" name="collection" id="field_collection"
                                [(ngModel)]="formModel.collection" maxlength="50"/>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.format" for="field_format">Format</label>
                         <input type="text" class="form-control form-control-sm" name="format" id="field_format"
                                [(ngModel)]="formModel.format" maxlength="50"/>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.lieuEdition" for="field_lieuEdition">Lieu Edition</label>
                         <input type="text" class="form-control form-control-sm" name="lieuEdition" id="field_lieuEdition"
@@ -95,26 +99,26 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.lieuImpression" for="field_lieuImpression">Lieu Impression</label>
                         <input type="text" class="form-control form-control-sm" name="lieuImpression" id="field_lieuImpression"
                                [(ngModel)]="formModel.lieuImpression" maxlength="50"/>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.livre.prenom" for="field_prenom">Prenom</label>
                         <input type="text" class="form-control form-control-sm" name="prenom" id="field_prenom"
                                [(ngModel)]="formModel.prenom" maxlength="50"/>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 align-self-end">
+                <div class="col-12 col-md-4 align-self-end">
                     <div class="form-group pull-right">
-                        <button type="reset" class="btn btn-danger btn-xs plat"  (click)="search()">
+                        <button type="reset" class="btn btn-danger btn-xs"  (click)="search()">
                             <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                         </button>
-                        <button type="submit" class="btn btn-primary btn-xs plat">
+                        <button type="submit" class="btn btn-primary btn-xs">
                             <span class="fa fa-search"></span>&nbsp;<span jhiTranslate="entity.action.search">Save</span>
                         </button>
                     </div>

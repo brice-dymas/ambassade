@@ -359,7 +359,7 @@ span {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    padding: 1rem;
+    padding: .5rem 1rem;
     border-bottom: 1px solid #e9ecef;
     border-top-left-radius: 0px!important;
     border-top-right-radius: 0px!important;
@@ -375,7 +375,7 @@ span {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
-    padding: 1rem;
+    padding: .5rem 1rem;
     border-top: 1px solid #e9ecef;
 }
 
@@ -410,6 +410,10 @@ table>thead>tr>th {
     padding: .4rem;
     vertical-align: top;
     border-top: 1px solid #dee2e6;
+}
+
+.table th {
+    padding: .7rem!important;
 }
 
 .table-responsive {
@@ -453,8 +457,20 @@ thead.theme-bg-blue>tr>th span {
     padding: .15rem .5rem;
     font-size: .875rem;
     line-height: 1.5;
-    border-radius: 0px;
+}
+thead.bg-table-light>tr>th span {
+    font-weight: 100!important;
+}
+.bg-table-light {
+    background-color: #FAFBFC!important;
 }
 
+.card-sm {
+    padding: .7rem 1.25rem!important;
+}
+
+span.text-strong {
+    font-family: bold!important;
+}
 
 /* jhipster-needle-css-add-main JHipster will add new css style */

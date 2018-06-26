@@ -1,5 +1,5 @@
 <form name="deleteForm" (ngSubmit)="confirmDelete(rapatriement.id)">
-    <div class="modal-header theme-bg-blue text-white">
+    <div class="modal-header bg-violet text-white">
         <h5 class="text-uppercase modal-title" jhiTranslate="entity.delete.title">Confirm delete operation</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
@@ -9,10 +9,10 @@
         <p jhiTranslate="ambassadeApp.rapatriement.delete.question" translateValues="{id: '{{rapatriement.id}}'}">Are you sure you want to delete this Rapatriement?</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-xs plat btn-secondary" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-xs btn-secondary" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" class="btn btn-danger btn-xs plat">
+        <button type="submit" class="btn btn-danger btn-xs">
             <span class="fa fa-trash"></span>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
         </button>
     </div>

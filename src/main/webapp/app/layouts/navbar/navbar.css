@@ -23,7 +23,7 @@ Navbar
     vertical-align: middle;
 }
 
-/* 
+/*
 ==========================================================================
 Logo styles
 ==========================================================================
@@ -114,4 +114,13 @@ Custom Haiti style template
     -webkit-transition:opacity 0.2s 0.01s ease-in-out, left 0.2s 0.1s ease-out, visibility 0.1s 0.1s linear;
     -o-transition:opacity 0.2s 0.01s ease-in-out, left 0.2s 0.1s ease-out, visibility 0.1s 0.1s linear;
     transition:opacity 0.2s 0.01s ease-in-out, left 0.2s 0.1s ease-out, visibility 0.1s 0.1s linear;
+}
+
+#firstNavBar ul.navbar-nav li.nav-item.dropdown ul.dropdown-menu li a:hover {
+    background-color: #6d7fcc!important;
+    color: #ffffff!important;
+}
+
+#firstNavBar ul.navbar-nav li.nav-item.dropdown ul.dropdown-menu li a {
+    color: #222222!important;
 }

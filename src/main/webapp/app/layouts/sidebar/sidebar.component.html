@@ -7,31 +7,29 @@
                     <span class="font-bold" jhiTranslate="global.menu.home">Home</span>
                 </a>
             </li>
-            <li class="nav-item"
-                (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
-                aria-controls="collapsePasseport">
+            <li class="nav-item" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapsePasseport">
                 <a class="nav-link">
                     <i class="fa fa-bar-chart" aria-hidden="true"></i>
                     <span jhiTranslate="global.menu.entities.passeport">Passeport</span>
                     <i class="fa fa-chevron-right float-right"></i>
                 </a>
-                <ul id="collapsePasseport" class="list-unstyled" [ngbCollapse]="isCollapsed">
-                    <li>
-                        <a routerLink="passeport-new" routerLinkActive="active"
-                           [routerLinkActiveOptions]="{ exact: true }">
+                <ul id="collapsePasseport" class="collapse list-unstyled" [ngbCollapse]="isCollapsed">
+                    <li routerLink="passeport-new" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                        <a>
                             <i class="fa fa-pencil-square-o"></i>
                             Enregistrer Passeport
                         </a>
                     </li>
-                    <li>
-                        <a routerLink="passeport" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <li routerLink="passeport" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>
                             <i class="fa fa-folder-open"></i>
                             Liste des Passeports
                         </a>
                     </li>
-                    <li>
-                        <a routerLink="type-service-passeport" routerLinkActive="active"
-                           [routerLinkActiveOptions]="{ exact: true }">
+                    <li routerLink="type-service-passeport" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                        <a>
                             <i class="fa fa-newspaper-o"></i>
                             Service Passeport
                         </a>
@@ -46,34 +44,32 @@
                     <i class="fa fa-chevron-right float-right"></i>
                 </a>
                 <ul id="visa" class="list-unstyled" [ngbCollapse]="isVisaCollapsed">
-                    <li>
-                        <a routerLink="visa-new" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <li routerLink="visa-new" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>
                             <i class="fa fa-pencil-square-o"></i>
                             Creer Visa
                         </a>
                     </li>
-                    <li>
-                        <a routerLink="visa" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <li routerLink="visa" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>
                             <i class="fa fa-folder-open"></i>
                             Liste des Visa
                         </a>
                     </li>
-                    <li>
-                        <a routerLink="type-service-visa" routerLinkActive="active"
-                           [routerLinkActiveOptions]="{ exact: true }">
+                    <li routerLink="type-service-visa" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>
                             <i class="fa fa-newspaper-o"></i>
                             Service visa
                         </a>
                     </li>
-                    <li>
-                        <a routerLink="categorie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <li routerLink="categorie" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>
                             <i class="fa fa-group"></i>
                             Categorie Visa
                         </a>
                     </li>
-                    <li>
-                        <a routerLink="type-entree" routerLinkActive="active"
-                           [routerLinkActiveOptions]="{ exact: true }">
+                    <li routerLink="type-entree" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>
                             <i class="fa fa-group"></i>
                             Classification Visa
                         </a>
@@ -89,29 +85,26 @@
                     <i class="fa fa-chevron-right float-right"></i>
                 </a>
                 <ul id="collapsePaiement" class="list-unstyled" [ngbCollapse]="isPaiementCollapsed">
-                    <li>
-                        <a routerLink="passeport-nouveau" routerLinkActive="active"
-                           [routerLinkActiveOptions]="{ exact: true }">
+                    <li routerLink="passeport-nouveau" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>
                             <i class="fa fa-pencil-square-o"></i>
                             Nouveaux Passeport
                         </a>
                     </li>
-                    <li>
-                        <a routerLink="visa-nouveau" routerLinkActive="active"
-                           [routerLinkActiveOptions]="{ exact: true }">
+                    <li routerLink="visa-nouveau" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>
                             <i class="fa fa-folder-open"></i>
                             Les Nouveaux Visas
                         </a>
                     </li>
-                    <li>
-                        <a routerLink="paiement" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <li routerLink="paiement" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>
                             <i class="fa fa-dollar"></i>
                             Liste des Paiements
                         </a>
                     </li>
-                    <li>
-                        <a routerLink="type-service" routerLinkActive="active"
-                           [routerLinkActiveOptions]="{ exact: true }">
+                    <li routerLink="type-service" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                        <a>
                             <i class="fa fa-dollar"></i>
                             Liste des Services
                         </a>

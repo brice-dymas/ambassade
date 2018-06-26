@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager, JhiDataUtils} from 'ng-jhipster';
 
-import { Passeport } from './passeport.model';
-import { PasseportService } from './passeport.service';
-import { Router } from '@angular/router';
+import {Passeport, State} from './passeport.model';
+import {PasseportService} from './passeport.service';
+import {Router} from '@angular/router';
 import {ConfirmationService, ResolveEmit} from '@jaspero/ng-confirmations';
 
 @Component({
@@ -19,14 +19,12 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
-    constructor(
-        private eventManager: JhiEventManager,
-        private dataUtils: JhiDataUtils,
-            private passeportService: PasseportService,
-            private router: Router,
-        private route: ActivatedRoute,
-        private _confirmation: ConfirmationService
-    ) {
+    constructor(private eventManager: JhiEventManager,
+                private dataUtils: JhiDataUtils,
+                private passeportService: PasseportService,
+                private router: Router,
+                private route: ActivatedRoute,
+                private _confirmation: ConfirmationService) {
     }
 
     ngOnInit() {
@@ -50,6 +48,44 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
             });
     }
 
+    payerPasseport(resolved: boolean) {
+        if (resolved === true) {
+            this.passeportService.payer(this.passeport.id)
+                .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                    this.passeport = passeportResponse.body;
+                });
+        } else {
+            alert('Procedure Annuleee');
+        }
+    }
+
+    encoursPasseport(resolved: boolean) {
+        if (resolved === true) {
+            this.passeportService.enCours(this.passeport.id)
+                .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                    this.passeport = passeportResponse.body;
+                });
+        }
+    }
+
+    retirerPasseport(resolved: boolean) {
+        if (resolved === true) {
+            this.passeportService.retirer(this.passeport.id)
+                .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                    this.passeport = passeportResponse.body;
+                });
+        }
+    }
+
+    pretPasseport(resolved: boolean) {
+        if (resolved === true) {
+            this.passeportService.pret(this.passeport.id)
+                .subscribe((passeportResponse: HttpResponse<Passeport>) => {
+                    this.passeport = passeportResponse.body;
+                });
+        }
+    }
+
     encours() {
         this.passeportService.enCours(this.passeport.id)
             .subscribe((passeportResponse: HttpResponse<Passeport>) => {
@@ -70,6 +106,7 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
                 this.passeport = passeportResponse.body;
             });
     }
+
     byteSize(field) {
         return this.dataUtils.byteSize(field);
     }
@@ -77,6 +114,7 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
     openFile(contentType, field) {
         return this.dataUtils.openFile(contentType, field);
     }
+
     previousState() {
         window.history.back();
     }
@@ -101,7 +139,8 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
     }
 
     create() {
-        console.log('entree dans la methode create de BUTTON');
+        this.open(this.passeport);
+        // console.log('entree dans la methode create de BUTTON');
         // const val = this.form.getRawValue();
         // const options = Object.assign({}, val);
         //
@@ -112,11 +151,25 @@ export class PasseportDetailComponent implements OnInit, OnDestroy {
         // options.declineText = 'Non je veux pas';
         // options.showCloseButton(true);
 
-        this.open('Verification de securite', 'Voulez-vous vraiment Effectuer cette tache ?');
+        // this.open('Verification de securite', 'Voulez-vous vraiment Effectuer cette tache ?');
     }
 
-    open(title: string, message: string) {
-        console.log('entree dans la methode open de BUTTON');
-        this._confirmation.create(title, message).subscribe((ans: ResolveEmit) => console.log('VOILAAAAAAAAAAAAAAAAAAAA ' + ans.resolved));
+    open(passeport: Passeport) {
+        if (passeport.state.toLocaleString() === 'NOUVEAU') {
+            this._confirmation.create('Vérification de sécurité',
+                'Voulez-vous vraiment marquer ce passeport comme étant Payé ?').subscribe((ans: ResolveEmit) => this.payerPasseport(ans.resolved));
+        }
+        if (passeport.state.toLocaleString() === 'PAYE') {
+            this._confirmation.create('Vérification de sécurité',
+                'Voulez-vous vraiment marquer ce passeport comme étant en cours de traitement ? ').subscribe((ans: ResolveEmit) => this.encoursPasseport(ans.resolved));
+        }
+        if (passeport.state.toLocaleString() === 'ENCOURS') {
+            this._confirmation.create('Vérification de sécurité',
+                'Voulez-vous vraiment marquer ce passeport comme étant prêt a être retiré ?').subscribe((ans: ResolveEmit) => this.pretPasseport(ans.resolved));
+        }
+        if (passeport.state.toLocaleString() === 'PRET') {
+            this._confirmation.create('Vérification de sécurité',
+                'Voulez-vous vraiment marquer ce passeport comme étant retiré ?').subscribe((ans: ResolveEmit) => this.retirerPasseport(ans.resolved));
+        }
     }
 }

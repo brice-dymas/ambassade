@@ -1,6 +1,6 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
-    <div class="modal-header theme-bg-blue text-white">
+    <div class="modal-header bg-violet text-white">
         <h5 class="modal-title text-uppercase" id="myMontantLabel" jhiTranslate="ambassadeApp.montant.home.createOrEditLabel">Create or edit a Montant</h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
@@ -65,10 +65,10 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-xs plat" data-dismiss="modal" (click)="clear()">
+        <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal" (click)="clear()">
             <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-blue btn-xs plat">
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary btn-xs">
             <span class="fa fa-download"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
     </div>

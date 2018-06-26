@@ -1,8 +1,9 @@
 <form name="searchForm" role="form" novalidate (ngSubmit)="search()" #searchForm="ngForm">
     <div class="card">
-        <div class="card-body plat">
+        <div class="card-body">
+            <div></div>
             <div class="row">
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.typeService"
                                for="field_typeService">Type Service</label>
@@ -17,7 +18,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.uniteOrganisationelle"
                                for="field_uniteOrganisationelle">uniteOrganisationelle</label>
@@ -32,7 +33,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.datePaiementSearch"
                                for="field_datePaiement">Date Paiement</label>
@@ -48,7 +49,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-3">
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="global.messages.and"
                                for="field_datePaiementFin">Date Paiement</label>
@@ -65,9 +68,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label class="form-control-label" jhiTranslate="ambassadeApp.paiement.numeroPaiement"
                                for="field_numeroPaiement">numero Paiement</label>
@@ -76,17 +77,17 @@
                                [(ngModel)]="formModel.numeroPaiement"/>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-6 align-self-end">
-                <div class="form-group pull-right">
-                    <button (click)="resetSearch()" class="btn btn-xs plat btn-danger">
-                        <span class="fa fa-refresh"></span>&nbsp;<span
-                        jhiTranslate="entity.action.cancel">Cancel</span>
-                    </button>&nbsp;
-                    <button type="submit" (click)="search()" class="btn btn-xs plat btn-primary">
-                        <span class="fa fa-search"></span>&nbsp;<span
-                        jhiTranslate="entity.action.search">Search</span>
-                    </button>
+                <div class="col-12 col-md-4">
+                    <div class="row justify-content-end pt-3 mr-1">
+                        <button (click)="resetSearch()" class="btn btn-xs btn-danger mr-4">
+                            <span class="fa fa-refresh"></span>&nbsp;<span
+                            jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>&nbsp;
+                        <button type="submit" (click)="search()" class="btn btn-xs btn-primary">
+                            <span class="fa fa-search"></span>&nbsp;<span
+                            jhiTranslate="entity.action.search">Search</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

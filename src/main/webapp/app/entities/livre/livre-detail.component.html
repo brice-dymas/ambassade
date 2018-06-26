@@ -1,132 +1,145 @@
 
-<div class="mb-lg-5" *ngIf="livre">
-    <h5 class="text-uppercase"><span jhiTranslate="ambassadeApp.livre.detail.title">Livre</span> {{livre.id}}</h5>
-    <div class="title-bullet"><span></span></div>
+<div *ngIf="livre">
+    <div class="card" style="border-bottom: none!important;">
+        <div class="card-body card-sm">
+            <h5 class="text-uppercase">
+                <span jhiTranslate="ambassadeApp.livre.detail.title">Livre</span> {{livre.id}}
+            </h5>
+        </div>
+    </div>
+
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.codeISBN">Code ISBN</label></dt>
+                <div></div>
+                <div class="row mb-1">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.codeISBN">Code ISBN</strong> &nbsp;
                         <span>{{livre.codeISBN}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.auteur">Auteur</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.auteur">Auteur</strong> &nbsp;
                         <span>{{livre.auteur}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.titre">Titre</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.titre">Titre</strong> &nbsp;
                         <span>{{livre.titre}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.edition">Edition</label></dt>
+                </div>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.edition">Edition</strong> &nbsp;
                         <span>{{livre.edition}}</span>
                     </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.etagere">Etagere</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.etagere">Etagere</strong> &nbsp;
                         <span>{{livre.etagere}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.annee">Annee</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.annee">Annee</strong> &nbsp;
                         <span>{{livre.annee}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.categorie">Categorie</label></dt>
+                </div>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.categorie">Categorie</strong> &nbsp;
                         <span>{{livre.categorie}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.resume">Resume</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.resume">Resume</strong> &nbsp;
                         <span>{{livre.resume}}</span>
                     </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.quantite">Quantite</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.quantite">Quantite</strong> &nbsp;
                         <span>{{livre.quantite}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.disponible">Disponible</label></dt>
+                </div>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.disponible">Disponible</strong> &nbsp;
                         <span>{{livre.disponible}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.page">Page</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.page">Page</strong> &nbsp;
                         <span>{{livre.page}}</span>
                     </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.consultation">Consultation</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.consultation">Consultation</strong> &nbsp;
                         <span>{{livre.consultation}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.origine">Origine</label></dt>
+                </div>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.origine">Origine</strong> &nbsp;
                         <span>{{livre.origine}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.sousTitre">Sous Titre</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.sousTitre">Sous Titre</strong> &nbsp;
                         <span>{{livre.sousTitre}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.collection">Collection</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.collection">Collection</strong> &nbsp;
                         <span>{{livre.collection}}</span>
                     </div>
                 </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.impression">Impression</label></dt>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.impression">Impression</strong> &nbsp;
                         <span>{{livre.impression}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.format">Format</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.format">Format</strong> &nbsp;
                         <span>{{livre.format}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.index">Index</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.index">Index</strong> &nbsp;
                         <span>{{livre.index}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.bibliographie">Bibliographie</label></dt>
+                </div>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.bibliographie">Bibliographie</strong> &nbsp;
                         <span>{{livre.bibliographie}}</span>
                     </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.lieuEdition">Lieu Edition</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.lieuEdition">Lieu Edition</strong> &nbsp;
                         <span>{{livre.lieuEdition}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.lieuImpression">Lieu Impression</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.lieuImpression">Lieu Impression</strong> &nbsp;
                         <span>{{livre.lieuImpression}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.illustration">Illustration</label></dt>
+                </div>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.illustration">Illustration</strong> &nbsp;
                         <span>{{livre.illustration}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.observation">Observation</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.observation">Observation</strong> &nbsp;
                         <span>{{livre.observation}}</span>
                     </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.prenom">Prenom</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.prenom">Prenom</strong> &nbsp;
                         <span>{{livre.prenom}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.statistique">Statistique</label></dt>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.statistique">Statistique</strong> &nbsp;
                         <span>{{livre.statistique}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.livre.glossaire">Glossaire</label></dt>
+                    <div class="col-md-4">
+                        <strong jhiTranslate="ambassadeApp.livre.glossaire">Glossaire</strong> &nbsp;
                         <span>{{livre.glossaire}}</span>
                     </div>
                 </div>
@@ -136,7 +149,7 @@
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-info btn-xs plat">
+            class="btn btn-info btn-xs">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
@@ -144,7 +157,7 @@
             [routerLink]="['/', { outlets: { popup: 'livre/'+ livre.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-blue pull-right btn-xs plat">
+            class="btn btn-primary btn-xs">
         <span class="fa fa-pencil-square-o"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

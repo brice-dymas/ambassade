@@ -1,78 +1,88 @@
 <div *ngIf="caisse">
-    <h5 class="text-uppercase"><span jhiTranslate="ambassadeApp.caisse.detail.title">Caisse</span> {{caisse.id}}</h5>
-    <div class="title-bullet"><span></span></div>
+    <div class="card" style="border-bottom: none!important;">
+        <div class="card-body card-sm">
+            <h5 class="text-uppercase">
+                <span jhiTranslate="ambassadeApp.caisse.detail.title">Caisse</span> {{caisse.id}}
+            </h5>
+        </div>
+    </div>
+
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.reference">Reference</label></dt>
+                <div></div>
+                <div class="row mb-1">
+                    <div class="col-md-4 col-6">
+                        <strong jhiTranslate="ambassadeApp.caisse.reference">Reference</strong> &nbsp;
                         <span>{{caisse.reference}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.dateDuJour">Date Du Jour</label></dt>
+                    <div class="col-md-4 col-6">
+                        <strong jhiTranslate="ambassadeApp.caisse.dateDuJour">Date Du Jour</strong> &nbsp;
                         <span>{{caisse.dateDuJour | date:'mediumDate'}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.nom">Nom</label></dt>
+                    <div class="col-md-4 col-6">
+                        <strong jhiTranslate="ambassadeApp.caisse.nom">Nom</strong> &nbsp;
                         <span>{{caisse.nom}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.prenom">Prenom</label></dt>
+                </div>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-md-4 col-6">
+                        <strong jhiTranslate="ambassadeApp.caisse.prenom">Prenom</strong> &nbsp;
                         <span>{{caisse.prenom}}</span>
                     </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.typeID">Type ID</label></dt>
+                    <div class="col-md-4 col-6">
+                        <strong jhiTranslate="ambassadeApp.caisse.typeID">Type ID</strong> &nbsp;
                         <span>{{caisse.typeID}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.numeroID">Numero ID</label></dt>
+                    <div class="col-md-4 col-6">
+                        <strong jhiTranslate="ambassadeApp.caisse.numeroID">Numero ID</strong> &nbsp;
                         <span>{{caisse.numeroID}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.serviceConcerne">Service Concerne</label></dt>
+                </div>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-md-4 col-6">
+                        <strong jhiTranslate="ambassadeApp.caisse.serviceConcerne">Service Concerne</strong> &nbsp;
                         <span>{{caisse.serviceConcerne}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</label></dt>
+                    <div class="col-md-4 col-6">
+                        <strong jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</strong> &nbsp;
+                        <span>{{caisse.monnaie}}</span>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <strong jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</strong> &nbsp;
                         <span>{{caisse.monnaie}}</span>
                     </div>
                 </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.monnaie">Monnaie</label></dt>
-                        <span>{{caisse.monnaie}}</span>
-                    </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.montant">Montant</label></dt>
+                <hr>
+                <div class="row mb-1">
+                    <div class="col-md-3 col-6">
+                        <strong jhiTranslate="ambassadeApp.caisse.montant">Montant</strong> &nbsp;
                         <span>{{caisse.montant}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.dateRetour">Date Retour</label></dt>
+                    <div class="col-md-3 col-6">
+                        <strong jhiTranslate="ambassadeApp.caisse.dateRetour">Date Retour</strong> &nbsp;
                         <span>{{caisse.dateRetour | date:'mediumDate'}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.telephone">Telephone</label></dt>
+                    <div class="col-md-3 col-6">
+                        <strong jhiTranslate="ambassadeApp.caisse.telephone">Telephone</strong> &nbsp;
                         <span>{{caisse.telephone}}</span>
                     </div>
                 </div>
-
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.telephone">Telephone</label></dt>
+                <hr>
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        <strong jhiTranslate="ambassadeApp.caisse.telephone">Telephone</strong> &nbsp;
                         <span>{{caisse.telephone}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.num">Num</label></dt>
+                    <div class="col-6 col-md-3">
+                        <strong jhiTranslate="ambassadeApp.caisse.num">Num</strong> &nbsp;
                         <span>{{caisse.num}}</span>
                     </div>
-                    <div class="col-md-3">
-                        <dt><label jhiTranslate="ambassadeApp.caisse.paiement">Paiement</label></dt>
+                    <div class="col-6 col-md-3">
+                        <strong jhiTranslate="ambassadeApp.caisse.paiement">Paiement</strong> &nbsp;
                         <span>{{caisse.paiement}}</span>
                     </div>
                 </div>
@@ -82,7 +92,7 @@
 
     <button type="submit"
             (click)="previousState()"
-            class="btn btn-info btn-xs plat">
+            class="btn btn-info btn-xs">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
@@ -90,7 +100,7 @@
             [routerLink]="['/', { outlets: { popup: 'caisse/'+ caisse.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
-            class="btn btn-blue pull-right btn-xs plat">
+            class="btn btn-blue pull-right btn-xs">
         <span class="fa fa-pencil-square-o"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>
