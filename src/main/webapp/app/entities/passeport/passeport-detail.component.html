@@ -157,30 +157,25 @@
                 class="btn btn-info btn-xs">
             <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
         </button>
-        <button type="submit"
-                (click)="create()"
-                class="btn btn-info btn-xs">
-            <span class="fa fa-arrow-left"></span>&nbsp;<span> BOUTON</span>
-        </button>
 
         <button type="button" *ngIf="passeport.state=='NOUVEAU'" [routerLink]="['../passeport', passeport.id, 'edit']"
                 queryParamsHandling="merge" class="btn btn-primary btn-xs">
             <span class="fa fa-pencil"></span>&nbsp;
             <span jhiTranslate="entity.action.edit"> Edit</span>
         </button>
-        <button type="button" *ngIf="passeport.state=='NOUVEAU'" class="btn btn-success btn-xs" (click)="payer()">
+        <button type="button" *ngIf="passeport.state=='NOUVEAU'" class="btn btn-success btn-xs" (click)="create()">
             <span class="fa fa-money"></span>&nbsp;
             <span jhiTranslate="entity.action.payer"> Payer</span>
         </button>
-        <button type="button" *ngIf="passeport.state=='PAYE'" class="btn btn-secondary btn-xs" (click)="encours()">
+        <button type="button" *ngIf="passeport.state=='PAYE'" class="btn btn-secondary btn-xs" (click)="create()">
             <span class="fa fa-money"></span>&nbsp;
             <span jhiTranslate="entity.action.encours"> En Cours</span>
         </button>
-        <button type="button" *ngIf="passeport.state=='ENCOURS'" (click)="pret()" class="btn btn-warning btn-xs">
+        <button type="button" *ngIf="passeport.state=='ENCOURS'" (click)="create()" class="btn btn-warning btn-xs">
             <span class="fa fa-money"></span>&nbsp;
             <span jhiTranslate="entity.action.pret"> Prêt</span>
         </button>
-        <button type="button" *ngIf="passeport.state=='PRET'" (click)="retirer()" class="btn btn-danger btn-xs">
+        <button type="button" *ngIf="passeport.state=='PRET'" (click)="create()" class="btn btn-danger btn-xs">
             <span class="fa fa-money"></span>&nbsp;
             <span jhiTranslate="entity.action.retirer"> Retirer</span>
         </button>

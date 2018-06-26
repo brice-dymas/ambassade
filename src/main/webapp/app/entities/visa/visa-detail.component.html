@@ -178,20 +178,20 @@
         <span class="fa fa-pencil"></span>&nbsp;
         <span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
-    <button type="button" *ngIf="visa.state=='NOUVEAU'" class="btn btn-blue btn-xs" (click)="payer()">
+    <button type="button" *ngIf="visa.state=='NOUVEAU'" class="btn btn-blue btn-xs" (click)="create()">
         <span class="fa fa-money"></span>&nbsp;
-        <span jhiTranslate="entity.action.payer"> Payer</span>
+        <span jhiTranslate="entity.action.payerVisa"> Payer</span>
     </button>
-    <button type="button" *ngIf="visa.state=='PAYE'" class="btn btn-success btn-xs" (click)="encours()">
+    <button type="button" *ngIf="visa.state=='PAYE'" class="btn btn-success btn-xs" (click)="create()">
         <span class="fa fa-money"></span>&nbsp;
-        <span jhiTranslate="entity.action.encours"> En Cours</span>
+        <span jhiTranslate="entity.action.encoursVisa"> En Cours</span>
     </button>
-    <button type="button" *ngIf="visa.state=='ENCOURS'" (click)="pret()" class="btn btn-warning btn-xs">
+    <button type="button" *ngIf="visa.state=='ENCOURS'" (click)="create()" class="btn btn-warning btn-xs">
         <span class="fa fa-money"></span>&nbsp;
-        <span jhiTranslate="entity.action.pret"> Prêt</span>
+        <span jhiTranslate="entity.action.pretVisa"> Prêt</span>
     </button>
-    <button type="button" *ngIf="visa.state=='PRET'" (click)="retirer()" class="btn btn-secondary btn-xs">
+    <button type="button" *ngIf="visa.state=='PRET'" (click)="create()" class="btn btn-secondary btn-xs">
         <span class="fa fa-money"></span>&nbsp;
-        <span jhiTranslate="entity.action.retirer"> Retirer</span>
+        <span jhiTranslate="entity.action.retirerVisa"> Retirer</span>
     </button>
 </div>
